@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://dm73o0agf3yay"]
+
+[ext_resource type="Script" path="res://CardUI.gd" id="1_ykfix"]
+
+[node name="CardFrame" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1218.0
+offset_bottom = -998.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ykfix")
+nameOfCard = null
+cardText = null
+
+[node name="MarginWrapper" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="Structure" type="VBoxContainer" parent="MarginWrapper"]
+layout_mode = 2
+
+[node name="TopLine" type="HBoxContainer" parent="MarginWrapper/Structure"]
+layout_mode = 2
+
+[node name="NameOfCard" type="Label" parent="MarginWrapper/Structure/TopLine"]
+layout_mode = 2
+text = "Hire some Dude"
+
+[node name="HSeparator" type="HSeparator" parent="MarginWrapper/Structure"]
+layout_mode = 2
+
+[node name="CardText" type="Label" parent="MarginWrapper/Structure"]
+layout_mode = 2

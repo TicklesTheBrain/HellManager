@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdewx43gbc46u"]
+
+[ext_resource type="Texture2D" uid="uid://7r24rejin1lm" path="res://assets/arrowTexture.png" id="1_mejk3"]
+[ext_resource type="Script" path="res://flow_line_UI.gd" id="2_vcmr8"]
+
+[node name="FlowLine" type="Line2D"]
+texture_repeat = 2
+points = PackedVector2Array(0, 0, 0, 0)
+width = 15.0
+texture = ExtResource("1_mejk3")
+texture_mode = 1
+script = ExtResource("2_vcmr8")

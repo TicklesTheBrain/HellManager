@@ -1,8 +1,105 @@
-[gd_scene load_steps=2 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=23 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://Job.gd" id="1_4eifv"]
+[ext_resource type="Script" path="res://JobManager.gd" id="1_ad5ba"]
+[ext_resource type="Script" path="res://CompanyUIManager.gd" id="1_othiy"]
+[ext_resource type="PackedScene" uid="uid://bdewx43gbc46u" path="res://flow_line.tscn" id="2_ckhfy"]
+[ext_resource type="Script" path="res://storage.gd" id="2_mhwrs"]
+[ext_resource type="Script" path="res://Employee.gd" id="2_qvji3"]
+[ext_resource type="Script" path="res://Token.gd" id="3_ci3dq"]
+[ext_resource type="Script" path="res://action_produce.gd" id="4_1ji7l"]
+[ext_resource type="Script" path="res://action_Consume.gd" id="4_pe8s3"]
+[ext_resource type="PackedScene" uid="uid://24aslno6yd8e" path="res://job_visual.tscn" id="4_u0xdj"]
+[ext_resource type="Texture2D" uid="uid://dhmuqf88u3xo1" path="res://assets/testPic1.png" id="8_a4vd5"]
+[ext_resource type="Texture2D" uid="uid://bsv27suggfjmq" path="res://assets/testPic2.png" id="12_dy5ij"]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="Resource" id="Resource_hmk4t"]
+script = ExtResource("3_ci3dq")
+type = 2
 
-[node name="Node" type="Node" parent="."]
+[sub_resource type="Resource" id="Resource_11hq2"]
+script = ExtResource("4_1ji7l")
+producedTokens = Array[ExtResource("3_ci3dq")]([SubResource("Resource_hmk4t")])
+
+[sub_resource type="Resource" id="Resource_vt8gg"]
+script = ExtResource("2_qvji3")
+prestige = 33
+capacity = 44
+dependentActions = Array[Resource("res://Action.gd")]([SubResource("Resource_11hq2")])
+independentActions = Array[Resource("res://Action.gd")]([])
+employeeName = "Gamintojas"
+employeePic = ExtResource("8_a4vd5")
+staticText = "Produce 1 Green."
+
+[sub_resource type="Resource" id="Resource_p2afh"]
+script = ExtResource("3_ci3dq")
+type = 2
+
+[sub_resource type="Resource" id="Resource_cguka"]
+script = ExtResource("3_ci3dq")
+type = 2
+
+[sub_resource type="Resource" id="Resource_f50jn"]
+script = ExtResource("3_ci3dq")
+type = 2
+
+[sub_resource type="Resource" id="Resource_1tbrk"]
+script = ExtResource("4_pe8s3")
+requiredTokens = Array[ExtResource("3_ci3dq")]([SubResource("Resource_cguka"), SubResource("Resource_f50jn")])
+
+[sub_resource type="Resource" id="Resource_uh2on"]
+script = ExtResource("3_ci3dq")
+type = 1
+
+[sub_resource type="Resource" id="Resource_ocyyw"]
+script = ExtResource("4_1ji7l")
+producedTokens = Array[ExtResource("3_ci3dq")]([SubResource("Resource_uh2on")])
+
+[sub_resource type="Resource" id="Resource_dq6ey"]
+script = ExtResource("2_qvji3")
+prestige = 2
+capacity = 4
+dependentActions = Array[Resource("res://Action.gd")]([SubResource("Resource_1tbrk"), SubResource("Resource_ocyyw")])
+independentActions = Array[Resource("res://Action.gd")]([])
+employeeName = "Valgytojas"
+employeePic = ExtResource("12_dy5ij")
+staticText = "Consume 2 Green, produce 1 Blue"
+
+[node name="Main" type="Node2D"]
+
+[node name="CompanyUILord" type="Node2D" parent="." node_paths=PackedStringArray("jobManager", "lineLayer", "jobLayer")]
+script = ExtResource("1_othiy")
+lineUIPacked = ExtResource("2_ckhfy")
+jobUIPacked = ExtResource("4_u0xdj")
+jobManager = NodePath("../JobLord")
+lineLayer = NodePath("LineLayer")
+jobLayer = NodePath("JobLayer")
+someVectors = Array[Vector2]([Vector2(300, 300), Vector2(600, 600), Vector2(0, 300), Vector2(1000, 250)])
+
+[node name="LineLayer" type="CanvasLayer" parent="CompanyUILord"]
+
+[node name="JobLayer" type="CanvasLayer" parent="CompanyUILord"]
+
+[node name="JobLord" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_ad5ba")
+
+[node name="Job" type="Node" parent="JobLord" node_paths=PackedStringArray("storage")]
 script = ExtResource("1_4eifv")
+employee = SubResource("Resource_vt8gg")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job"]
+script = ExtResource("2_mhwrs")
+contents = Array[ExtResource("3_ci3dq")]([SubResource("Resource_p2afh")])
+defaultLimit = 5
+
+[node name="Job2" type="Node" parent="JobLord" node_paths=PackedStringArray("inflow", "storage")]
+script = ExtResource("1_4eifv")
+inflow = [NodePath("../Job")]
+employee = SubResource("Resource_dq6ey")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job2"]
+script = ExtResource("2_mhwrs")
+defaultLimit = 5

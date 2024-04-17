@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://qd4r5iqbaah3"]
+
+[ext_resource type="Script" path="res://employee_visual.gd" id="1_agrcr"]
+[ext_resource type="Texture2D" uid="uid://dy1nw01ng1rko" path="res://icon.svg" id="2_3570i"]
+
+[node name="EmployeeVisual" type="Control" node_paths=PackedStringArray("employeeNameLabel", "prestigeLabel", "capacityLabel", "employeeTextLabel", "employeePic")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_agrcr")
+employeeNameLabel = NodePath("CardFrame/Top Structure/TopLine/EmployeeName")
+prestigeLabel = NodePath("CardFrame/Top Structure/TopLine/Prestige")
+capacityLabel = NodePath("CardFrame/Top Structure/TopLine/Capacity")
+employeeTextLabel = NodePath("CardFrame/Top Structure/EmployeeText")
+employeePic = NodePath("CardFrame/Top Structure/EmployePic")
+
+[node name="CardFrame" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Top Structure" type="VBoxContainer" parent="CardFrame"]
+layout_mode = 2
+
+[node name="TopLine" type="HBoxContainer" parent="CardFrame/Top Structure"]
+layout_mode = 2
+
+[node name="EmployeeName" type="Label" parent="CardFrame/Top Structure/TopLine"]
+custom_minimum_size = Vector2(150, 25)
+layout_mode = 2
+text = "Vladimiras Vladimirovicius"
+autowrap_mode = 2
+
+[node name="Prestige" type="Label" parent="CardFrame/Top Structure/TopLine"]
+layout_mode = 2
+text = "4"
+
+[node name="Capacity" type="Label" parent="CardFrame/Top Structure/TopLine"]
+layout_mode = 2
+text = "5"
+
+[node name="EmployePic" type="TextureRect" parent="CardFrame/Top Structure"]
+layout_mode = 2
+texture = ExtResource("2_3570i")
+stretch_mode = 5
+
+[node name="EmployeeText" type="Label" parent="CardFrame/Top Structure"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+text = "Consume 2 Red, Produce 2 Blue"
+autowrap_mode = 2

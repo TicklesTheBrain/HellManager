@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://24aslno6yd8e"]
+
+[ext_resource type="Script" path="res://job_visual.gd" id="1_t5rk0"]
+[ext_resource type="PackedScene" uid="uid://qd4r5iqbaah3" path="res://employee_visual.tscn" id="2_qeiug"]
+[ext_resource type="PackedScene" uid="uid://cgq6pba1xc53a" path="res://token_ui.tscn" id="3_av8fg"]
+
+[node name="JobVisual" type="Control" node_paths=PackedStringArray("emptyContainer", "employeeContainer", "storageContainer")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_t5rk0")
+emptyContainer = NodePath("JobFrame/EmpyCentering")
+employeeContainer = NodePath("JobFrame/EmployeeCentering")
+employeePackedScene = ExtResource("2_qeiug")
+storageContainer = NodePath("StorageContainer")
+tokenUIPacked = ExtResource("3_av8fg")
+
+[node name="JobFrame" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(200, 250)
+layout_mode = 0
+offset_left = -92.0
+offset_top = -123.0
+offset_right = 108.0
+offset_bottom = 127.0
+
+[node name="EmpyCentering" type="CenterContainer" parent="JobFrame"]
+layout_mode = 2
+
+[node name="EmptyString" type="Label" parent="JobFrame/EmpyCentering"]
+layout_mode = 2
+text = "Vacant
+"
+
+[node name="EmployeeCentering" type="CenterContainer" parent="JobFrame"]
+layout_mode = 2
+use_top_left = true
+
+[node name="StorageContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 110.0
+offset_top = -123.0
+offset_right = 150.0
+offset_bottom = -83.0
+columns = 3

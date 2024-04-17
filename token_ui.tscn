@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgq6pba1xc53a"]
+
+[ext_resource type="Texture2D" uid="uid://dfkcvx505hxh6" path="res://assets/Dot.png" id="1_7e4gq"]
+[ext_resource type="Script" path="res://token_ui.gd" id="2_fqeij"]
+
+[node name="TokenUI" type="TextureRect"]
+custom_minimum_size = Vector2(25, 25)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_7e4gq")
+expand_mode = 3
+stretch_mode = 4
+script = ExtResource("2_fqeij")
+types = Array[int]([0, 1, 2])
+colors = Array[Color]([Color(0.886275, 0.192157, 0.333333, 1), Color(0.203922, 0.164706, 0.780392, 1), Color(0, 0.619608, 0, 1)])
