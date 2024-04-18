@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=34 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://Job.gd" id="1_4eifv"]
 [ext_resource type="Script" path="res://JobManager.gd" id="1_ad5ba"]
+[ext_resource type="Script" path="res://Main.gd" id="1_ehfe1"]
 [ext_resource type="Script" path="res://CompanyUIManager.gd" id="1_othiy"]
 [ext_resource type="PackedScene" uid="uid://bdewx43gbc46u" path="res://flow_line.tscn" id="2_ckhfy"]
 [ext_resource type="Script" path="res://storage.gd" id="2_mhwrs"]
@@ -12,6 +13,12 @@
 [ext_resource type="PackedScene" uid="uid://24aslno6yd8e" path="res://job_visual.tscn" id="4_u0xdj"]
 [ext_resource type="Texture2D" uid="uid://dhmuqf88u3xo1" path="res://assets/testPic1.png" id="8_a4vd5"]
 [ext_resource type="Texture2D" uid="uid://bsv27suggfjmq" path="res://assets/testPic2.png" id="12_dy5ij"]
+[ext_resource type="Script" path="res://Deck.gd" id="13_lkv7n"]
+[ext_resource type="Script" path="res://CardContainer.gd" id="14_ubolo"]
+[ext_resource type="Script" path="res://action_makeJob.gd" id="15_xedw4"]
+[ext_resource type="Script" path="res://Card.gd" id="16_d8kjb"]
+[ext_resource type="Script" path="res://AreaPC.gd" id="16_ehrhj"]
+[ext_resource type="Script" path="res://multiCard.gd" id="17_ipptd"]
 
 [sub_resource type="Resource" id="Resource_hmk4t"]
 script = ExtResource("3_ci3dq")
@@ -65,7 +72,29 @@ employeeName = "Valgytojas"
 employeePic = ExtResource("12_dy5ij")
 staticText = "Consume 2 Green, produce 1 Blue"
 
-[node name="Main" type="Node2D"]
+[sub_resource type="Resource" id="Resource_uc3l2"]
+script = ExtResource("15_xedw4")
+
+[sub_resource type="Resource" id="Resource_nj4v4"]
+script = ExtResource("16_d8kjb")
+cardName = "Expansion"
+cardText = "Add new job"
+onExecute = Array[Resource("res://Action.gd")]([SubResource("Resource_uc3l2")])
+revealed = false
+
+[sub_resource type="Resource" id="Resource_5jtij"]
+script = ExtResource("17_ipptd")
+copies = 6
+card = SubResource("Resource_nj4v4")
+debug = false
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f5c0v"]
+size = Vector2(1385.5, 342)
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("deck", "hand")]
+script = ExtResource("1_ehfe1")
+deck = NodePath("Deck")
+hand = NodePath("HandCards")
 
 [node name="CompanyUILord" type="Node2D" parent="." node_paths=PackedStringArray("jobManager", "lineLayer", "jobLayer")]
 script = ExtResource("1_othiy")
@@ -103,3 +132,22 @@ storage = NodePath("TokenStorage")
 [node name="TokenStorage" type="Node" parent="JobLord/Job2"]
 script = ExtResource("2_mhwrs")
 defaultLimit = 5
+
+[node name="Deck" type="Node" parent="."]
+script = ExtResource("13_lkv7n")
+deck = Array[ExtResource("17_ipptd")]([SubResource("Resource_5jtij")])
+
+[node name="HandCards" type="Node" parent="."]
+script = ExtResource("14_ubolo")
+
+[node name="HandPC" type="Node2D" parent="." node_paths=PackedStringArray("area", "logicalContainer")]
+script = ExtResource("16_ehrhj")
+area = NodePath("CollisionShape2D")
+mindCenterDistance = 50.0
+maxGap = 25.0
+logicalContainer = NodePath("../HandCards")
+resetRotation = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HandPC"]
+position = Vector2(724.25, 1071)
+shape = SubResource("RectangleShape2D_f5c0v")

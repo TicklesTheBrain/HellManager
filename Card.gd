@@ -11,4 +11,5 @@ class_name Card
        
 @export var cardText: String
 @export var onExecute: Array[Action]
+@export var revealed: bool = false
 

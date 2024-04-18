@@ -3,10 +3,8 @@ extends Node
 @export var employeeUIPacked: PackedScene
 @export var employeeUIs: Array[EmployeeUI] = []
 
-
 func _ready():
-    Events.employeeConsumed.connect(func(e,_j): destroyEmployeeUI(e))
-     
+    Events.employeeConsumed.connect(func(e,_j): destroyEmployeeUI(e))     
 
 func makeNewEmployeeUI(employee: Employee) -> EmployeeUI:
     var newUI = employeeUIPacked.instantiate()

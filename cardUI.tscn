@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://CardUI.gd" id="1_ykfix"]
 
-[node name="CardFrame" type="PanelContainer"]
+[node name="CardFrame" type="PanelContainer" node_paths=PackedStringArray("nameOfCard", "cardText", "cardStructure")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -11,8 +11,9 @@ offset_bottom = -998.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ykfix")
-nameOfCard = null
-cardText = null
+nameOfCard = NodePath("MarginWrapper/Structure/TopLine/NameOfCard")
+cardText = NodePath("MarginWrapper/Structure/CardText")
+cardStructure = NodePath("MarginWrapper/Structure")
 
 [node name="MarginWrapper" type="MarginContainer" parent="."]
 layout_mode = 2
