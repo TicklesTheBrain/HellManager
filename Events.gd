@@ -36,8 +36,11 @@ signal goalCompleted()
 signal goalActivationStart()
 signal goalActivationEnd()
 
-
 ## LOGIC META SIGNALS
 signal gameStateChanged(dirty: bool)
 
 ## UI Signals
+signal cardClicked(card: CardUI, button: MouseButton)
+signal jobClicked(jobUI: JobUI, button: MouseButton)
+signal goalClicked(goal, button: MouseButton)
+signal buttonClicked(someSortOfButtonMeaningHere)

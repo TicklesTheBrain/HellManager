@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgn1hsdj1vstc"]
-
-[ext_resource type="Script" path="res://employeeUILord.gd" id="1_iej8x"]
-[ext_resource type="PackedScene" uid="uid://qd4r5iqbaah3" path="res://employee_visual.tscn" id="2_amrlc"]
-
-[node name="EmployeeUILord" type="Node"]
-script = ExtResource("1_iej8x")
-employeeUIPacked = ExtResource("2_amrlc")

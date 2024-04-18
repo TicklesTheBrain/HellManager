@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bdewx43gbc46u"]
 
-[ext_resource type="Texture2D" uid="uid://7r24rejin1lm" path="res://assets/arrowTexture.png" id="1_mejk3"]
-[ext_resource type="Script" path="res://flow_line_UI.gd" id="2_vcmr8"]
+[ext_resource type="Texture2D" uid="uid://7r24rejin1lm" path="res://assets/arrow.png" id="1_mejk3"]
+[ext_resource type="Script" path="res://src/ui_code/flow_line_UI.gd" id="2_vcmr8"]
 
 [node name="FlowLine" type="Line2D"]
 texture_repeat = 2

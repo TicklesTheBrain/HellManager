@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://24aslno6yd8e"]
 
-[ext_resource type="Script" path="res://job_visual.gd" id="1_t5rk0"]
-[ext_resource type="PackedScene" uid="uid://cgq6pba1xc53a" path="res://token_ui.tscn" id="3_av8fg"]
+[ext_resource type="Script" path="res://src/ui_code/job_visual.gd" id="1_t5rk0"]
+[ext_resource type="PackedScene" uid="uid://cgq6pba1xc53a" path="res://scenes/tokenUI.tscn" id="3_av8fg"]
 
 [node name="JobVisual" type="Control" node_paths=PackedStringArray("emptyContainer", "employeeContainer", "storageContainer")]
 layout_mode = 3

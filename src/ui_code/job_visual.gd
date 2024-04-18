@@ -40,3 +40,7 @@ func addEmployee(employee: Employee):
 
 func showVacant():
 	emptyContainer.visible = true
+	
+func _on_job_frame_gui_input(event):
+	if event is InputEventMouseButton and event.is_released():
+		Events.cardClicked.emit(self, event.button_index)

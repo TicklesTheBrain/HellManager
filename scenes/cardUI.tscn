@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dm73o0agf3yay"]
 
-[ext_resource type="Script" path="res://CardUI.gd" id="1_ykfix"]
+[ext_resource type="Script" path="res://src/ui_code/CardUI.gd" id="1_7wjcq"]
 
 [node name="CardFrame" type="PanelContainer" node_paths=PackedStringArray("nameOfCard", "cardText", "cardStructure")]
 anchors_preset = 15
@@ -10,7 +10,7 @@ offset_right = -1218.0
 offset_bottom = -998.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ykfix")
+script = ExtResource("1_7wjcq")
 nameOfCard = NodePath("MarginWrapper/Structure/TopLine/NameOfCard")
 cardText = NodePath("MarginWrapper/Structure/CardText")
 cardStructure = NodePath("MarginWrapper/Structure")
@@ -33,3 +33,5 @@ layout_mode = 2
 
 [node name="CardText" type="Label" parent="MarginWrapper/Structure"]
 layout_mode = 2
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

@@ -21,4 +21,8 @@ func updateCardUI():
 		if empUI == null:
 			empUI = EmployeeUILord.makeNewEmployeeUI(card.employee)
 		cardStructure.add_child(empUI)
+
+func _on_gui_input(event):
+	if event is InputEventMouseButton and event.is_released():
+		Events.cardClicked.emit(self, event.button_index)
 		
