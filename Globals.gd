@@ -37,4 +37,4 @@ func getCtxt() -> GameContext:
 	return ctxt
 
 func getJobManager() -> JobManager:
-	return %JobLord
+	return get_tree().get_first_node_in_group("JobLord")

@@ -26,3 +26,7 @@ func ask() -> Callable:
 func execute():
    if onExecute.all(func(a): return a.try()):
         onExecute.all(func(a): return a.perform())
+
+func reset():
+    for action in onExecute:
+        action.resetSetup()

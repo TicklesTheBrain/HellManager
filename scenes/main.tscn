@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=35 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_nbim8"]
 [ext_resource type="Script" path="res://src/ui_code/CompanyUIManager.gd" id="2_hwxbs"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bsv27suggfjmq" path="res://assets/testPic2.png" id="13_fgyyd"]
 [ext_resource type="Script" path="res://src/actions/action_consume.gd" id="13_mduv8"]
 [ext_resource type="Script" path="res://src/cards/Deck.gd" id="14_r0k10"]
+[ext_resource type="Script" path="res://src/actions/action_makeJob.gd" id="16_16kad"]
 [ext_resource type="Script" path="res://src/cards/Card.gd" id="16_hnq1w"]
 [ext_resource type="Script" path="res://src/cards/multiCard.gd" id="17_mrygo"]
 [ext_resource type="Script" path="res://src/cards/CardContainer.gd" id="18_1vww6"]
@@ -72,11 +73,14 @@ employeeName = "Valgytojas"
 employeePic = ExtResource("13_fgyyd")
 staticText = "Consume 2 Green, produce 1 Blue"
 
+[sub_resource type="Resource" id="Resource_cal8w"]
+script = ExtResource("16_16kad")
+
 [sub_resource type="Resource" id="Resource_nj4v4"]
 script = ExtResource("16_hnq1w")
 cardName = "Expansion"
 cardText = "Add new job"
-onExecute = Array[Resource("res://src/actions/Action.gd")]([])
+onExecute = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_cal8w")])
 revealed = false
 
 [sub_resource type="Resource" id="Resource_5jtij"]
@@ -101,14 +105,13 @@ employeeUIPacked = ExtResource("5_xdwna")
 jobManager = NodePath("../JobLord")
 lineLayer = NodePath("LineLayer")
 jobLayer = NodePath("JobLayer")
-someVectors = Array[Vector2]([Vector2(300, 300), Vector2(600, 600), Vector2(0, 300), Vector2(1000, 250)])
+someVectors = Array[Vector2]([Vector2(110, 130), Vector2(420, 130), Vector2(730, 130), Vector2(1040, 130), Vector2(110, 550), Vector2(420, 550), Vector2(730, 550), Vector2(1040, 550)])
 
 [node name="LineLayer" type="CanvasLayer" parent="CompanyUILord"]
 
 [node name="JobLayer" type="CanvasLayer" parent="CompanyUILord"]
 
-[node name="JobLord" type="Node" parent="."]
-unique_name_in_owner = true
+[node name="JobLord" type="Node" parent="." groups=["JobLord"]]
 script = ExtResource("5_1cdr4")
 
 [node name="Job" type="Node" parent="JobLord" node_paths=PackedStringArray("storage")]
@@ -137,6 +140,8 @@ deck = Array[ExtResource("17_mrygo")]([SubResource("Resource_5jtij")])
 
 [node name="HandCards" type="Node" parent="."]
 script = ExtResource("18_1vww6")
+
+[node name="Discard" type="Node" parent="."]
 
 [node name="HandPC" type="Node2D" parent="." node_paths=PackedStringArray("area", "logicalContainer")]
 script = ExtResource("19_qe3sq")

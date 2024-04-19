@@ -30,3 +30,10 @@ func checkSetup() -> bool:
 #validate the choice (returning true/false) and record the choice if it is valid.
 func ask() -> Callable:
 	return (func(_a): return true)
+
+#This function is triggered when action is partly setup and then cancelled
+func resetSetup():
+	pass
+
+func announceChoice(choice):
+	Events.choiceMade.emit(self, choice)

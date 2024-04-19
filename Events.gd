@@ -44,3 +44,7 @@ signal cardClicked(card: CardUI, button: MouseButton)
 signal jobClicked(jobUI: JobUI, button: MouseButton)
 signal goalClicked(goal, button: MouseButton)
 signal buttonClicked(someSortOfButtonMeaningHere)
+
+
+#DANGER ZONE
+signal choiceMade(action, choice)

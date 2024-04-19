@@ -18,9 +18,7 @@ func _ready():
 	#InputLord.cardDragReleased.connect(_onCardDragReleased)
 
 func addCard(card: Card):
-
-	print('addCard on Controller')
-
+	
 	var cardUI = CardUILord.getCardUI(card)
 	if cardUI == null:
 		cardUI = CardUILord.makeNewCardUI(card)
@@ -54,8 +52,6 @@ func removeCardUI(cardToRemove: CardUI):
 	scuttleCards()
 
 func setupNewLogicalContainer(newContainer = null):
-
-	print_stack()
 
 	if newContainer:
 		logicalContainer = newContainer
