@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://24aslno6yd8e"]
 
-[ext_resource type="Script" path="res://src/ui_code/job_visual.gd" id="1_t5rk0"]
+[ext_resource type="Script" path="res://src/ui_code/JobUI.gd" id="1_8wb7k"]
 [ext_resource type="PackedScene" uid="uid://cgq6pba1xc53a" path="res://scenes/tokenUI.tscn" id="3_av8fg"]
 
 [node name="JobVisual" type="Control" node_paths=PackedStringArray("emptyContainer", "employeeContainer", "storageContainer")]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_t5rk0")
+script = ExtResource("1_8wb7k")
 emptyContainer = NodePath("JobFrame/EmpyCentering")
 employeeContainer = NodePath("JobFrame/EmployeeCentering")
 storageContainer = NodePath("StorageContainer")
