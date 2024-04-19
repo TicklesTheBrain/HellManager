@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://qd4r5iqbaah3"]
 
 [ext_resource type="Script" path="res://src/ui_code/EmployeeUIl.gd" id="1_l6rba"]
-[ext_resource type="Texture2D" uid="uid://dy1nw01ng1rko" path="res://icon.svg" id="2_jsfjt"]
+[ext_resource type="Texture2D" uid="uid://dy1nw01ng1rko" path="res://assets/icon.svg" id="2_w5u1y"]
 
 [node name="EmployeeVisual" type="Control" node_paths=PackedStringArray("employeeNameLabel", "prestigeLabel", "capacityLabel", "employeeTextLabel", "employeePic")]
 layout_mode = 3
@@ -44,7 +44,7 @@ text = "5"
 
 [node name="EmployePic" type="TextureRect" parent="CardFrame/Top Structure"]
 layout_mode = 2
-texture = ExtResource("2_jsfjt")
+texture = ExtResource("2_w5u1y")
 stretch_mode = 5
 
 [node name="EmployeeText" type="Label" parent="CardFrame/Top Structure"]

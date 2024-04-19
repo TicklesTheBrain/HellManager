@@ -9,15 +9,13 @@ func isSetup() -> bool:
 		return false
 	return true
 
-func ask():
+func ask() :
 	if from == null:
+		return recordFrom
+	elif to == null:
+		return recordTo
 
-
-
-
-func setup(jobFrom: Job, jobTo: Job):
-	from = jobFrom
-	to = jobTo
+	return (func(_a): return true)
 
 func try() -> bool:
 	if from == null or to == null:
@@ -31,3 +29,15 @@ func performSpecific() -> bool:
 
 func checkAcceptChoice(choice) -> bool:
 	return choice is Job
+
+func recordFrom(smth):
+	if checkAcceptChoice(smth):
+		from = smth
+		return true
+	return false
+
+func recordTo(smth):
+	if checkAcceptChoice(smth):
+		to = smth
+		return true
+	return false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=33 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_nbim8"]
 [ext_resource type="Script" path="res://src/ui_code/CompanyUIManager.gd" id="2_hwxbs"]
@@ -8,21 +8,31 @@
 [ext_resource type="PackedScene" uid="uid://qd4r5iqbaah3" path="res://scenes/employeeUI.tscn" id="5_xdwna"]
 [ext_resource type="Script" path="res://src/company/Job.gd" id="6_cnhkk"]
 [ext_resource type="Script" path="res://src/company/Token.gd" id="7_b1mae"]
+[ext_resource type="Script" path="res://src/actions/action_produce.gd" id="8_2wa5w"]
 [ext_resource type="Texture2D" uid="uid://dhmuqf88u3xo1" path="res://assets/testPic1.png" id="9_xt47j"]
 [ext_resource type="Script" path="res://src/company/Employee.gd" id="10_wmw7d"]
 [ext_resource type="Script" path="res://src/company/TokenStorage.gd" id="11_if1yf"]
 [ext_resource type="Texture2D" uid="uid://bsv27suggfjmq" path="res://assets/testPic2.png" id="13_fgyyd"]
+[ext_resource type="Script" path="res://src/actions/action_consume.gd" id="13_mduv8"]
 [ext_resource type="Script" path="res://src/cards/Deck.gd" id="14_r0k10"]
 [ext_resource type="Script" path="res://src/cards/Card.gd" id="16_hnq1w"]
 [ext_resource type="Script" path="res://src/cards/multiCard.gd" id="17_mrygo"]
 [ext_resource type="Script" path="res://src/cards/CardContainer.gd" id="18_1vww6"]
 [ext_resource type="Script" path="res://src/ui_code/AreaPC.gd" id="19_qe3sq"]
 
+[sub_resource type="Resource" id="Resource_lfh2a"]
+script = ExtResource("7_b1mae")
+type = 2
+
+[sub_resource type="Resource" id="Resource_l3khh"]
+script = ExtResource("8_2wa5w")
+producedTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_lfh2a")])
+
 [sub_resource type="Resource" id="Resource_vt8gg"]
 script = ExtResource("10_wmw7d")
 prestige = 33
 capacity = 44
-dependentActions = Array[Resource("res://src/actions/Action.gd")]([])
+dependentActions = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_l3khh")])
 independentActions = Array[Resource("res://src/actions/Action.gd")]([])
 employeeName = "Gamintojas"
 employeePic = ExtResource("9_xt47j")
@@ -32,11 +42,31 @@ staticText = "Produce 1 Green."
 script = ExtResource("7_b1mae")
 type = 2
 
+[sub_resource type="Resource" id="Resource_pax6k"]
+script = ExtResource("7_b1mae")
+type = 2
+
+[sub_resource type="Resource" id="Resource_7c1lp"]
+script = ExtResource("7_b1mae")
+type = 2
+
+[sub_resource type="Resource" id="Resource_iwbiw"]
+script = ExtResource("13_mduv8")
+requiredTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_pax6k"), SubResource("Resource_7c1lp")])
+
+[sub_resource type="Resource" id="Resource_wk6m5"]
+script = ExtResource("7_b1mae")
+type = 0
+
+[sub_resource type="Resource" id="Resource_emjku"]
+script = ExtResource("8_2wa5w")
+producedTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_wk6m5")])
+
 [sub_resource type="Resource" id="Resource_dq6ey"]
 script = ExtResource("10_wmw7d")
 prestige = 2
 capacity = 4
-dependentActions = Array[Resource("res://src/actions/Action.gd")]([])
+dependentActions = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_iwbiw"), SubResource("Resource_emjku")])
 independentActions = Array[Resource("res://src/actions/Action.gd")]([])
 employeeName = "Valgytojas"
 employeePic = ExtResource("13_fgyyd")

@@ -15,5 +15,5 @@ texture = ExtResource("1_ea0ll")
 expand_mode = 3
 stretch_mode = 4
 script = ExtResource("2_3wh6f")
-types = Array[int]([0, 1, 2])
+types = Array[int]([1, 0, 2])
 colors = Array[Color]([Color(0.886275, 0.192157, 0.333333, 1), Color(0.203922, 0.164706, 0.780392, 1), Color(0, 0.619608, 0, 1)])
