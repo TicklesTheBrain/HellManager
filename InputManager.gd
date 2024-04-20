@@ -1,6 +1,9 @@
 extends Node
+class_name InputManager
 
 @export var phase: int = 1
+@export var hand: Hand
+
 var activeChoice: Callable = Callable()
 
 func _ready():
@@ -14,20 +17,22 @@ func cardClicked(cardUI: CardUI, button: MouseButton):
 
 	print('clicked on card ', cardUI, " with button ", button)
 
-	if phase != 1:
-		return
-
-	if button == MOUSE_BUTTON_LEFT:
-		cardUI.card.execute()
+	if phase == 1 and button == MOUSE_BUTTON_LEFT:
+		hand.useCard(cardUI.card, receiveActiveChoice)
 
 func jobClicked(jobUI: JobUI, button):
 
 	print('clicked on job ', jobUI, " with button ", button)
 
 	if not activeChoice.is_null():
+		print('gonna try validate choice')
 		var result = activeChoice.call(jobUI.job)
 		if result:
+			print('choice accepted')
 			activeChoice = Callable()
+
+func receiveActiveChoice(callable: Callable):
+	activeChoice = callable
 
 
 

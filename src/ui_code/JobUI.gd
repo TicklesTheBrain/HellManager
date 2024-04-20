@@ -42,5 +42,6 @@ func showVacant():
 	emptyContainer.visible = true
 	
 func _on_job_frame_gui_input(event):
+	#print('on job frame gui input')
 	if event is InputEventMouseButton and event.is_released():
-		Events.cardClicked.emit(self, event.button_index)
+		Events.jobClicked.emit(self, event.button_index)

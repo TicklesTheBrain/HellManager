@@ -22,6 +22,7 @@ offset_bottom = 127.0
 
 [node name="EmpyCentering" type="CenterContainer" parent="JobFrame"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="EmptyString" type="Label" parent="JobFrame/EmpyCentering"]
 layout_mode = 2
@@ -30,6 +31,7 @@ text = "Vacant
 
 [node name="EmployeeCentering" type="CenterContainer" parent="JobFrame"]
 layout_mode = 2
+mouse_filter = 2
 use_top_left = true
 
 [node name="StorageContainer" type="GridContainer" parent="."]
@@ -38,4 +40,7 @@ offset_left = 110.0
 offset_top = -123.0
 offset_right = 150.0
 offset_bottom = -83.0
+mouse_filter = 2
 columns = 3
+
+[connection signal="gui_input" from="JobFrame" to="." method="_on_job_frame_gui_input"]

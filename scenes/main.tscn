@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=42 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_nbim8"]
 [ext_resource type="Script" path="res://src/ui_code/CompanyUIManager.gd" id="2_hwxbs"]
@@ -19,7 +19,11 @@
 [ext_resource type="Script" path="res://src/cards/Card.gd" id="16_hnq1w"]
 [ext_resource type="Script" path="res://src/cards/multiCard.gd" id="17_mrygo"]
 [ext_resource type="Script" path="res://src/cards/CardContainer.gd" id="18_1vww6"]
+[ext_resource type="Script" path="res://src/actions/action_addFlow.gd" id="19_5nh3j"]
 [ext_resource type="Script" path="res://src/ui_code/AreaPC.gd" id="19_qe3sq"]
+[ext_resource type="Script" path="res://src/cards/Hand.gd" id="20_vouf7"]
+[ext_resource type="Script" path="res://src/ui_code/SinkPC.gd" id="23_i5ahq"]
+[ext_resource type="Script" path="res://InputManager.gd" id="23_xx20n"]
 
 [sub_resource type="Resource" id="Resource_lfh2a"]
 script = ExtResource("7_b1mae")
@@ -85,8 +89,24 @@ revealed = false
 
 [sub_resource type="Resource" id="Resource_5jtij"]
 script = ExtResource("17_mrygo")
-copies = 6
+copies = 3
 card = SubResource("Resource_nj4v4")
+debug = false
+
+[sub_resource type="Resource" id="Resource_jr0jv"]
+script = ExtResource("19_5nh3j")
+
+[sub_resource type="Resource" id="Resource_ktrr6"]
+script = ExtResource("16_hnq1w")
+cardName = "New line"
+cardText = "Make ne wline of flow"
+onExecute = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_jr0jv")])
+revealed = false
+
+[sub_resource type="Resource" id="Resource_poo86"]
+script = ExtResource("17_mrygo")
+copies = 3
+card = SubResource("Resource_ktrr6")
 debug = false
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f5c0v"]
@@ -96,6 +116,10 @@ size = Vector2(1385.5, 342)
 script = ExtResource("1_nbim8")
 deck = NodePath("Deck")
 hand = NodePath("HandCards")
+
+[node name="InputManager" type="Node" parent="." node_paths=PackedStringArray("hand")]
+script = ExtResource("23_xx20n")
+hand = NodePath("../HandCards")
 
 [node name="CompanyUILord" type="Node2D" parent="." node_paths=PackedStringArray("jobManager", "lineLayer", "jobLayer")]
 script = ExtResource("2_hwxbs")
@@ -136,12 +160,15 @@ defaultLimit = 5
 
 [node name="Deck" type="Node" parent="."]
 script = ExtResource("14_r0k10")
-deck = Array[ExtResource("17_mrygo")]([SubResource("Resource_5jtij")])
+deck = Array[ExtResource("17_mrygo")]([SubResource("Resource_5jtij"), SubResource("Resource_poo86")])
 
-[node name="HandCards" type="Node" parent="."]
+[node name="HandCards" type="Node" parent="." node_paths=PackedStringArray("disposeContainer")]
+script = ExtResource("20_vouf7")
+disposeContainer = NodePath("../Discard")
+
+[node name="Discard" type="Node" parent="." node_paths=PackedStringArray("disposeContainer")]
 script = ExtResource("18_1vww6")
-
-[node name="Discard" type="Node" parent="."]
+disposeContainer = NodePath(".")
 
 [node name="HandPC" type="Node2D" parent="." node_paths=PackedStringArray("area", "logicalContainer")]
 script = ExtResource("19_qe3sq")
@@ -154,3 +181,11 @@ resetRotation = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HandPC"]
 position = Vector2(724.25, 1071)
 shape = SubResource("RectangleShape2D_f5c0v")
+
+[node name="SinkPC" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker", "logicalContainer")]
+script = ExtResource("23_i5ahq")
+positionMarker = NodePath("SinkPoint")
+logicalContainer = NodePath("../Discard")
+
+[node name="SinkPoint" type="Marker2D" parent="SinkPC"]
+position = Vector2(1519, 614)

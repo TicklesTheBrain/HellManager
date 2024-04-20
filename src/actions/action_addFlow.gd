@@ -31,13 +31,19 @@ func checkAcceptChoice(choice) -> bool:
 	return choice is Job
 
 func recordFrom(smth):
+	print('record from triggered')
 	if checkAcceptChoice(smth):
 		from = smth
+		print('record from accepted')
+		announceChoice(smth)
 		return true
 	return false
 
 func recordTo(smth):
+	print('record to triggered')
 	if checkAcceptChoice(smth):
 		to = smth
+		print('record to accepted')
+		announceChoice(smth)
 		return true
 	return false

@@ -26,10 +26,10 @@ func addCard(card: Card):
 	
 func removeCard(card: Card):	
 	
-	if not CardUILord.checkCardDisplayExists(card):
+	if CardUILord.getCardUI(card) == null:
 		return
 	
-	var cardUI = CardUILord.getCardDisplay(card)
+	var cardUI = CardUILord.getCardUI(card)
 	removeCardUI(cardUI) #TODO: this is kinda ugly
 	
 func addCardUI(newCard: CardUI):

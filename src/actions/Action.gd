@@ -23,7 +23,7 @@ func performSpecific() -> bool:
 
 #This is a check to see if all the parameters that the action needs are chosen. If there are no additional params,
 #this can be left as is.
-func checkSetup() -> bool:
+func isSetup() -> bool:
 	return true
 
 #This function gets called when setup is not done, it returns a delegate that will get fed a choice. the delegate will
