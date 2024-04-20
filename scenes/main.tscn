@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=51 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_nbim8"]
 [ext_resource type="Script" path="res://src/ui_code/CompanyUIManager.gd" id="2_hwxbs"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://src/cards/Deck.gd" id="14_r0k10"]
 [ext_resource type="Script" path="res://src/actions/action_makeJob.gd" id="16_16kad"]
 [ext_resource type="Script" path="res://src/cards/Card.gd" id="16_hnq1w"]
+[ext_resource type="Script" path="res://src/actions/action_placeEmployee.gd" id="17_cxtnn"]
 [ext_resource type="Script" path="res://src/cards/multiCard.gd" id="17_mrygo"]
 [ext_resource type="Script" path="res://src/cards/CardContainer.gd" id="18_1vww6"]
 [ext_resource type="Script" path="res://src/actions/action_addFlow.gd" id="19_5nh3j"]
@@ -89,8 +90,51 @@ revealed = false
 
 [sub_resource type="Resource" id="Resource_5jtij"]
 script = ExtResource("17_mrygo")
-copies = 3
+copies = 2
 card = SubResource("Resource_nj4v4")
+debug = false
+
+[sub_resource type="Resource" id="Resource_1hrvb"]
+script = ExtResource("7_b1mae")
+type = 0
+
+[sub_resource type="Resource" id="Resource_73coo"]
+script = ExtResource("7_b1mae")
+type = 1
+
+[sub_resource type="Resource" id="Resource_hep17"]
+script = ExtResource("7_b1mae")
+type = 2
+
+[sub_resource type="Resource" id="Resource_2ac0j"]
+script = ExtResource("8_2wa5w")
+producedTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_1hrvb"), SubResource("Resource_73coo"), SubResource("Resource_hep17")])
+
+[sub_resource type="Resource" id="Resource_v1ny0"]
+script = ExtResource("10_wmw7d")
+prestige = 7
+capacity = 9
+dependentActions = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_2ac0j")])
+independentActions = Array[Resource("res://src/actions/Action.gd")]([])
+employeeName = "Dude"
+employeePic = ExtResource("9_xt47j")
+staticText = "Produce one of each"
+
+[sub_resource type="Resource" id="Resource_qg2rp"]
+script = ExtResource("17_cxtnn")
+employee = SubResource("Resource_v1ny0")
+
+[sub_resource type="Resource" id="Resource_dburm"]
+script = ExtResource("16_hnq1w")
+cardName = "Place this shmuck"
+cardText = "This shmuck"
+onExecute = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_qg2rp")])
+revealed = false
+
+[sub_resource type="Resource" id="Resource_8c0pc"]
+script = ExtResource("17_mrygo")
+copies = 2
+card = SubResource("Resource_dburm")
 debug = false
 
 [sub_resource type="Resource" id="Resource_jr0jv"]
@@ -105,7 +149,7 @@ revealed = false
 
 [sub_resource type="Resource" id="Resource_poo86"]
 script = ExtResource("17_mrygo")
-copies = 3
+copies = 2
 card = SubResource("Resource_ktrr6")
 debug = false
 
@@ -160,7 +204,7 @@ defaultLimit = 5
 
 [node name="Deck" type="Node" parent="."]
 script = ExtResource("14_r0k10")
-deck = Array[ExtResource("17_mrygo")]([SubResource("Resource_5jtij"), SubResource("Resource_poo86")])
+deck = Array[ExtResource("17_mrygo")]([SubResource("Resource_5jtij"), SubResource("Resource_8c0pc"), SubResource("Resource_poo86")])
 
 [node name="HandCards" type="Node" parent="." node_paths=PackedStringArray("disposeContainer")]
 script = ExtResource("20_vouf7")

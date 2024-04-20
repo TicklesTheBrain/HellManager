@@ -7,7 +7,10 @@ class_name Job
 		inflow.sort_custom(func(a,b): return a.priority < b.priority)
 		return inflow
 		
-@export var employee: Employee
+@export var employee: Employee:
+	set(v):
+		employee = v
+		Events.employeePlaced.emit(v, self)
 @export var storage: TokenStorage
 
 func doWork():

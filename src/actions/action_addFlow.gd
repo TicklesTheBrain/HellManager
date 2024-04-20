@@ -9,13 +9,10 @@ func isSetup() -> bool:
 		return false
 	return true
 
-func ask() :
-	if from == null:
-		return recordFrom
-	elif to == null:
-		return recordTo
-
-	return (func(_a): return true)
+func ask() -> Callable:
+	if not isSetup():
+		return recordChoice
+	return Callable()
 
 func try() -> bool:
 	if from == null or to == null:
@@ -27,23 +24,12 @@ func performSpecific() -> bool:
 	Events.flowAdded.emit(from, to)
 	return true
 
-func checkAcceptChoice(choice) -> bool:
-	return choice is Job
-
-func recordFrom(smth):
-	print('record from triggered')
-	if checkAcceptChoice(smth):
-		from = smth
-		print('record from accepted')
-		announceChoice(smth)
-		return true
-	return false
-
-func recordTo(smth):
-	print('record to triggered')
-	if checkAcceptChoice(smth):
-		to = smth
-		print('record to accepted')
+func recordChoice(smth):
+	if smth is Job:
+		if from == null:
+			from = smth
+		elif to == null:
+			to = smth
 		announceChoice(smth)
 		return true
 	return false

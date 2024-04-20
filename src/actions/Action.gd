@@ -35,5 +35,6 @@ func ask() -> Callable:
 func resetSetup():
 	pass
 
+#This is just a help function, when action needs to tell the resolver it wants to move on.
 func announceChoice(choice):
 	Events.choiceMade.emit(self, choice)
