@@ -173,7 +173,7 @@ employeeUIPacked = ExtResource("5_xdwna")
 jobManager = NodePath("../JobLord")
 lineLayer = NodePath("LineLayer")
 jobLayer = NodePath("JobLayer")
-someVectors = Array[Vector2]([Vector2(110, 130), Vector2(420, 130), Vector2(730, 130), Vector2(1040, 130), Vector2(110, 550), Vector2(420, 550), Vector2(730, 550), Vector2(1040, 550)])
+someVectors = Array[Vector2]([Vector2(150, 200), Vector2(500, 200), Vector2(850, 200), Vector2(1200, 200), Vector2(150, 600), Vector2(500, 600), Vector2(850, 600), Vector2(1200, 600)])
 
 [node name="LineLayer" type="CanvasLayer" parent="CompanyUILord"]
 
