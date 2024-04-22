@@ -3,7 +3,7 @@ class_name JobUI
 
 @export var job: Job
 @export var emptyContainer: Container
-@export var employeeContainer: Container
+@export var employeePos: Node2D
 @export var storageContainer: Container
 @export var tokenUIPacked: PackedScene
 
@@ -36,7 +36,7 @@ func removeTokenUI(t: Token):
 func addEmployee(employee: Employee):
 
 	emptyContainer.visible = false
-	employeeContainer.add_child(EmployeeUILord.makeNewEmployeeUI(employee))
+	employeePos.add_child(EmployeeUILord.makeNewEmployeeUI(employee))
 
 func showVacant():
 	emptyContainer.visible = true

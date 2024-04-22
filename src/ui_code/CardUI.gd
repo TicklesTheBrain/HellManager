@@ -1,4 +1,4 @@
-extends PanelContainer
+extends Control
 class_name CardUI
 
 @export var nameOfCard: Label
@@ -7,22 +7,26 @@ class_name CardUI
 	set(v):
 		card = v
 		updateCardUI()
-@export var cardStructure: Container
+@export var employeePos: Node2D
+@export var cardPic: TextureRect
+
 
 func updateCardUI():
 	if card == null:
 		return
 	
 	nameOfCard.text = card.cardName
-	if card.employee == null:
-		cardText.text = card.cardText
-	else:
+	cardText.text = card.cardText
+
+	if not card.employee == null:
 		var empUI = EmployeeUILord.getEmployeeUI(card.employee)
 		if empUI == null:
 			empUI = EmployeeUILord.makeNewEmployeeUI(card.employee)
-		cardStructure.add_child(empUI)
+		employeePos.add_child(empUI)
+	else:
+		cardPic.texture = card.cardIcon
 
-func _on_gui_input(event):
+func _on_card_frame_gui_input(event):
 	if event is InputEventMouseButton and event.is_released():
 		Events.cardClicked.emit(self, event.button_index)
 		

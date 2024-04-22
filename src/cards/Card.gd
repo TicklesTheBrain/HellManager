@@ -10,6 +10,7 @@ class_name Card
 		return employee
 	   
 @export var cardText: String
+@export var cardIcon: Texture
 @export var onExecute: Array[Action]
 @export var revealed: bool = false
 

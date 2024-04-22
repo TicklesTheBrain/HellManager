@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=53 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_nbim8"]
 [ext_resource type="Script" path="res://src/ui_code/CompanyUIManager.gd" id="2_hwxbs"]
@@ -17,12 +17,14 @@
 [ext_resource type="Script" path="res://src/cards/Deck.gd" id="14_r0k10"]
 [ext_resource type="Script" path="res://src/actions/action_makeJob.gd" id="16_16kad"]
 [ext_resource type="Script" path="res://src/cards/Card.gd" id="16_hnq1w"]
+[ext_resource type="Texture2D" uid="uid://ngdu2hqkbis2" path="res://assets/fedora.svg" id="17_6m0wt"]
 [ext_resource type="Script" path="res://src/actions/action_placeEmployee.gd" id="17_cxtnn"]
 [ext_resource type="Script" path="res://src/cards/multiCard.gd" id="17_mrygo"]
 [ext_resource type="Script" path="res://src/cards/CardContainer.gd" id="18_1vww6"]
 [ext_resource type="Script" path="res://src/actions/action_addFlow.gd" id="19_5nh3j"]
 [ext_resource type="Script" path="res://src/ui_code/AreaPC.gd" id="19_qe3sq"]
 [ext_resource type="Script" path="res://src/cards/Hand.gd" id="20_vouf7"]
+[ext_resource type="Texture2D" uid="uid://bwl07yqs0u1c7" path="res://assets/zig-arrow.svg" id="22_hgn1x"]
 [ext_resource type="Script" path="res://src/ui_code/SinkPC.gd" id="23_i5ahq"]
 [ext_resource type="Script" path="res://InputManager.gd" id="23_xx20n"]
 
@@ -85,6 +87,7 @@ script = ExtResource("16_16kad")
 script = ExtResource("16_hnq1w")
 cardName = "Expansion"
 cardText = "Add new job"
+cardIcon = ExtResource("17_6m0wt")
 onExecute = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_cal8w")])
 revealed = false
 
@@ -143,7 +146,8 @@ script = ExtResource("19_5nh3j")
 [sub_resource type="Resource" id="Resource_ktrr6"]
 script = ExtResource("16_hnq1w")
 cardName = "New line"
-cardText = "Make ne wline of flow"
+cardText = "Make new line of flow."
+cardIcon = ExtResource("22_hgn1x")
 onExecute = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_jr0jv")])
 revealed = false
 

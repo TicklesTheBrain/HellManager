@@ -23,14 +23,7 @@ blend_mode = 3
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mdt14"]
 blend_mode = 3
 
-[node name="EmployeeVisual" type="Control" node_paths=PackedStringArray("employeeNameLabel", "prestigeLabel", "capacityLabel", "employeeTextLabel", "employeePic")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+[node name="EmployeeVisual" type="Node2D" node_paths=PackedStringArray("employeeNameLabel", "prestigeLabel", "capacityLabel", "employeeTextLabel", "employeePic")]
 script = ExtResource("1_l6rba")
 employeeNameLabel = NodePath("EmployeeName")
 prestigeLabel = NodePath("Prestige")
@@ -44,16 +37,14 @@ offset_right = 250.0
 offset_bottom = 335.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_xge7i")
 metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
 
-[node name="Texutre" type="Sprite2D" parent="Panel"]
+[node name="Texture" type="Sprite2D" parent="Panel"]
 material = SubResource("CanvasItemMaterial_rdup8")
 position = Vector2(128, 165)
 scale = Vector2(0.602, 0.717)
 texture = ExtResource("3_1mb5p")
 
 [node name="EmployeeName" type="Label" parent="."]
-layout_mode = 0
 offset_left = 5.0
 offset_top = 6.0
 offset_right = 245.0
@@ -67,7 +58,6 @@ vertical_alignment = 1
 text_overrun_behavior = 3
 
 [node name="EmployeeText" type="Label" parent="."]
-layout_mode = 0
 offset_left = 9.0
 offset_top = 210.0
 offset_right = 241.0
@@ -82,7 +72,6 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="Capacity" type="Label" parent="."]
-layout_mode = 0
 offset_left = 210.0
 offset_top = 293.0
 offset_right = 245.0
@@ -96,7 +85,6 @@ vertical_alignment = 1
 
 [node name="EmployePic" type="TextureRect" parent="."]
 material = SubResource("CanvasItemMaterial_mdt14")
-layout_mode = 2
 offset_left = 3.0
 offset_top = 40.0
 offset_right = 244.0
@@ -106,7 +94,6 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Prestige" type="Label" parent="."]
-layout_mode = 0
 offset_left = 5.0
 offset_top = 291.0
 offset_right = 40.0

@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://24aslno6yd8e"]
+[gd_scene load_steps=7 format=3 uid="uid://24aslno6yd8e"]
 
 [ext_resource type="Script" path="res://src/ui_code/JobUI.gd" id="1_8wb7k"]
 [ext_resource type="Texture2D" uid="uid://4uv5dwx6r717" path="res://assets/white_uneven_2_tex.png" id="3_3dqos"]
 [ext_resource type="PackedScene" uid="uid://cgq6pba1xc53a" path="res://scenes/tokenUI.tscn" id="3_av8fg"]
 [ext_resource type="FontFile" uid="uid://u2357g28y3hy" path="res://assets/fonts/libel-suit-rg.otf" id="4_t5r7q"]
-[ext_resource type="PackedScene" uid="uid://qd4r5iqbaah3" path="res://scenes/employeeUI.tscn" id="5_n2lwb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5x8bu"]
 bg_color = Color(0.368627, 0.0431373, 0.0901961, 1)
@@ -22,12 +21,12 @@ shadow_offset = Vector2(3, 3)
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1d15q"]
 blend_mode = 3
 
-[node name="JobVisual" type="Control" node_paths=PackedStringArray("emptyContainer", "employeeContainer", "storageContainer")]
+[node name="JobVisual" type="Control" node_paths=PackedStringArray("emptyContainer", "employeePos", "storageContainer")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_8wb7k")
-emptyContainer = NodePath("JobFrame/EmpyCentering")
-employeeContainer = NodePath("JobFrame/EmployeeCentering")
+emptyContainer = NodePath("JobFrame/EmptyCentering")
+employeePos = NodePath("EmployeePosition")
 storageContainer = NodePath("StorageContainer")
 tokenUIPacked = ExtResource("3_av8fg")
 
@@ -42,33 +41,24 @@ offset_bottom = 174.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_5x8bu")
 metadata/_edit_group_ = true
 
-[node name="Texture" type="Sprite2D" parent="JobFrame"]
-material = SubResource("CanvasItemMaterial_1d15q")
-position = Vector2(27, 228)
-texture = ExtResource("3_3dqos")
-
-[node name="EmpyCentering" type="CenterContainer" parent="JobFrame"]
+[node name="EmptyCentering" type="CenterContainer" parent="JobFrame"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="EmptyString" type="Label" parent="JobFrame/EmpyCentering"]
+[node name="EmptyString" type="Label" parent="JobFrame/EmptyCentering"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_t5r7q")
 theme_override_font_sizes/font_size = 48
 text = "Vacant
 "
 
-[node name="EmployeeCentering" type="MarginContainer" parent="JobFrame"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
+[node name="Texture" type="Sprite2D" parent="JobFrame"]
+material = SubResource("CanvasItemMaterial_1d15q")
+position = Vector2(27, 228)
+texture = ExtResource("3_3dqos")
 
-[node name="EmployeeVisual" parent="JobFrame/EmployeeCentering" instance=ExtResource("5_n2lwb")]
-visible = false
-layout_mode = 2
+[node name="EmployeePosition" type="Node2D" parent="."]
+position = Vector2(-124, -168)
 
 [node name="StorageContainer" type="GridContainer" parent="."]
 layout_mode = 0
