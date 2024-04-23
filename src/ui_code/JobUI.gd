@@ -7,13 +7,16 @@ class_name JobUI
 @export var storageContainer: Container
 @export var tokenUIPacked: PackedScene
 
+@export var tokenFadeTime: float = 0.2
+
+
 func _ready():
 	if job != null and job.employee != null:
 		addEmployee(job.employee)
 
 	if job != null and job.storage != null:
-		Events.tokenProduced.connect(func(t,s): if s == job.storage: addTokenUI(t))
-		Events.tokenConsumed.connect(func(t,s): if s == job.storage: removeTokenUI(t))
+		Events.tokenProduced.connect(func(t,s): if s == job.storage: scheduleUIAnim(addTokenUI.bind(t)))
+		Events.tokenConsumed.connect(func(t,s): if s == job.storage: scheduleUIAnim(removeTokenUI.bind(t)))
 		for token in job.storage.contents:
 			addTokenUI(token)
 
@@ -22,16 +25,26 @@ func _ready():
 		Events.employeeFired.connect(func(_e, j): if j == job: showVacant())
 		Events.employeeConsumed.connect(func(_e, j): if j == job: showVacant())		
 
+func scheduleUIAnim(anim: Callable):
+	UIScheduler.addToSchedule(anim, Globals.getCtxt())
+
 func addTokenUI(t: Token):
 	var newToken = tokenUIPacked.instantiate()
 	newToken.type = t.type
+	newToken.scale = Vector2(0,0)
+	var tween = get_tree().create_tween()
+	tween.tween_property(newToken,"scale", Vector2(1,1), tokenFadeTime)
 	storageContainer.add_child(newToken)
-	
-func removeTokenUI(t: Token):
-	for child in storageContainer.get_children():
-		if child.type == t.type:
-			child.free()
-			return
+	await tween.finished
+
+func removeTokenUI(token: Token):
+	var matching = storageContainer.get_children().filter(func(t): return t.type == token.type and not t.markedForConsumption)
+	if matching.size() > 0:
+		matching[0].markedForConsumption = true
+		var tween = get_tree().create_tween()
+		tween.tween_property(matching[0], "scale", Vector2(0,0), tokenFadeTime)
+		await tween.finished
+		matching[0].free()
 
 func addEmployee(employee: Employee):
 

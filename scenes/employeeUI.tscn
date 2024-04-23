@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://qd4r5iqbaah3"]
 
-[ext_resource type="Script" path="res://src/ui_code/EmployeeUIl.gd" id="1_l6rba"]
+[ext_resource type="Script" path="res://src/ui_code/EmployeeUI.gd" id="1_khwmb"]
 [ext_resource type="Texture2D" uid="uid://dk82t4md4wuqo" path="res://assets/white_uneven_tex.png" id="3_1mb5p"]
 [ext_resource type="FontFile" uid="uid://u2357g28y3hy" path="res://assets/fonts/libel-suit-rg.otf" id="4_iyvhs"]
 [ext_resource type="Texture2D" uid="uid://dhmuqf88u3xo1" path="res://assets/testPic1.png" id="5_ouqm5"]
@@ -24,7 +24,7 @@ blend_mode = 3
 blend_mode = 3
 
 [node name="EmployeeVisual" type="Node2D" node_paths=PackedStringArray("employeeNameLabel", "prestigeLabel", "capacityLabel", "employeeTextLabel", "employeePic")]
-script = ExtResource("1_l6rba")
+script = ExtResource("1_khwmb")
 employeeNameLabel = NodePath("EmployeeName")
 prestigeLabel = NodePath("Prestige")
 capacityLabel = NodePath("Capacity")
@@ -35,6 +35,7 @@ employeePic = NodePath("EmployePic")
 clip_children = 2
 offset_right = 250.0
 offset_bottom = 335.0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xge7i")
 metadata/_edit_group_ = true
 
@@ -89,6 +90,7 @@ offset_left = 3.0
 offset_top = 40.0
 offset_right = 244.0
 offset_bottom = 215.0
+mouse_filter = 2
 texture = ExtResource("5_ouqm5")
 expand_mode = 1
 stretch_mode = 5

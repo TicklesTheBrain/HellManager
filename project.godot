@@ -21,6 +21,7 @@ Events="*res://Events.gd"
 Globals="*res://Globals.gd"
 EmployeeUILord="*res://scenes/employeeUILord.tscn"
 CardUILord="*res://scenes/cardUILord.tscn"
+UIScheduler="*res://ui_scheduler.gd"
 
 [display]
 

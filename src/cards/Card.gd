@@ -37,3 +37,5 @@ func nonStupidDeepDuplicate() -> Card:
 	var dupe = duplicate(true)
 	dupe.onExecute.assign(onExecute.map(func(a): return a.duplicate(true) as Action) as Array[Action])
 	return dupe
+
+	

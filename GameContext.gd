@@ -7,5 +7,6 @@ var actingCard: Card
 var actingJob: Job
 var actingEmployee: Employee
 var actingGoal: int
+var step: int
 var actionStack: Array[Action] = []
 

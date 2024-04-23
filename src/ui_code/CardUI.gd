@@ -22,6 +22,8 @@ func updateCardUI():
 		var empUI = EmployeeUILord.getEmployeeUI(card.employee)
 		if empUI == null:
 			empUI = EmployeeUILord.makeNewEmployeeUI(card.employee)
+		if empUI.get_parent() != null:
+			empUI.get_parent().remove_child(empUI)
 		employeePos.add_child(empUI)
 	else:
 		cardPic.texture = card.cardIcon

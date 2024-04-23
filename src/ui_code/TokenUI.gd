@@ -7,3 +7,5 @@ extends TextureRect
 		var index = types.find(v)
 		self_modulate = colors[index]
 		type = v
+
+var markedForConsumption: bool = false
