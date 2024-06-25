@@ -21,7 +21,11 @@ func processItem(item: ScheduleItem):
     await item.change.call()
     inProgress.erase(item)
 
-func addToSchedule(change: Callable, ctxt: GameContext):
+func addToSchedule(change: Callable, ctxt: GameContext = null):
+
+    if ctxt == null:
+        ctxt = Globals.getCtxt()
+    
     var newItem = ScheduleItem.new()
     newItem.change = change
     newItem.ctxt = ctxt

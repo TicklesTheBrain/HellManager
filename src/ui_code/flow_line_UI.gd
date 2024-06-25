@@ -12,7 +12,20 @@ class_name flowLineUI
         toUI = v
         updateLine()
 
+func _ready():
+    fromUI.moved.connect(updateLine)
+    toUI.moved.connect(updateLine)
+
 func updateLine():
-    if fromUI != null and toUI != null:
-        points[0] = fromUI.position
-        points[1] = toUI.position
+    if fromUI == null or toUI == null or from == null or to == null:
+        print('line setup, something went wrong')
+        return
+
+    var toIndex: int = to.inflow.find(from)
+    var fromIndex: int = from.outflow.find(to)
+    var fromPos: Vector2 = fromUI.outMarkers[fromIndex].global_position
+    var toPos: Vector2 = toUI.inMarkers[toIndex].global_position
+
+    #print('new line ', fromIndex, '  ', toIndex)
+    points[0] = fromPos
+    points[1] = toPos

@@ -2,7 +2,8 @@ extends Node
 class_name TokenStorage
 
 @export var contents: Array[Token] = []
-@export var defaultLimit: int = 1
+@export var transit: Array[Token] = []
+@export var defaultLimit: int = 10
 
 func getTokenLimit() -> int:
 	if get_parent().has_method("getTokenLimit"):
@@ -24,18 +25,30 @@ func addTokens(tokensToAdd: Array[Token]) -> Array[Token]:
 			notAdded.push_back(token)
 	return notAdded
 
+func addTokenTransit(token: Token):
+	transit.push_back(token)
+
+func addTokensTransit(tokens: Array[Token]):
+	for token in tokens:
+		addTokenTransit(token)
+
 func checkFull() -> bool:
 	return contents.size() >= getTokenLimit()
 
+func getTokens(request: Array[Token], exclude: Array[Token] = []) -> Array[Token]:
+	var tempContents = contents.duplicate()
+	var tokensGot: Array[Token] = []
+	for token in request:
+		var matching = tempContents.filter(func(t): return t.type == token.type and not exclude.has(t))
+		if not matching.is_empty():
+			tokensGot.push_back(matching[0])
+			tempContents.erase(matching[0])
+	return tokensGot
+
+
 #Adding this here for future tagging of effects, etc.
 func removeToken(tokenToRemove: Token):
-	#print('remove token function start')
-	var amountPre = contents.size()
 	contents.erase(tokenToRemove)
-	if amountPre > contents.size():
-		#print('emitting token consumed')
-		Events.tokenConsumed.emit(tokenToRemove, self)
-	
    
 func tryFulfill(request: Array[Token]) -> Array[Token]:
 	var leftUnfulfilled: Array[Token] = request.duplicate()

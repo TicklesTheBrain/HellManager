@@ -21,6 +21,7 @@ func try() -> bool:
 
 func performSpecific() -> bool:
 	to.inflow.push_back(from)
+	from.outflow.push_back(to)
 	Events.flowAdded.emit(from, to)
 	return true
 

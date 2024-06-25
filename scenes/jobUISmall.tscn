@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://24aslno6yd8e"]
+[gd_scene load_steps=7 format=3 uid="uid://dccekuf7o544k"]
 
-[ext_resource type="Script" path="res://src/ui_code/JobUI.gd" id="1_8wb7k"]
-[ext_resource type="Texture2D" uid="uid://4uv5dwx6r717" path="res://assets/white_uneven_2_tex.png" id="3_3dqos"]
-[ext_resource type="PackedScene" uid="uid://cgq6pba1xc53a" path="res://scenes/tokenUI.tscn" id="3_av8fg"]
-[ext_resource type="FontFile" uid="uid://u2357g28y3hy" path="res://assets/fonts/libel-suit-rg.otf" id="4_t5r7q"]
+[ext_resource type="Script" path="res://src/ui_code/JobUI.gd" id="1_b1o3n"]
+[ext_resource type="PackedScene" uid="uid://cgq6pba1xc53a" path="res://scenes/tokenUI.tscn" id="2_1pdfv"]
+[ext_resource type="FontFile" uid="uid://u2357g28y3hy" path="res://assets/fonts/libel-suit-rg.otf" id="3_q0nr6"]
+[ext_resource type="Texture2D" uid="uid://4uv5dwx6r717" path="res://assets/white_uneven_2_tex.png" id="4_cdv68"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5x8bu"]
 bg_color = Color(0.368627, 0.0431373, 0.0901961, 1)
@@ -24,23 +24,23 @@ blend_mode = 3
 [node name="JobVisual" type="Control" node_paths=PackedStringArray("emptyContainer", "employeePos", "storageContainer", "inMarkers", "outMarkers")]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_8wb7k")
+script = ExtResource("1_b1o3n")
 emptyContainer = NodePath("JobFrame/EmptyCentering")
 employeePos = NodePath("EmployeePosition")
 storageContainer = NodePath("StorageContainer")
-tokenUIPacked = ExtResource("3_av8fg")
+tokenUIPacked = ExtResource("2_1pdfv")
 inMarkers = [NodePath("Markers/InMarker"), NodePath("Markers/InMarker2"), NodePath("Markers/InMarker3"), NodePath("Markers/InMarker4")]
 outMarkers = [NodePath("Markers/OutMarker"), NodePath("Markers/OutMarker2"), NodePath("Markers/OutMarker3"), NodePath("Markers/OutMarker4")]
 tokenFadeTime = 0.5
 
 [node name="JobFrame" type="PanelContainer" parent="."]
 clip_children = 2
-custom_minimum_size = Vector2(265, 350)
+custom_minimum_size = Vector2(150, 200)
 layout_mode = 0
-offset_left = -132.0
-offset_top = -176.0
-offset_right = 133.0
-offset_bottom = 174.0
+offset_left = -84.0
+offset_top = -123.0
+offset_right = 81.0
+offset_bottom = 112.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_5x8bu")
 metadata/_edit_group_ = true
 
@@ -50,7 +50,7 @@ mouse_filter = 2
 
 [node name="EmptyString" type="Label" parent="JobFrame/EmptyCentering"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_t5r7q")
+theme_override_fonts/font = ExtResource("3_q0nr6")
 theme_override_font_sizes/font_size = 48
 text = "Vacant
 "
@@ -58,44 +58,45 @@ text = "Vacant
 [node name="Texture" type="Sprite2D" parent="JobFrame"]
 material = SubResource("CanvasItemMaterial_1d15q")
 position = Vector2(27, 228)
-texture = ExtResource("3_3dqos")
+texture = ExtResource("4_cdv68")
 
 [node name="EmployeePosition" type="Node2D" parent="."]
-position = Vector2(-124, -168)
+position = Vector2(-76, -115)
 
 [node name="StorageContainer" type="GridContainer" parent="."]
 layout_mode = 0
-offset_left = -114.0
-offset_top = -123.0
-offset_right = -74.0
-offset_bottom = -83.0
+offset_left = -69.0
+offset_top = -98.0
+offset_right = -29.0
+offset_bottom = -58.0
 mouse_filter = 2
-columns = 3
+columns = 6
 
 [node name="Markers" type="Node2D" parent="."]
+position = Vector2(48, 53)
 
 [node name="OutMarker" type="Marker2D" parent="Markers"]
-position = Vector2(-110, 162)
+position = Vector2(-122, 52)
 
 [node name="OutMarker2" type="Marker2D" parent="Markers"]
-position = Vector2(-46, 164)
+position = Vector2(-77, 53)
 
 [node name="OutMarker3" type="Marker2D" parent="Markers"]
-position = Vector2(44, 164)
+position = Vector2(-23, 52)
 
 [node name="OutMarker4" type="Marker2D" parent="Markers"]
-position = Vector2(114, 164)
+position = Vector2(22, 50)
 
 [node name="InMarker" type="Marker2D" parent="Markers"]
 position = Vector2(-119, -163)
 
 [node name="InMarker2" type="Marker2D" parent="Markers"]
-position = Vector2(-51, -163)
+position = Vector2(-82, -161)
 
 [node name="InMarker3" type="Marker2D" parent="Markers"]
-position = Vector2(37, -163)
+position = Vector2(-28, -167)
 
 [node name="InMarker4" type="Marker2D" parent="Markers"]
-position = Vector2(114, -163)
+position = Vector2(19, -162)
 
 [connection signal="gui_input" from="JobFrame" to="." method="_on_job_frame_gui_input"]

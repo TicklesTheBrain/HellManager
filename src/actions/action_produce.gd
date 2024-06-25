@@ -5,6 +5,7 @@ class_name ActionProduce
 		
 func performSpecific() -> bool:
 	var storage = Globals.getCtxt().actingJob.storage
+	print('storage ', storage)
 	storage.addTokens(producedTokens)
 	return true
 

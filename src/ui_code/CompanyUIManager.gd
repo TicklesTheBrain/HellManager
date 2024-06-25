@@ -3,19 +3,25 @@ class_name CompanyUILord
 
 @export var lineUIPacked: PackedScene
 @export var jobUIPacked: PackedScene
-@export var employeeUIPacked: PackedScene
 @export var jobManager: JobManager
-
 @export var lineLayer: CanvasLayer
 @export var jobLayer: CanvasLayer
 
-@export var someVectors: Array[Vector2] = []
+@export_category("Grid stuff")
+@export var gridCellSizeVector: Vector2
+@export var gridGapSizeVector: Vector2
+@export var gridSizeVector: Vector2
+var gridCells = {}
 
 
 func _ready():
+
+	createGrid()
+
 	Events.flowAdded.connect(addNewLineUI)
 	Events.flowRemoved.connect(removeLineUI)
 	Events.jobAdded.connect(makeNewJobUI)
+	Events.jobDragEnd.connect(dragJobToNewCell)
 
 	for job in jobManager.get_children():
 		if getJobUI(job) == null:
@@ -52,8 +58,61 @@ func getJobUI(job: Job) -> JobUI:
 func makeNewJobUI(job: Job):
 	var newJobUI = jobUIPacked.instantiate()
 	newJobUI.job = job
-	var newPos = someVectors.pop_front()
+
+	var newPos = findFirstEmpyGridCell()
 	newJobUI.position = newPos
-	someVectors.push_back(newPos)
+	gridCells[newPos] = newJobUI
+
 	jobLayer.add_child(newJobUI)
+
+func createGrid():
+	
+	var lineY = gridGapSizeVector.y + gridCellSizeVector.y/2
+	var cellX = gridGapSizeVector.x + gridCellSizeVector.x/2
+	var firstCellX = cellX
+
+	#Check if new cell fits within grid
+	while(lineY + gridCellSizeVector.y/2 < gridSizeVector.y and cellX + gridCellSizeVector.x/2 < gridSizeVector.x):
+		while(lineY + gridCellSizeVector.y/2 < gridSizeVector.y and cellX + gridCellSizeVector.x/2 < gridSizeVector.x):
+			gridCells[Vector2(cellX, lineY)] = null
+			cellX += gridCellSizeVector.x + gridGapSizeVector.x
+		cellX = firstCellX
+		lineY += gridCellSizeVector.y + gridGapSizeVector.y
+
+func findFirstEmpyGridCell():
+	for cell in gridCells.keys():
+		if gridCells[cell] == null:
+			return cell
+	return null
+
+func findJobUICell(jobUi: JobUI):
+	for cell in gridCells.keys():
+		if gridCells[cell] == jobUi:
+			return cell
+	return null
+
+func findClosestEmptyCell(pos: Vector2):
+	var emptyCells = getAllEmptyCells()
+	if emptyCells.size() == 0:
+		return
+	var closest = emptyCells[0]	
+	for cell in emptyCells:
+		if abs(pos - cell) < abs(pos - closest):
+			closest = cell
+	return closest
+
+func getAllEmptyCells():
+	return gridCells.keys().filter(func(v): return gridCells[v] == null)
+
+func dragJobToNewCell(jobUI: JobUI):
+	gridCells[findJobUICell(jobUI)] = null
+	var closest = findClosestEmptyCell(get_viewport().get_mouse_position())
+	gridCells[closest] = jobUI
+	jobUI.global_position = closest
+	jobUI.moved.emit()
+
+
+
+	
+
 

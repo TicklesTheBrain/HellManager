@@ -4,14 +4,13 @@ class_name InputManager
 @export var phase: int = 1
 @export var hand: Hand
 
+var draggedJob: JobUI = null
 var activeChoice: Callable = Callable()
 
 func _ready():
-	print('checking if empty callable is null ', Callable().is_null())
-	print('checking if lambda is null ', (func(_c): return true).is_null())
-
 	Events.cardClicked.connect(cardClicked)
 	Events.jobClicked.connect(jobClicked)
+	Events.jobClickReleased.connect(jobClickReleased)
 	
 func cardClicked(cardUI: CardUI, button: MouseButton):
 
@@ -30,6 +29,21 @@ func jobClicked(jobUI: JobUI, button):
 		if result:
 			print('choice accepted')
 			activeChoice = Callable()
+		return
+
+	if draggedJob == null:
+		draggedJob = jobUI
+		print('about to job drag start')
+		Events.jobDragStart.emit(jobUI)
+		return
+	
+func jobClickReleased(jobUI: JobUI, button):
+	print('released on job ', jobUI, " with button ", button)
+	if draggedJob == jobUI:
+		print('about to job drag end')
+		Events.jobDragEnd.emit(jobUI)
+		draggedJob = null
+		return
 
 func receiveActiveChoice(callable: Callable):
 	activeChoice = callable

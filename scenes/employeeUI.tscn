@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://qd4r5iqbaah3"]
 
-[ext_resource type="Script" path="res://src/ui_code/EmployeeUI.gd" id="1_khwmb"]
+[ext_resource type="Script" path="res://src/ui_code/EmployeeUIl.gd" id="1_khwmb"]
 [ext_resource type="Texture2D" uid="uid://dk82t4md4wuqo" path="res://assets/white_uneven_tex.png" id="3_1mb5p"]
 [ext_resource type="FontFile" uid="uid://u2357g28y3hy" path="res://assets/fonts/libel-suit-rg.otf" id="4_iyvhs"]
 [ext_resource type="Texture2D" uid="uid://dhmuqf88u3xo1" path="res://assets/testPic1.png" id="5_ouqm5"]
@@ -38,6 +38,7 @@ offset_bottom = 335.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xge7i")
 metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
 
 [node name="Texture" type="Sprite2D" parent="Panel"]
 material = SubResource("CanvasItemMaterial_rdup8")
@@ -57,6 +58,7 @@ text = "Beelzebub Demonovitch Jr."
 horizontal_alignment = 1
 vertical_alignment = 1
 text_overrun_behavior = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="EmployeeText" type="Label" parent="."]
 offset_left = 9.0
@@ -71,6 +73,7 @@ text = "This does something something bla bla bla, then something else. Three li
 An extra line for keywords."
 vertical_alignment = 1
 autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Capacity" type="Label" parent="."]
 offset_left = 210.0
@@ -83,6 +86,7 @@ theme_override_font_sizes/font_size = 32
 text = "23"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="EmployePic" type="TextureRect" parent="."]
 material = SubResource("CanvasItemMaterial_mdt14")
@@ -94,6 +98,7 @@ mouse_filter = 2
 texture = ExtResource("5_ouqm5")
 expand_mode = 1
 stretch_mode = 5
+metadata/_edit_use_anchors_ = true
 
 [node name="Prestige" type="Label" parent="."]
 offset_left = 5.0
@@ -106,3 +111,4 @@ theme_override_font_sizes/font_size = 32
 text = "22"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true

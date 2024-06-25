@@ -4,13 +4,12 @@
 [ext_resource type="Script" path="res://src/ui_code/TokenUI.gd" id="2_3wh6f"]
 
 [node name="TokenUI" type="TextureRect"]
-custom_minimum_size = Vector2(25, 25)
+custom_minimum_size = Vector2(18, 18)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_ea0ll")
 expand_mode = 3
 stretch_mode = 4

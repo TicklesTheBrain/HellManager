@@ -3,9 +3,8 @@
 [ext_resource type="Script" path="res://Main.gd" id="1_nbim8"]
 [ext_resource type="Script" path="res://src/ui_code/CompanyUIManager.gd" id="2_hwxbs"]
 [ext_resource type="PackedScene" uid="uid://bdewx43gbc46u" path="res://scenes/flowLine.tscn" id="3_m468t"]
-[ext_resource type="PackedScene" uid="uid://24aslno6yd8e" path="res://scenes/jobUI.tscn" id="4_ld8tm"]
 [ext_resource type="Script" path="res://src/company/JobManager.gd" id="5_1cdr4"]
-[ext_resource type="PackedScene" uid="uid://qd4r5iqbaah3" path="res://scenes/employeeUI.tscn" id="5_xdwna"]
+[ext_resource type="PackedScene" uid="uid://dccekuf7o544k" path="res://scenes/jobUISmall.tscn" id="5_b0wxn"]
 [ext_resource type="Script" path="res://src/company/Job.gd" id="6_cnhkk"]
 [ext_resource type="Script" path="res://src/company/Token.gd" id="7_b1mae"]
 [ext_resource type="Script" path="res://src/actions/action_produce.gd" id="8_2wa5w"]
@@ -36,7 +35,7 @@ type = 2
 script = ExtResource("8_2wa5w")
 producedTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_lfh2a")])
 
-[sub_resource type="Resource" id="Resource_vt8gg"]
+[sub_resource type="Resource" id="Resource_qdqlf"]
 script = ExtResource("10_wmw7d")
 prestige = 33
 capacity = 44
@@ -49,6 +48,16 @@ staticText = "Produce 1 Green."
 [sub_resource type="Resource" id="Resource_p2afh"]
 script = ExtResource("7_b1mae")
 type = 2
+
+[sub_resource type="Resource" id="Resource_vt8gg"]
+script = ExtResource("10_wmw7d")
+prestige = 33
+capacity = 44
+dependentActions = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_l3khh")])
+independentActions = Array[Resource("res://src/actions/Action.gd")]([])
+employeeName = "Gamintojas"
+employeePic = ExtResource("9_xt47j")
+staticText = "Produce 1 Green."
 
 [sub_resource type="Resource" id="Resource_pax6k"]
 script = ExtResource("7_b1mae")
@@ -172,26 +181,39 @@ hand = NodePath("../HandCards")
 [node name="CompanyUILord" type="Node2D" parent="." node_paths=PackedStringArray("jobManager", "lineLayer", "jobLayer")]
 script = ExtResource("2_hwxbs")
 lineUIPacked = ExtResource("3_m468t")
-jobUIPacked = ExtResource("4_ld8tm")
-employeeUIPacked = ExtResource("5_xdwna")
+jobUIPacked = ExtResource("5_b0wxn")
 jobManager = NodePath("../JobLord")
 lineLayer = NodePath("LineLayer")
 jobLayer = NodePath("JobLayer")
-someVectors = Array[Vector2]([Vector2(150, 200), Vector2(500, 200), Vector2(850, 200), Vector2(1200, 200), Vector2(150, 600), Vector2(500, 600), Vector2(850, 600), Vector2(1200, 600)])
+gridCellSizeVector = Vector2(165, 235)
+gridGapSizeVector = Vector2(25, 25)
+gridSizeVector = Vector2(1300, 1200)
 
 [node name="LineLayer" type="CanvasLayer" parent="CompanyUILord"]
+layer = 3
 
 [node name="JobLayer" type="CanvasLayer" parent="CompanyUILord"]
 
 [node name="JobLord" type="Node" parent="." groups=["JobLord"]]
 script = ExtResource("5_1cdr4")
 
-[node name="Job" type="Node" parent="JobLord" node_paths=PackedStringArray("storage")]
+[node name="Job" type="Node" parent="JobLord" node_paths=PackedStringArray("outflow", "storage")]
+script = ExtResource("6_cnhkk")
+outflow = [NodePath("../Job2")]
+employee = SubResource("Resource_qdqlf")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job"]
+script = ExtResource("11_if1yf")
+contents = Array[ExtResource("7_b1mae")]([SubResource("Resource_p2afh")])
+defaultLimit = 5
+
+[node name="Job3" type="Node" parent="JobLord" node_paths=PackedStringArray("storage")]
 script = ExtResource("6_cnhkk")
 employee = SubResource("Resource_vt8gg")
 storage = NodePath("TokenStorage")
 
-[node name="TokenStorage" type="Node" parent="JobLord/Job"]
+[node name="TokenStorage" type="Node" parent="JobLord/Job3"]
 script = ExtResource("11_if1yf")
 contents = Array[ExtResource("7_b1mae")]([SubResource("Resource_p2afh")])
 defaultLimit = 5

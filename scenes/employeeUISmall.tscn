@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=3 uid="uid://dqta314ss8ngg"]
+
+[ext_resource type="Script" path="res://src/ui_code/EmployeeUIl.gd" id="1_vqegc"]
+[ext_resource type="Texture2D" uid="uid://dk82t4md4wuqo" path="res://assets/white_uneven_tex.png" id="2_baq61"]
+[ext_resource type="FontFile" uid="uid://u2357g28y3hy" path="res://assets/fonts/libel-suit-rg.otf" id="3_a0552"]
+[ext_resource type="Texture2D" uid="uid://dhmuqf88u3xo1" path="res://assets/testPic1.png" id="4_dk2lu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xge7i"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rdup8"]
+blend_mode = 3
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mdt14"]
+blend_mode = 3
+
+[node name="EmployeeVisualSmall" type="Node2D" node_paths=PackedStringArray("prestigeLabel", "capacityLabel", "employeePic")]
+script = ExtResource("1_vqegc")
+prestigeLabel = NodePath("Prestige")
+capacityLabel = NodePath("Capacity")
+employeePic = NodePath("EmployePic")
+
+[node name="Panel" type="Panel" parent="."]
+clip_children = 2
+offset_right = 150.0
+offset_bottom = 220.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xge7i")
+metadata/_edit_use_anchors_ = true
+
+[node name="Texture" type="Sprite2D" parent="Panel"]
+material = SubResource("CanvasItemMaterial_rdup8")
+position = Vector2(75, 110.5)
+scale = Vector2(0.34, 0.466)
+texture = ExtResource("2_baq61")
+
+[node name="Capacity" type="Label" parent="."]
+offset_left = 107.0
+offset_top = 176.0
+offset_right = 142.0
+offset_bottom = 215.0
+theme_override_colors/font_color = Color(0.290196, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_a0552")
+theme_override_font_sizes/font_size = 32
+text = "23"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="EmployePic" type="TextureRect" parent="."]
+material = SubResource("CanvasItemMaterial_mdt14")
+offset_left = -6.0
+offset_top = 21.0
+offset_right = 144.0
+offset_bottom = 171.0
+mouse_filter = 2
+texture = ExtResource("4_dk2lu")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="Prestige" type="Label" parent="."]
+offset_left = 6.0
+offset_top = 174.0
+offset_right = 41.0
+offset_bottom = 213.0
+theme_override_colors/font_color = Color(0, 0, 0.470588, 1)
+theme_override_fonts/font = ExtResource("3_a0552")
+theme_override_font_sizes/font_size = 32
+text = "22"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
