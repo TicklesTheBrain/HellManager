@@ -8,3 +8,8 @@ enum Type {
 }
 
 @export var type: Type
+
+func replicateSelf():
+    var replica = Token.new()
+    replica.type = type
+    return replica

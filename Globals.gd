@@ -56,7 +56,7 @@ func getCtxt() -> GameContext:
 func getJobManager() -> JobManager:
 	return get_tree().get_first_node_in_group("JobLord")
 
-func subtractTokenList(first: Array[Token], second: Array[Token]):
+func subtractTokenList(first, second):
 	var result = first.duplicate()
 	for token in second:
 		var matching = result.filter(func(t): return t.type == token.type)

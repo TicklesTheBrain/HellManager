@@ -1,11 +1,11 @@
 extends TextureRect
+class_name TokenUI
 
 @export var types: Array[Token.Type]
 @export var colors: Array[Color]
-@export var type: Token.Type:
+@export var tokenFadeTime: float
+@export var token: Token:
 	set (v):
-		var index = types.find(v)
+		var index = types.find(v.type)
 		self_modulate = colors[index]
-		type = v
-
-var markedForConsumption: bool = false
+		token = v

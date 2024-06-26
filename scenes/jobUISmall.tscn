@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dccekuf7o544k"]
+[gd_scene load_steps=6 format=3 uid="uid://dccekuf7o544k"]
 
 [ext_resource type="Script" path="res://src/ui_code/JobUI.gd" id="1_b1o3n"]
-[ext_resource type="PackedScene" uid="uid://cgq6pba1xc53a" path="res://scenes/tokenUI.tscn" id="2_1pdfv"]
 [ext_resource type="FontFile" uid="uid://u2357g28y3hy" path="res://assets/fonts/libel-suit-rg.otf" id="3_q0nr6"]
 [ext_resource type="Texture2D" uid="uid://4uv5dwx6r717" path="res://assets/white_uneven_2_tex.png" id="4_cdv68"]
 
@@ -28,10 +27,8 @@ script = ExtResource("1_b1o3n")
 emptyContainer = NodePath("JobFrame/EmptyCentering")
 employeePos = NodePath("EmployeePosition")
 storageContainer = NodePath("StorageContainer")
-tokenUIPacked = ExtResource("2_1pdfv")
 inMarkers = [NodePath("Markers/InMarker"), NodePath("Markers/InMarker2"), NodePath("Markers/InMarker3"), NodePath("Markers/InMarker4")]
 outMarkers = [NodePath("Markers/OutMarker"), NodePath("Markers/OutMarker2"), NodePath("Markers/OutMarker3"), NodePath("Markers/OutMarker4")]
-tokenFadeTime = 0.5
 
 [node name="JobFrame" type="PanelContainer" parent="."]
 clip_children = 2

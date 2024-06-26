@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=54 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_nbim8"]
 [ext_resource type="Script" path="res://src/ui_code/CompanyUIManager.gd" id="2_hwxbs"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://src/company/JobManager.gd" id="5_1cdr4"]
 [ext_resource type="PackedScene" uid="uid://dccekuf7o544k" path="res://scenes/jobUISmall.tscn" id="5_b0wxn"]
 [ext_resource type="Script" path="res://src/company/Job.gd" id="6_cnhkk"]
+[ext_resource type="PackedScene" uid="uid://cgq6pba1xc53a" path="res://scenes/tokenUI.tscn" id="6_h2iy3"]
 [ext_resource type="Script" path="res://src/company/Token.gd" id="7_b1mae"]
 [ext_resource type="Script" path="res://src/actions/action_produce.gd" id="8_2wa5w"]
 [ext_resource type="Texture2D" uid="uid://dhmuqf88u3xo1" path="res://assets/testPic1.png" id="9_xt47j"]
@@ -178,13 +179,15 @@ hand = NodePath("HandCards")
 script = ExtResource("23_xx20n")
 hand = NodePath("../HandCards")
 
-[node name="CompanyUILord" type="Node2D" parent="." node_paths=PackedStringArray("jobManager", "lineLayer", "jobLayer")]
+[node name="CompanyUILord" type="Node2D" parent="." node_paths=PackedStringArray("jobManager", "lineLayer", "jobLayer", "tokenLayer")]
 script = ExtResource("2_hwxbs")
+jobManager = NodePath("../JobLord")
 lineUIPacked = ExtResource("3_m468t")
 jobUIPacked = ExtResource("5_b0wxn")
-jobManager = NodePath("../JobLord")
+tokenUIPacked = ExtResource("6_h2iy3")
 lineLayer = NodePath("LineLayer")
 jobLayer = NodePath("JobLayer")
+tokenLayer = NodePath("TokenLayer")
 gridCellSizeVector = Vector2(165, 235)
 gridGapSizeVector = Vector2(25, 25)
 gridSizeVector = Vector2(1300, 1200)
@@ -193,6 +196,9 @@ gridSizeVector = Vector2(1300, 1200)
 layer = 3
 
 [node name="JobLayer" type="CanvasLayer" parent="CompanyUILord"]
+
+[node name="TokenLayer" type="CanvasLayer" parent="CompanyUILord"]
+layer = 4
 
 [node name="JobLord" type="Node" parent="." groups=["JobLord"]]
 script = ExtResource("5_1cdr4")

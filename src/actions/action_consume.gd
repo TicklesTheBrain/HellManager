@@ -5,8 +5,11 @@ class_name ActionConsume
 
 func try() -> bool:
 	var job = Globals.getCtxt().actingJob
-	return job.fulfillRequest(requiredTokens).size() == 0
+	return job.getTokens(requiredTokens).size() == requiredTokens.size()
 		
 func performSpecific():
 	var job = Globals.getCtxt().actingJob
-	return job.fulfillRequest(requiredTokens, false).size() == 0
+	var tokens = job.getTokens(requiredTokens)
+	job.acquireTokens(tokens)
+	job.consumeTokens(tokens.map(func(tp): return tp.token))
+	return true

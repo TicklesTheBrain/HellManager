@@ -21,33 +21,14 @@ func doWork():
 		employee.doWork(self)
 	Events.jobEnded.emit(self)
 
-func fulfillRequestSolo(request: Array[Token], mock = true) -> Array[Token]:
-	if storage == null:
-		return request
-	if mock:
-		return storage.tryFulfill(request)
-	else:
-		return storage.fulfill(request)
-
-func fulfillRequestNetwork(request: Array[Token], mock = true) -> Array[Token]:
-	var unfilled =  request
-	for job in inflow:
-		unfilled = job.fulfillRequestSolo(unfilled, mock)
-	return unfilled
-
-func fulfillRequest(request: Array[Token], mock = true) -> Array[Token]:
-	var unfilled = request
-	unfilled = fulfillRequestSolo(unfilled, mock)
-	unfilled = fulfillRequestNetwork(unfilled, mock)
-	return unfilled
-
 func getTokens(request: Array[Token], exclude: Array[Token] = []):
 	var own = getTokensOwn(request, exclude)
 	var requestModified = Globals.subtractTokenList(request, own.map(func(tp): return tp.token))
 	var excludeModified = exclude.duplicate()
 	excludeModified.append_array(own.map(func(tp): return tp.token))
 	var networkTokens = getTokensNetwork(requestModified, excludeModified)
-	return own.append_array(networkTokens)
+	own.append_array(networkTokens)
+	return own
 
 func getTokensOwn(request: Array[Token], exclude: Array[Token] = []):
 	if storage == null:
@@ -66,17 +47,21 @@ func getTokensNetwork(request: Array[Token], exclude: Array[Token]):
 		tokensExcluded.append_array(tokensGot.map(func(tp): return tp.token))
 	return got
 
-
-func acquireTokens(tps: Array[TokenPath]):
-	for tp in tps:
+func acquireTokens(tokenPathArray):
+	for tp in tokenPathArray:
 		for i in range(tp.path.size()):
 			if i == tp.path.size()-1:
 				break
-			tp.path[i].passTokens(tp.token, tp.path[i+1])
+			tp.path[i].passToken(tp.token, tp.path[i+1])
 
 func passToken(token: Token, passTo: Job):
 	storage.removeToken(token)
 	Events.tokenMoved.emit(token, self, passTo)
+
+func consumeTokens(tokensToConsume):
+	for token in tokensToConsume:
+		storage.removeToken(token)
+		Events.tokenConsumed.emit(token)
 
 class TokenPath:
 	var token: Token
