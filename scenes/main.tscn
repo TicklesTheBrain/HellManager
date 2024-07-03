@@ -183,6 +183,7 @@ hand = NodePath("../HandCards")
 [node name="MouseOverLord" type="Node2D" parent="."]
 position = Vector2(1188, 27)
 script = ExtResource("3_2pjbp")
+hideDelay = 0.15
 
 [node name="CompanyUILord" type="Node2D" parent="." node_paths=PackedStringArray("jobManager", "lineLayer", "jobLayer", "tokenLayer")]
 script = ExtResource("2_hwxbs")

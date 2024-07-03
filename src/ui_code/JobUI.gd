@@ -32,15 +32,6 @@ func addEmployee(employee: Employee):
 
 func showVacant():
 	emptyContainer.visible = true
-	
-func _on_job_frame_gui_input(event):
-	
-	if event is InputEventMouseButton:
-		print('event mouse button on job frame gui')
-		if event.is_pressed():
-			Events.jobClicked.emit(self, event.button_index)
-		elif event.is_released():
-			Events.jobClickReleased.emit(self, event.button_index)
 
 func startDrag():
 	dragged = true
@@ -55,3 +46,13 @@ func _process(_delta):
 func endDrag():	
 	dragged = false
 	#print('drag ended')
+
+
+func _on_drag_detect_area_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
+	
+	if event is InputEventMouseButton:
+		print('event mouse button on job frame gui')
+		if event.is_pressed():
+			Events.jobClicked.emit(self, event.button_index)
+		elif event.is_released():
+			Events.jobClickReleased.emit(self, event.button_index)

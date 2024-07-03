@@ -1,8 +1,13 @@
 extends Node2D
 class_name MouseOverLord
 
+@export var hideDelay: float
+
 var employeeToShow: Employee
 var jobToShow: Job
+
+var hidePending: Employee
+var hideOverruled: bool 
 
 func _ready():
     Events.employeeUIDetailsRequest.connect(showEmployee)
@@ -14,6 +19,15 @@ func destroyCurrentEmployeeShow():
 
 
 func showEmployee(empUI: EmployeeUI):
+    print('show called')
+
+    if hidePending == empUI.employee:
+        hideOverruled = true
+        hidePending = null
+    
+    if empUI.employee == employeeToShow:
+        return
+
     var emp = empUI.employee
     destroyCurrentEmployeeShow()
     var newShow = EmployeeUILord.makeNewEmployeeUI(emp, true)
@@ -21,8 +35,19 @@ func showEmployee(empUI: EmployeeUI):
     add_child(newShow)
 
 func hideEmployee(empUI: EmployeeUI):
+
     var emp = empUI.employee
     if emp != employeeToShow:
         return
+
+    hidePending = empUI.employee
+    await get_tree().create_timer(hideDelay).timeout
+
+    if hideOverruled:
+        print('hide overruled')
+        hideOverruled = false
+        return
+
+    hidePending = null
     destroyCurrentEmployeeShow()
     employeeToShow = null

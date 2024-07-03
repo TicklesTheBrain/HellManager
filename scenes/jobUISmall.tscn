@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dccekuf7o544k"]
+[gd_scene load_steps=7 format=3 uid="uid://dccekuf7o544k"]
 
 [ext_resource type="Script" path="res://src/ui_code/JobUI.gd" id="1_b1o3n"]
 [ext_resource type="FontFile" uid="uid://u2357g28y3hy" path="res://assets/fonts/libel-suit-rg.otf" id="3_q0nr6"]
@@ -20,6 +20,9 @@ shadow_offset = Vector2(3, 3)
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1d15q"]
 blend_mode = 3
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5u0lv"]
+size = Vector2(159, 229)
+
 [node name="JobVisual" type="Control" node_paths=PackedStringArray("emptyContainer", "employeePos", "storageContainer", "inMarkers", "outMarkers")]
 layout_mode = 3
 anchors_preset = 0
@@ -38,7 +41,7 @@ offset_left = -84.0
 offset_top = -123.0
 offset_right = 81.0
 offset_bottom = 112.0
-mouse_filter = 1
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5x8bu")
 metadata/_edit_group_ = true
 
@@ -97,4 +100,10 @@ position = Vector2(-28, -167)
 [node name="InMarker4" type="Marker2D" parent="Markers"]
 position = Vector2(19, -162)
 
-[connection signal="gui_input" from="JobFrame" to="." method="_on_job_frame_gui_input"]
+[node name="DragDetectArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DragDetectArea"]
+position = Vector2(-1.5, -5.5)
+shape = SubResource("RectangleShape2D_5u0lv")
+
+[connection signal="input_event" from="DragDetectArea" to="." method="_on_drag_detect_area_input_event"]
