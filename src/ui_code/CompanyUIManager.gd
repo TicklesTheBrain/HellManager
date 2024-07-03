@@ -164,7 +164,7 @@ func moveToken(token: Token, from: Job, to: Job):
 	if tokenUI.get_parent() is Container:
 		var previousPos = tokenUI.global_position
 		tokenUI.get_parent().remove_child(tokenUI)
-		print('previous pos ', previousPos)
+		#print('previous pos ', previousPos)
 		tokenUI.position = previousPos
 		tokenLayer.add_child(tokenUI)
 	var line = getLineUI(from, to)

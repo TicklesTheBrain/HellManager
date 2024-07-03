@@ -22,8 +22,8 @@ blend_mode = 3
 [node name="CardUI" type="Control" node_paths=PackedStringArray("nameOfCard", "cardText", "employeePos", "cardPic")]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 250.0
-offset_bottom = 368.0
+offset_right = 163.0
+offset_bottom = 257.0
 script = ExtResource("1_7wjcq")
 nameOfCard = NodePath("CardFrame/NameOfCard")
 cardText = NodePath("CardFrame/TextOfCard")
@@ -33,19 +33,21 @@ cardPic = NodePath("CardFrame/CardPic")
 [node name="CardFrame" type="Panel" parent="."]
 clip_children = 2
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_right = 0.975
+anchor_bottom = 0.996
+offset_right = 0.0749969
+offset_bottom = 0.0279846
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xyd8l")
 
 [node name="NameOfCard" type="Label" parent="CardFrame"]
 layout_mode = 2
-offset_right = 250.0
+offset_right = 161.0
 offset_bottom = 27.0
 theme_override_fonts/font = ExtResource("2_k1y3r")
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 20
 text = "Hire Demon"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -55,7 +57,7 @@ text_overrun_behavior = 3
 layout_mode = 2
 offset_left = 1.0
 offset_top = 26.0
-offset_right = 250.0
+offset_right = 181.0
 offset_bottom = 30.0
 theme_override_styles/separator = SubResource("StyleBoxLine_ioek6")
 
@@ -63,32 +65,32 @@ theme_override_styles/separator = SubResource("StyleBoxLine_ioek6")
 layout_mode = 2
 offset_left = 6.0
 offset_top = 33.0
-offset_right = 243.0
-offset_bottom = 105.0
+offset_right = 158.0
+offset_bottom = 111.0
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_k1y3r")
 theme_override_font_sizes/font_size = 16
-text = "This is a text of card. It explains what card does and stuff. THis is useful, although should not be long."
+text = "This is a text of card. It explains what card does and stuff. This is useful, although should not be long."
+vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="CardPic" type="TextureRect" parent="CardFrame"]
 layout_mode = 0
-offset_left = 19.0
-offset_top = 131.0
-offset_right = 228.0
-offset_bottom = 340.0
+offset_left = 16.0
+offset_top = 113.0
+offset_right = 146.0
+offset_bottom = 253.0
 texture = ExtResource("3_xo1ia")
 expand_mode = 1
 
 [node name="Texture" type="Sprite2D" parent="CardFrame"]
 material = SubResource("CanvasItemMaterial_k201i")
-position = Vector2(160, 136)
+position = Vector2(181, 73)
 rotation = 3.14159
 scale = Vector2(0.804749, 0.804749)
 texture = ExtResource("3_w4waq")
 
 [node name="EmployeePosition" type="Node2D" parent="."]
-position = Vector2(0, 33)
-metadata/_edit_group_ = true
+position = Vector2(6, 32)
 
 [connection signal="gui_input" from="CardFrame" to="." method="_on_card_frame_gui_input"]

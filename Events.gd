@@ -49,6 +49,10 @@ signal jobDragStart(jobUI: JobUI)
 signal jobDragEnd(jobUI: JobUI)
 signal goalClicked(goal, button: MouseButton)
 signal buttonClicked(someSortOfButtonMeaningHere)
+signal employeeUIMouseOverStart(employeeUI: EmployeeUI)
+signal employeeUIMouseOverEnd(employeeUI: EmployeeUI)
+signal employeeUIDetailsRequest(employeeUI: EmployeeUI)
+signal employeeUIDetailsCloseRequest(employeeUI: EmployeeUI)
 
 
 #DANGER ZONE

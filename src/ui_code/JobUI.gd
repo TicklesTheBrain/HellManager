@@ -26,7 +26,7 @@ func _ready():
 	Events.jobDragEnd.connect(func(j): if j == self: endDrag())		
 
 func addEmployee(employee: Employee):
-	print('add employee triggered')
+	#print('add employee triggered')
 	emptyContainer.visible = false
 	employeePos.add_child(EmployeeUILord.makeNewEmployeeUI(employee))
 
@@ -34,7 +34,9 @@ func showVacant():
 	emptyContainer.visible = true
 	
 func _on_job_frame_gui_input(event):
+	
 	if event is InputEventMouseButton:
+		print('event mouse button on job frame gui')
 		if event.is_pressed():
 			Events.jobClicked.emit(self, event.button_index)
 		elif event.is_released():

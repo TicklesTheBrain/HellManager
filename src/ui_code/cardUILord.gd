@@ -27,8 +27,5 @@ func destroyCardUI(card: Card):
 	var ui = getCardUI(card)
 	if ui != null:
 
-		#Need to refactor this, because it smells real bad
-		if ui.card.employee != null:
-			EmployeeUILord.destroyEmployeeUI(ui.card.employee)
 		ui.queue_free()
 		cardUIs.erase(ui)

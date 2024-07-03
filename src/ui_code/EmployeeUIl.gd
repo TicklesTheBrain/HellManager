@@ -10,6 +10,7 @@ class_name EmployeeUI
 @export var capacityLabel: Label
 @export var employeeTextLabel: Label
 @export var employeePic: TextureRect
+@export var requestMouseOver: bool
 
 func _ready():
 	if employee != null:
@@ -26,3 +27,11 @@ func updateVisuals():
 		prestigeLabel.text = str(employee.prestige)
 	if capacityLabel != null:
 		capacityLabel.text = str(employee.capacity)
+
+func _mouse_exited():
+	print('emp UI mouse leave')
+	Events.employeeUIMouseOverEnd.emit(self)
+
+func _mouse_entered():
+	print('emp UI mouse enter')
+	Events.employeeUIMouseOverStart.emit(self)

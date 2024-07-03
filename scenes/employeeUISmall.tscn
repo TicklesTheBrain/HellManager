@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dqta314ss8ngg"]
+[gd_scene load_steps=9 format=3 uid="uid://dqta314ss8ngg"]
 
 [ext_resource type="Script" path="res://src/ui_code/EmployeeUIl.gd" id="1_vqegc"]
 [ext_resource type="Texture2D" uid="uid://dk82t4md4wuqo" path="res://assets/white_uneven_tex.png" id="2_baq61"]
@@ -23,11 +23,15 @@ blend_mode = 3
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mdt14"]
 blend_mode = 3
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lm160"]
+size = Vector2(143, 212)
+
 [node name="EmployeeVisualSmall" type="Node2D" node_paths=PackedStringArray("prestigeLabel", "capacityLabel", "employeePic")]
 script = ExtResource("1_vqegc")
 prestigeLabel = NodePath("Prestige")
 capacityLabel = NodePath("Capacity")
 employeePic = NodePath("EmployePic")
+requestMouseOver = true
 
 [node name="Panel" type="Panel" parent="."]
 clip_children = 2
@@ -80,3 +84,12 @@ text = "22"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="MouseOverArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseOverArea"]
+position = Vector2(75.5, 110)
+shape = SubResource("RectangleShape2D_lm160")
+
+[connection signal="mouse_entered" from="MouseOverArea" to="." method="_mouse_entered"]
+[connection signal="mouse_exited" from="MouseOverArea" to="." method="_mouse_exited"]

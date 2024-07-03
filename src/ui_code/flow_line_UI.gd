@@ -18,7 +18,7 @@ func _ready():
 
 func updateLine():
     if fromUI == null or toUI == null or from == null or to == null:
-        print('line setup, something went wrong')
+        #print('line setup, something went wrong')
         return
 
     var toIndex: int = to.inflow.find(from)

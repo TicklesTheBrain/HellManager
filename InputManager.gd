@@ -3,6 +3,7 @@ class_name InputManager
 
 @export var phase: int = 1
 @export var hand: Hand
+@export var mouseOverAllowed: bool = true
 
 var draggedJob: JobUI = null
 var activeChoice: Callable = Callable()
@@ -11,6 +12,15 @@ func _ready():
 	Events.cardClicked.connect(cardClicked)
 	Events.jobClicked.connect(jobClicked)
 	Events.jobClickReleased.connect(jobClickReleased)
+	Events.employeeUIMouseOverStart.connect(employeeMouseOverStart)
+	Events.employeeUIMouseOverEnd.connect(employeeMouseOverEnd)
+
+func employeeMouseOverStart(empUI: EmployeeUI):
+	if mouseOverAllowed and empUI.requestMouseOver:
+		Events.employeeUIDetailsRequest.emit(empUI)
+
+func employeeMouseOverEnd(empUI: EmployeeUI):
+	Events.employeeUIDetailsCloseRequest.emit(empUI)
 	
 func cardClicked(cardUI: CardUI, button: MouseButton):
 
@@ -19,9 +29,9 @@ func cardClicked(cardUI: CardUI, button: MouseButton):
 	if phase == 1 and button == MOUSE_BUTTON_LEFT:
 		hand.useCard(cardUI.card, receiveActiveChoice)
 
-func jobClicked(jobUI: JobUI, button):
+func jobClicked(jobUI: JobUI, _button):
 
-	print('clicked on job ', jobUI, " with button ", button)
+	#print('clicked on job ', jobUI, " with button ", button)
 
 	if not activeChoice.is_null():
 		#print('gonna try validate choice')

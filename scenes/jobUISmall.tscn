@@ -38,6 +38,7 @@ offset_left = -84.0
 offset_top = -123.0
 offset_right = 81.0
 offset_bottom = 112.0
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_5x8bu")
 metadata/_edit_group_ = true
 

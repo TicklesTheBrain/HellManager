@@ -1,7 +1,8 @@
-[gd_scene load_steps=54 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=55 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_nbim8"]
 [ext_resource type="Script" path="res://src/ui_code/CompanyUIManager.gd" id="2_hwxbs"]
+[ext_resource type="Script" path="res://scenes/MouseOverLord.gd" id="3_2pjbp"]
 [ext_resource type="PackedScene" uid="uid://bdewx43gbc46u" path="res://scenes/flowLine.tscn" id="3_m468t"]
 [ext_resource type="Script" path="res://src/company/JobManager.gd" id="5_1cdr4"]
 [ext_resource type="PackedScene" uid="uid://dccekuf7o544k" path="res://scenes/jobUISmall.tscn" id="5_b0wxn"]
@@ -178,6 +179,10 @@ hand = NodePath("HandCards")
 [node name="InputManager" type="Node" parent="." node_paths=PackedStringArray("hand")]
 script = ExtResource("23_xx20n")
 hand = NodePath("../HandCards")
+
+[node name="MouseOverLord" type="Node2D" parent="."]
+position = Vector2(1188, 27)
+script = ExtResource("3_2pjbp")
 
 [node name="CompanyUILord" type="Node2D" parent="." node_paths=PackedStringArray("jobManager", "lineLayer", "jobLayer", "tokenLayer")]
 script = ExtResource("2_hwxbs")
