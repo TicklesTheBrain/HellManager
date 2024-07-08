@@ -4,6 +4,7 @@ class_name InputManager
 @export var phase: int = 1
 @export var hand: Hand
 @export var mouseOverAllowed: bool = true
+@export var marketContainer: CardMarket
 
 var draggedJob: JobUI = null
 var activeChoice: Callable = Callable()
@@ -23,6 +24,12 @@ func employeeMouseOverEnd(empUI: EmployeeUI):
 	Events.employeeUIDetailsCloseRequest.emit(empUI)
 	
 func cardClicked(cardUI: CardUI, button: MouseButton):
+
+	if button == MOUSE_BUTTON_LEFT and marketContainer.getCardPosition(cardUI.card) != Vector2(-1,-1):
+		marketContainer.removeCard(cardUI.card)
+		hand.addCard(cardUI.card)
+		return
+
 
 	#print('clicked on card ', cardUI, " with button ", button)
 

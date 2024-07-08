@@ -1,6 +1,7 @@
-[gd_scene load_steps=55 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=59 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_nbim8"]
+[ext_resource type="Script" path="res://scenes/CardMarket.gd" id="2_42g87"]
 [ext_resource type="Script" path="res://src/ui_code/CompanyUIManager.gd" id="2_hwxbs"]
 [ext_resource type="Script" path="res://scenes/MouseOverLord.gd" id="3_2pjbp"]
 [ext_resource type="PackedScene" uid="uid://bdewx43gbc46u" path="res://scenes/flowLine.tscn" id="3_m468t"]
@@ -28,6 +29,8 @@
 [ext_resource type="Texture2D" uid="uid://bwl07yqs0u1c7" path="res://assets/zig-arrow.svg" id="22_hgn1x"]
 [ext_resource type="Script" path="res://src/ui_code/SinkPC.gd" id="23_i5ahq"]
 [ext_resource type="Script" path="res://InputManager.gd" id="23_xx20n"]
+[ext_resource type="Script" path="res://src/ui_code/MarketPC.gd" id="28_lx5eo"]
+[ext_resource type="PackedScene" uid="uid://dm73o0agf3yay" path="res://scenes/cardUI.tscn" id="29_2tfqd"]
 
 [sub_resource type="Resource" id="Resource_lfh2a"]
 script = ExtResource("7_b1mae")
@@ -168,17 +171,21 @@ copies = 2
 card = SubResource("Resource_ktrr6")
 debug = false
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nfpkx"]
+size = Vector2(647, 565)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f5c0v"]
-size = Vector2(1385.5, 342)
+size = Vector2(1868.5, 300)
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("deck", "hand")]
 script = ExtResource("1_nbim8")
 deck = NodePath("Deck")
 hand = NodePath("HandCards")
 
-[node name="InputManager" type="Node" parent="." node_paths=PackedStringArray("hand")]
+[node name="InputManager" type="Node" parent="." node_paths=PackedStringArray("hand", "marketContainer")]
 script = ExtResource("23_xx20n")
 hand = NodePath("../HandCards")
+marketContainer = NodePath("../CardMarket")
 
 [node name="MouseOverLord" type="Node2D" parent="."]
 position = Vector2(1188, 27)
@@ -244,6 +251,12 @@ defaultLimit = 5
 script = ExtResource("14_r0k10")
 deck = Array[ExtResource("17_mrygo")]([SubResource("Resource_5jtij"), SubResource("Resource_8c0pc"), SubResource("Resource_poo86")])
 
+[node name="CardMarket" type="Node" parent="." node_paths=PackedStringArray("feedContainer")]
+script = ExtResource("2_42g87")
+rows = 2
+columns = 2
+feedContainer = NodePath("../Deck")
+
 [node name="HandCards" type="Node" parent="." node_paths=PackedStringArray("disposeContainer")]
 script = ExtResource("20_vouf7")
 disposeContainer = NodePath("../Discard")
@@ -252,6 +265,20 @@ disposeContainer = NodePath("../Discard")
 script = ExtResource("18_1vww6")
 disposeContainer = NodePath(".")
 
+[node name="Market PC" type="Node2D" parent="." node_paths=PackedStringArray("area", "logicalContainer")]
+script = ExtResource("28_lx5eo")
+area = NodePath("MarketShape")
+mindCenterDistance = 50.0
+maxGap = 25.0
+multipleRows = true
+logicalContainer = NodePath("../CardMarket")
+resetRotation = false
+packedCardForReference = ExtResource("29_2tfqd")
+
+[node name="MarketShape" type="CollisionShape2D" parent="Market PC"]
+position = Vector2(1454.5, 343.5)
+shape = SubResource("RectangleShape2D_nfpkx")
+
 [node name="HandPC" type="Node2D" parent="." node_paths=PackedStringArray("area", "logicalContainer")]
 script = ExtResource("19_qe3sq")
 area = NodePath("CollisionShape2D")
@@ -259,15 +286,17 @@ mindCenterDistance = 50.0
 maxGap = 25.0
 logicalContainer = NodePath("../HandCards")
 resetRotation = false
+packedCardForReference = ExtResource("29_2tfqd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HandPC"]
-position = Vector2(724.25, 1071)
+position = Vector2(965.75, 903)
 shape = SubResource("RectangleShape2D_f5c0v")
 
 [node name="SinkPC" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker", "logicalContainer")]
 script = ExtResource("23_i5ahq")
 positionMarker = NodePath("SinkPoint")
 logicalContainer = NodePath("../Discard")
+packedCardForReference = ExtResource("29_2tfqd")
 
 [node name="SinkPoint" type="Marker2D" parent="SinkPC"]
 position = Vector2(1519, 614)

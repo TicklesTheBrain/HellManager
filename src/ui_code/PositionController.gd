@@ -3,15 +3,22 @@ class_name PositionController
 
 @export var moveTime: float = 0.5
 @export var logicalContainer: CardContainer
-
 @export var resetRotation: bool = true
 @export var resetRotationTo: float = 0
 @export var reverseZ: bool = false
+@export var packedCardForReference: PackedScene
+
+var cardHeight: float
+var cardWidth: float
 
 var cardUIs: Array[CardUI] = []
 var setupDone: bool = false
 
 func _ready():
+
+	var ref = packedCardForReference.instantiate()
+	cardHeight = ref.size.y
+	cardWidth = ref.size.x
 
 	if logicalContainer and not setupDone:
 		setupNewLogicalContainer()

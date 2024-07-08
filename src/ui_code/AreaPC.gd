@@ -8,16 +8,26 @@ class_name AreaPC
 @export var rowGap: float = 25
 
 func scuttleCardsSpecific():
-
 	if cardUIs.size() < 1:
 		return
-	var numberOfRows
 
-	var areaHeight = area.shape.get_rect().size.y
+	var cardUIsInRows = getCardsInRows()
+
 	var areaWidth = area.shape.get_rect().size.x
-	var cardHeight = cardUIs[0].size.y #TODO: this is fucking ugly
-	var cardUIsInRows = [cardUIs]
+	var centerPos = area.global_position
+	var totalHeight = (cardUIsInRows.size()-1)*(cardHeight+rowGap)+cardHeight
+	var firstRowCenter = centerPos-Vector2(0,totalHeight/2)
+	var r = 0
+	for row in cardUIsInRows:
+		var rowCenter = firstRowCenter+r*Vector2(0,cardHeight+rowGap)
+		scuttleOneRow(row, rowCenter, areaWidth)
+		r+=1
+
+func getCardsInRows():
 	
+	var numberOfRows
+	var areaHeight = area.shape.get_rect().size.y
+	var cardUIsInRows = [cardUIs]
 	if multipleRows:
 		var spaceWithoutFirstRow = areaHeight - cardHeight
 		numberOfRows = floor(spaceWithoutFirstRow/(cardHeight+rowGap))+1
@@ -33,21 +43,15 @@ func scuttleCardsSpecific():
 				c+=1
 			cardUIsInRows.push_back(newRow)
 
-	var centerPos = area.global_position
-	var totalHeight = (cardUIsInRows.size()-1)*(cardHeight+rowGap)+cardHeight
-	var firstRowCenter = centerPos-Vector2(0,totalHeight/2)
-	var r = 0
-	for row in cardUIsInRows:
-		var rowCenter = firstRowCenter+r*Vector2(0,cardHeight+rowGap)
-		scuttleOneRow(row, rowCenter, areaWidth)
-		r+=1	
+	return cardUIsInRows
+		
 
 func scuttleOneRow(rowCards, centerPos: Vector2, areaWidth: float):
+	print('scuttle called', rowCards, centerPos, areaWidth)
 
 	if rowCards.size() == 0:
 		return
 
-	var cardWidth = rowCards[0].size.x
 	var distanceBetweenCards = mindCenterDistance
 	var startingPoint: Vector2
 
@@ -67,11 +71,16 @@ func scuttleOneRow(rowCards, centerPos: Vector2, areaWidth: float):
 
 	var i = 0
 	
-	for card: CardUI in rowCards:
+	for card in rowCards:
 		var cardPosition = startingPoint + Vector2(i*distanceBetweenCards,0)
 		i +=1
+
+		if card == null:
+			continue
+
 		var newTween = get_tree().create_tween()
 		newTween.tween_property(card,"position", cardPosition, moveTime)
+		print(card, ' tween done to position ', cardPosition)
 	
 
 
