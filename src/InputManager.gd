@@ -3,6 +3,7 @@ class_name InputManager
 
 @export var phase: int = 1
 @export var hand: Hand
+@export var taskManager: TaskManager
 @export var mouseOverAllowed: bool = true
 @export var marketContainer: CardMarket
 
@@ -15,6 +16,11 @@ func _ready():
 	Events.jobClickReleased.connect(jobClickReleased)
 	Events.employeeUIMouseOverStart.connect(employeeMouseOverStart)
 	Events.employeeUIMouseOverEnd.connect(employeeMouseOverEnd)
+	Events.taskClicked.connect(taskClicked)
+
+func taskClicked(taskUI: TaskUI, button):
+	if phase == 1 and button == MOUSE_BUTTON_LEFT:
+		taskManager.tryCompleteTask(taskUI.task, receiveActiveChoice)
 
 func employeeMouseOverStart(empUI: EmployeeUI):
 	if mouseOverAllowed and empUI.requestMouseOver:
@@ -26,10 +32,14 @@ func employeeMouseOverEnd(empUI: EmployeeUI):
 func cardClicked(cardUI: CardUI, button: MouseButton):
 
 	if button == MOUSE_BUTTON_LEFT and marketContainer.getCardPosition(cardUI.card) != Vector2(-1,-1):
+
+		if marketContainer.inaccessible:
+			return
+
 		marketContainer.removeCard(cardUI.card)
 		hand.addCard(cardUI.card)
+		Events.cardTaken.emit(cardUI.card)
 		return
-
 
 	#print('clicked on card ', cardUI, " with button ", button)
 

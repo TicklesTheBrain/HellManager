@@ -15,11 +15,22 @@ class_name Job
 		Events.employeePlaced.emit(v, self)
 @export var storage: TokenStorage
 
+func _ready():
+	Events.jobDestroyed.connect(clearDeadFlows)
+
+func clearDeadFlows(destroyedJob: Job):
+	inflow.erase(destroyedJob)
+	outflow.erase(destroyedJob)
+
 func doWork():
 	Events.jobStarted.emit(self)
 	if employee != null:
 		employee.doWork(self)
 	Events.jobEnded.emit(self)
+
+func destroy():
+	Events.jobDestroyed.emit(self)
+	queue_free()
 
 func getTokens(request: Array[Token], exclude: Array[Token] = []):
 	var own = getTokensOwn(request, exclude)

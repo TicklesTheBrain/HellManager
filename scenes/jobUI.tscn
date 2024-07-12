@@ -95,5 +95,3 @@ position = Vector2(37, -163)
 
 [node name="InMarker4" type="Marker2D" parent="Markers"]
 position = Vector2(114, -163)
-
-[connection signal="gui_input" from="JobFrame" to="." method="_on_job_frame_gui_input"]

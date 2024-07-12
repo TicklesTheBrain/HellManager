@@ -51,10 +51,14 @@ func getCtxt() -> GameContext:
 	ctxt.actingGoal = actingGoal
 	ctxt.actionStack = actionStack.duplicate()
 	ctxt.step = stepCounter
+	ctxt.playerData = getPlayerData()
 	return ctxt
 
 func getJobManager() -> JobManager:
 	return get_tree().get_first_node_in_group("JobLord")
+
+func getPlayerData():
+	return get_tree().get_first_node_in_group("PlayerData")
 
 func subtractTokenList(first, second):
 	var result = first.duplicate()

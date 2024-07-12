@@ -7,6 +7,8 @@ class_name CardMarket
 @export var rows: int = 1
 @export var columns: int = 1
 
+var inaccessible: bool = false
+
 enum SlideDirection {
 	Right,
 	Left,
@@ -44,6 +46,7 @@ func addCard(cardToAdd: Card, _addToTop: bool = false):
 		if ind != -1:
 			row[ind] = cardToAdd
 			cards.push_back(cardToAdd)
+			Events.cardAddedToMarket.emit(cardToAdd)
 			return
 
 func checkFull():

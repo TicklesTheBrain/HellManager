@@ -23,7 +23,8 @@ func _ready():
 		Events.employeeConsumed.connect(func(_e, j): if j == job: showVacant())
 
 	Events.jobDragStart.connect(func(j): if j == self: startDrag())
-	Events.jobDragEnd.connect(func(j): if j == self: endDrag())		
+	Events.jobDragEnd.connect(func(j): if j == self: endDrag())
+	Events.jobDestroyed.connect(func(j): if j == job: queue_free())
 
 func addEmployee(employee: Employee):
 	#print('add employee triggered')
@@ -51,7 +52,6 @@ func endDrag():
 func _on_drag_detect_area_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
 	
 	if event is InputEventMouseButton:
-		print('event mouse button on job frame gui')
 		if event.is_pressed():
 			Events.jobClicked.emit(self, event.button_index)
 		elif event.is_released():

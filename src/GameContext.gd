@@ -9,6 +9,7 @@ var actingEmployee: Employee
 var actingGoal: int
 var step: int
 var actionStack: Array[Action] = []
+var playerData: PlayerData
 
 func printSelf():
     print('current Phase ', currentPhase,  ' current Turn ', currentTurn, ' actingCard ', actingCard,

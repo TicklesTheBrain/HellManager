@@ -14,7 +14,7 @@ func scuttleCardsSpecific():
 	var cardUIsInRows = getCardsInRows()
 
 	var areaWidth = area.shape.get_rect().size.x
-	var centerPos = area.global_position
+	var centerPos = area.position
 	var totalHeight = (cardUIsInRows.size()-1)*(cardHeight+rowGap)+cardHeight
 	var firstRowCenter = centerPos-Vector2(0,totalHeight/2)
 	var r = 0

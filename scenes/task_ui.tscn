@@ -1,0 +1,126 @@
+[gd_scene load_steps=8 format=3 uid="uid://bav2v2vhrfn3o"]
+
+[ext_resource type="Script" path="res://src/ui_code/task_ui.gd" id="1_j1nns"]
+[ext_resource type="Texture2D" uid="uid://dk82t4md4wuqo" path="res://assets/white_uneven_tex.png" id="1_nopyd"]
+[ext_resource type="FontFile" uid="uid://u2357g28y3hy" path="res://assets/fonts/libel-suit-rg.otf" id="2_lewwq"]
+[ext_resource type="Texture2D" uid="uid://dhmuqf88u3xo1" path="res://assets/testPic1.png" id="3_tqiin"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ertft"]
+bg_color = Color(1, 0.900032, 0.55792, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_m61hb"]
+blend_mode = 3
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mkg1x"]
+blend_mode = 3
+
+[node name="TaskUI" type="Control"]
+layout_mode = 3
+anchor_right = 0.126
+anchor_bottom = 0.246
+offset_right = 0.0800018
+offset_bottom = 0.320007
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j1nns")
+
+[node name="Background" type="Panel" parent="."]
+clip_children = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_right = -0.0206612
+anchor_bottom = -0.259398
+offset_right = 250.0
+offset_bottom = 335.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ertft")
+metadata/_edit_use_anchors_ = true
+
+[node name="Texture" type="Sprite2D" parent="Background"]
+material = SubResource("CanvasItemMaterial_m61hb")
+position = Vector2(128.75, 165)
+scale = Vector2(0.605, 0.717)
+texture = ExtResource("1_nopyd")
+
+[node name="TaskName" type="Label" parent="."]
+offset_left = 5.0
+offset_top = 6.0
+offset_right = 245.0
+offset_bottom = 46.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_lewwq")
+theme_override_font_sizes/font_size = 24
+text = "DEMAND PAIN"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="TaskGoalText" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.00413223
+anchor_top = -0.706767
+anchor_right = 0.00413223
+anchor_bottom = -0.706767
+offset_left = 9.0
+offset_top = 210.0
+offset_right = 241.0
+offset_bottom = 295.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -1
+theme_override_fonts/font = ExtResource("2_lewwq")
+theme_override_font_sizes/font_size = 18
+text = "Need to do these things to complete task. Two lines"
+vertical_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="TaskIcon" type="TextureRect" parent="."]
+material = SubResource("CanvasItemMaterial_mkg1x")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.144628
+anchor_top = 0.172932
+anchor_right = -0.136364
+anchor_bottom = -0.018797
+offset_left = 3.0
+offset_top = 40.0
+offset_right = 244.0
+offset_bottom = 215.0
+mouse_filter = 2
+texture = ExtResource("3_tqiin")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="TaskConsequenceText" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0252927
+anchor_top = -0.803589
+anchor_right = -0.0331052
+anchor_bottom = -0.803589
+offset_left = 18.1208
+offset_top = 405.755
+offset_right = 250.121
+offset_bottom = 490.755
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -1
+theme_override_fonts/font = ExtResource("2_lewwq")
+theme_override_font_sizes/font_size = 18
+text = "This is what happens when task is incomplete. Two lines"
+vertical_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[connection signal="gui_input" from="Background" to="." method="_on_background_gui_input"]
