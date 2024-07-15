@@ -10,3 +10,10 @@ class_name ActionCard
 	   
 @export var cardText: String
 @export var cardIcon: Texture
+
+
+func preExecuteSpecific():
+	Events.cardUseStarted.emit(self)
+
+func postExecuteSpecific():
+	Events.cardUseEnded.emit(self)

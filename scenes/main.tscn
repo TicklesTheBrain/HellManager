@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=82 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://src/Main.gd" id="1_nbim8"]
 [ext_resource type="Script" path="res://src/CardMarket.gd" id="2_42g87"]
@@ -60,7 +60,7 @@ employeeName = "Gamintojas"
 employeePic = ExtResource("9_xt47j")
 staticText = "Produce 1 Green."
 
-[sub_resource type="Resource" id="Resource_p2afh"]
+[sub_resource type="Resource" id="Resource_j62mu"]
 script = ExtResource("7_b1mae")
 type = 2
 
@@ -73,6 +73,10 @@ independentActions = Array[Resource("res://src/actions/Action.gd")]([])
 employeeName = "Gamintojas"
 employeePic = ExtResource("9_xt47j")
 staticText = "Produce 1 Green."
+
+[sub_resource type="Resource" id="Resource_p2afh"]
+script = ExtResource("7_b1mae")
+type = 2
 
 [sub_resource type="Resource" id="Resource_pax6k"]
 script = ExtResource("7_b1mae")
@@ -288,7 +292,7 @@ storage = NodePath("TokenStorage")
 
 [node name="TokenStorage" type="Node" parent="JobLord/Job"]
 script = ExtResource("11_if1yf")
-contents = Array[ExtResource("7_b1mae")]([SubResource("Resource_p2afh")])
+contents = Array[ExtResource("7_b1mae")]([SubResource("Resource_j62mu")])
 defaultLimit = 5
 
 [node name="Job3" type="Node" parent="JobLord" node_paths=PackedStringArray("storage")]

@@ -32,6 +32,9 @@ func destroy():
 	Events.jobDestroyed.emit(self)
 	queue_free()
 
+func listTokensOwn():
+	return storage.contents.map(func(t): return TokenPath.new(t, [self]))
+
 func getTokens(request: Array[Token], exclude: Array[Token] = []):
 	var own = getTokensOwn(request, exclude)
 	var requestModified = Globals.subtractTokenList(request, own.map(func(tp): return tp.token))

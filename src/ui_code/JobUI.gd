@@ -18,13 +18,22 @@ func _ready():
 		addEmployee(job.employee)
 
 	if job != null:
-		Events.employeePlaced.connect(func(e,j): if j == job: addEmployee(e))
-		Events.employeeFired.connect(func(_e, j): if j == job: showVacant())
-		Events.employeeConsumed.connect(func(_e, j): if j == job: showVacant())
+		Events.employeePlaced.connect(func(e,j): if j == job: scheduleAddEmployee(e))
+		Events.employeeFired.connect(func(_e, j): if j == job: scheduleShowVacanat())
+		Events.employeeConsumed.connect(func(_e, j): if j == job: scheduleShowVacanat())
 
 	Events.jobDragStart.connect(func(j): if j == self: startDrag())
 	Events.jobDragEnd.connect(func(j): if j == self: endDrag())
-	Events.jobDestroyed.connect(func(j): if j == job: queue_free())
+	Events.jobDestroyed.connect(func(j): if j == job: scheduleDestroyJob())
+
+func scheduleAddEmployee(employee: Employee):
+	UIScheduler.addToSchedule(addEmployee.bind(employee))
+
+func scheduleShowVacanat():
+	UIScheduler.addToSchedule(showVacant)
+
+func scheduleDestroyJob():
+	UIScheduler.addToSchedule(queue_free)
 
 func addEmployee(employee: Employee):
 	#print('add employee triggered')

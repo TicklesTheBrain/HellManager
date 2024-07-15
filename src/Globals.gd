@@ -9,8 +9,14 @@ extends Node
 @export var actionStack: Array[Action] = []
 var stepCounter: int = 0
 
+enum phases {
+	WORK,
+	MANAGE
+}
 
-func _ready():
+func _ready():	
+	
+	#Keeping track of phase, step, etc.
 	Events.phaseStarted.connect(func(p):
 		phase = p
 		stepCounter += 1)
@@ -39,6 +45,27 @@ func _ready():
 		actionStack.push_back(a)
 		stepCounter +=1)
 	Events.actionEnded.connect(func(a): actionStack.erase(a))
+
+
+	#Manging game phase
+	Events.phaseEnded.connect(func(p):
+		if p == phases.WORK:
+			Events.phaseStarted.emit(phases.MANAGE)
+		)
+
+	Events.cardUseEnded.connect(func(_c):
+		Events.phaseEnded.emit(phases.WORK)
+		getJobManager().makeEveryoneWork()
+		)
+
+	Events.cardTaken.connect(func(_c):
+		Events.phaseEnded.emit(phases.WORK)
+		getJobManager().makeEveryoneWork()
+	)
+
+func _unhandled_input(event):
+	if event.is_action_pressed("work"):
+		getJobManager().makeEveryoneWork()		
 
 func getCtxt() -> GameContext:
 	var ctxt = GameContext.new()

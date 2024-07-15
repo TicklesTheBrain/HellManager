@@ -5,23 +5,26 @@ class_name ActionDestroyJob
 var job: Job
 
 func isSetup() -> bool:
-    return job != null
+	return job != null
 
 func try() -> bool:
-    return job != null
+	return job != null
 
 func performSpecific():
-    job.destroy()
-    return true
+  
+	var tokens = job.listTokensOwn()
+	job.consumeTokens(tokens.map(func(tp): return tp.token))
+	job.destroy()
+	return true
 
 func ask() -> Callable:
-    if not isSetup():
-        return recordChoice
-    return Callable()
+	if not isSetup():
+		return recordChoice
+	return Callable()
 
 func recordChoice(smth):
-    if condition.checkSubject(smth):
-        job = smth
-        announceChoice(smth)
-        return true
-    return false
+	if condition.checkSubject(smth):
+		job = smth
+		announceChoice(smth)
+		return true
+	return false

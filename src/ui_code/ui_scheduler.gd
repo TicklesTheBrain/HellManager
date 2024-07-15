@@ -2,10 +2,20 @@ extends Node
 
 var schedule: Array[ScheduleItem] = []
 var inProgress: Array[ScheduleItem] = []
-var schedulerActive: bool
+var schedulerActive: bool:
+    set(v):
+        if schedulerActive and not v:
+            finished.emit()
+        if not schedulerActive and v:
+            started.emit()
+        schedulerActive = v
+
+signal started
+signal finished
 
 func processScheduler():
     if schedule.size() == 0:
+        schedulerActive = false
         return
     
     if inProgress.size() == 0:
@@ -24,6 +34,7 @@ func processScheduler():
         #    print('schedule conflict, waiting to finish')
 
 func processItem(item: ScheduleItem):
+    schedulerActive = true
     inProgress.push_back(item)
     await item.change.call()
     inProgress.erase(item)

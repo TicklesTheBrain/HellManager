@@ -6,9 +6,11 @@ class_name InputManager
 @export var taskHand: Hand
 @export var mouseOverAllowed: bool = true
 @export var marketContainer: CardMarket
+@export var inputLock: bool = false
 
 var draggedJob: JobUI = null
 var activeChoice: Callable = Callable()
+
 
 func _ready():
 	Events.actionCardClicked.connect(cardClicked)
@@ -18,8 +20,15 @@ func _ready():
 	Events.employeeUIMouseOverEnd.connect(employeeMouseOverEnd)
 	Events.taskCardClicked.connect(taskClicked)
 
+	Events.cardUseStarted.connect(func(_c): inputLock = true)
+	Events.phaseStarted.connect(func(p):
+		if p == Globals.phases.WORK:
+			inputLock = true
+		)
+	UIScheduler.finished.connect(func():inputLock = false)
+
 func taskClicked(taskUI: TaskCardUI, button):
-	if phase == 1 and button == MOUSE_BUTTON_LEFT:
+	if not inputLock and button == MOUSE_BUTTON_LEFT:
 		print('task clicked')
 		taskHand.useCard(taskUI.card, receiveActiveChoice)
 
@@ -31,6 +40,9 @@ func employeeMouseOverEnd(empUI: EmployeeUI):
 	Events.employeeUIDetailsCloseRequest.emit(empUI)
 	
 func cardClicked(cardUI: ActionCardUI, button: MouseButton):
+
+	if inputLock:
+		return
 
 	if button == MOUSE_BUTTON_LEFT and marketContainer.getCardPosition(cardUI.card) != Vector2(-1,-1):
 
@@ -44,14 +56,14 @@ func cardClicked(cardUI: ActionCardUI, button: MouseButton):
 
 	#print('clicked on card ', cardUI, " with button ", button)
 
-	if phase == 1 and button == MOUSE_BUTTON_LEFT:
+	if phase == Globals.phases.MANAGE and button == MOUSE_BUTTON_LEFT:
 		actionHand.useCard(cardUI.card, receiveActiveChoice)
 
 func jobClicked(jobUI: JobUI, _button):
 
 	#print('clicked on job ', jobUI, " with button ", button)
 
-	if not activeChoice.is_null():
+	if not activeChoice.is_null() and not inputLock:
 		#print('gonna try validate choice')
 		var result = activeChoice.call(jobUI.job)
 		if result:

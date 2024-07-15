@@ -181,7 +181,8 @@ func consumeToken(t: Token):
 	var tween = get_tree().create_tween()
 	tween.tween_property(tokenUI, "scale", Vector2(0,0), tokenFadeTime)
 	await tween.finished
-	tokenUI.free()
+	if is_instance_valid(tokenUI):
+		tokenUI.queue_free()
 
 func storeToken(t: Token, j: Job):
 	var tokenUI = getTokenUI(t)
