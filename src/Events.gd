@@ -25,30 +25,30 @@ signal actionStarted(action: Action)
 signal actionEnded(action: Action)
 
 #Card stuff
-signal cardAddedToMarket(card: Card)
-signal cardTaken(card: Card)
-signal cardUseStarted(card: Card)
-signal cardUseEnded(card: Card)
-signal cardAddedToContainer(card: Card, container: CardContainer)
-signal cardRemovedFromContainer(card: Card, container: CardContainer)
+signal cardAddedToMarket(card: ProtoCard)
+signal cardTaken(card: ProtoCard)
+signal cardUseStarted(card: ProtoCard)
+signal cardUseEnded(card: ProtoCard)
+signal cardAddedToContainer(card: ProtoCard, container: CardContainer)
+signal cardRemovedFromContainer(card: ProtoCard, container: CardContainer)
 signal containerShuffled(container: CardContainer)
 
 #Goal Stuff
-signal newTaskAdded(task: Task)
-signal taskCompleted(task: Task)
-signal taskConsequenceStart(task: Task)
+signal newTaskAdded(task: TaskCard)
+signal taskCompleted(task: TaskCard)
+signal taskConsequenceStart(task: TaskCard)
 signal taskConsequenceEnd()
 
 ## LOGIC META SIGNALS
 signal gameStateChanged(dirty: bool)
 
 ## UI Signals
-signal cardClicked(card: CardUI, button: MouseButton)
+signal actionCardClicked(card: ActionCardUI, button: MouseButton)
 signal jobClicked(jobUI: JobUI, button: MouseButton)
 signal jobClickReleased(jobUI: JobUI, button: MouseButton)
 signal jobDragStart(jobUI: JobUI)
 signal jobDragEnd(jobUI: JobUI)
-signal taskClicked(task: TaskUI, button: MouseButton)
+signal taskCardClicked(task: TaskCardUI, button: MouseButton)
 signal buttonClicked(someSortOfButtonMeaningHere)
 signal employeeUIMouseOverStart(employeeUI: EmployeeUI)
 signal employeeUIMouseOverEnd(employeeUI: EmployeeUI)

@@ -1,8 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bb7ywyia3ct0u"]
+[gd_scene load_steps=4 format=3 uid="uid://bb7ywyia3ct0u"]
 
 [ext_resource type="Script" path="res://src/ui_code/cardUILord.gd" id="1_rdklg"]
 [ext_resource type="PackedScene" uid="uid://dm73o0agf3yay" path="res://scenes/cardUI.tscn" id="2_7ox2i"]
+[ext_resource type="PackedScene" uid="uid://bav2v2vhrfn3o" path="res://scenes/task_ui.tscn" id="3_3hh8v"]
 
 [node name="CardUILord" type="Node"]
 script = ExtResource("1_rdklg")
-cardUIPacked = ExtResource("2_7ox2i")
+actionCardUIPacked = ExtResource("2_7ox2i")
+taskCardUIPacked = ExtResource("3_3hh8v")

@@ -26,7 +26,7 @@ func _ready():
 		spaces.push_back(newRow)
 	fillEmpty()
 
-func removeCard(card: Card):
+func removeCard(card: ProtoCard):
 	for row in spaces:
 		var ind = row.find(card)
 		if ind != -1:
@@ -40,7 +40,7 @@ func getFreeSpace():
 func getCapacity():
 	return rows*columns
 
-func addCard(cardToAdd: Card, _addToTop: bool = false):
+func addCard(cardToAdd: ProtoCard, _addToTop: bool = false):
 	for row in spaces:
 		var ind = row.find(null)
 		if ind != -1:
@@ -64,7 +64,7 @@ func getLast(_toLast: int = 1):
 	#TODO: FILL THIS OUT
 	pass
 
-func getCardPosition(cardToFind: Card):
+func getCardPosition(cardToFind: ProtoCard):
 	for r in range(rows):
 		for c in range(columns):
 			if spaces[r][c] == cardToFind:

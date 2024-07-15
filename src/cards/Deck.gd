@@ -16,7 +16,7 @@ func unrollDeck():
             continue
 
         for i in range(multiCard.copies):
-            addCard(multiCard.card.nonStupidDeepDuplicate())
+            addCard(multiCard.card.specificDuplicate())
 
 
 func _ready():

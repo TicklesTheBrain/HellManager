@@ -19,7 +19,7 @@ func destroyCurrentEmployeeShow():
 
 
 func showEmployee(empUI: EmployeeUI):
-	print('show called')
+	#print('show called')
 
 	if hidePending == empUI.employee:
 		hideOverruled = true
@@ -44,7 +44,7 @@ func hideEmployee(empUI: EmployeeUI):
 	await get_tree().create_timer(hideDelay).timeout
 
 	if hideOverruled:
-		print('hide overruled')
+		#print('hide overruled')
 		hideOverruled = false
 		return
 

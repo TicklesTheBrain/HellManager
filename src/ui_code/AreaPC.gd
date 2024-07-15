@@ -47,7 +47,7 @@ func getCardsInRows():
 		
 
 func scuttleOneRow(rowCards, centerPos: Vector2, areaWidth: float):
-	print('scuttle called', rowCards, centerPos, areaWidth)
+	#print('scuttle called', rowCards, centerPos, areaWidth)
 
 	if rowCards.size() == 0:
 		return
@@ -80,7 +80,7 @@ func scuttleOneRow(rowCards, centerPos: Vector2, areaWidth: float):
 
 		var newTween = get_tree().create_tween()
 		newTween.tween_property(card,"position", cardPosition, moveTime)
-		print(card, ' tween done to position ', cardPosition)
+		#print(card, ' tween done to position ', cardPosition)
 	
 
 

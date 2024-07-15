@@ -11,7 +11,7 @@ class_name PositionController
 var cardHeight: float
 var cardWidth: float
 
-var cardUIs: Array[CardUI] = []
+var cardUIs: Array[ProtoCardUI] = []
 var setupDone: bool = false
 
 func _ready():
@@ -24,14 +24,15 @@ func _ready():
 		setupNewLogicalContainer()
 	#InputLord.cardDragReleased.connect(_onCardDragReleased)
 
-func addCard(card: Card):
+func addCard(card: ProtoCard):
 	
 	var cardUI = CardUILord.getCardUI(card)
 	if cardUI == null:
+		print('new card UI requested')
 		cardUI = CardUILord.makeNewCardUI(card)
 	addCardUI(cardUI)
 	
-func removeCard(card: Card):	
+func removeCard(card: ProtoCard):	
 	
 	if CardUILord.getCardUI(card) == null:
 		return
@@ -39,19 +40,20 @@ func removeCard(card: Card):
 	var cardUI = CardUILord.getCardUI(card)
 	removeCardUI(cardUI) #TODO: this is kinda ugly
 	
-func addCardUI(newCard: CardUI):
+func addCardUI(newCard: ProtoCardUI):
 	
 	#Set self to parent
 	if newCard.get_parent() != null:
 		newCard.get_parent().remove_child(newCard)
 	add_child(newCard)
+	print('card UI added')
 
 	#Add UI to list and make them sort themselves
 	cardUIs.push_back(newCard)
 	updateCardZIndex()
 	scuttleCards()
 
-func removeCardUI(cardToRemove: CardUI):
+func removeCardUI(cardToRemove: ProtoCardUI):
 	if !cardUIs.has(cardToRemove):
 		return
 	

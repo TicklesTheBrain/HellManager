@@ -5,7 +5,7 @@ extends Node
 @export var actingJob: Job
 @export var actingEmployee: Employee
 @export var actingGoal: int
-@export var actingCard: Card
+@export var actingCard: ProtoCard
 @export var actionStack: Array[Action] = []
 var stepCounter: int = 0
 
@@ -27,10 +27,10 @@ func _ready():
 		actingEmployee = e
 		stepCounter +=1)
 	Events.employeeActivationEnd.connect(func(_e): actingEmployee = null)
-	Events.goalActivationStart.connect(func(g):
+	Events.taskConsequenceStart.connect(func(g):
 		actingGoal = g
 		stepCounter +=1)
-	Events.goalActivationEnd.connect(func(_g): actingGoal = -1)
+	Events.taskConsequenceEnd.connect(func(_g): actingGoal = -1)
 	Events.cardUseStarted.connect(func(c):
 		actingCard = c
 		stepCounter +=1)

@@ -15,7 +15,7 @@ class_name flowLineUI
 func _ready():
 	fromUI.moved.connect(updateLine)
 	toUI.moved.connect(updateLine)
-	Events.jobDestroyed(func(j):
+	Events.jobDestroyed.connect(func(j):
 		if j == from or j == to:
 			queue_free()
 		)

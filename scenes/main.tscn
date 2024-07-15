@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=81 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://src/Main.gd" id="1_nbim8"]
 [ext_resource type="Script" path="res://src/CardMarket.gd" id="2_42g87"]
@@ -18,7 +18,7 @@
 [ext_resource type="Script" path="res://src/actions/action_consume.gd" id="13_mduv8"]
 [ext_resource type="Script" path="res://src/cards/Deck.gd" id="14_r0k10"]
 [ext_resource type="Script" path="res://src/actions/action_makeJob.gd" id="16_16kad"]
-[ext_resource type="Script" path="res://src/cards/Card.gd" id="16_hnq1w"]
+[ext_resource type="Script" path="res://src/cards/ActionCard.gd" id="16_hnq1w"]
 [ext_resource type="Texture2D" uid="uid://ngdu2hqkbis2" path="res://assets/fedora.svg" id="17_6m0wt"]
 [ext_resource type="Script" path="res://src/actions/action_placeEmployee.gd" id="17_cxtnn"]
 [ext_resource type="Script" path="res://src/cards/multiCard.gd" id="17_mrygo"]
@@ -29,12 +29,18 @@
 [ext_resource type="Texture2D" uid="uid://bwl07yqs0u1c7" path="res://assets/zig-arrow.svg" id="22_hgn1x"]
 [ext_resource type="Script" path="res://src/ui_code/SinkPC.gd" id="23_i5ahq"]
 [ext_resource type="Script" path="res://src/InputManager.gd" id="23_xx20n"]
+[ext_resource type="Script" path="res://src/conditions/conditionTokenOnJob.gd" id="25_bfr6v"]
+[ext_resource type="Script" path="res://src/actions/action_destroyJob.gd" id="26_r4wih"]
+[ext_resource type="Script" path="res://src/TaskCard.gd" id="27_skm2w"]
 [ext_resource type="Script" path="res://src/ui_code/MarketPC.gd" id="28_lx5eo"]
+[ext_resource type="Script" path="res://src/actions/action_changeCache.gd" id="28_v6a6q"]
 [ext_resource type="PackedScene" uid="uid://dm73o0agf3yay" path="res://scenes/cardUI.tscn" id="29_2tfqd"]
 [ext_resource type="Script" path="res://src/ui_code/MarketSlideController.gd" id="32_beqie"]
 [ext_resource type="Script" path="res://src/company/PlayerData.gd" id="33_oq5l2"]
 [ext_resource type="FontFile" uid="uid://u2357g28y3hy" path="res://assets/fonts/libel-suit-rg.otf" id="34_y48yq"]
 [ext_resource type="Script" path="res://src/ui_code/CacheLabel.gd" id="35_6tauc"]
+[ext_resource type="Script" path="res://src/company/TaskManager.gd" id="36_w7x6f"]
+[ext_resource type="PackedScene" uid="uid://bav2v2vhrfn3o" path="res://scenes/task_ui.tscn" id="37_62ix5"]
 
 [sub_resource type="Resource" id="Resource_lfh2a"]
 script = ExtResource("7_b1mae")
@@ -103,11 +109,11 @@ script = ExtResource("16_16kad")
 
 [sub_resource type="Resource" id="Resource_nj4v4"]
 script = ExtResource("16_hnq1w")
-cardName = "Expansion"
 cardText = "Add new job"
 cardIcon = ExtResource("17_6m0wt")
-onExecute = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_cal8w")])
+cardName = "Expansion"
 revealed = false
+onExecute = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_cal8w")])
 
 [sub_resource type="Resource" id="Resource_5jtij"]
 script = ExtResource("17_mrygo")
@@ -147,10 +153,10 @@ employee = SubResource("Resource_v1ny0")
 
 [sub_resource type="Resource" id="Resource_dburm"]
 script = ExtResource("16_hnq1w")
-cardName = "Place this shmuck"
 cardText = "This shmuck"
-onExecute = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_qg2rp")])
+cardName = "Place this shmuck"
 revealed = false
+onExecute = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_qg2rp")])
 
 [sub_resource type="Resource" id="Resource_8c0pc"]
 script = ExtResource("17_mrygo")
@@ -163,16 +169,49 @@ script = ExtResource("19_5nh3j")
 
 [sub_resource type="Resource" id="Resource_ktrr6"]
 script = ExtResource("16_hnq1w")
-cardName = "New line"
 cardText = "Make new line of flow."
 cardIcon = ExtResource("22_hgn1x")
-onExecute = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_jr0jv")])
+cardName = "New line"
 revealed = false
+onExecute = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_jr0jv")])
 
 [sub_resource type="Resource" id="Resource_poo86"]
 script = ExtResource("17_mrygo")
 copies = 2
 card = SubResource("Resource_ktrr6")
+debug = false
+
+[sub_resource type="Resource" id="Resource_2ov4j"]
+script = ExtResource("7_b1mae")
+type = 2
+
+[sub_resource type="Resource" id="Resource_20e1u"]
+script = ExtResource("25_bfr6v")
+tokenRequirement = Array[ExtResource("7_b1mae")]([SubResource("Resource_2ov4j")])
+
+[sub_resource type="Resource" id="Resource_4skit"]
+script = ExtResource("26_r4wih")
+condition = SubResource("Resource_20e1u")
+
+[sub_resource type="Resource" id="Resource_41yhl"]
+script = ExtResource("28_v6a6q")
+cacheFieldName = "cacheA"
+changeAmount = -1
+
+[sub_resource type="Resource" id="Resource_v0x5r"]
+script = ExtResource("27_skm2w")
+taskIcon = ExtResource("9_xt47j")
+taskText = "Consume Job with One green"
+consequenceText = "Lose one CacheA"
+taskConsequence = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_41yhl")])
+cardName = "Test Task"
+revealed = false
+onExecute = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_4skit")])
+
+[sub_resource type="Resource" id="Resource_h0cd8"]
+script = ExtResource("17_mrygo")
+copies = 4
+card = SubResource("Resource_v0x5r")
 debug = false
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f5c0v"]
@@ -224,41 +263,19 @@ size = Vector2(647, 565)
 bg_color = Color(0.40625, 0.0471723, 0.095828, 1)
 corner_radius_bottom_left = 100
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5fq8s"]
+size = Vector2(623.5, 639.5)
+
 [node name="Main" type="Node2D" node_paths=PackedStringArray("deck", "hand")]
 script = ExtResource("1_nbim8")
-deck = NodePath("Deck")
-hand = NodePath("HandCards")
+deck = NodePath("ActionCards/Deck")
+hand = NodePath("ActionCards/HandCards")
 
-[node name="InputManager" type="Node" parent="." node_paths=PackedStringArray("hand", "marketContainer")]
+[node name="InputManager" type="Node" parent="." node_paths=PackedStringArray("actionHand", "taskHand", "marketContainer")]
 script = ExtResource("23_xx20n")
-hand = NodePath("../HandCards")
-marketContainer = NodePath("../CardMarket")
-
-[node name="MouseOverLord" type="Node2D" parent="."]
-position = Vector2(1188, 27)
-script = ExtResource("3_2pjbp")
-hideDelay = 0.15
-
-[node name="CompanyUILord" type="Node2D" parent="." node_paths=PackedStringArray("jobManager", "lineLayer", "jobLayer", "tokenLayer")]
-script = ExtResource("2_hwxbs")
-jobManager = NodePath("../JobLord")
-lineUIPacked = ExtResource("3_m468t")
-jobUIPacked = ExtResource("5_b0wxn")
-tokenUIPacked = ExtResource("6_h2iy3")
-lineLayer = NodePath("LineLayer")
-jobLayer = NodePath("JobLayer")
-tokenLayer = NodePath("TokenLayer")
-gridCellSizeVector = Vector2(165, 235)
-gridGapSizeVector = Vector2(25, 25)
-gridSizeVector = Vector2(1300, 1200)
-
-[node name="LineLayer" type="CanvasLayer" parent="CompanyUILord"]
-layer = 3
-
-[node name="JobLayer" type="CanvasLayer" parent="CompanyUILord"]
-
-[node name="TokenLayer" type="CanvasLayer" parent="CompanyUILord"]
-layer = 4
+actionHand = NodePath("../ActionCards/HandCards")
+taskHand = NodePath("../TaskManager/TaskHand")
+marketContainer = NodePath("../ActionCards/CardMarket")
 
 [node name="JobLord" type="Node" parent="." groups=["JobLord"]]
 script = ExtResource("5_1cdr4")
@@ -294,30 +311,77 @@ storage = NodePath("TokenStorage")
 script = ExtResource("11_if1yf")
 defaultLimit = 5
 
-[node name="Deck" type="Node" parent="."]
+[node name="ActionCards" type="Node" parent="."]
+
+[node name="Deck" type="Node" parent="ActionCards"]
 script = ExtResource("14_r0k10")
 deck = Array[ExtResource("17_mrygo")]([SubResource("Resource_5jtij"), SubResource("Resource_8c0pc"), SubResource("Resource_poo86")])
 
-[node name="CardMarket" type="Node" parent="." node_paths=PackedStringArray("feedContainer")]
+[node name="CardMarket" type="Node" parent="ActionCards" node_paths=PackedStringArray("feedContainer")]
 script = ExtResource("2_42g87")
 rows = 2
 columns = 2
 feedContainer = NodePath("../Deck")
 
-[node name="HandCards" type="Node" parent="." node_paths=PackedStringArray("disposeContainer")]
+[node name="HandCards" type="Node" parent="ActionCards" node_paths=PackedStringArray("disposeContainer")]
 script = ExtResource("20_vouf7")
 disposeContainer = NodePath("../Discard")
 
-[node name="Discard" type="Node" parent="." node_paths=PackedStringArray("disposeContainer")]
+[node name="Discard" type="Node" parent="ActionCards" node_paths=PackedStringArray("disposeContainer")]
 script = ExtResource("18_1vww6")
 disposeContainer = NodePath(".")
+
+[node name="PlayerData" type="Node" parent="." groups=["PlayerData"]]
+script = ExtResource("33_oq5l2")
+
+[node name="TaskManager" type="Node" parent="." node_paths=PackedStringArray("taskHand", "taskDeck")]
+script = ExtResource("36_w7x6f")
+taskHand = NodePath("TaskHand")
+taskDeck = NodePath("TaskDeck")
+
+[node name="TaskDeck" type="Node" parent="TaskManager"]
+script = ExtResource("14_r0k10")
+deck = Array[ExtResource("17_mrygo")]([SubResource("Resource_h0cd8")])
+
+[node name="TaskHand" type="Node" parent="TaskManager" node_paths=PackedStringArray("disposeContainer")]
+script = ExtResource("20_vouf7")
+disposeContainer = NodePath("../TaskDiscard")
+
+[node name="TaskDiscard" type="Node" parent="TaskManager"]
+script = ExtResource("18_1vww6")
+
+[node name="MouseOverLord" type="Node2D" parent="."]
+position = Vector2(1188, 27)
+script = ExtResource("3_2pjbp")
+hideDelay = 0.15
+
+[node name="CompanyUILord" type="Node2D" parent="." node_paths=PackedStringArray("jobManager", "lineLayer", "jobLayer", "tokenLayer")]
+script = ExtResource("2_hwxbs")
+jobManager = NodePath("../JobLord")
+lineUIPacked = ExtResource("3_m468t")
+jobUIPacked = ExtResource("5_b0wxn")
+tokenUIPacked = ExtResource("6_h2iy3")
+lineLayer = NodePath("LineLayer")
+jobLayer = NodePath("JobLayer")
+tokenLayer = NodePath("TokenLayer")
+gridCellSizeVector = Vector2(165, 235)
+gridGapSizeVector = Vector2(25, 25)
+gridSizeVector = Vector2(1300, 1200)
+
+[node name="LineLayer" type="CanvasLayer" parent="CompanyUILord"]
+layer = 3
+
+[node name="JobLayer" type="CanvasLayer" parent="CompanyUILord"]
+
+[node name="TokenLayer" type="CanvasLayer" parent="CompanyUILord"]
+layer = 4
 
 [node name="HandPC" type="Node2D" parent="." node_paths=PackedStringArray("area", "logicalContainer")]
 script = ExtResource("19_qe3sq")
 area = NodePath("CollisionShape2D")
 mindCenterDistance = 50.0
 maxGap = 25.0
-logicalContainer = NodePath("../HandCards")
+logicalContainer = NodePath("../ActionCards/HandCards")
 resetRotation = false
 packedCardForReference = ExtResource("29_2tfqd")
 
@@ -328,7 +392,7 @@ shape = SubResource("RectangleShape2D_f5c0v")
 [node name="SinkPC" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker", "logicalContainer")]
 script = ExtResource("23_i5ahq")
 positionMarker = NodePath("SinkPoint")
-logicalContainer = NodePath("../Discard")
+logicalContainer = NodePath("../ActionCards/Discard")
 packedCardForReference = ExtResource("29_2tfqd")
 
 [node name="SinkPoint" type="Marker2D" parent="SinkPC"]
@@ -337,7 +401,7 @@ position = Vector2(1519, 614)
 [node name="MarketSlideController" type="Node2D" parent="." node_paths=PackedStringArray("marketAnimator", "marketContainer")]
 script = ExtResource("32_beqie")
 marketAnimator = NodePath("AnimationPlayer")
-marketContainer = NodePath("../CardMarket")
+marketContainer = NodePath("../ActionCards/CardMarket")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MarketSlideController"]
 libraries = {
@@ -359,7 +423,7 @@ area = NodePath("MarketShape")
 mindCenterDistance = 50.0
 maxGap = 25.0
 multipleRows = true
-logicalContainer = NodePath("../../../CardMarket")
+logicalContainer = NodePath("../../../ActionCards/CardMarket")
 resetRotation = false
 packedCardForReference = ExtResource("29_2tfqd")
 
@@ -368,9 +432,6 @@ position = Vector2(408, 322)
 shape = SubResource("RectangleShape2D_nfpkx")
 
 [node name="MarketAnimationRoot" type="Node2D" parent="MarketSlideController"]
-
-[node name="PlayerData" type="Node" parent="." groups=["PlayerData"]]
-script = ExtResource("33_oq5l2")
 
 [node name="CacheUI" type="Node2D" parent="."]
 position = Vector2(1594, -27)
@@ -408,4 +469,23 @@ script = ExtResource("35_6tauc")
 playerData = NodePath("../../PlayerData")
 propName = "cacheB"
 
-[node name="TaskUILord" type="Node2D" parent="."]
+[node name="TaskSinkPC" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker", "logicalContainer")]
+script = ExtResource("23_i5ahq")
+positionMarker = NodePath("Marker2D")
+logicalContainer = NodePath("../TaskManager/TaskDiscard")
+packedCardForReference = ExtResource("37_62ix5")
+
+[node name="Marker2D" type="Marker2D" parent="TaskSinkPC"]
+
+[node name="TaskHandPC" type="Node2D" parent="." node_paths=PackedStringArray("area", "logicalContainer")]
+position = Vector2(1830, 70)
+script = ExtResource("19_qe3sq")
+area = NodePath("CollisionShape2D")
+multipleRows = true
+rowGap = 10.0
+logicalContainer = NodePath("../TaskManager/TaskHand")
+packedCardForReference = ExtResource("37_62ix5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TaskHandPC"]
+position = Vector2(-223.25, 354.25)
+shape = SubResource("RectangleShape2D_5fq8s")

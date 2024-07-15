@@ -1,12 +1,8 @@
-extends Control
-class_name CardUI
+extends ProtoCardUI
+class_name ActionCardUI
 
 @export var nameOfCard: Label
 @export var cardText: Label
-@export var card: Card:
-	set(v):
-		card = v
-		updateCardUI()
 @export var employeePos: Node2D
 @export var cardPic: TextureRect
 
@@ -26,5 +22,5 @@ func updateCardUI():
 
 func _on_card_frame_gui_input(event):
 	if event is InputEventMouseButton and event.is_released():
-		Events.cardClicked.emit(self, event.button_index)
+		Events.actionCardClicked.emit(self, event.button_index)
 		

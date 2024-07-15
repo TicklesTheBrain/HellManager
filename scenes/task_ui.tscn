@@ -23,25 +23,34 @@ blend_mode = 3
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mkg1x"]
 blend_mode = 3
 
-[node name="TaskUI" type="Control"]
+[node name="TaskUI" type="Control" node_paths=PackedStringArray("nameOfTask", "taskText", "taskConsequenceText", "taskIcon")]
 layout_mode = 3
 anchor_right = 0.126
-anchor_bottom = 0.246
+anchor_bottom = 0.276
 offset_right = 0.0800018
-offset_bottom = 0.320007
+offset_bottom = -3.07999
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_j1nns")
+nameOfTask = NodePath("Background/TaskName")
+taskText = NodePath("Background/TaskGoalText")
+taskConsequenceText = NodePath("Background/TaskConsequenceText")
+taskIcon = NodePath("Background/TaskIcon")
 
 [node name="Background" type="Panel" parent="."]
 clip_children = 2
+custom_minimum_size = Vector2(250, 298)
 layout_mode = 1
 anchors_preset = -1
-anchor_right = -0.0206612
-anchor_bottom = -0.259398
-offset_right = 250.0
-offset_bottom = 335.0
-mouse_filter = 2
+anchor_left = -0.0206612
+anchor_top = 0.0101695
+anchor_right = 1.0
+anchor_bottom = 1.02034
+offset_left = 5.00001
+offset_top = -3.0
+offset_right = 8.00002
+offset_bottom = -3.0
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_ertft")
 metadata/_edit_use_anchors_ = true
 
@@ -51,11 +60,12 @@ position = Vector2(128.75, 165)
 scale = Vector2(0.605, 0.717)
 texture = ExtResource("1_nopyd")
 
-[node name="TaskName" type="Label" parent="."]
-offset_left = 5.0
-offset_top = 6.0
-offset_right = 245.0
-offset_bottom = 46.0
+[node name="TaskName" type="Label" parent="Background"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 3.0
+offset_right = 250.0
+offset_bottom = 43.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_lewwq")
 theme_override_font_sizes/font_size = 24
@@ -65,17 +75,17 @@ vertical_alignment = 1
 text_overrun_behavior = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="TaskGoalText" type="Label" parent="."]
+[node name="TaskGoalText" type="Label" parent="Background"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.00413223
 anchor_top = -0.706767
 anchor_right = 0.00413223
 anchor_bottom = -0.706767
-offset_left = 9.0
-offset_top = 210.0
-offset_right = 241.0
-offset_bottom = 295.0
+offset_left = 13.967
+offset_top = 229.617
+offset_right = 245.967
+offset_bottom = 314.617
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_lewwq")
@@ -85,35 +95,35 @@ vertical_alignment = 1
 autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="TaskIcon" type="TextureRect" parent="."]
+[node name="TaskIcon" type="TextureRect" parent="Background"]
 material = SubResource("CanvasItemMaterial_mkg1x")
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.144628
-anchor_top = 0.172932
-anchor_right = -0.136364
-anchor_bottom = -0.018797
-offset_left = 3.0
-offset_top = 40.0
-offset_right = 244.0
-offset_bottom = 215.0
+anchor_left = -0.0826446
+anchor_top = 0.0902256
+anchor_right = -0.0826446
+anchor_bottom = 0.0902256
+offset_left = 8.66117
+offset_top = 34.1128
+offset_right = 249.661
+offset_bottom = 209.113
 mouse_filter = 2
 texture = ExtResource("3_tqiin")
 expand_mode = 1
 stretch_mode = 5
 metadata/_edit_use_anchors_ = true
 
-[node name="TaskConsequenceText" type="Label" parent="."]
+[node name="TaskConsequenceText" type="Label" parent="Background"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.0252927
-anchor_top = -0.803589
-anchor_right = -0.0331052
-anchor_bottom = -0.803589
-offset_left = 18.1208
-offset_top = 405.755
-offset_right = 250.121
-offset_bottom = 490.755
+anchor_left = -0.0624827
+anchor_top = -0.713365
+anchor_right = -0.0624827
+anchor_bottom = -0.713365
+offset_left = 23.6207
+offset_top = 425.583
+offset_right = 255.621
+offset_bottom = 510.583
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_lewwq")

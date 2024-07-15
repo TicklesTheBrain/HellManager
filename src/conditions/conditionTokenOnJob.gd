@@ -1,4 +1,5 @@
 extends Condition
+class_name ConditionTokenOnJob
 
 @export var tokenRequirement: Array[Token]
 
