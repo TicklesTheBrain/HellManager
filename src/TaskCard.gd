@@ -7,9 +7,9 @@ class_name TaskCard
 @export var taskConsequence: Array[Action]
 #@export var onExecute: Array[Action] #Task Complete Actions, inherited
 
-func startConsequence():
+func executeConsequence():
 	Events.taskConsequenceStart.emit(self)
-	onExecute.all(func(a): return a.perform())
+	taskConsequence.all(func(a): return a.perform())
 	Events.taskConsequenceEnd.emit(self)
 
 func specificDuplicate():

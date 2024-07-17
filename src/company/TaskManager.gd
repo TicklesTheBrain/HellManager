@@ -8,8 +8,11 @@ var newTaskCounter: int = 0
 
 func _ready():
     addNewTask()
-    pass
-
+    Events.phaseStarted.connect(func(p):
+        if p == Globals.phases.CONSEQUENCE:
+            applyConsequence()
+            Events.phaseEnded.emit(Globals.phases.CONSEQUENCE)
+        )
 
 func addNewTask():
     var newTask = taskDeck.drawCard()
@@ -21,6 +24,10 @@ func tickCounter():
     if newTaskCounter >= addTaskEveryXTurns:
         addNewTask()
         newTaskCounter = 0
+
+func applyConsequence():
+    print('applying consequences')
+    taskHand.getAll().all(func(t): t.executeConsequence())
 
 
     

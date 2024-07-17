@@ -7,9 +7,9 @@ class_name TaskCardUI
 @export var taskIcon: TextureRect
 
 func _ready():
-	print('task card size ', $Background.size)
+	# print('task card size ', $Background.size)
 	await get_tree().create_timer(0.1).timeout
-	print('task card size ', $Background.size)
+	# print('task card size ', $Background.size)
 
 func updateCardUI():
 	if card == null:

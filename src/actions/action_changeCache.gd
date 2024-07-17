@@ -7,3 +7,4 @@ class_name ActionChangeCache
 func performSpecific():
     var ctxt = Globals.getCtxt()
     ctxt.playerData[cacheFieldName] += changeAmount
+    return true

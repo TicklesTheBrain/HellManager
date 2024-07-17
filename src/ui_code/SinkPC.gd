@@ -10,6 +10,6 @@ func scuttleCardsSpecific():
 		newTween.tween_callback(CardUILord.destroyCardUI.bind(ui.card))
 		newTween.tween_callback(removeUIWithoutScuttle.bind(ui))		
 
-func removeUIWithoutScuttle(ui: ActionCardUI):
+func removeUIWithoutScuttle(ui: ProtoCardUI):
 	cardUIs.erase(ui)
 	

@@ -1,5 +1,5 @@
 extends Line2D
-class_name flowLineUI
+class_name FlowLineUI
 
 @export var from: Job
 @export var to: Job

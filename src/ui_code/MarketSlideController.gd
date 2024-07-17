@@ -18,7 +18,7 @@ func _unhandled_input(event):
 			openMarket()
 
 func openMarket():
-	print('market open')
+	# print('market open')
 	marketAnimator.play("open")
 	slideInProgress = true
 	marketContainer.inaccessible = true
@@ -28,7 +28,7 @@ func openMarket():
 	marketOpen = true
 
 func closeMarket():
-	print(' market close')
+	# print(' market close')
 	marketAnimator.play("close")
 	slideInProgress = true
 	marketContainer.inaccessible = true

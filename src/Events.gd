@@ -3,8 +3,8 @@ extends Node
 #Logic signals
 signal phaseEnded(phase)
 signal phaseStarted(phase)
-signal turnStarted(turnNo: int)
-signal turnEnded(turnNo: int)
+signal dayStarted(dayNo: int)
+signal dayEnded(dayNo: int)
 signal jobStarted(job: Job)
 signal jobEnded(job: Job)
 signal jobDestroyed(job: Job)

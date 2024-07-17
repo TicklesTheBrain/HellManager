@@ -73,7 +73,7 @@ func addNewLineUI(from: Job, to: Job):
 func removeLineUI(from: Job, to: Job):
 	getLineUI(from, to).free()
 
-func getLineUI(from: Job, to: Job) -> flowLineUI:
+func getLineUI(from: Job, to: Job) -> FlowLineUI:
 	for line in lineLayer.get_children():
 		if line.from == from and line.to == to:
 			return line

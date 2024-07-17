@@ -13,13 +13,13 @@ func makeNewCardUI(card: ProtoCard) -> ProtoCardUI:
 
 	var newUI
 	if card is ActionCard:
-		print('action card created')
+		# print('action card created')
 		newUI = actionCardUIPacked.instantiate()
 	elif card is TaskCard:
-		print('task card created')
+		# print('task card created')
 		newUI = taskCardUIPacked.instantiate()
 	
-	print('it is ', newUI)
+	# print('it is ', newUI)
 	newUI.card = card
 	cardUIs.push_back(newUI)
 	return newUI

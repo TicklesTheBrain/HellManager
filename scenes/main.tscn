@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=83 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://src/Main.gd" id="1_nbim8"]
 [ext_resource type="Script" path="res://src/CardMarket.gd" id="2_42g87"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bdewx43gbc46u" path="res://scenes/flowLine.tscn" id="3_m468t"]
 [ext_resource type="Script" path="res://src/company/JobManager.gd" id="5_1cdr4"]
 [ext_resource type="PackedScene" uid="uid://dccekuf7o544k" path="res://scenes/jobUISmall.tscn" id="5_b0wxn"]
+[ext_resource type="Script" path="res://src/actions/Action.gd" id="5_nsq4b"]
 [ext_resource type="Script" path="res://src/company/Job.gd" id="6_cnhkk"]
 [ext_resource type="PackedScene" uid="uid://cgq6pba1xc53a" path="res://scenes/tokenUI.tscn" id="6_h2iy3"]
 [ext_resource type="Script" path="res://src/company/Token.gd" id="7_b1mae"]
@@ -54,8 +55,8 @@ producedTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_lfh2a")])
 script = ExtResource("10_wmw7d")
 prestige = 33
 capacity = 44
-dependentActions = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_l3khh")])
-independentActions = Array[Resource("res://src/actions/Action.gd")]([])
+dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_l3khh")])
+independentActions = Array[ExtResource("5_nsq4b")]([])
 employeeName = "Gamintojas"
 employeePic = ExtResource("9_xt47j")
 staticText = "Produce 1 Green."
@@ -68,8 +69,8 @@ type = 2
 script = ExtResource("10_wmw7d")
 prestige = 33
 capacity = 44
-dependentActions = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_l3khh")])
-independentActions = Array[Resource("res://src/actions/Action.gd")]([])
+dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_l3khh")])
+independentActions = Array[ExtResource("5_nsq4b")]([])
 employeeName = "Gamintojas"
 employeePic = ExtResource("9_xt47j")
 staticText = "Produce 1 Green."
@@ -102,8 +103,8 @@ producedTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_wk6m5")])
 script = ExtResource("10_wmw7d")
 prestige = 2
 capacity = 4
-dependentActions = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_iwbiw"), SubResource("Resource_emjku")])
-independentActions = Array[Resource("res://src/actions/Action.gd")]([])
+dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_iwbiw"), SubResource("Resource_emjku")])
+independentActions = Array[ExtResource("5_nsq4b")]([])
 employeeName = "Valgytojas"
 employeePic = ExtResource("13_fgyyd")
 staticText = "Consume 2 Green, produce 1 Blue"
@@ -117,7 +118,7 @@ cardText = "Add new job"
 cardIcon = ExtResource("17_6m0wt")
 cardName = "Expansion"
 revealed = false
-onExecute = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_cal8w")])
+onExecute = Array[ExtResource("5_nsq4b")]([SubResource("Resource_cal8w")])
 
 [sub_resource type="Resource" id="Resource_5jtij"]
 script = ExtResource("17_mrygo")
@@ -145,8 +146,8 @@ producedTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_1hrvb"), S
 script = ExtResource("10_wmw7d")
 prestige = 7
 capacity = 9
-dependentActions = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_2ac0j")])
-independentActions = Array[Resource("res://src/actions/Action.gd")]([])
+dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_2ac0j")])
+independentActions = Array[ExtResource("5_nsq4b")]([])
 employeeName = "Dude"
 employeePic = ExtResource("9_xt47j")
 staticText = "Produce one of each"
@@ -160,7 +161,7 @@ script = ExtResource("16_hnq1w")
 cardText = "This shmuck"
 cardName = "Place this shmuck"
 revealed = false
-onExecute = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_qg2rp")])
+onExecute = Array[ExtResource("5_nsq4b")]([SubResource("Resource_qg2rp")])
 
 [sub_resource type="Resource" id="Resource_8c0pc"]
 script = ExtResource("17_mrygo")
@@ -177,7 +178,7 @@ cardText = "Make new line of flow."
 cardIcon = ExtResource("22_hgn1x")
 cardName = "New line"
 revealed = false
-onExecute = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_jr0jv")])
+onExecute = Array[ExtResource("5_nsq4b")]([SubResource("Resource_jr0jv")])
 
 [sub_resource type="Resource" id="Resource_poo86"]
 script = ExtResource("17_mrygo")
@@ -207,10 +208,10 @@ script = ExtResource("27_skm2w")
 taskIcon = ExtResource("9_xt47j")
 taskText = "Consume Job with One green"
 consequenceText = "Lose one CacheA"
-taskConsequence = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_41yhl")])
+taskConsequence = Array[ExtResource("5_nsq4b")]([SubResource("Resource_41yhl")])
 cardName = "Test Task"
 revealed = false
-onExecute = Array[Resource("res://src/actions/Action.gd")]([SubResource("Resource_4skit")])
+onExecute = Array[ExtResource("5_nsq4b")]([SubResource("Resource_4skit")])
 
 [sub_resource type="Resource" id="Resource_h0cd8"]
 script = ExtResource("17_mrygo")
@@ -359,6 +360,11 @@ position = Vector2(1188, 27)
 script = ExtResource("3_2pjbp")
 hideDelay = 0.15
 
+[node name="MouseOverLord2" type="Node2D" parent="."]
+position = Vector2(1188, 27)
+script = ExtResource("3_2pjbp")
+hideDelay = 0.15
+
 [node name="CompanyUILord" type="Node2D" parent="." node_paths=PackedStringArray("jobManager", "lineLayer", "jobLayer", "tokenLayer")]
 script = ExtResource("2_hwxbs")
 jobManager = NodePath("../JobLord")
@@ -371,6 +377,9 @@ tokenLayer = NodePath("TokenLayer")
 gridCellSizeVector = Vector2(165, 235)
 gridGapSizeVector = Vector2(25, 25)
 gridSizeVector = Vector2(1300, 1200)
+tokenAppearTime = null
+tokenMoveTime = null
+tokenFadeTime = null
 
 [node name="LineLayer" type="CanvasLayer" parent="CompanyUILord"]
 layer = 3
@@ -393,13 +402,13 @@ packedCardForReference = ExtResource("29_2tfqd")
 position = Vector2(965.75, 903)
 shape = SubResource("RectangleShape2D_f5c0v")
 
-[node name="SinkPC" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker", "logicalContainer")]
+[node name="ActionSinkPC" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker", "logicalContainer")]
 script = ExtResource("23_i5ahq")
 positionMarker = NodePath("SinkPoint")
 logicalContainer = NodePath("../ActionCards/Discard")
 packedCardForReference = ExtResource("29_2tfqd")
 
-[node name="SinkPoint" type="Marker2D" parent="SinkPC"]
+[node name="SinkPoint" type="Marker2D" parent="ActionSinkPC"]
 position = Vector2(1519, 614)
 
 [node name="MarketSlideController" type="Node2D" parent="." node_paths=PackedStringArray("marketAnimator", "marketContainer")]
@@ -480,9 +489,9 @@ logicalContainer = NodePath("../TaskManager/TaskDiscard")
 packedCardForReference = ExtResource("37_62ix5")
 
 [node name="Marker2D" type="Marker2D" parent="TaskSinkPC"]
+position = Vector2(2169, 428)
 
 [node name="TaskHandPC" type="Node2D" parent="." node_paths=PackedStringArray("area", "logicalContainer")]
-position = Vector2(1830, 70)
 script = ExtResource("19_qe3sq")
 area = NodePath("CollisionShape2D")
 multipleRows = true
@@ -491,5 +500,5 @@ logicalContainer = NodePath("../TaskManager/TaskHand")
 packedCardForReference = ExtResource("37_62ix5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TaskHandPC"]
-position = Vector2(-223.25, 354.25)
+position = Vector2(1580, 416)
 shape = SubResource("RectangleShape2D_5fq8s")

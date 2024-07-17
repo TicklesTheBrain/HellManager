@@ -28,7 +28,7 @@ func addCard(card: ProtoCard):
 	
 	var cardUI = CardUILord.getCardUI(card)
 	if cardUI == null:
-		print('new card UI requested')
+		#print('new card UI requested')
 		cardUI = CardUILord.makeNewCardUI(card)
 	addCardUI(cardUI)
 	
@@ -46,7 +46,7 @@ func addCardUI(newCard: ProtoCardUI):
 	if newCard.get_parent() != null:
 		newCard.get_parent().remove_child(newCard)
 	add_child(newCard)
-	print('card UI added')
+	# print('card UI added')
 
 	#Add UI to list and make them sort themselves
 	cardUIs.push_back(newCard)
