@@ -20,17 +20,23 @@ func _ready():
 	cardHeight = ref.size.y
 	cardWidth = ref.size.x
 
+	#print('reference card size is ', cardHeight, ' ', cardWidth, ' for ', ref)
+
 	if logicalContainer and not setupDone:
 		setupNewLogicalContainer()
 	#InputLord.cardDragReleased.connect(_onCardDragReleased)
 
+
 func addCard(card: ProtoCard):
+	#print('addCard called ', card)
 	
 	var cardUI = CardUILord.getCardUI(card)
 	if cardUI == null:
 		#print('new card UI requested')
 		cardUI = CardUILord.makeNewCardUI(card)
-	addCardUI(cardUI)
+	print('scheduling addCard for ', self)
+	UIScheduler.addToSchedule(addCardUISpecific.bind(cardUI))
+	UIScheduler.addToSchedule(addCardUI.bind(cardUI))
 	
 func removeCard(card: ProtoCard):	
 	
@@ -38,10 +44,14 @@ func removeCard(card: ProtoCard):
 		return
 	
 	var cardUI = CardUILord.getCardUI(card)
-	removeCardUI(cardUI) #TODO: this is kinda ugly
+	print('scheduling removeCard for ', self)
+	UIScheduler.addToSchedule(removeCardUISpecific.bind(cardUI))
+	UIScheduler.addToSchedule(removeCardUI.bind(cardUI))
 	
 func addCardUI(newCard: ProtoCardUI):
 	
+	#print('add card UI called', newCard)
+
 	#Set self to parent
 	if newCard.get_parent() != null:
 		newCard.get_parent().remove_child(newCard)
@@ -50,21 +60,25 @@ func addCardUI(newCard: ProtoCardUI):
 
 	#Add UI to list and make them sort themselves
 	cardUIs.push_back(newCard)
-	updateCardZIndex()
-	scuttleCards()
+	updateCardZIndex() #TODO: add back when it makes sense with UIScheduler
+	# print('scheduling a scuttle for ', self)
+	await scuttleCards()
 
 func removeCardUI(cardToRemove: ProtoCardUI):
 	if !cardUIs.has(cardToRemove):
 		return
 	
 	cardUIs.erase(cardToRemove)
-	scuttleCards()
+	print('scheduling a scuttle for ', self)
+	await scuttleCards()
 
 func setupNewLogicalContainer(newContainer = null):
 
 	if newContainer:
 		logicalContainer = newContainer
 	
+	setupContainerSpecific()
+
 	#for cases when controller is initiated later than the logical container
 	for card in logicalContainer.getAll():
 		addCard(card)
@@ -72,14 +86,13 @@ func setupNewLogicalContainer(newContainer = null):
 	Events.cardAddedToContainer.connect(func(c, co): if co == logicalContainer: addCard(c))
 	Events.cardRemovedFromContainer.connect(func(c, co): if co == logicalContainer: removeCard(c))
 	Events.containerShuffled.connect(func(co): if co == logicalContainer: showShuffle())
-	setupContainerSpecific()
-
+	#logicalContainer.updated.connect(scuttleCards)
 	setupDone = true	
 
 func scuttleCards():
 	resetCardRotation()
 	#stopPreviousTween()
-	scuttleCardsSpecific()
+	await scuttleCardsSpecific()
 
 func scuttleCardsSpecific():
 	print("generic scuttle cardUIs for position controller not overrriden")
@@ -87,6 +100,14 @@ func scuttleCardsSpecific():
 
 func setupContainerSpecific():
 	print("setup container specific not overriden, might be alright")
+
+func addCardUISpecific(_cardUI: ProtoCardUI):
+	#Just for overriding
+	pass
+
+func removeCardUISpecific(_cardUI: ProtoCardUI):
+	#Just for overridingS
+	pass
 
 func resetCardRotation():
 	if resetRotation:
@@ -111,8 +132,3 @@ func updateCardZIndex():
 	# 		cardDisplay.setRegularZIndex(-cardPosition)
 	# 	else:
 	# 		cardDisplay.setRegularZIndex(cardPosition)
-
-
-
-
-

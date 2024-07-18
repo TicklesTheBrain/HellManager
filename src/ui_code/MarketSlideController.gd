@@ -4,15 +4,12 @@ class_name MarketUIController
 @export var marketAnimator: AnimationPlayer
 @export var marketContainer: CardMarket
 
-var marketOpen: bool = false
-var slideInProgress: bool = false
-
 func _unhandled_input(event):
 
 	if event.is_action_pressed("market_open"):
-		if slideInProgress:
+		if Globals.slideInProgress:
 			return
-		if marketOpen:
+		if Globals.marketOpen:
 			closeMarket()
 		else:
 			openMarket()
@@ -20,20 +17,20 @@ func _unhandled_input(event):
 func openMarket():
 	# print('market open')
 	marketAnimator.play("open")
-	slideInProgress = true
+	Globals.slideInProgress = true
 	marketContainer.inaccessible = true
 	await marketAnimator.animation_finished
-	slideInProgress = false
+	Globals.slideInProgress = false
 	marketContainer.inaccessible = false
-	marketOpen = true
+	Globals.marketOpen = true
 
 func closeMarket():
 	# print(' market close')
 	marketAnimator.play("close")
-	slideInProgress = true
+	Globals.slideInProgress = true
 	marketContainer.inaccessible = true
 	await marketAnimator.animation_finished
-	slideInProgress = false
+	Globals.slideInProgress = false
 	marketContainer.inaccessible = false
-	marketOpen = false
+	Globals.marketOpen = false
 

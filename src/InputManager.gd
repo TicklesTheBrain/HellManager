@@ -1,7 +1,6 @@
 extends Node
 class_name InputManager
 
-@export var phase: int = 1
 @export var actionHand: Hand
 @export var taskHand: Hand
 @export var mouseOverAllowed: bool = true
@@ -19,8 +18,8 @@ func _ready():
 	Events.employeeUIMouseOverStart.connect(employeeMouseOverStart)
 	Events.employeeUIMouseOverEnd.connect(employeeMouseOverEnd)
 	Events.taskCardClicked.connect(taskClicked)
-
 	Events.cardUseStarted.connect(func(_c): inputLock = true)
+	#TODO: this input locking thing is fucked, need to do it a different way
 	Events.phaseStarted.connect(func(p):
 		if p == Globals.phases.WORK:
 			inputLock = true
@@ -41,8 +40,15 @@ func employeeMouseOverEnd(empUI: EmployeeUI):
 	
 func cardClicked(cardUI: ActionCardUI, button: MouseButton):
 
+	
+
+	#print('card clicked on input manger, input lock is ', inputLock, ' phase is ', phase)
+
 	if inputLock:
 		return
+
+	#var ctxt = Globals.get_ctxt()
+
 
 	if button == MOUSE_BUTTON_LEFT and marketContainer.getCardPosition(cardUI.card) != Vector2(-1,-1):
 
@@ -56,12 +62,15 @@ func cardClicked(cardUI: ActionCardUI, button: MouseButton):
 
 	#print('clicked on card ', cardUI, " with button ", button)
 
-	if phase == Globals.phases.MANAGE and button == MOUSE_BUTTON_LEFT:
+	if button == MOUSE_BUTTON_LEFT:
 		actionHand.useCard(cardUI.card, receiveActiveChoice)
 
 func jobClicked(jobUI: JobUI, _button):
 
 	#print('clicked on job ', jobUI, " with button ", button)
+
+	if Globals.marketOpen or Globals.slideInProgress:
+		return
 
 	if not activeChoice.is_null() and not inputLock:
 		#print('gonna try validate choice')

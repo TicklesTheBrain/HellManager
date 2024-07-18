@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dm73o0agf3yay"]
+[gd_scene load_steps=9 format=3 uid="uid://dm73o0agf3yay"]
 
 [ext_resource type="Script" path="res://src/ui_code/CardUI.gd" id="1_7wjcq"]
 [ext_resource type="FontFile" uid="uid://u2357g28y3hy" path="res://assets/fonts/libel-suit-rg.otf" id="2_k1y3r"]
@@ -19,11 +19,15 @@ thickness = 2
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k201i"]
 blend_mode = 3
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_463b0"]
+size = Vector2(157, 253)
+
 [node name="CardUI" type="Control" node_paths=PackedStringArray("nameOfCard", "cardText", "employeePos", "cardPic")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 163.0
 offset_bottom = 257.0
+mouse_filter = 2
 script = ExtResource("1_7wjcq")
 nameOfCard = NodePath("CardFrame/NameOfCard")
 cardText = NodePath("CardFrame/TextOfCard")
@@ -40,6 +44,7 @@ offset_right = 0.0749969
 offset_bottom = 0.0279846
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xyd8l")
 
 [node name="NameOfCard" type="Label" parent="CardFrame"]
@@ -93,4 +98,10 @@ texture = ExtResource("3_w4waq")
 [node name="EmployeePosition" type="Node2D" parent="."]
 position = Vector2(6, 32)
 
-[connection signal="gui_input" from="CardFrame" to="." method="_on_card_frame_gui_input"]
+[node name="CardClickDetection" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CardClickDetection"]
+position = Vector2(79.5, 128.5)
+shape = SubResource("RectangleShape2D_463b0")
+
+[connection signal="input_event" from="CardClickDetection" to="." method="_on_area_2d_input_event"]

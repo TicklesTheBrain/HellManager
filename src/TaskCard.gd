@@ -6,11 +6,23 @@ class_name TaskCard
 @export var consequenceText: String
 @export var taskConsequence: Array[Action]
 #@export var onExecute: Array[Action] #Task Complete Actions, inherited
+@export var consequenceFrequency: int = 0 #Zero means do it every consequence
+var frequencyTimer: int:
+	get:
+		if first:
+			first = false
+			return consequenceFrequency
+		return frequencyTimer 
 
-func executeConsequence():
-	Events.taskConsequenceStart.emit(self)
-	taskConsequence.all(func(a): return a.perform())
-	Events.taskConsequenceEnd.emit(self)
+var first: bool = true
+
+func tickConsequence():
+	#print('frequencyTimer ', frequencyTimer)
+	if frequencyTimer <= 0:
+		executeConsequence()		
+		frequencyTimer = consequenceFrequency
+	else:
+		frequencyTimer -= 1
 
 func specificDuplicate():
 	var dupe = duplicate(true)
@@ -20,3 +32,8 @@ func specificDuplicate():
 
 func postExecuteSpecific():
 	Events.taskCompleted.emit(self)
+
+func executeConsequence():
+	Events.taskConsequenceStart.emit(self)
+	taskConsequence.all(func(a): return a.perform())
+	Events.taskConsequenceEnd.emit(self)

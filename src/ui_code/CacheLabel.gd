@@ -6,7 +6,10 @@ class_name CacheLabel
 
 func _ready():
     text = str(playerData[propName])
-    playerData.cacheChange.connect(updateLabel)
+    playerData.cacheChange.connect(scheduleUpdateLabel)
+
+func scheduleUpdateLabel(uName: String, value: int):
+    UIScheduler.addToSchedule(updateLabel.bind(uName, value))
 
 func updateLabel(uName: String, value: int):
     if uName != propName:

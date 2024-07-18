@@ -10,6 +10,7 @@ class_name CardContainer
 @export var addToTopWhenFeeding: bool = true
 
 signal shuffled()
+signal updated()
 
 func removeCard(cardToRemove: ProtoCard) -> bool:
 	if cards.has(cardToRemove):

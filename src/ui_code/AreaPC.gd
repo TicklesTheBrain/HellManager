@@ -2,12 +2,13 @@ extends PositionController
 class_name AreaPC
 
 @export var area: CollisionShape2D
-@export var mindCenterDistance: float
+@export var midCenterDistance: float
 @export var maxGap: float
 @export var multipleRows: bool = false
 @export var rowGap: float = 25
 
 func scuttleCardsSpecific():
+	print('scuttle specific started for ', self)
 	if cardUIs.size() < 1:
 		return
 
@@ -22,6 +23,7 @@ func scuttleCardsSpecific():
 		var rowCenter = firstRowCenter+r*Vector2(0,cardHeight+rowGap)
 		scuttleOneRow(row, rowCenter, areaWidth)
 		r+=1
+	await get_tree().create_timer(moveTime).timeout
 
 func getCardsInRows():
 	
@@ -43,8 +45,7 @@ func getCardsInRows():
 				c+=1
 			cardUIsInRows.push_back(newRow)
 
-	return cardUIsInRows
-		
+	return cardUIsInRows		
 
 func scuttleOneRow(rowCards, centerPos: Vector2, areaWidth: float):
 	#print('scuttle called', rowCards, centerPos, areaWidth)
@@ -52,25 +53,27 @@ func scuttleOneRow(rowCards, centerPos: Vector2, areaWidth: float):
 	if rowCards.size() == 0:
 		return
 
-	var distanceBetweenCards = mindCenterDistance
+	var distanceBetweenCards = midCenterDistance
 	var startingPoint: Vector2
 
 	if rowCards.size() == 1:
 		distanceBetweenCards = 0
 	elif (rowCards.size()-1)*maxGap+rowCards.size()*cardWidth < areaWidth:
 		distanceBetweenCards = maxGap+cardWidth
-	elif cardWidth+(rowCards.size()-1)*mindCenterDistance >= areaWidth:
-		distanceBetweenCards = mindCenterDistance
-		startingPoint = centerPos - Vector2(areaWidth/2,0) + Vector2(cardWidth/2,0)
+	elif cardWidth+(rowCards.size()-1)*midCenterDistance >= areaWidth:
+		distanceBetweenCards = midCenterDistance
+		startingPoint = centerPos - Vector2(areaWidth/2,0) #+ Vector2(cardWidth/2,0)
 	else:
 		distanceBetweenCards = (areaWidth - cardWidth) / (rowCards.size()-1)
 	
 	var totalCardWidth = cardWidth + distanceBetweenCards*(rowCards.size()-1)
 	if not startingPoint:
-		startingPoint = centerPos - Vector2(totalCardWidth/2, 0) + Vector2(cardWidth/2,0)
+		startingPoint = centerPos - Vector2(totalCardWidth/2, 0) #+ Vector2(cardWidth/2,0)
 
 	var i = 0
 	
+	#print('starting point ', startingPoint, ' distance between ', distanceBetweenCards)
+
 	for card in rowCards:
 		var cardPosition = startingPoint + Vector2(i*distanceBetweenCards,0)
 		i +=1
@@ -82,5 +85,3 @@ func scuttleOneRow(rowCards, centerPos: Vector2, areaWidth: float):
 		newTween.tween_property(card,"position", cardPosition, moveTime)
 		#print(card, ' tween done to position ', cardPosition)
 	
-
-

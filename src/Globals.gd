@@ -1,6 +1,9 @@
 extends Node
 
-@export var phase: phases
+@export var phase: phases:
+	set(v):
+		phase = v
+		print('new phase ', v)
 @export var day: int = 0
 @export var actingJob: Job
 @export var actingEmployee: Employee
@@ -10,10 +13,13 @@ var stepCounter: int = 0
 
 enum phases {
 	MORNING,
-	WORK,
 	MANAGE,
+	WORK,	
 	CONSEQUENCE
 }
+
+@export var marketOpen: bool = false
+@export var slideInProgress: bool = false
 
 func _ready():	
 	
@@ -46,53 +52,12 @@ func _ready():
 		actionStack.push_back(a)
 		stepCounter +=1)
 	Events.actionEnded.connect(func(a): actionStack.erase(a))
-
-	#Manging game phase
-	Events.phaseEnded.connect(func(p):
-		if p == phases.WORK:
-			Events.phaseStarted.emit(phases.CONSEQUENCE)
-	)
 	
-	Events.phaseEnded.connect(func(p):
-		if p == phases.CONSEQUENCE:
-			
-			Events.phaseStarted.emit(phases.MORNING)
-			#Start phase will be where all the market setup and start of day conditions happen, will SETup later
-			Events.phaseEnded.emit(phases.MORNING)
-	)
-
-	Events.phaseEnded.connect(func(p):
-		if p == phases.MORNING:
-			Events.phaseStarted.emit(phases.MANAGE)
-	)
-
-	Events.cardUseEnded.connect(func(_c):
-		Events.phaseEnded.emit(phases.WORK)
-		getJobManager().makeEveryoneWork()
-	)
-
-	Events.cardTaken.connect(func(_c):
-		Events.phaseEnded.emit(phases.WORK)
-		getJobManager().makeEveryoneWork()
-	)
-
 	#Manage days
-	Events.phaseEnded.connect(func(p):
-		if p == phases.CONSEQUENCE:
-			Events.dayEnded.emit(day)
-			Events.dayStarted.emit(day+1)
-	)
-
 	Events.dayStarted.connect(func(d):
 		day = d
 	)
 
-	#Start first day
-	Events.dayStarted.emit(day+1)
-
-func _unhandled_input(event):
-	if event.is_action_pressed("work"):
-		getJobManager().makeEveryoneWork()		
 
 func getCtxt() -> GameContext:
 	var ctxt = GameContext.new()

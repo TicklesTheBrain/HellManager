@@ -21,6 +21,7 @@ func processScheduler():
     if inProgress.size() == 0:
         #print('processing on empty stack, schedule subject ', schedule[0].subject , ' ctxt:')
         #schedule[0].ctxt.printSelf()
+        #schedule.sort_custom(func(a,b): return a.ctxt.step < b.ctxt.step)
         processItem(schedule.pop_front())
         return
     
@@ -43,6 +44,8 @@ func addToSchedule(change: Callable, animationSubject = null, ctxt: GameContext 
 
     if ctxt == null:
         ctxt = Globals.getCtxt()
+
+    #print('added to schedule step' , ctxt.step)
     
     var newItem = ScheduleItem.new()
     newItem.change = change

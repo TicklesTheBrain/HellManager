@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=84 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://src/Main.gd" id="1_nbim8"]
 [ext_resource type="Script" path="res://src/CardMarket.gd" id="2_42g87"]
@@ -42,6 +42,7 @@
 [ext_resource type="Script" path="res://src/ui_code/CacheLabel.gd" id="35_6tauc"]
 [ext_resource type="Script" path="res://src/company/TaskManager.gd" id="36_w7x6f"]
 [ext_resource type="PackedScene" uid="uid://bav2v2vhrfn3o" path="res://scenes/task_ui.tscn" id="37_62ix5"]
+[ext_resource type="Script" path="res://src/ui_code/phase_show_ui.gd" id="43_dqmsq"]
 
 [sub_resource type="Resource" id="Resource_lfh2a"]
 script = ExtResource("7_b1mae")
@@ -165,7 +166,7 @@ onExecute = Array[ExtResource("5_nsq4b")]([SubResource("Resource_qg2rp")])
 
 [sub_resource type="Resource" id="Resource_8c0pc"]
 script = ExtResource("17_mrygo")
-copies = 2
+copies = 6
 card = SubResource("Resource_dburm")
 debug = false
 
@@ -209,6 +210,7 @@ taskIcon = ExtResource("9_xt47j")
 taskText = "Consume Job with One green"
 consequenceText = "Lose one CacheA"
 taskConsequence = Array[ExtResource("5_nsq4b")]([SubResource("Resource_41yhl")])
+consequenceFrequency = 1
 cardName = "Test Task"
 revealed = false
 onExecute = Array[ExtResource("5_nsq4b")]([SubResource("Resource_4skit")])
@@ -220,14 +222,14 @@ card = SubResource("Resource_v0x5r")
 debug = false
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f5c0v"]
-size = Vector2(1868.5, 300)
+size = Vector2(1400.5, 300)
 
 [sub_resource type="Animation" id="Animation_eqvq1"]
 resource_name = "close"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Panel:position")
+tracks/0/path = NodePath("MarketLayer/Panel:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -242,7 +244,7 @@ resource_name = "open"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Panel:position")
+tracks/0/path = NodePath("MarketLayer/Panel:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -269,12 +271,15 @@ bg_color = Color(0.40625, 0.0471723, 0.095828, 1)
 corner_radius_bottom_left = 100
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5fq8s"]
-size = Vector2(623.5, 639.5)
+size = Vector2(361, 872)
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("deck", "hand")]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("deck", "hand", "cardMarket", "jobManager", "taskManager")]
 script = ExtResource("1_nbim8")
 deck = NodePath("ActionCards/Deck")
 hand = NodePath("ActionCards/HandCards")
+cardMarket = NodePath("ActionCards/CardMarket")
+jobManager = NodePath("JobLord")
+taskManager = NodePath("TaskManager")
 
 [node name="InputManager" type="Node" parent="." node_paths=PackedStringArray("actionHand", "taskHand", "marketContainer")]
 script = ExtResource("23_xx20n")
@@ -322,11 +327,15 @@ defaultLimit = 5
 script = ExtResource("14_r0k10")
 deck = Array[ExtResource("17_mrygo")]([SubResource("Resource_5jtij"), SubResource("Resource_8c0pc"), SubResource("Resource_poo86")])
 
-[node name="CardMarket" type="Node" parent="ActionCards" node_paths=PackedStringArray("feedContainer")]
+[node name="CardMarket" type="Node" parent="ActionCards" node_paths=PackedStringArray("feedContainer", "disposeContainer")]
 script = ExtResource("2_42g87")
 rows = 2
 columns = 2
 feedContainer = NodePath("../Deck")
+disposeContainer = NodePath("MarketDispose")
+
+[node name="MarketDispose" type="Node" parent="ActionCards/CardMarket"]
+script = ExtResource("18_1vww6")
 
 [node name="HandCards" type="Node" parent="ActionCards" node_paths=PackedStringArray("disposeContainer")]
 script = ExtResource("20_vouf7")
@@ -343,6 +352,7 @@ script = ExtResource("33_oq5l2")
 script = ExtResource("36_w7x6f")
 taskHand = NodePath("TaskHand")
 taskDeck = NodePath("TaskDeck")
+startingTasks = 1
 
 [node name="TaskDeck" type="Node" parent="TaskManager"]
 script = ExtResource("14_r0k10")
@@ -356,11 +366,6 @@ disposeContainer = NodePath("../TaskDiscard")
 script = ExtResource("18_1vww6")
 
 [node name="MouseOverLord" type="Node2D" parent="."]
-position = Vector2(1188, 27)
-script = ExtResource("3_2pjbp")
-hideDelay = 0.15
-
-[node name="MouseOverLord2" type="Node2D" parent="."]
 position = Vector2(1188, 27)
 script = ExtResource("3_2pjbp")
 hideDelay = 0.15
@@ -390,22 +395,26 @@ layer = 3
 layer = 4
 
 [node name="HandPC" type="Node2D" parent="." node_paths=PackedStringArray("area", "logicalContainer")]
+position = Vector2(-17, -48)
 script = ExtResource("19_qe3sq")
 area = NodePath("CollisionShape2D")
-mindCenterDistance = 50.0
 maxGap = 25.0
 logicalContainer = NodePath("../ActionCards/HandCards")
 resetRotation = false
 packedCardForReference = ExtResource("29_2tfqd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HandPC"]
-position = Vector2(965.75, 903)
+position = Vector2(731.75, 903)
 shape = SubResource("RectangleShape2D_f5c0v")
 
 [node name="ActionSinkPC" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker", "logicalContainer")]
 script = ExtResource("23_i5ahq")
 positionMarker = NodePath("SinkPoint")
+moveTime = null
 logicalContainer = NodePath("../ActionCards/Discard")
+resetRotation = null
+resetRotationTo = null
+reverseZ = null
 packedCardForReference = ExtResource("29_2tfqd")
 
 [node name="SinkPoint" type="Marker2D" parent="ActionSinkPC"]
@@ -413,15 +422,19 @@ position = Vector2(1519, 614)
 
 [node name="MarketSlideController" type="Node2D" parent="." node_paths=PackedStringArray("marketAnimator", "marketContainer")]
 script = ExtResource("32_beqie")
-marketAnimator = NodePath("AnimationPlayer")
+marketAnimator = NodePath("MarketLayer/AnimationPlayer")
 marketContainer = NodePath("../ActionCards/CardMarket")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MarketSlideController"]
+[node name="MarketLayer" type="CanvasLayer" parent="MarketSlideController"]
+layer = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarketSlideController/MarketLayer"]
+root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_4g00f")
 }
 
-[node name="Panel" type="Panel" parent="MarketSlideController"]
+[node name="Panel" type="Panel" parent="MarketSlideController/MarketLayer"]
 z_as_relative = false
 offset_left = 248.0
 offset_top = -697.0
@@ -430,21 +443,33 @@ offset_bottom = -19.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kad5c")
 
-[node name="Market PC" type="Node2D" parent="MarketSlideController/Panel" node_paths=PackedStringArray("area", "logicalContainer")]
+[node name="Market PC" type="Node2D" parent="MarketSlideController/MarketLayer/Panel" node_paths=PackedStringArray("area", "logicalContainer")]
 script = ExtResource("28_lx5eo")
 area = NodePath("MarketShape")
-mindCenterDistance = 50.0
 maxGap = 25.0
 multipleRows = true
-logicalContainer = NodePath("../../../ActionCards/CardMarket")
+logicalContainer = NodePath("../../../../ActionCards/CardMarket")
 resetRotation = false
 packedCardForReference = ExtResource("29_2tfqd")
 
-[node name="MarketShape" type="CollisionShape2D" parent="MarketSlideController/Panel/Market PC"]
+[node name="MarketShape" type="CollisionShape2D" parent="MarketSlideController/MarketLayer/Panel/Market PC"]
 position = Vector2(408, 322)
 shape = SubResource("RectangleShape2D_nfpkx")
 
-[node name="MarketAnimationRoot" type="Node2D" parent="MarketSlideController"]
+[node name="MarketSinkPC" type="Node2D" parent="MarketSlideController/MarketLayer/Panel" node_paths=PackedStringArray("positionMarker", "logicalContainer")]
+script = ExtResource("23_i5ahq")
+positionMarker = NodePath("MarketSinkMarker")
+moveTime = null
+logicalContainer = NodePath("../../../../ActionCards/CardMarket/MarketDispose")
+resetRotation = null
+resetRotationTo = null
+reverseZ = null
+packedCardForReference = ExtResource("29_2tfqd")
+
+[node name="MarketSinkMarker" type="Marker2D" parent="MarketSlideController/MarketLayer/Panel/MarketSinkPC"]
+position = Vector2(-279, 344)
+
+[node name="MarketAnimationRoot" type="Node2D" parent="MarketSlideController/MarketLayer"]
 
 [node name="CacheUI" type="Node2D" parent="."]
 position = Vector2(1594, -27)
@@ -485,7 +510,11 @@ propName = "cacheB"
 [node name="TaskSinkPC" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker", "logicalContainer")]
 script = ExtResource("23_i5ahq")
 positionMarker = NodePath("Marker2D")
+moveTime = null
 logicalContainer = NodePath("../TaskManager/TaskDiscard")
+resetRotation = null
+resetRotationTo = null
+reverseZ = null
 packedCardForReference = ExtResource("37_62ix5")
 
 [node name="Marker2D" type="Marker2D" parent="TaskSinkPC"]
@@ -500,5 +529,103 @@ logicalContainer = NodePath("../TaskManager/TaskHand")
 packedCardForReference = ExtResource("37_62ix5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TaskHandPC"]
-position = Vector2(1580, 416)
+position = Vector2(1727.5, 557)
 shape = SubResource("RectangleShape2D_5fq8s")
+
+[node name="GeneralInfoLabel" type="Label" parent="."]
+offset_left = 1.0
+offset_top = 1022.0
+offset_right = 1415.0
+offset_bottom = 1073.0
+theme_override_fonts/font = ExtResource("34_y48yq")
+theme_override_font_sizes/font_size = 42
+text = "This is information on what is happening in the game, choices and phases, etc."
+horizontal_alignment = 1
+
+[node name="PhaseShowUI" type="Node2D" parent="." node_paths=PackedStringArray("listOfRects", "pointer")]
+position = Vector2(1435, 1040)
+script = ExtResource("43_dqmsq")
+listOfPhases = Array[int]([0, 1, 2, 3])
+listOfRects = [NodePath("MorningRect"), NodePath("MANAGERECT"), NodePath("WorkRect"), NodePath("ConsequenceRect")]
+pointer = NodePath("Pointer")
+
+[node name="MorningRect" type="ColorRect" parent="PhaseShowUI"]
+offset_right = 116.0
+offset_bottom = 40.0
+mouse_filter = 2
+color = Color(0.290584, 0.282908, 1, 1)
+metadata/_edit_group_ = true
+
+[node name="PhaseLabelMorning" type="Label" parent="PhaseShowUI/MorningRect"]
+layout_mode = 0
+offset_right = 116.0
+offset_bottom = 41.0
+theme_override_fonts/font = ExtResource("34_y48yq")
+theme_override_font_sizes/font_size = 30
+text = "morning"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="MANAGERECT" type="ColorRect" parent="PhaseShowUI"]
+offset_left = 116.0
+offset_right = 232.0
+offset_bottom = 40.0
+mouse_filter = 2
+color = Color(1, 0.702556, 0, 1)
+metadata/_edit_group_ = true
+
+[node name="PhaseLabelManage" type="Label" parent="PhaseShowUI/MANAGERECT"]
+layout_mode = 0
+offset_right = 116.0
+offset_bottom = 41.0
+theme_override_fonts/font = ExtResource("34_y48yq")
+theme_override_font_sizes/font_size = 30
+text = "MANAGE"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="WorkRect" type="ColorRect" parent="PhaseShowUI"]
+offset_left = 232.0
+offset_right = 348.0
+offset_bottom = 40.0
+mouse_filter = 2
+color = Color(1, 0.0598345, 0.807176, 1)
+metadata/_edit_group_ = true
+
+[node name="PhaseLabelWork" type="Label" parent="PhaseShowUI/WorkRect"]
+layout_mode = 0
+offset_right = 116.0
+offset_bottom = 41.0
+theme_override_fonts/font = ExtResource("34_y48yq")
+theme_override_font_sizes/font_size = 30
+text = "Work"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="ConsequenceRect" type="ColorRect" parent="PhaseShowUI"]
+offset_left = 348.0
+offset_right = 481.0
+offset_bottom = 40.0
+mouse_filter = 2
+color = Color(0.51, 0.299969, 0.273273, 1)
+metadata/_edit_group_ = true
+
+[node name="PhaseLabelConsequence" type="Label" parent="PhaseShowUI/ConsequenceRect"]
+layout_mode = 0
+offset_right = 133.0
+offset_bottom = 41.0
+theme_override_fonts/font = ExtResource("34_y48yq")
+theme_override_font_sizes/font_size = 30
+text = "Consequence"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Pointer" type="Polygon2D" parent="PhaseShowUI"]
+position = Vector2(58, 40)
+color = Color(0.0078125, 0.0078125, 0.0078125, 1)
+offset = Vector2(-27, 5)
+polygon = PackedVector2Array(-1, 1, 27, -11, 55, 1)

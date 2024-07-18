@@ -4,30 +4,28 @@ class_name TaskManager
 @export var taskHand: Hand
 @export var taskDeck: Deck
 @export var addTaskEveryXTurns: int = 5
+@export var startingTasks: int = 0
 var newTaskCounter: int = 0
 
 func _ready():
-    addNewTask()
-    Events.phaseStarted.connect(func(p):
-        if p == Globals.phases.CONSEQUENCE:
-            applyConsequence()
-            Events.phaseEnded.emit(Globals.phases.CONSEQUENCE)
-        )
+    addNewTasks(startingTasks)   
 
-func addNewTask():
-    var newTask = taskDeck.drawCard()
-    taskHand.addCard(newTask)
-    Events.newTaskAdded.emit(newTask)
+func addNewTasks(amount: int):
+    for i in range(amount):
+        var newTask = taskDeck.drawCard()
+        taskHand.addCard(newTask)
+        Events.newTaskAdded.emit(newTask)
 
 func tickCounter():
     newTaskCounter += 1
     if newTaskCounter >= addTaskEveryXTurns:
-        addNewTask()
+        addNewTasks(1)
         newTaskCounter = 0
 
-func applyConsequence():
-    print('applying consequences')
-    taskHand.getAll().all(func(t): t.executeConsequence())
+func processConsequence():
+    #print('applying consequences')
+    taskHand.getAll().all(func(t): t.tickConsequence())
+    tickCounter()
 
 
     

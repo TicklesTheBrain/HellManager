@@ -11,8 +11,6 @@ func makeNewJob():
 
 	Events.jobAdded.emit(newJob)
 
-func makeEveryoneWork():
-	Events.phaseStarted.emit(Globals.phases.WORK)
+func makeEveryoneWork():	
 	for child in get_children():
 			child.doWork()
-	Events.phaseEnded.emit(Globals.phases.WORK)
