@@ -1,6 +1,12 @@
 extends Resource
 class_name Action
 
+var jobAttachedTo: Job:
+	get():
+		if jobAttachedTo == null:
+			return Globals.getCtxt().actingJob
+		return jobAttachedTo
+
 #This function is supposed to do a dry run of the execution and return bool on whether it would succeed,
 #what exactly success means depends on the action. E.g., when consuming stuff success is probably getting
 #all the requirements satisfied, while when producing stuff, success might mean producing at least 1 thing,

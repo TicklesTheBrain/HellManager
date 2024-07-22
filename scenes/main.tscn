@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=96 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://src/Main.gd" id="1_nbim8"]
 [ext_resource type="Script" path="res://src/CardMarket.gd" id="2_42g87"]
@@ -16,8 +16,11 @@
 [ext_resource type="Script" path="res://src/company/Employee.gd" id="10_wmw7d"]
 [ext_resource type="Script" path="res://src/company/TokenStorage.gd" id="11_if1yf"]
 [ext_resource type="Texture2D" uid="uid://bsv27suggfjmq" path="res://assets/testPic2.png" id="13_fgyyd"]
+[ext_resource type="Script" path="res://src/conditions/conditionPrestigeAmount.gd" id="13_l20mq"]
 [ext_resource type="Script" path="res://src/actions/action_consume.gd" id="13_mduv8"]
+[ext_resource type="Script" path="res://src/actions/action_produceOutflow.gd" id="14_aaf2y"]
 [ext_resource type="Script" path="res://src/cards/Deck.gd" id="14_r0k10"]
+[ext_resource type="Texture2D" uid="uid://c5qexnfi4fad2" path="res://assets/testPic3.png" id="15_lao0j"]
 [ext_resource type="Script" path="res://src/actions/action_makeJob.gd" id="16_16kad"]
 [ext_resource type="Script" path="res://src/cards/ActionCard.gd" id="16_hnq1w"]
 [ext_resource type="Texture2D" uid="uid://ngdu2hqkbis2" path="res://assets/fedora.svg" id="17_6m0wt"]
@@ -32,7 +35,7 @@
 [ext_resource type="Script" path="res://src/InputManager.gd" id="23_xx20n"]
 [ext_resource type="Script" path="res://src/conditions/conditionTokenOnJob.gd" id="25_bfr6v"]
 [ext_resource type="Script" path="res://src/actions/action_destroyJob.gd" id="26_r4wih"]
-[ext_resource type="Script" path="res://src/TaskCard.gd" id="27_skm2w"]
+[ext_resource type="Script" path="res://src/cards/TaskCard.gd" id="27_skm2w"]
 [ext_resource type="Script" path="res://src/ui_code/MarketPC.gd" id="28_lx5eo"]
 [ext_resource type="Script" path="res://src/actions/action_changeCache.gd" id="28_v6a6q"]
 [ext_resource type="PackedScene" uid="uid://dm73o0agf3yay" path="res://scenes/cardUI.tscn" id="29_2tfqd"]
@@ -110,6 +113,55 @@ independentActions = Array[ExtResource("5_nsq4b")]([])
 employeeName = "Valgytojas"
 employeePic = ExtResource("13_fgyyd")
 staticText = "Consume 2 Green, produce 1 Blue"
+
+[sub_resource type="Resource" id="Resource_h3s7x"]
+script = ExtResource("7_b1mae")
+type = 1
+
+[sub_resource type="Resource" id="Resource_7po4p"]
+script = ExtResource("8_2wa5w")
+producedTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_h3s7x")])
+
+[sub_resource type="Resource" id="Resource_sgr0r"]
+script = ExtResource("13_l20mq")
+lower = false
+acceptEqual = true
+compareToActingEmployee = true
+prestigeValueToCompare = 0
+
+[sub_resource type="Resource" id="Resource_srmyc"]
+script = ExtResource("14_aaf2y")
+actionToDelegate = SubResource("Resource_7po4p")
+allowDelegateOnVacant = false
+delegateCondition = SubResource("Resource_sgr0r")
+
+[sub_resource type="Resource" id="Resource_r08g0"]
+script = ExtResource("10_wmw7d")
+prestige = 10
+capacity = 5
+dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_srmyc")])
+independentActions = Array[ExtResource("5_nsq4b")]([])
+employeeName = "Pasiuntėjas"
+employeePic = ExtResource("15_lao0j")
+staticText = "Produce 1 Red on lower prestige subordinates"
+
+[sub_resource type="Resource" id="Resource_362dq"]
+script = ExtResource("7_b1mae")
+type = 0
+
+[sub_resource type="Resource" id="Resource_ewigq"]
+script = ExtResource("8_2wa5w")
+producedTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_362dq")])
+
+[sub_resource type="Resource" id="Resource_qhelu"]
+script = ExtResource("10_wmw7d")
+prestige = 3
+capacity = 5
+dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_ewigq")])
+independentActions = Array[ExtResource("5_nsq4b")]([])
+employeeName = "Shlub"
+employeePic = ExtResource("13_fgyyd")
+staticText = ""
 
 [sub_resource type="Resource" id="Resource_cal8w"]
 script = ExtResource("16_16kad")
@@ -321,6 +373,26 @@ storage = NodePath("TokenStorage")
 [node name="TokenStorage" type="Node" parent="JobLord/Job2"]
 script = ExtResource("11_if1yf")
 defaultLimit = 5
+
+[node name="Job4" type="Node" parent="JobLord" node_paths=PackedStringArray("outflow", "storage")]
+script = ExtResource("6_cnhkk")
+outflow = [NodePath("../Job5")]
+employee = SubResource("Resource_r08g0")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job4"]
+script = ExtResource("11_if1yf")
+defaultLimit = 5
+
+[node name="Job5" type="Node" parent="JobLord" node_paths=PackedStringArray("inflow", "storage")]
+script = ExtResource("6_cnhkk")
+inflow = [NodePath("../Job4")]
+employee = SubResource("Resource_qhelu")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job5"]
+script = ExtResource("11_if1yf")
+defaultLimit = 20
 
 [node name="ActionCards" type="Node" parent="."]
 

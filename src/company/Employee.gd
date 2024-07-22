@@ -4,7 +4,7 @@ class_name Employee
 @export var prestige: int
 @export var capacity: int
 @export var dependentActions: Array[Action] = []
-@export var independentActions: Array[Action] = []
+@export var independentActions: Array[Action] = [] #TODO: I forgot why I put it here
 @export var employeeName: String
 @export var employeePic: Texture2D
 @export var staticText: String
