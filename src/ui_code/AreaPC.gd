@@ -8,7 +8,7 @@ class_name AreaPC
 @export var rowGap: float = 25
 
 func scuttleCardsSpecific():
-	print('scuttle specific started for ', self)
+	# print('scuttle specific started for ', self)
 	if cardUIs.size() < 1:
 		return
 

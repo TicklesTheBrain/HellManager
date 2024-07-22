@@ -35,5 +35,6 @@ func destroyCardUI(card: ProtoCard):
 	var ui = getCardUI(card)
 	if ui != null:
 
-		ui.queue_free()
 		cardUIs.erase(ui)
+		await RenderingServer.frame_post_draw
+		ui.queue_free()

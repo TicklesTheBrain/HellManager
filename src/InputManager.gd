@@ -9,8 +9,7 @@ class_name InputManager
 
 var draggedJob: JobUI = null
 var activeChoice: Callable = Callable()
-
-
+	
 func _ready():
 	Events.actionCardClicked.connect(cardClicked)
 	Events.jobClicked.connect(jobClicked)
@@ -28,7 +27,7 @@ func _ready():
 
 func taskClicked(taskUI: TaskCardUI, button):
 	if not inputLock and button == MOUSE_BUTTON_LEFT:
-		print('task clicked')
+		# print('task clicked')
 		taskHand.useCard(taskUI.card, receiveActiveChoice)
 
 func employeeMouseOverStart(empUI: EmployeeUI):
@@ -39,8 +38,6 @@ func employeeMouseOverEnd(empUI: EmployeeUI):
 	Events.employeeUIDetailsCloseRequest.emit(empUI)
 	
 func cardClicked(cardUI: ActionCardUI, button: MouseButton):
-
-	
 
 	#print('card clicked on input manger, input lock is ', inputLock, ' phase is ', phase)
 
@@ -77,6 +74,7 @@ func jobClicked(jobUI: JobUI, _button):
 		var result = activeChoice.call(jobUI.job)
 		if result:
 			#print('choice accepted')
+			Events.stopShowChoices.emit()
 			activeChoice = Callable()
 		return
 
@@ -96,6 +94,7 @@ func jobClickReleased(jobUI: JobUI, _button):
 
 func receiveActiveChoice(callable: Callable):
 	activeChoice = callable
+	Events.showChoices.emit(callable.get_object().checkChoice)
 
 
 

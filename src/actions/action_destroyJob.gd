@@ -23,8 +23,19 @@ func ask() -> Callable:
 	return Callable()
 
 func recordChoice(smth):
-	if condition.checkSubject(smth):
+	if checkChoice(smth):
 		job = smth
 		announceChoice(smth)
 		return true
 	return false
+
+func checkChoice(smth) -> bool:
+	# print('start check Choice')
+	if job != null:
+		return false
+
+	if not (smth is Job):
+		return false
+
+	# print('going to check condition now ', condition.checkSubject(smth))
+	return condition.checkSubject(smth)

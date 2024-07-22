@@ -11,6 +11,7 @@ func isSetup() -> bool:
 
 func ask() -> Callable:
 	if not isSetup():
+		Events.requestMessage.emit('choose the outgoing job')
 		return recordChoice
 	return Callable()
 
@@ -26,11 +27,24 @@ func performSpecific() -> bool:
 	return true
 
 func recordChoice(smth):
-	if smth is Job:
+	if checkChoice(smth):
 		if from == null:
 			from = smth
+			Events.requestMessage.emit('choose incoming job')
 		elif to == null:
 			to = smth
+		Events.clearMessage.emit()
 		announceChoice(smth)
 		return true
 	return false
+
+func checkChoice(smth) -> bool:
+
+	if not (smth is Job):
+		return false
+	if from != null and to != null:
+		return false	
+	if from != null and smth.inflow.has(from):
+		return false
+	
+	return true

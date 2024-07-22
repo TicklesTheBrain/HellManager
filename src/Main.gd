@@ -29,7 +29,10 @@ func mainLoop():
 	cardMarket.refreshMarket()
 	Events.phaseEnded.emit(Globals.phases.MORNING)
 	Events.phaseStarted.emit(Globals.phases.MANAGE)
-	await manageComplete
+	Events.requestMessage.emit('Play a card, get a card or skip')
+	await manageComplete #TODO: BAD BAD NOT GOOD, the idea is to create an action scheduler similar to the UIScheduler to make sure, things triggered off other events happen in the correct order
+	await RenderingServer.frame_post_draw
+	Events.clearMessage.emit()
 	Events.phaseEnded.emit(Globals.phases.MANAGE)
 	Events.phaseStarted.emit(Globals.phases.WORK)
 	jobManager.makeEveryoneWork()

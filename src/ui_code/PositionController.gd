@@ -34,7 +34,7 @@ func addCard(card: ProtoCard):
 	if cardUI == null:
 		#print('new card UI requested')
 		cardUI = CardUILord.makeNewCardUI(card)
-	print('scheduling addCard for ', self)
+	# print('scheduling addCard for ', self)
 	UIScheduler.addToSchedule(addCardUISpecific.bind(cardUI))
 	UIScheduler.addToSchedule(addCardUI.bind(cardUI))
 	
@@ -44,7 +44,7 @@ func removeCard(card: ProtoCard):
 		return
 	
 	var cardUI = CardUILord.getCardUI(card)
-	print('scheduling removeCard for ', self)
+	# print('scheduling removeCard for ', self)
 	UIScheduler.addToSchedule(removeCardUISpecific.bind(cardUI))
 	UIScheduler.addToSchedule(removeCardUI.bind(cardUI))
 	
@@ -69,7 +69,7 @@ func removeCardUI(cardToRemove: ProtoCardUI):
 		return
 	
 	cardUIs.erase(cardToRemove)
-	print('scheduling a scuttle for ', self)
+	# print('scheduling a scuttle for ', self)
 	await scuttleCards()
 
 func setupNewLogicalContainer(newContainer = null):

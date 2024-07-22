@@ -23,7 +23,7 @@ blend_mode = 3
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5u0lv"]
 size = Vector2(159, 229)
 
-[node name="JobVisual" type="Control" node_paths=PackedStringArray("emptyContainer", "employeePos", "storageContainer", "inMarkers", "outMarkers")]
+[node name="JobVisual" type="Control" node_paths=PackedStringArray("emptyContainer", "employeePos", "storageContainer", "inMarkers", "outMarkers", "choiceHighlight")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_b1o3n")
@@ -32,6 +32,7 @@ employeePos = NodePath("EmployeePosition")
 storageContainer = NodePath("StorageContainer")
 inMarkers = [NodePath("Markers/InMarker"), NodePath("Markers/InMarker2"), NodePath("Markers/InMarker3"), NodePath("Markers/InMarker4")]
 outMarkers = [NodePath("Markers/OutMarker"), NodePath("Markers/OutMarker2"), NodePath("Markers/OutMarker3"), NodePath("Markers/OutMarker4")]
+choiceHighlight = NodePath("ChoiceHighlightRect")
 
 [node name="JobFrame" type="PanelContainer" parent="."]
 clip_children = 2
@@ -105,5 +106,15 @@ position = Vector2(19, -162)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DragDetectArea"]
 position = Vector2(-1.5, -5.5)
 shape = SubResource("RectangleShape2D_5u0lv")
+
+[node name="ChoiceHighlightRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 2
+offset_left = -84.0
+offset_top = -123.0
+offset_right = 82.0
+offset_bottom = 112.0
+mouse_filter = 2
+color = Color(1, 0.43, 0.8385, 0.639216)
 
 [connection signal="input_event" from="DragDetectArea" to="." method="_on_drag_detect_area_input_event"]

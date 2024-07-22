@@ -98,7 +98,7 @@ func slideToFill(slideDirection: SlideDirection):
 							updatedPosition.emit(tempSpaces[x][y], Vector2(i,c), Vector2(x,y))
 							found = true
 							break
-	print('spaces ', spaces , ' temp spaces ', tempSpaces)
+	# print('spaces ', spaces , ' temp spaces ', tempSpaces)
 
 	spaces = tempSpaces
 	

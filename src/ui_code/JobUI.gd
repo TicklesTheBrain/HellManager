@@ -7,6 +7,7 @@ class_name JobUI
 @export var storageContainer: Container
 @export var inMarkers: Array[Marker2D]
 @export var outMarkers: Array[Marker2D]
+@export var choiceHighlight: Control
 
 var dragOffset: Vector2
 var dragged = false
@@ -22,9 +23,24 @@ func _ready():
 		Events.employeeFired.connect(func(_e, j): if j == job: scheduleShowVacanat())
 		Events.employeeConsumed.connect(func(_e, j): if j == job: scheduleShowVacanat())
 
+
+	Events.showChoices.connect(checkMyselfAsChoice)
+	Events.stopShowChoices.connect(scheduleClearMyHighlight)
 	Events.jobDragStart.connect(func(j): if j == self: startDrag())
 	Events.jobDragEnd.connect(func(j): if j == self: endDrag())
 	Events.jobDestroyed.connect(func(j): if j == job: scheduleDestroyJob())
+
+func checkMyselfAsChoice(validator: Callable):
+	# print("check myself as choice")
+	if validator.call(self.job):
+		choiceHighlight.visible = true
+		#UIScheduler.addToSchedule(func(): choiceHighlight.visible = true)
+	else:
+		scheduleClearMyHighlight()
+
+func scheduleClearMyHighlight():
+	choiceHighlight.visible = false
+	# UIScheduler.addToSchedule(func(): choiceHighlight.visible = false)
 
 func scheduleAddEmployee(employee: Employee):
 	UIScheduler.addToSchedule(addEmployee.bind(employee))

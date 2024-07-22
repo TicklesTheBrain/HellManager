@@ -8,9 +8,6 @@ func scuttleCardsSpecific():
 		var newTween = get_tree().create_tween()
 		newTween.tween_property(ui, "position", positionMarker.position, moveTime)
 		newTween.tween_callback(CardUILord.destroyCardUI.bind(ui.card))
-		newTween.tween_callback(removeUIWithoutScuttle.bind(ui))		
+	cardUIs = []
 	await get_tree().create_timer(moveTime).timeout
-	
-func removeUIWithoutScuttle(ui: ProtoCardUI):
-	cardUIs.erase(ui)
-	
+

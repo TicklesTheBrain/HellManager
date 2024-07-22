@@ -3,7 +3,7 @@ extends Node
 @export var phase: phases:
 	set(v):
 		phase = v
-		print('new phase ', v)
+		# print('new phase ', v)
 @export var day: int = 0
 @export var actingJob: Job
 @export var actingEmployee: Employee
