@@ -20,10 +20,8 @@ func _ready():
 
 	if job != null:
 		Events.employeePlaced.connect(func(e,j): if j == job: scheduleAddEmployee(e))
-		Events.employeeFired.connect(func(_e, j): if j == job: scheduleShowVacanat())
-		Events.employeeConsumed.connect(func(_e, j): if j == job: scheduleShowVacanat())
-
-
+		Events.employeeRemoved.connect(func(_e, j): if j == job: scheduleShowVacanat())
+		
 	Events.showChoices.connect(checkMyselfAsChoice)
 	Events.stopShowChoices.connect(scheduleClearMyHighlight)
 	Events.jobDragStart.connect(func(j): if j == self: startDrag())
@@ -46,6 +44,10 @@ func scheduleAddEmployee(employee: Employee):
 	UIScheduler.addToSchedule(addEmployee.bind(employee))
 
 func scheduleShowVacanat():
+	var curEmpUI = employeePos.get_children()
+	if curEmpUI.size() >0:
+		assert(curEmpUI[0] is EmployeeUI)
+		curEmpUI[0].scheduleShowDestroy()
 	UIScheduler.addToSchedule(showVacant)
 
 func scheduleDestroyJob():

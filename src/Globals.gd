@@ -58,7 +58,6 @@ func _ready():
 		day = d
 	)
 
-
 func getCtxt() -> GameContext:
 	var ctxt = GameContext.new()
 	ctxt.actingCard = actingCard
@@ -77,6 +76,12 @@ func getJobManager() -> JobManager:
 
 func getPlayerData():
 	return get_tree().get_first_node_in_group("PlayerData")
+
+func getActionHand() -> Hand:
+	return get_tree().get_first_node_in_group("ActionHand")
+
+func getTaskHand() -> Hand:
+	return get_tree().get_first_node_in_group("TaskHand")
 
 func subtractTokenList(first, second):
 	var result = first.duplicate()

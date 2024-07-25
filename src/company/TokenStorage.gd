@@ -38,3 +38,6 @@ func getTokens(request: Array[Token], exclude: Array[Token] = []) -> Array[Token
 			tokensGot.push_back(matching[0])
 			tempContents.erase(matching[0])
 	return tokensGot
+
+func getCapacityLeft() -> int:
+	return getTokenLimit() - contents.size()

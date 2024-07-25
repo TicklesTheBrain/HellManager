@@ -7,6 +7,9 @@ class_name TaskCard
 @export var taskConsequence: Array[Action]
 #@export var onExecute: Array[Action] #Task Complete Actions, inherited
 @export var consequenceFrequency: int = 0 #Zero means do it every consequence
+
+signal timerChanged(newValue: int)
+
 var frequencyTimer: int:
 	get:
 		if first:

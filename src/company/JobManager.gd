@@ -11,6 +11,8 @@ func makeNewJob():
 
 	Events.jobAdded.emit(newJob)
 
+	return newJob
+
 func makeEveryoneWork():	
 	for child in get_children():
 			child.doWork()

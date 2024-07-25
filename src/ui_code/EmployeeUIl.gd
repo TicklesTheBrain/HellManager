@@ -11,10 +11,14 @@ class_name EmployeeUI
 @export var employeeTextLabel: Label
 @export var employeePic: TextureRect
 @export var requestMouseOver: bool
+@export var destroyFadeTime: float
 
 func _ready():
 	if employee != null:
 		updateVisuals()
+		employee.prestigeChange.connect(updatePrestige)
+		employee.capacityChange.connect(updateCapacity)
+		employee.destroyed.connect(scheduleShowDestroy)
 
 func updateVisuals():
 	if employeeNameLabel != null:
@@ -36,3 +40,18 @@ func _mouse_entered():
 	#print('emp UI mouse enter')
 	Events.employeeUIMouseOverStart.emit(self)
 
+func updatePrestige():
+	var newPrestige = str(employee.prestige)
+	UIScheduler.addToSchedule(func(): prestigeLabel.text = newPrestige)
+
+func updateCapacity():
+	var newCapacity = str(employee.capacity)
+	UIScheduler.addToSchedule(func(): capacityLabel.text = newCapacity)
+
+func showDestroy():
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "modulate", Color(Color.WHITE, 0), destroyFadeTime)
+	await get_tree().create_timer(destroyFadeTime).timeout
+
+func scheduleShowDestroy():
+	UIScheduler.addToSchedule(showDestroy)

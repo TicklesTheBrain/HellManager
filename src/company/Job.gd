@@ -11,8 +11,14 @@ class_name Job
 		
 @export var employee: Employee:
 	set(v):
-		employee = v
-		Events.employeePlaced.emit(v, self)
+		if employee == null:
+			employee = v
+			Events.employeePlaced.emit(v, self)
+			employee.triggerPlaced() #TODO: THIS NOT GOOD
+		if v == null and employee != null:
+			var oldEmployee = employee
+			employee = v
+			Events.employeeRemoved.emit(oldEmployee, self)
 @export var storage: TokenStorage
 
 func _ready():
@@ -35,22 +41,48 @@ func destroy():
 func listTokensOwn():
 	return storage.contents.map(func(t): return TokenPath.new(t, [self]))
 
-func getTokens(request: Array[Token], exclude: Array[Token] = []):
+func getTokens(request: Array[Token], exclude: Array[Token] = [], limit: int = 999):
+
+	if employee == null:
+		return []
+
+	if employee.checkJobMethodReplacement("getTokens"):
+		return employee.invokeJobMethodReplacement("getTokens", [self, request, exclude, limit])
+
+
 	var own = getTokensOwn(request, exclude)
 	var requestModified = Globals.subtractTokenList(request, own.map(func(tp): return tp.token))
 	var excludeModified = exclude.duplicate()
 	excludeModified.append_array(own.map(func(tp): return tp.token))
-	var networkTokens = getTokensNetwork(requestModified, excludeModified)
+	var networkTokens = getTokensNetwork(requestModified, excludeModified, limit)
 	own.append_array(networkTokens)
+	if own.size() > limit:
+		own = own.slice(0, limit)
 	return own
 
-func getTokensOwn(request: Array[Token], exclude: Array[Token] = []):
+func getTokensOwn(request: Array[Token], exclude: Array[Token] = [], limit: int = 999):
+
+	if employee == null:
+		return []
+
+	if employee.checkJobMethodReplacement("getTokensOwn"):
+		return employee.invokeJobMethodReplacement("getTokensOwn", [self, request, exclude, limit])
+
 	if storage == null:
 		return [] as Array[Token]
 	var ownTokens = storage.getTokens(request, exclude)
+	if ownTokens.size() > limit:
+		ownTokens = ownTokens.slice(0, limit)
 	return ownTokens.map(func(t): return TokenPath.new(t, [self]))
 
-func getTokensNetwork(request: Array[Token], exclude: Array[Token]):
+func getTokensNetwork(request: Array[Token], exclude: Array[Token] = [], limit: int = 999):
+
+	if employee == null:
+		return []
+
+	if employee.checkJobMethodReplacement("getTokensNetwork"):
+		return employee.invokeJobMethodReplacement("getTokensNetwork", [self, request, exclude, limit])
+
 	var tokensExcluded: Array[Token] = exclude.duplicate()
 	var requestModified: Array[Token] = request.duplicate()
 	var got: Array[TokenPath] = []
@@ -59,6 +91,8 @@ func getTokensNetwork(request: Array[Token], exclude: Array[Token]):
 		requestModified = Globals.subtractTokenList(requestModified, tokensGot.map(func(tp): return tp.token))
 		got.append_array(tokensGot.map(func(tp): return tp.extend(self)))
 		tokensExcluded.append_array(tokensGot.map(func(tp): return tp.token))
+	if got.size() > limit:
+		got = got.slice(0, limit)
 	return got
 
 func acquireTokens(tokenPathArray):

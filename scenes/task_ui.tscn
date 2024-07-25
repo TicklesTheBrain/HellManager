@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bav2v2vhrfn3o"]
+[gd_scene load_steps=13 format=3 uid="uid://bav2v2vhrfn3o"]
 
 [ext_resource type="Script" path="res://src/ui_code/task_ui.gd" id="1_j1nns"]
 [ext_resource type="Texture2D" uid="uid://dk82t4md4wuqo" path="res://assets/white_uneven_tex.png" id="1_nopyd"]
@@ -23,7 +23,89 @@ blend_mode = 3
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mkg1x"]
 blend_mode = 3
 
-[node name="TaskUI" type="Control" node_paths=PackedStringArray("nameOfTask", "taskText", "taskConsequenceText", "taskIcon")]
+[sub_resource type="Animation" id="Animation_y2wy1"]
+resource_name = "number_decrease"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NextActivationLabel:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0.917969, 0.200806, 0.395159, 1), Color(0, 0, 0, 1), Color(0.847656, 0, 0.148777, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1c6js"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NextActivationLabel:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ob6bp"]
+resource_name = "poke_out"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-50, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_orw2w"]
+resource_name = "poke_back"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-50, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vsit0"]
+_data = {
+"RESET": SubResource("Animation_1c6js"),
+"number_decrease": SubResource("Animation_y2wy1"),
+"poke_back": SubResource("Animation_orw2w"),
+"poke_out": SubResource("Animation_ob6bp")
+}
+
+[node name="TaskUI" type="Control" node_paths=PackedStringArray("nameOfTask", "taskText", "taskConsequenceText", "taskIcon", "animationPlayer", "nextActivationLabel")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 230.0
@@ -33,6 +115,8 @@ nameOfTask = NodePath("Background/TaskName")
 taskText = NodePath("Background/TaskGoalText")
 taskConsequenceText = NodePath("Background/TaskConsequenceText")
 taskIcon = NodePath("Background/TaskIcon")
+animationPlayer = NodePath("Background/AnimationPlayer")
+nextActivationLabel = NodePath("Background/NextActivationLabel")
 
 [node name="Background" type="Panel" parent="."]
 clip_children = 2
@@ -42,12 +126,13 @@ anchor_left = -0.0218413
 anchor_top = 0.00896861
 anchor_right = -0.0214847
 anchor_bottom = 0.00896861
-offset_left = 5.00165
-offset_top = -2.0
-offset_right = 234.92
-offset_bottom = 218.0
+offset_left = 5.0235
+offset_top = -1.97309
+offset_right = 234.942
+offset_bottom = 218.027
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_ertft")
+metadata/_edit_group_ = true
 
 [node name="Texture" type="Sprite2D" parent="Background"]
 material = SubResource("CanvasItemMaterial_m61hb")
@@ -108,5 +193,21 @@ theme_override_font_sizes/font_size = 18
 text = "This is what happens when task is incomplete. Two lines"
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="NextActivationLabel" type="Label" parent="Background"]
+layout_mode = 0
+offset_left = 12.0218
+offset_top = 83.0269
+offset_right = 52.0219
+offset_bottom = 161.027
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_lewwq")
+theme_override_font_sizes/font_size = 64
+text = "3"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background"]
+libraries = {
+"": SubResource("AnimationLibrary_vsit0")
+}
 
 [connection signal="gui_input" from="Background" to="." method="_on_background_gui_input"]
