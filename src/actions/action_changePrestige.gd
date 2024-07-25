@@ -8,8 +8,11 @@ var employee: Employee
 func performSpecific():
 	if not choiceBased:
 		employee = jobAttachedTo.employee
-	if employee == null: return
+	if employee == null:
+		return false
 	employee.prestige += amountOfChange
+	# print('employee prestige changed ', employee.prestige)
+	return true
 
 func try():
 	if jobAttachedTo.employee == null and employee == null:

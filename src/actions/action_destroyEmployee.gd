@@ -11,14 +11,14 @@ func isSetup() -> bool:
 	return job != null
 
 func try() -> bool:
-	if selfDestroy: return jobAttachedTo.employee != null and condition.checkSubject(jobAttachedTo)
+	if selfDestroy: return jobAttachedTo.employee != null and condition.checkSubject(jobAttachedTo.employee)
 	return job != null and job.employee != null
 
 func performSpecific():
 	
 	var aj
 	if selfDestroy:
-		if condition.checkSubject(jobAttachedTo):
+		if condition.checkSubject(jobAttachedTo.employee):
 			aj = jobAttachedTo
 		else:
 			return

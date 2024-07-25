@@ -13,6 +13,7 @@ func _ready():
 func addNewTasks(amount: int):
     for i in range(amount):
         var newTask = taskDeck.drawCard()
+        newTask.resetFrequency()
         taskHand.addCard(newTask)
         Events.newTaskAdded.emit(newTask)
 
@@ -24,7 +25,10 @@ func tickCounter():
 
 func processConsequence():
     #print('applying consequences')
-    taskHand.getAll().all(func(t): t.tickConsequence())
+    taskHand.getAll().all(func(t):
+        t.tickConsequence()
+        return true
+    )
     tickCounter()
 
 

@@ -8,7 +8,7 @@ class_name ConditionPrestigeAmount
 
 func checkSubject(sbj):
 
-    print('checking prestige amount')
+    # print('checking prestige amount')
     if not (sbj is Employee):
         return false
 
@@ -18,13 +18,13 @@ func checkSubject(sbj):
     else:
         value = prestigeValueToCompare
 
-    print('value ', value)
+    # print('value ', value)
     
     if value == sbj.prestige and acceptEqual:
         return true
     
-    if (value < sbj.prestige and lower) or (value > sbj.prestige and not lower):
-        print('returning true')
+    if (value < sbj.prestige and not lower) or (value > sbj.prestige and lower):
+        # print('returning true')
         return true
 
     return false

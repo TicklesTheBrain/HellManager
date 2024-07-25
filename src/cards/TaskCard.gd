@@ -11,13 +11,15 @@ class_name TaskCard
 signal timerChanged(newValue: int)
 
 var frequencyTimer: int:
-	get:
-		if first:
-			first = false
-			return consequenceFrequency
-		return frequencyTimer 
-
-var first: bool = true
+	# get:
+	# 	if first:
+	# 		first = false
+	# 		return consequenceFrequency
+	# 	return frequencyTimer
+	set(v):
+		#print('timer changed ', v)
+		timerChanged.emit(v)
+		frequencyTimer = v
 
 func tickConsequence():
 	#print('frequencyTimer ', frequencyTimer)
@@ -40,3 +42,6 @@ func executeConsequence():
 	Events.taskConsequenceStart.emit(self)
 	taskConsequence.all(func(a): return a.perform())
 	Events.taskConsequenceEnd.emit(self)
+
+func resetFrequency():
+	frequencyTimer = consequenceFrequency

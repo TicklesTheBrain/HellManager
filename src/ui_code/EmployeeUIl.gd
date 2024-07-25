@@ -41,6 +41,7 @@ func _mouse_entered():
 	Events.employeeUIMouseOverStart.emit(self)
 
 func updatePrestige():
+	# print('update prestige called')
 	var newPrestige = str(employee.prestige)
 	UIScheduler.addToSchedule(func(): prestigeLabel.text = newPrestige)
 

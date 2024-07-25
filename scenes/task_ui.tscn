@@ -23,21 +23,6 @@ blend_mode = 3
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mkg1x"]
 blend_mode = 3
 
-[sub_resource type="Animation" id="Animation_y2wy1"]
-resource_name = "number_decrease"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("NextActivationLabel:theme_override_colors/font_color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0.917969, 0.200806, 0.395159, 1), Color(0, 0, 0, 1), Color(0.847656, 0, 0.148777, 1), Color(0, 0, 0, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_1c6js"]
 length = 0.001
 tracks/0/type = "value"
@@ -65,20 +50,19 @@ tracks/1/keys = {
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_ob6bp"]
-resource_name = "poke_out"
-length = 0.3
+[sub_resource type="Animation" id="Animation_y2wy1"]
+resource_name = "number_decrease"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath("NextActivationLabel:theme_override_colors/font_color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(-50, 0)]
+"values": [Color(0, 0, 0, 1), Color(0.917969, 0.200806, 0.395159, 1), Color(0, 0, 0, 1), Color(0.847656, 0, 0.148777, 1), Color(0, 0, 0, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_orw2w"]
@@ -95,6 +79,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(-50, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ob6bp"]
+resource_name = "poke_out"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-50, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vsit0"]

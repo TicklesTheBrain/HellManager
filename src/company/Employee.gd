@@ -4,13 +4,15 @@ class_name Employee
 @export var prestige: int:
     set(v):
         if v != prestige:
+            prestige = v
             prestigeChange.emit()
-        prestige = v
+            
 @export var capacity: int:
     set(v):
         if v != capacity:
+            capacity = v
             capacityChange.emit()
-        capacity = v
+
 @export var dependentActions: Array[Action] = []
 @export var independentActions: Array[Action] = [] #TODO: I forgot why I put it here
 @export var whenPlacedActions: Array[Action] = []

@@ -14,14 +14,14 @@ enum InOrOut {
 
 
 func performSpecific() -> bool:
-	print('delegate action perform specific')
+	# print('delegate action perform specific')
 
 	var initialList = []
 	if connectionType == InOrOut.Inflow or connectionType == InOrOut.Both:
 		initialList.append_array(jobAttachedTo.inflow)
 	if connectionType == InOrOut.Outflow or connectionType == InOrOut.Both:
 		initialList.append_array(jobAttachedTo.outflow)
-
+	# print('initial list ', initialList)
 	var connectedToDelegate = []
 	for flow in initialList:
 		if flow.employee == null and allowDelegateOnVacant:
@@ -35,10 +35,10 @@ func performSpecific() -> bool:
 		if delegateCondition == null:
 			connectedToDelegate.push_back(flow)
 
-	for outflow in connectedToDelegate:
+	for flow in connectedToDelegate:
 		var newAction = actionToDelegate.duplicate()
-		newAction.jobAttachedTo = outflow
+		newAction.jobAttachedTo = flow
 		newAction.perform()
 	
-	print('outflows to delegate ', connectedToDelegate)
+	# print('outflows to delegate ', connectedToDelegate)
 	return connectedToDelegate.size() > 0
