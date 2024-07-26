@@ -40,8 +40,9 @@ func doWork(_job: Job):
 func destroy():
     destroyed.emit()
 
-func triggerPlaced():
+func triggerPlaced(jobPlaced: Job):
     for action in whenPlacedActions:
+        action.jobAttachedTo = jobPlaced
         if action.try():
             action.perform()
 

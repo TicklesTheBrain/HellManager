@@ -14,7 +14,7 @@ class_name Job
 		if employee == null:
 			employee = v
 			Events.employeePlaced.emit(v, self)
-			employee.triggerPlaced() #TODO: THIS NOT GOOD
+			employee.triggerPlaced(self) #TODO: THIS NOT GOOD
 		if v == null and employee != null:
 			var oldEmployee = employee
 			employee = v

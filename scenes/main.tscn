@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=114 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://src/Main.gd" id="1_nbim8"]
 [ext_resource type="Script" path="res://src/CardMarket.gd" id="2_42g87"]
@@ -28,10 +28,12 @@
 [ext_resource type="Script" path="res://src/actions/action_placeEmployee.gd" id="17_cxtnn"]
 [ext_resource type="Script" path="res://src/cards/multiCard.gd" id="17_mrygo"]
 [ext_resource type="Script" path="res://src/actions/action_changePrestige.gd" id="17_p0tod"]
+[ext_resource type="Script" path="res://src/actions/action_changeTaskDelay.gd" id="17_rftmj"]
 [ext_resource type="Script" path="res://src/cards/CardContainer.gd" id="18_1vww6"]
 [ext_resource type="Script" path="res://src/actions/action_destroyEmployee.gd" id="18_jrclo"]
 [ext_resource type="Script" path="res://src/actions/action_addFlow.gd" id="19_5nh3j"]
 [ext_resource type="Script" path="res://src/ui_code/AreaPC.gd" id="19_qe3sq"]
+[ext_resource type="Script" path="res://src/methodReplacements/getNetworkInsteadOfOwn.gd" id="20_4ptb6"]
 [ext_resource type="Script" path="res://src/cards/Hand.gd" id="20_vouf7"]
 [ext_resource type="Texture2D" uid="uid://bwl07yqs0u1c7" path="res://assets/zig-arrow.svg" id="22_hgn1x"]
 [ext_resource type="Script" path="res://src/ui_code/SinkPC.gd" id="23_i5ahq"]
@@ -157,25 +159,32 @@ employeeName = "Pasiuntėjas"
 employeePic = ExtResource("15_lao0j")
 staticText = "Produce 1 Red on lower prestige subordinates"
 
-[sub_resource type="Resource" id="Resource_362dq"]
+[sub_resource type="Resource" id="Resource_3t7a0"]
 script = ExtResource("7_b1mae")
-type = 0
+type = 1
 
-[sub_resource type="Resource" id="Resource_ewigq"]
-script = ExtResource("8_2wa5w")
-producedTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_362dq")])
+[sub_resource type="Resource" id="Resource_cf7wx"]
+script = ExtResource("13_mduv8")
+requiredTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_3t7a0")])
+
+[sub_resource type="Resource" id="Resource_cerpk"]
+script = ExtResource("17_rftmj")
+delayChange = 1
+delaySet = false
+choiceBased = false
+basedOnChoice = true
 
 [sub_resource type="Resource" id="Resource_qhelu"]
 script = ExtResource("10_wmw7d")
 prestige = 3
 capacity = 5
-dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_ewigq")])
+dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_cf7wx"), SubResource("Resource_cerpk")])
 independentActions = Array[ExtResource("5_nsq4b")]([])
 whenPlacedActions = Array[ExtResource("5_nsq4b")]([])
 methodReplacements = Array[ExtResource("9_7lokn")]([])
 employeeName = "Shlub"
 employeePic = ExtResource("13_fgyyd")
-staticText = ""
+staticText = "Consume Red, delay Tasks"
 
 [sub_resource type="Resource" id="Resource_7p3tm"]
 script = ExtResource("7_b1mae")
@@ -213,6 +222,43 @@ methodReplacements = Array[ExtResource("9_7lokn")]([])
 employeeName = ""
 staticText = ""
 
+[sub_resource type="Resource" id="Resource_pogl1"]
+script = ExtResource("20_4ptb6")
+
+[sub_resource type="Resource" id="Resource_xdlq6"]
+script = ExtResource("10_wmw7d")
+prestige = 7
+capacity = 7
+dependentActions = Array[ExtResource("5_nsq4b")]([])
+independentActions = Array[ExtResource("5_nsq4b")]([])
+whenPlacedActions = Array[ExtResource("5_nsq4b")]([])
+methodReplacements = Array[ExtResource("9_7lokn")]([SubResource("Resource_pogl1")])
+employeeName = "Courier"
+staticText = "Can pass on requests"
+
+[sub_resource type="Resource" id="Resource_l11ea"]
+script = ExtResource("7_b1mae")
+type = 2
+
+[sub_resource type="Resource" id="Resource_wwyg7"]
+script = ExtResource("7_b1mae")
+type = 2
+
+[sub_resource type="Resource" id="Resource_j2obe"]
+script = ExtResource("13_mduv8")
+requiredTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_l11ea"), SubResource("Resource_wwyg7")])
+
+[sub_resource type="Resource" id="Resource_dpwma"]
+script = ExtResource("10_wmw7d")
+prestige = 8
+capacity = 8
+dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_j2obe")])
+independentActions = Array[ExtResource("5_nsq4b")]([])
+whenPlacedActions = Array[ExtResource("5_nsq4b")]([])
+methodReplacements = Array[ExtResource("9_7lokn")]([])
+employeeName = "Eater"
+staticText = "Consume Two Green"
+
 [sub_resource type="Resource" id="Resource_cal8w"]
 script = ExtResource("16_16kad")
 amountOfJobs = 1
@@ -233,37 +279,36 @@ copies = 2
 card = SubResource("Resource_nj4v4")
 debug = false
 
-[sub_resource type="Resource" id="Resource_1hrvb"]
+[sub_resource type="Resource" id="Resource_6ombi"]
 script = ExtResource("7_b1mae")
 type = 0
 
-[sub_resource type="Resource" id="Resource_73coo"]
+[sub_resource type="Resource" id="Resource_bnl7g"]
 script = ExtResource("7_b1mae")
-type = 1
+type = 0
 
-[sub_resource type="Resource" id="Resource_hep17"]
+[sub_resource type="Resource" id="Resource_7igap"]
 script = ExtResource("7_b1mae")
 type = 2
 
-[sub_resource type="Resource" id="Resource_2ac0j"]
+[sub_resource type="Resource" id="Resource_4pb1r"]
 script = ExtResource("8_2wa5w")
-producedTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_1hrvb"), SubResource("Resource_73coo"), SubResource("Resource_hep17")])
+producedTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_6ombi"), SubResource("Resource_bnl7g"), SubResource("Resource_7igap")])
 
-[sub_resource type="Resource" id="Resource_v1ny0"]
+[sub_resource type="Resource" id="Resource_llf17"]
 script = ExtResource("10_wmw7d")
-prestige = 7
-capacity = 9
-dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_2ac0j")])
+prestige = 2
+capacity = 2
+dependentActions = Array[ExtResource("5_nsq4b")]([])
 independentActions = Array[ExtResource("5_nsq4b")]([])
-whenPlacedActions = Array[ExtResource("5_nsq4b")]([])
+whenPlacedActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_4pb1r")])
 methodReplacements = Array[ExtResource("9_7lokn")]([])
-employeeName = "Dude"
-employeePic = ExtResource("9_xt47j")
-staticText = "Produce one of each"
+employeeName = ""
+staticText = ""
 
 [sub_resource type="Resource" id="Resource_qg2rp"]
 script = ExtResource("17_cxtnn")
-employee = SubResource("Resource_v1ny0")
+employee = SubResource("Resource_llf17")
 
 [sub_resource type="Resource" id="Resource_dburm"]
 script = ExtResource("16_hnq1w")
@@ -409,8 +454,9 @@ script = ExtResource("11_if1yf")
 contents = Array[ExtResource("7_b1mae")]([SubResource("Resource_j62mu")])
 defaultLimit = 5
 
-[node name="Job3" type="Node" parent="JobLord" node_paths=PackedStringArray("storage")]
+[node name="Job3" type="Node" parent="JobLord" node_paths=PackedStringArray("outflow", "storage")]
 script = ExtResource("6_cnhkk")
+outflow = [NodePath("../Job7")]
 employee = SubResource("Resource_vt8gg")
 storage = NodePath("TokenStorage")
 
@@ -455,6 +501,27 @@ employee = SubResource("Resource_y8f7y")
 storage = NodePath("TokenStorage")
 
 [node name="TokenStorage" type="Node" parent="JobLord/Job6"]
+script = ExtResource("11_if1yf")
+defaultLimit = 20
+
+[node name="Job7" type="Node" parent="JobLord" node_paths=PackedStringArray("inflow", "outflow", "storage")]
+script = ExtResource("6_cnhkk")
+inflow = [NodePath("../Job3")]
+outflow = [NodePath("../Job8")]
+employee = SubResource("Resource_xdlq6")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job7"]
+script = ExtResource("11_if1yf")
+defaultLimit = 20
+
+[node name="Job8" type="Node" parent="JobLord" node_paths=PackedStringArray("inflow", "storage")]
+script = ExtResource("6_cnhkk")
+inflow = [NodePath("../Job7")]
+employee = SubResource("Resource_dpwma")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job8"]
 script = ExtResource("11_if1yf")
 defaultLimit = 20
 

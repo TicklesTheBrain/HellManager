@@ -8,7 +8,7 @@ class_name ActionChangeTaskDelay
 @export var condition: Condition
 @export var basedOnChoice: bool = true
 
-var tasks: Array[TaskCard]
+var tasks: Array[ProtoCard] #TODO: need to fix casting for this below, should be Array[TaskCard]
 
 func isSetup() -> bool:
 	if not basedOnChoice: return true

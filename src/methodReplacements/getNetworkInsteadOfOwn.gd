@@ -13,7 +13,7 @@ func getTokensOwn(replacingJob: Job, request: Array[Token], exclude: Array[Token
 	for job in replacingJob.inflow:
 		var tokensGot = job.getTokensOwn(requestModified, tokensExcluded)
 		requestModified = Globals.subtractTokenList(requestModified, tokensGot.map(func(tp): return tp.token))
-		got.append_array(tokensGot.map(func(tp): return tp.extend(self)))
+		got.append_array(tokensGot.map(func(tp): return tp.extend(replacingJob)))
 		tokensExcluded.append_array(tokensGot.map(func(tp): return tp.token))
 	if got.size() > limit:
 		got = got.slice(0, limit)
