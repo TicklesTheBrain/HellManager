@@ -49,8 +49,8 @@ func getTokens(request: Array[Token], exclude: Array[Token] = [], limit: int = 9
 	if employee.checkJobMethodReplacement("getTokens"):
 		return employee.invokeJobMethodReplacement("getTokens", [self, request, exclude, limit])
 
-
-	var own = getTokensOwn(request, exclude)
+	var own: Array[TokenPath]
+	own.assign(getTokensOwn(request, exclude))
 	var requestModified = Globals.subtractTokenList(request, own.map(func(tp): return tp.token))
 	var excludeModified = exclude.duplicate()
 	excludeModified.append_array(own.map(func(tp): return tp.token))
@@ -73,7 +73,9 @@ func getTokensOwn(request: Array[Token], exclude: Array[Token] = [], limit: int 
 	var ownTokens = storage.getTokens(request, exclude)
 	if ownTokens.size() > limit:
 		ownTokens = ownTokens.slice(0, limit)
-	return ownTokens.map(func(t): return TokenPath.new(t, [self]))
+	var ownTokensTP: Array[TokenPath]
+	ownTokensTP.assign(ownTokens.map(func(t): return TokenPath.new(t, [self])))
+	return ownTokensTP
 
 func getTokensNetwork(request: Array[Token], exclude: Array[Token] = [], limit: int = 999):
 
@@ -111,6 +113,11 @@ func consumeTokens(tokensToConsume):
 		storage.removeToken(token)
 		Events.tokenConsumed.emit(token)
 
+func storeTokens(tokens):
+	storage.addTokens(tokens)
+	for token in tokens:
+		Events.tokenStored.emit(token, self)
+
 class TokenPath:
 	var token: Token
 	var path: Array[Job]
@@ -123,5 +130,3 @@ class TokenPath:
 		var extended = TokenPath.new(token, path)
 		extended.path.push_back(job)
 		return extended
-
-

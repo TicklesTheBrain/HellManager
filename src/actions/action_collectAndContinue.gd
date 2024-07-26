@@ -23,12 +23,16 @@ func performSpecific():
 
 		first = false
 		var limitLeft = capacityAvailable - accessed.size()
-		newAccess = jobAttachedTo.getTokens(requiredTokens, accessed.map(func(tp): return tp.token), limitLeft)
+		var accessedNoTP: Array[Token]
+		accessedNoTP.assign(accessed.map(func(tp): return tp.token))
+		newAccess = jobAttachedTo.getTokens(requiredTokens, accessedNoTP, limitLeft)
 		accessed.append_array(newAccess)
 
 	if additionalAction != null:
 		additionalAction[recordField] = accessed.map(func(tp): return tp.token)
-	jobAttachedTo.acquireTokens(accessed.map(func(tp): return tp.token))
+	jobAttachedTo.acquireTokens(accessed)
+	jobAttachedTo.storeTokens(accessed.map(func(tp): return tp.token))
+	
 	if additionalAction == null:
 		return true
 	var newAdditional = additionalAction.duplicate()

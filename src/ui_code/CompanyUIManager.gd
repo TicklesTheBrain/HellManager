@@ -145,8 +145,7 @@ func makeNewToken(token: Token, job: Job):
 	var newToken = tokenUIPacked.instantiate()
 	tokenUIs.push_back(newToken)
 	newToken.token = token
-	var jobProducing = getJobUI(job)
-	jobProducing.storageContainer.add_child(newToken)
+	storeToken(token, job)
 	await get_tree().process_frame
 	newToken.scale = Vector2(0,0)
 	var tween = get_tree().create_tween()
@@ -178,6 +177,7 @@ func moveToken(token: Token, from: Job, to: Job):
 func consumeToken(t: Token):
 	var tokenUI = getTokenUI(t)
 	tokenUIs.erase(tokenUI)
+	#print('token ', t, ' tokenUI ', tokenUI)
 	var tween = get_tree().create_tween()
 	tween.tween_property(tokenUI, "scale", Vector2(0,0), tokenFadeTime)
 	await tween.finished
@@ -186,6 +186,8 @@ func consumeToken(t: Token):
 
 func storeToken(t: Token, j: Job):
 	var tokenUI = getTokenUI(t)
-	tokenUI.get_parent().remove_child(tokenUI)
+	var parent = tokenUI.get_parent()
+	if parent != null:
+		tokenUI.get_parent().remove_child(tokenUI)
 	var jobUI = getJobUI(j)
 	jobUI.storageContainer.add_child(tokenUI)

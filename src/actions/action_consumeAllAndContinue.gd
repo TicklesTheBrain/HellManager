@@ -16,10 +16,13 @@ func performSpecific():
 	var first = true
 	while (acquired.size() > 0 or first):
 		first = false
-		acquired = jobAttachedTo.getTokens(requiredTokens, stored.map(func(tp): return tp.token))
+		var storedNoTP: Array[Token]
+		storedNoTP.assign(stored.map(func(tp): return tp.token))
+		acquired = jobAttachedTo.getTokens(requiredTokens, storedNoTP)
 		stored.append_array(acquired)
 	if additionalAction != null:
 		additionalAction[recordField] = stored.map(func(tp): return tp.token)
+	jobAttachedTo.acquireTokens(stored)
 	jobAttachedTo.consumeTokens(stored.map(func(tp): return tp.token))
 	if additionalAction == null:
 		return true
