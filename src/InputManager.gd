@@ -7,6 +7,7 @@ class_name InputManager
 @export var marketContainer: CardMarket
 @export var inputLock: bool = false
 
+var draggedCanvas: CompanyUICanvas
 var draggedJob: JobUI = null
 var activeChoice: Callable = Callable()
 	
@@ -18,6 +19,8 @@ func _ready():
 	Events.employeeUIMouseOverEnd.connect(employeeMouseOverEnd)
 	Events.taskCardClicked.connect(taskClicked)
 	Events.cardUseStarted.connect(func(_c): inputLock = true)
+	Events.companyCanvasDragStart.connect(companyCanvasDragStart)
+	Events.companyCanvasDragReleased.connect(companyCanvasDragEnd)
 	#TODO: this input locking thing is fucked, need to do it a different way
 	Events.phaseStarted.connect(func(p):
 		if p == Globals.phases.WORK:
@@ -25,7 +28,20 @@ func _ready():
 		)
 	UIScheduler.finished.connect(func():inputLock = false)
 
+func companyCanvasDragStart(canvas: CompanyUICanvas):
+	if draggedJob == null and activeChoice.is_null():
+		draggedCanvas = canvas
+		canvas.drag = true
+
+
+func companyCanvasDragEnd(canvas: CompanyUICanvas):
+	if not canvas.drag:
+		return
+
+	cancelCanvasDrag()
+
 func taskClicked(taskUI: TaskCardUI, button):
+	cancelCanvasDrag()
 	if not inputLock and button == MOUSE_BUTTON_LEFT:
 		# print('task clicked')
 		taskHand.useCard(taskUI.card, receiveActiveChoice)
@@ -38,6 +54,7 @@ func employeeMouseOverEnd(empUI: EmployeeUI):
 	Events.employeeUIDetailsCloseRequest.emit(empUI)
 	
 func cardClicked(cardUI: ActionCardUI, button: MouseButton):
+	cancelCanvasDrag()
 
 	#print('card clicked on input manger, input lock is ', inputLock, ' phase is ', phase)
 
@@ -65,6 +82,7 @@ func cardClicked(cardUI: ActionCardUI, button: MouseButton):
 func jobClicked(jobUI: JobUI, _button):
 
 	#print('clicked on job ', jobUI, " with button ", button)
+	cancelCanvasDrag()
 
 	if Globals.marketOpen or Globals.slideInProgress:
 		return
@@ -95,6 +113,14 @@ func jobClickReleased(jobUI: JobUI, _button):
 func receiveActiveChoice(callable: Callable):
 	activeChoice = callable
 	Events.showChoices.emit(callable.get_object().checkChoice)
+	
+
+func cancelCanvasDrag():
+	if draggedCanvas == null:
+		return
+
+	draggedCanvas.drag = false
+	draggedCanvas = null
 
 
 

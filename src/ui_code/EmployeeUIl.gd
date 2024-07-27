@@ -33,11 +33,11 @@ func updateVisuals():
 		capacityLabel.text = str(employee.capacity)
 
 func _mouse_exited():
-	#print('emp UI mouse leave')
+	# print('emp UI mouse leave')
 	Events.employeeUIMouseOverEnd.emit(self)
 
 func _mouse_entered():
-	#print('emp UI mouse enter')
+	# print('emp UI mouse enter')
 	Events.employeeUIMouseOverStart.emit(self)
 
 func updatePrestige():

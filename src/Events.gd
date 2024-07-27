@@ -45,6 +45,8 @@ signal gameStateChanged(dirty: bool)
 
 ## UI Signals
 signal actionCardClicked(card: ActionCardUI, button: MouseButton)
+signal companyCanvasDragStart(companyCanvas: CompanyUICanvas)
+signal companyCanvasDragReleased(companyCanvas: CompanyUICanvas)
 signal jobClicked(jobUI: JobUI, button: MouseButton)
 signal jobClickReleased(jobUI: JobUI, button: MouseButton)
 signal jobDragStart(jobUI: JobUI)

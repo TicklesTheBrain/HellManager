@@ -8,8 +8,8 @@ class_name Job
 		return inflow
 
 @export var outflow: Array[Job] = []
-		
-@export var employee: Employee:
+
+@export var employee: Employee: #TODO: Move the initial export one to be placed via _ready() function
 	set(v):
 		if employee == null:
 			employee = v

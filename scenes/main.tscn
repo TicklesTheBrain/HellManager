@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=129 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://src/Main.gd" id="1_nbim8"]
 [ext_resource type="Script" path="res://src/CardMarket.gd" id="2_42g87"]
@@ -54,6 +54,8 @@
 [ext_resource type="PackedScene" uid="uid://bav2v2vhrfn3o" path="res://scenes/task_ui.tscn" id="37_62ix5"]
 [ext_resource type="Script" path="res://src/ui_code/phase_show_ui.gd" id="43_dqmsq"]
 [ext_resource type="Script" path="res://scenes/general_info_label.gd" id="43_j5rga"]
+[ext_resource type="Script" path="res://CanvasLayerFollowPosition.gd" id="45_juffj"]
+[ext_resource type="PackedScene" uid="uid://6sbacijn0esb" path="res://scenes/companyUICanvas.tscn" id="45_k7yar"]
 
 [sub_resource type="Resource" id="Resource_lfh2a"]
 script = ExtResource("7_b1mae")
@@ -638,20 +640,15 @@ disposeContainer = NodePath("../TaskDiscard")
 [node name="TaskDiscard" type="Node" parent="TaskManager"]
 script = ExtResource("18_1vww6")
 
-[node name="MouseOverLord" type="Node2D" parent="."]
-position = Vector2(1188, 27)
-script = ExtResource("3_2pjbp")
-hideDelay = 0.15
-
 [node name="CompanyUILord" type="Node2D" parent="." node_paths=PackedStringArray("jobManager", "lineLayer", "jobLayer", "tokenLayer")]
 script = ExtResource("2_hwxbs")
 jobManager = NodePath("../JobLord")
 lineUIPacked = ExtResource("3_m468t")
 jobUIPacked = ExtResource("5_b0wxn")
 tokenUIPacked = ExtResource("6_h2iy3")
-lineLayer = NodePath("LineLayer")
-jobLayer = NodePath("JobLayer")
-tokenLayer = NodePath("TokenLayer")
+lineLayer = NodePath("CompanyUICanvas/LineLayer")
+jobLayer = NodePath("CompanyUICanvas/JobLayer")
+tokenLayer = NodePath("CompanyUICanvas/TokenLayer")
 gridCellSizeVector = Vector2(165, 235)
 gridGapSizeVector = Vector2(25, 25)
 gridSizeVector = Vector2(1300, 1200)
@@ -659,13 +656,27 @@ tokenAppearTime = null
 tokenMoveTime = null
 tokenFadeTime = null
 
-[node name="LineLayer" type="CanvasLayer" parent="CompanyUILord"]
+[node name="CompanyUICanvas" parent="CompanyUILord" instance=ExtResource("45_k7yar")]
+initialSize = Vector2(3000, 4000)
+
+[node name="LineLayer" type="CanvasLayer" parent="CompanyUILord/CompanyUICanvas" node_paths=PackedStringArray("nodeForFollowPosition")]
 layer = 3
+script = ExtResource("45_juffj")
+nodeForFollowPosition = NodePath("..")
 
-[node name="JobLayer" type="CanvasLayer" parent="CompanyUILord"]
+[node name="JobLayer" type="CanvasLayer" parent="CompanyUILord/CompanyUICanvas" node_paths=PackedStringArray("nodeForFollowPosition")]
+script = ExtResource("45_juffj")
+nodeForFollowPosition = NodePath("..")
 
-[node name="TokenLayer" type="CanvasLayer" parent="CompanyUILord"]
+[node name="TokenLayer" type="CanvasLayer" parent="CompanyUILord/CompanyUICanvas" node_paths=PackedStringArray("nodeForFollowPosition")]
 layer = 4
+script = ExtResource("45_juffj")
+nodeForFollowPosition = NodePath("..")
+
+[node name="MouseOverLord" type="Node2D" parent="."]
+position = Vector2(1188, 27)
+script = ExtResource("3_2pjbp")
+hideDelay = 0.15
 
 [node name="HandPC" type="Node2D" parent="." node_paths=PackedStringArray("area", "logicalContainer")]
 position = Vector2(-17, -48)

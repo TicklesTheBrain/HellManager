@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://6sbacijn0esb"]
+
+[ext_resource type="Script" path="res://CompanyUICanvas.gd" id="1_g141p"]
+[ext_resource type="Shader" path="res://scenes/companyUICanvas.gdshader" id="2_o4lkb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_emcrn"]
+shader = ExtResource("2_o4lkb")
+shader_parameter/effect_filling = 1.0
+shader_parameter/angle = 55.9
+shader_parameter/keep_saturation = 0.0
+shader_parameter/keep_luminance = 0.0
+shader_parameter/color_start = Color(0.46875, 0.138165, 0.162669, 1)
+shader_parameter/start_pos = 0.0
+shader_parameter/color_mid = Color(0.867188, 0.648528, 0.175683, 1)
+shader_parameter/mid_pos = 0.5
+shader_parameter/color_end = Color(0.00348503, 0.378906, 0.0532548, 1)
+shader_parameter/end_pos = 1.0
+shader_parameter/midpos_enabled = true
+shader_parameter/range_start = 0.0
+shader_parameter/range_end = 1.0
+shader_parameter/range_softedge = 0.1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qj248"]
+size = Vector2(128, 91)
+
+[node name="CompanyUICanvas" type="Node2D" node_paths=PackedStringArray("background", "collisionShape")]
+script = ExtResource("1_g141p")
+background = NodePath("CompanyBackground")
+collisionShape = NodePath("DragAreaCompanyUI/CollisionShape2D")
+initialSize = Vector2(500, 500)
+
+[node name="CompanyBackground" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_emcrn")
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+color = Color(1, 0.297744, 0.675507, 1)
+
+[node name="DragAreaCompanyUI" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DragAreaCompanyUI"]
+position = Vector2(64, 45.5)
+shape = SubResource("RectangleShape2D_qj248")
+
+[connection signal="input_event" from="DragAreaCompanyUI" to="." method="_on_drag_area_company_ui_input_event"]
