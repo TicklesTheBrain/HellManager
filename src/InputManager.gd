@@ -21,6 +21,8 @@ func _ready():
 	Events.cardUseStarted.connect(func(_c): inputLock = true)
 	Events.companyCanvasDragStart.connect(companyCanvasDragStart)
 	Events.companyCanvasDragReleased.connect(companyCanvasDragEnd)
+	Events.marketOpenRequest.connect(marketOpen)
+	Events.marketCloseRequest.connect(marketClose)
 	#TODO: this input locking thing is fucked, need to do it a different way
 	Events.phaseStarted.connect(func(p):
 		if p == Globals.phases.WORK:
@@ -28,11 +30,24 @@ func _ready():
 		)
 	UIScheduler.finished.connect(func():inputLock = false)
 
-func companyCanvasDragStart(canvas: CompanyUICanvas):
-	if draggedJob == null and activeChoice.is_null():
-		draggedCanvas = canvas
-		canvas.drag = true
+func marketOpen(controller: MarketUIController):
+	cancelCanvasDrag()
+	controller.openMarket()
 
+func marketClose(controller: MarketUIController):
+	cancelCanvasDrag()
+	cancelJobDrag()
+	controller.closeMarket()
+
+func companyCanvasDragStart(canvas: CompanyUICanvas):
+	if draggedCanvas != null or not activeChoice.is_null():
+		return
+	
+	if Globals.slideInProgress or Globals.marketOpen:
+		return
+	
+	draggedCanvas = canvas
+	canvas.drag = true
 
 func companyCanvasDragEnd(canvas: CompanyUICanvas):
 	if not canvas.drag:
@@ -105,8 +120,12 @@ func jobClicked(jobUI: JobUI, _button):
 func jobClickReleased(jobUI: JobUI, _button):
 	#print('released on job ', jobUI, " with button ", button)
 	if draggedJob == jobUI:
+		cancelJobDrag()
+
+func cancelJobDrag():
+	if draggedJob != null:
 		#print('about to job drag end')
-		Events.jobDragEnd.emit(jobUI)
+		Events.jobDragEnd.emit(draggedJob)
 		draggedJob = null
 		return
 

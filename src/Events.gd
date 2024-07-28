@@ -45,6 +45,8 @@ signal gameStateChanged(dirty: bool)
 
 ## UI Signals
 signal actionCardClicked(card: ActionCardUI, button: MouseButton)
+signal marketOpenRequest(market: MarketUIController)
+signal marketCloseRequest(market: MarketUIController)
 signal companyCanvasDragStart(companyCanvas: CompanyUICanvas)
 signal companyCanvasDragReleased(companyCanvas: CompanyUICanvas)
 signal jobClicked(jobUI: JobUI, button: MouseButton)

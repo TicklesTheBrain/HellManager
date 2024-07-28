@@ -68,7 +68,7 @@ func startDrag():
 
 func _process(_delta):
 	if dragged:
-		global_position = get_viewport().get_mouse_position() + dragOffset
+		global_position = get_viewport().get_mouse_position() - dragOffset
 		moved.emit()		
 
 func endDrag():	

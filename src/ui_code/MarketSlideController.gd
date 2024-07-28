@@ -10,9 +10,9 @@ func _unhandled_input(event):
 		if Globals.slideInProgress:
 			return
 		if Globals.marketOpen:
-			closeMarket()
+			Events.marketCloseRequest.emit(self)
 		else:
-			openMarket()
+			Events.marketOpenRequest.emit(self)
 
 func openMarket():
 	# print('market open')
