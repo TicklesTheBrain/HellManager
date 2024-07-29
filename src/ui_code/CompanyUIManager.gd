@@ -124,7 +124,7 @@ func getJobUI(job: Job) -> JobUI:
 func makeNewJobUI(job: Job, fitIntoInitial: bool = false):
 	var newJobUI = jobUIPacked.instantiate()
 	newJobUI.job = job
-	var emptyCell
+	var emptyCell = null
 	if fitIntoInitial:
 		for row in gridCells:
 			if emptyCell != null: break

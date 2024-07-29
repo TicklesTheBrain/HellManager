@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://6sbacijn0esb"]
 
-[ext_resource type="Script" path="res://CompanyUICanvas.gd" id="1_g141p"]
+[ext_resource type="Script" path="res://src/ui_code/CompanyUICanvas.gd" id="1_g141p"]
 [ext_resource type="Shader" path="res://scenes/companyUICanvas.gdshader" id="2_o4lkb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_emcrn"]

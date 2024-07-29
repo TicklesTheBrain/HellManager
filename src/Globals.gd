@@ -18,6 +18,8 @@ enum phases {
 	CONSEQUENCE
 }
 
+var actionCounter: int
+
 @export var marketOpen: bool = false
 @export var slideInProgress: bool = false
 

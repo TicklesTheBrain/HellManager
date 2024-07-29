@@ -3,7 +3,8 @@ class_name ActionConsumeAllAndContinue
 
 @export var requiredTokens: Array[Token] = []
 @export var additionalAction: Action
-@export var recordField: String
+@export var recordFieldTokenList: String
+@export var recordFieldTokenAmount: String
 
 func try() -> bool:
 	var job = Globals.getCtxt().actingJob
@@ -20,8 +21,13 @@ func performSpecific():
 		storedNoTP.assign(stored.map(func(tp): return tp.token))
 		acquired = jobAttachedTo.getTokens(requiredTokens, storedNoTP)
 		stored.append_array(acquired)
+
 	if additionalAction != null:
-		additionalAction[recordField] = stored.map(func(tp): return tp.token)
+		if recordFieldTokenList != '':
+			additionalAction[recordFieldTokenList] = stored.map(func(tp): return tp.token)
+		if recordFieldTokenAmount != '':
+			additionalAction[recordFieldTokenAmount] = stored.size()
+
 	jobAttachedTo.acquireTokens(stored)
 	jobAttachedTo.consumeTokens(stored.map(func(tp): return tp.token))
 	if additionalAction == null:

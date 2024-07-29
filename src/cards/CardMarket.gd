@@ -20,6 +20,12 @@ enum SlideDirection {
 
 var spaces = []
 
+func getColumnCost(i: int):
+	return i+1
+
+func getCardColumn(card: ProtoCard):
+	return getCardPosition(card).y
+
 func _ready():
 	for r in range(rows):
 		var newRow = []

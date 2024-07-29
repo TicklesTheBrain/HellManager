@@ -1,7 +1,7 @@
-[gd_scene load_steps=130 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=147 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://src/Main.gd" id="1_nbim8"]
-[ext_resource type="Script" path="res://src/CardMarket.gd" id="2_42g87"]
+[ext_resource type="Script" path="res://src/cards/CardMarket.gd" id="2_42g87"]
 [ext_resource type="Script" path="res://src/ui_code/CompanyUIManager.gd" id="2_hwxbs"]
 [ext_resource type="Script" path="res://src/ui_code/MouseOverLord.gd" id="3_2pjbp"]
 [ext_resource type="PackedScene" uid="uid://bdewx43gbc46u" path="res://scenes/flowLine.tscn" id="3_m468t"]
@@ -40,7 +40,9 @@
 [ext_resource type="Texture2D" uid="uid://bwl07yqs0u1c7" path="res://assets/zig-arrow.svg" id="22_hgn1x"]
 [ext_resource type="Script" path="res://src/ui_code/SinkPC.gd" id="23_i5ahq"]
 [ext_resource type="Script" path="res://src/InputManager.gd" id="23_xx20n"]
+[ext_resource type="Script" path="res://src/dynamics/dynamicConnectedToCondition.gd" id="24_1qhwm"]
 [ext_resource type="Script" path="res://src/conditions/conditionTokenOnJob.gd" id="25_bfr6v"]
+[ext_resource type="Script" path="res://src/dynamics/dynamicTokenCollection.gd" id="25_wg2ck"]
 [ext_resource type="Script" path="res://src/actions/action_destroyJob.gd" id="26_r4wih"]
 [ext_resource type="Script" path="res://src/cards/TaskCard.gd" id="27_skm2w"]
 [ext_resource type="Script" path="res://src/ui_code/MarketPC.gd" id="28_lx5eo"]
@@ -55,8 +57,10 @@
 [ext_resource type="Script" path="res://src/ui_code/phase_show_ui.gd" id="43_dqmsq"]
 [ext_resource type="Script" path="res://scenes/general_info_label.gd" id="43_j5rga"]
 [ext_resource type="PackedScene" uid="uid://r1xuijx0ewa4" path="res://scenes/company_grid_cell.tscn" id="44_l3dw6"]
-[ext_resource type="Script" path="res://CanvasLayerFollowPosition.gd" id="45_juffj"]
+[ext_resource type="Script" path="res://src/ui_code/CanvasLayerFollowPosition.gd" id="45_juffj"]
 [ext_resource type="PackedScene" uid="uid://6sbacijn0esb" path="res://scenes/companyUICanvas.tscn" id="45_k7yar"]
+[ext_resource type="Script" path="res://src/ui_code/MarketLabelLord.gd" id="53_ahosn"]
+[ext_resource type="PackedScene" uid="uid://6jmlsqw04ghs" path="res://scenes/market_label.tscn" id="54_0pl2r"]
 
 [sub_resource type="Resource" id="Resource_lfh2a"]
 script = ExtResource("7_b1mae")
@@ -199,6 +203,49 @@ employeeName = "Shlub"
 employeePic = ExtResource("13_fgyyd")
 staticText = "Consume Red, delay Tasks"
 
+[sub_resource type="Resource" id="Resource_pogl1"]
+script = ExtResource("20_4ptb6")
+
+[sub_resource type="Resource" id="Resource_xdlq6"]
+script = ExtResource("10_wmw7d")
+prestige = 7
+capacity = 7
+dependentActions = Array[ExtResource("5_nsq4b")]([])
+independentActions = Array[ExtResource("5_nsq4b")]([])
+whenPlacedActions = Array[ExtResource("5_nsq4b")]([])
+methodReplacements = Array[ExtResource("9_7lokn")]([SubResource("Resource_pogl1")])
+employeeName = "Courier"
+staticText = "Can pass on requests"
+
+[sub_resource type="Resource" id="Resource_5i1vf"]
+script = ExtResource("7_b1mae")
+type = 0
+
+[sub_resource type="Resource" id="Resource_qbqwl"]
+script = ExtResource("7_b1mae")
+type = 1
+
+[sub_resource type="Resource" id="Resource_i7tyi"]
+script = ExtResource("7_b1mae")
+type = 2
+
+[sub_resource type="Resource" id="Resource_y7bww"]
+script = ExtResource("21_dr4mn")
+requiredTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_5i1vf"), SubResource("Resource_qbqwl"), SubResource("Resource_i7tyi")])
+recordFieldTokenList = ""
+recordFieldTokenAmount = ""
+
+[sub_resource type="Resource" id="Resource_dpwma"]
+script = ExtResource("10_wmw7d")
+prestige = 8
+capacity = 8
+dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_y7bww")])
+independentActions = Array[ExtResource("5_nsq4b")]([])
+whenPlacedActions = Array[ExtResource("5_nsq4b")]([])
+methodReplacements = Array[ExtResource("9_7lokn")]([])
+employeeName = "Eater"
+staticText = "Consume Everything"
+
 [sub_resource type="Resource" id="Resource_7p3tm"]
 script = ExtResource("7_b1mae")
 type = 0
@@ -247,48 +294,6 @@ type = 1
 script = ExtResource("7_b1mae")
 type = 1
 
-[sub_resource type="Resource" id="Resource_pogl1"]
-script = ExtResource("20_4ptb6")
-
-[sub_resource type="Resource" id="Resource_xdlq6"]
-script = ExtResource("10_wmw7d")
-prestige = 7
-capacity = 7
-dependentActions = Array[ExtResource("5_nsq4b")]([])
-independentActions = Array[ExtResource("5_nsq4b")]([])
-whenPlacedActions = Array[ExtResource("5_nsq4b")]([])
-methodReplacements = Array[ExtResource("9_7lokn")]([SubResource("Resource_pogl1")])
-employeeName = "Courier"
-staticText = "Can pass on requests"
-
-[sub_resource type="Resource" id="Resource_5i1vf"]
-script = ExtResource("7_b1mae")
-type = 0
-
-[sub_resource type="Resource" id="Resource_qbqwl"]
-script = ExtResource("7_b1mae")
-type = 1
-
-[sub_resource type="Resource" id="Resource_i7tyi"]
-script = ExtResource("7_b1mae")
-type = 2
-
-[sub_resource type="Resource" id="Resource_y7bww"]
-script = ExtResource("21_dr4mn")
-requiredTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_5i1vf"), SubResource("Resource_qbqwl"), SubResource("Resource_i7tyi")])
-recordField = ""
-
-[sub_resource type="Resource" id="Resource_dpwma"]
-script = ExtResource("10_wmw7d")
-prestige = 8
-capacity = 8
-dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_y7bww")])
-independentActions = Array[ExtResource("5_nsq4b")]([])
-whenPlacedActions = Array[ExtResource("5_nsq4b")]([])
-methodReplacements = Array[ExtResource("9_7lokn")]([])
-employeeName = "Eater"
-staticText = "Consume Everything"
-
 [sub_resource type="Resource" id="Resource_icen6"]
 script = ExtResource("7_b1mae")
 type = 0
@@ -318,6 +323,80 @@ methodReplacements = Array[ExtResource("9_7lokn")]([])
 employeeName = "Collector"
 employeePic = ExtResource("22_hgn1x")
 staticText = "Collect all tokens"
+
+[sub_resource type="Resource" id="Resource_ixmts"]
+script = ExtResource("17_p0tod")
+amountOfChange = 1
+choiceBased = false
+
+[sub_resource type="Resource" id="Resource_vbwk3"]
+script = ExtResource("7_b1mae")
+type = 1
+
+[sub_resource type="Resource" id="Resource_pbneg"]
+script = ExtResource("21_dr4mn")
+requiredTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_vbwk3")])
+additionalAction = SubResource("Resource_ixmts")
+recordFieldTokenList = ""
+recordFieldTokenAmount = "amountOfChange"
+
+[sub_resource type="Resource" id="Resource_qcddy"]
+script = ExtResource("10_wmw7d")
+prestige = 1
+capacity = 2
+dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_pbneg")])
+independentActions = Array[ExtResource("5_nsq4b")]([])
+whenPlacedActions = Array[ExtResource("5_nsq4b")]([])
+methodReplacements = Array[ExtResource("9_7lokn")]([])
+employeeName = "Grower"
+employeePic = ExtResource("15_lao0j")
+staticText = "Consume all reds, gain 1 prestige for each"
+
+[sub_resource type="Resource" id="Resource_sih2q"]
+script = ExtResource("7_b1mae")
+type = 0
+
+[sub_resource type="Resource" id="Resource_8omh7"]
+script = ExtResource("7_b1mae")
+type = 0
+
+[sub_resource type="Resource" id="Resource_bi3p5"]
+script = ExtResource("24_1qhwm")
+direction = 2
+
+[sub_resource type="Resource" id="Resource_q1t2w"]
+script = ExtResource("7_b1mae")
+type = 0
+
+[sub_resource type="Resource" id="Resource_pim35"]
+script = ExtResource("25_wg2ck")
+tokenCollection = Array[ExtResource("7_b1mae")]([SubResource("Resource_q1t2w")])
+dynamicMultiplier = SubResource("Resource_bi3p5")
+
+[sub_resource type="Resource" id="Resource_3dyha"]
+script = ExtResource("8_2wa5w")
+producedTokens = Array[ExtResource("7_b1mae")]([])
+dynamic = SubResource("Resource_pim35")
+
+[sub_resource type="Resource" id="Resource_e4rb4"]
+script = ExtResource("10_wmw7d")
+prestige = 3
+capacity = 4
+dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_3dyha")])
+independentActions = Array[ExtResource("5_nsq4b")]([])
+whenPlacedActions = Array[ExtResource("5_nsq4b")]([])
+methodReplacements = Array[ExtResource("9_7lokn")]([])
+employeeName = "Blue Beast"
+employeePic = ExtResource("13_fgyyd")
+staticText = "Produce Blue for each connection."
+
+[sub_resource type="Resource" id="Resource_ucos1"]
+script = ExtResource("7_b1mae")
+type = 1
+
+[sub_resource type="Resource" id="Resource_t3exc"]
+script = ExtResource("7_b1mae")
+type = 1
 
 [sub_resource type="Resource" id="Resource_cal8w"]
 script = ExtResource("16_16kad")
@@ -477,7 +556,7 @@ _data = {
 bg_color = Color(0.0627451, 0.368627, 0.6, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nfpkx"]
-size = Vector2(647, 565)
+size = Vector2(769.5, 457.5)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spnij"]
 bg_color = Color(0.40625, 0.0471723, 0.095828, 1)
@@ -498,103 +577,127 @@ taskManager = NodePath("TaskManager")
 script = ExtResource("23_xx20n")
 actionHand = NodePath("../ActionCards/HandCards")
 taskHand = NodePath("../TaskManager/TaskHand")
+mouseOverAllowed = null
 marketContainer = NodePath("../ActionCards/CardMarket")
+inputLock = null
 
-[node name="JobLord" type="Node" parent="." groups=["JobLord"]]
-script = ExtResource("5_1cdr4")
+[node name="Temp" type="Node" parent="."]
 
-[node name="Job" type="Node" parent="JobLord" node_paths=PackedStringArray("outflow", "storage")]
+[node name="Job" type="Node" parent="Temp" node_paths=PackedStringArray("outflow", "storage")]
 script = ExtResource("6_cnhkk")
 outflow = [NodePath("../Job2")]
 employee = SubResource("Resource_qdqlf")
 storage = NodePath("TokenStorage")
 
-[node name="TokenStorage" type="Node" parent="JobLord/Job"]
+[node name="TokenStorage" type="Node" parent="Temp/Job"]
 script = ExtResource("11_if1yf")
 contents = Array[ExtResource("7_b1mae")]([SubResource("Resource_j62mu")])
 defaultLimit = 5
 
-[node name="Job3" type="Node" parent="JobLord" node_paths=PackedStringArray("outflow", "storage")]
+[node name="Job3" type="Node" parent="Temp" node_paths=PackedStringArray("outflow", "storage")]
 script = ExtResource("6_cnhkk")
 outflow = [NodePath("../Job7")]
 employee = SubResource("Resource_vt8gg")
 storage = NodePath("TokenStorage")
 
-[node name="TokenStorage" type="Node" parent="JobLord/Job3"]
+[node name="TokenStorage" type="Node" parent="Temp/Job3"]
 script = ExtResource("11_if1yf")
 contents = Array[ExtResource("7_b1mae")]([SubResource("Resource_p2afh"), SubResource("Resource_oa62m"), SubResource("Resource_uttuc")])
 defaultLimit = 5
 
-[node name="Job2" type="Node" parent="JobLord" node_paths=PackedStringArray("inflow", "storage")]
+[node name="Job2" type="Node" parent="Temp" node_paths=PackedStringArray("inflow", "storage")]
 script = ExtResource("6_cnhkk")
 inflow = [NodePath("../Job")]
 employee = SubResource("Resource_dq6ey")
 storage = NodePath("TokenStorage")
 
-[node name="TokenStorage" type="Node" parent="JobLord/Job2"]
+[node name="TokenStorage" type="Node" parent="Temp/Job2"]
 script = ExtResource("11_if1yf")
 defaultLimit = 5
 
-[node name="Job4" type="Node" parent="JobLord" node_paths=PackedStringArray("outflow", "storage")]
+[node name="Job4" type="Node" parent="Temp" node_paths=PackedStringArray("outflow", "storage")]
 script = ExtResource("6_cnhkk")
 outflow = [NodePath("../Job5")]
 employee = SubResource("Resource_r08g0")
 storage = NodePath("TokenStorage")
 
-[node name="TokenStorage" type="Node" parent="JobLord/Job4"]
+[node name="TokenStorage" type="Node" parent="Temp/Job4"]
 script = ExtResource("11_if1yf")
 defaultLimit = 5
 
-[node name="Job5" type="Node" parent="JobLord" node_paths=PackedStringArray("inflow", "storage")]
+[node name="Job5" type="Node" parent="Temp" node_paths=PackedStringArray("inflow", "storage")]
 script = ExtResource("6_cnhkk")
 inflow = [NodePath("../Job4")]
 employee = SubResource("Resource_qhelu")
 storage = NodePath("TokenStorage")
 
-[node name="TokenStorage" type="Node" parent="JobLord/Job5"]
+[node name="TokenStorage" type="Node" parent="Temp/Job5"]
 script = ExtResource("11_if1yf")
 defaultLimit = 20
 
-[node name="Job6" type="Node" parent="JobLord" node_paths=PackedStringArray("outflow", "storage")]
-script = ExtResource("6_cnhkk")
-outflow = [NodePath("../Job9")]
-employee = SubResource("Resource_y8f7y")
-storage = NodePath("TokenStorage")
-
-[node name="TokenStorage" type="Node" parent="JobLord/Job6"]
-script = ExtResource("11_if1yf")
-contents = Array[ExtResource("7_b1mae")]([SubResource("Resource_b70cd"), SubResource("Resource_0nadg"), SubResource("Resource_v5ayw")])
-defaultLimit = 20
-
-[node name="Job7" type="Node" parent="JobLord" node_paths=PackedStringArray("inflow", "outflow", "storage")]
+[node name="Job7" type="Node" parent="Temp" node_paths=PackedStringArray("inflow", "outflow", "storage")]
 script = ExtResource("6_cnhkk")
 inflow = [NodePath("../Job3")]
 outflow = [NodePath("../Job8")]
 employee = SubResource("Resource_xdlq6")
 storage = NodePath("TokenStorage")
 
-[node name="TokenStorage" type="Node" parent="JobLord/Job7"]
+[node name="TokenStorage" type="Node" parent="Temp/Job7"]
 script = ExtResource("11_if1yf")
 defaultLimit = 20
 
-[node name="Job8" type="Node" parent="JobLord" node_paths=PackedStringArray("inflow", "storage")]
+[node name="Job8" type="Node" parent="Temp" node_paths=PackedStringArray("inflow", "storage")]
 script = ExtResource("6_cnhkk")
 inflow = [NodePath("../Job7")]
 employee = SubResource("Resource_dpwma")
 storage = NodePath("TokenStorage")
 
-[node name="TokenStorage" type="Node" parent="JobLord/Job8"]
+[node name="TokenStorage" type="Node" parent="Temp/Job8"]
 script = ExtResource("11_if1yf")
 defaultLimit = 20
 
-[node name="Job9" type="Node" parent="JobLord" node_paths=PackedStringArray("inflow", "storage")]
+[node name="Job6" type="Node" parent="Temp" node_paths=PackedStringArray("storage")]
 script = ExtResource("6_cnhkk")
-inflow = [NodePath("../Job6")]
+employee = SubResource("Resource_y8f7y")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="Temp/Job6"]
+script = ExtResource("11_if1yf")
+contents = Array[ExtResource("7_b1mae")]([SubResource("Resource_b70cd"), SubResource("Resource_0nadg"), SubResource("Resource_v5ayw")])
+defaultLimit = 20
+
+[node name="Job9" type="Node" parent="Temp" node_paths=PackedStringArray("storage")]
+script = ExtResource("6_cnhkk")
 employee = SubResource("Resource_7po3r")
 storage = NodePath("TokenStorage")
 
-[node name="TokenStorage" type="Node" parent="JobLord/Job9"]
+[node name="TokenStorage" type="Node" parent="Temp/Job9"]
 script = ExtResource("11_if1yf")
+defaultLimit = 20
+
+[node name="JobLord" type="Node" parent="." groups=["JobLord"]]
+script = ExtResource("5_1cdr4")
+
+[node name="Job10" type="Node" parent="JobLord" node_paths=PackedStringArray("inflow", "storage")]
+script = ExtResource("6_cnhkk")
+inflow = [NodePath("../Job11")]
+employee = SubResource("Resource_qcddy")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job10"]
+script = ExtResource("11_if1yf")
+contents = Array[ExtResource("7_b1mae")]([SubResource("Resource_sih2q"), SubResource("Resource_8omh7")])
+defaultLimit = 20
+
+[node name="Job11" type="Node" parent="JobLord" node_paths=PackedStringArray("outflow", "storage")]
+script = ExtResource("6_cnhkk")
+outflow = [NodePath("../Job10")]
+employee = SubResource("Resource_e4rb4")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job11"]
+script = ExtResource("11_if1yf")
+contents = Array[ExtResource("7_b1mae")]([SubResource("Resource_ucos1"), SubResource("Resource_t3exc")])
 defaultLimit = 20
 
 [node name="ActionCards" type="Node" parent="."]
@@ -606,7 +709,7 @@ deck = Array[ExtResource("17_mrygo")]([SubResource("Resource_5jtij"), SubResourc
 [node name="CardMarket" type="Node" parent="ActionCards" node_paths=PackedStringArray("feedContainer", "disposeContainer")]
 script = ExtResource("2_42g87")
 rows = 2
-columns = 2
+columns = 3
 feedContainer = NodePath("../Deck")
 disposeContainer = NodePath("MarketDispose")
 
@@ -725,7 +828,7 @@ libraries = {
 z_as_relative = false
 offset_left = 248.0
 offset_top = -697.0
-offset_right = 1046.0
+offset_right = 1159.0
 offset_bottom = -19.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kad5c")
@@ -740,7 +843,7 @@ resetRotation = false
 packedCardForReference = ExtResource("29_2tfqd")
 
 [node name="MarketShape" type="CollisionShape2D" parent="MarketSlideController/MarketLayer/Panel/Market PC"]
-position = Vector2(408, 322)
+position = Vector2(469.25, 375.75)
 shape = SubResource("RectangleShape2D_nfpkx")
 
 [node name="MarketSinkPC" type="Node2D" parent="MarketSlideController/MarketLayer/Panel" node_paths=PackedStringArray("positionMarker", "logicalContainer")]
@@ -752,7 +855,18 @@ packedCardForReference = ExtResource("29_2tfqd")
 [node name="MarketSinkMarker" type="Marker2D" parent="MarketSlideController/MarketLayer/Panel/MarketSinkPC"]
 position = Vector2(-279, 344)
 
-[node name="MarketAnimationRoot" type="Node2D" parent="MarketSlideController/MarketLayer"]
+[node name="MarketLabelLord" type="Node2D" parent="MarketSlideController/MarketLayer/Panel" node_paths=PackedStringArray("market", "container")]
+script = ExtResource("53_ahosn")
+marketLabelPacked = ExtResource("54_0pl2r")
+market = NodePath("../../../../ActionCards/CardMarket")
+container = NodePath("MarketLabelContainer")
+
+[node name="MarketLabelContainer" type="HBoxContainer" parent="MarketSlideController/MarketLayer/Panel/MarketLabelLord"]
+offset_left = 177.0
+offset_top = 30.0
+offset_right = 764.0
+offset_bottom = 100.0
+alignment = 1
 
 [node name="CacheUI" type="Node2D" parent="."]
 position = Vector2(1594, -27)

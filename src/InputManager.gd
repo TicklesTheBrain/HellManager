@@ -56,9 +56,12 @@ func companyCanvasDragEnd(canvas: CompanyUICanvas):
 	cancelCanvasDrag()
 
 func taskClicked(taskUI: TaskCardUI, button):
+	print('task clicked')
 	cancelCanvasDrag()
+	if not activeChoice.is_null():
+		stopChoice()
+		return
 	if not inputLock and button == MOUSE_BUTTON_LEFT:
-		# print('task clicked')
 		taskHand.useCard(taskUI.card, receiveActiveChoice)
 
 func employeeMouseOverStart(empUI: EmployeeUI):
@@ -70,23 +73,28 @@ func employeeMouseOverEnd(empUI: EmployeeUI):
 	
 func cardClicked(cardUI: ActionCardUI, button: MouseButton):
 	cancelCanvasDrag()
-
 	#print('card clicked on input manger, input lock is ', inputLock, ' phase is ', phase)
+
+	if not activeChoice.is_null():
+		stopChoice()
 
 	if inputLock:
 		return
 
 	#var ctxt = Globals.get_ctxt()
-
-
 	if button == MOUSE_BUTTON_LEFT and marketContainer.getCardPosition(cardUI.card) != Vector2(-1,-1):
 
 		if marketContainer.inaccessible:
 			return
 
+		var cost = marketContainer.getColumnCost(marketContainer.getCardColumn(cardUI.card))
+		# print('cost ', cost)
+		if cost > Globals.actionCounter:
+			return
+
 		marketContainer.removeCard(cardUI.card)
 		actionHand.addCard(cardUI.card)
-		Events.cardTaken.emit(cardUI.card)
+		Events.cardTaken.emit(cardUI.card, cost)
 		return
 
 	#print('clicked on card ', cardUI, " with button ", button)
@@ -107,8 +115,7 @@ func jobClicked(jobUI: JobUI, _button):
 		var result = activeChoice.call(jobUI.job)
 		if result:
 			#print('choice accepted')
-			Events.stopShowChoices.emit()
-			activeChoice = Callable()
+			stopChoice()
 		return
 
 	if draggedJob == null:
@@ -132,7 +139,11 @@ func cancelJobDrag():
 func receiveActiveChoice(callable: Callable):
 	activeChoice = callable
 	Events.showChoices.emit(callable.get_object().checkChoice)
-	
+
+func stopChoice():
+	print('stop choice')
+	activeChoice = Callable()
+	Events.stopShowChoices.emit()	
 
 func cancelCanvasDrag():
 	if draggedCanvas == null:
@@ -140,6 +151,3 @@ func cancelCanvasDrag():
 
 	draggedCanvas.drag = false
 	draggedCanvas = null
-
-
-

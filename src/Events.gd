@@ -27,7 +27,7 @@ signal actionEnded(action: Action)
 
 #Card stuff
 signal cardAddedToMarket(card: ProtoCard)
-signal cardTaken(card: ProtoCard)
+signal cardTaken(card: ProtoCard, actionCost: int)
 signal cardUseStarted(card: ProtoCard)
 signal cardUseEnded(card: ProtoCard)
 signal cardAddedToContainer(card: ProtoCard, container: CardContainer)

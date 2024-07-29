@@ -9,6 +9,7 @@ extends Node2D
 @export var actionsPerManage: int = 3
 var actionCounter: int = 0:
 	set(v):
+		Globals.actionCounter = v
 		actionCounter = v
 		if actionCounter > 0:
 			Events.requestMessage.emit('Play a card, get a card or skip. Actions Left: {act}'.format({"act": actionCounter}))
@@ -20,8 +21,8 @@ func _ready():
 	Events.cardUseEnded.connect(markActionTaken)
 	mainLoop()
 
-func markActionTaken(_discardedArgument):
-	actionCounter -= 1
+func markActionTaken(_discardedArgument, cost: int = 1):
+	actionCounter -= cost
 	if actionCounter <= 0:
 		manageComplete.emit()
 
