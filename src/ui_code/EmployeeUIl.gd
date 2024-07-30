@@ -7,7 +7,7 @@ class_name EmployeeUI
 		updateVisuals()
 @export var employeeNameLabel: Label
 @export var prestigeLabel: Label
-@export var capacityLabel: Label
+@export var skillLabel: Label
 @export var employeeTextLabel: Label
 @export var employeePic: TextureRect
 @export var requestMouseOver: bool
@@ -17,7 +17,7 @@ func _ready():
 	if employee != null:
 		updateVisuals()
 		employee.prestigeChange.connect(updatePrestige)
-		employee.capacityChange.connect(updateCapacity)
+		employee.skillChange.connect(updateSkill)
 		employee.destroyed.connect(scheduleShowDestroy)
 
 func updateVisuals():
@@ -29,8 +29,8 @@ func updateVisuals():
 		employeePic.texture = employee.employeePic
 	if prestigeLabel != null:
 		prestigeLabel.text = str(employee.prestige)
-	if capacityLabel != null:
-		capacityLabel.text = str(employee.capacity)
+	if skillLabel != null:
+		skillLabel.text = str(employee.skill)
 
 func _mouse_exited():
 	# print('emp UI mouse leave')
@@ -45,9 +45,9 @@ func updatePrestige():
 	var newPrestige = str(employee.prestige)
 	UIScheduler.addToSchedule(func(): prestigeLabel.text = newPrestige)
 
-func updateCapacity():
-	var newCapacity = str(employee.capacity)
-	UIScheduler.addToSchedule(func(): capacityLabel.text = newCapacity)
+func updateSkill():
+	var newSkill = str(employee.skill)
+	UIScheduler.addToSchedule(func(): skillLabel.text = newSkill)
 
 func showDestroy():
 	var tween = get_tree().create_tween()

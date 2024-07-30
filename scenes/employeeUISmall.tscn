@@ -26,10 +26,9 @@ blend_mode = 3
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lm160"]
 size = Vector2(143, 212)
 
-[node name="EmployeeVisualSmall" type="Node2D" node_paths=PackedStringArray("prestigeLabel", "capacityLabel", "employeePic")]
+[node name="EmployeeVisualSmall" type="Node2D" node_paths=PackedStringArray("prestigeLabel", "employeePic")]
 script = ExtResource("1_vqegc")
 prestigeLabel = NodePath("Prestige")
-capacityLabel = NodePath("Capacity")
 employeePic = NodePath("EmployePic")
 requestMouseOver = true
 
@@ -47,7 +46,7 @@ position = Vector2(75, 110.5)
 scale = Vector2(0.34, 0.466)
 texture = ExtResource("2_baq61")
 
-[node name="Capacity" type="Label" parent="."]
+[node name="Skill" type="Label" parent="."]
 offset_left = 107.0
 offset_top = 176.0
 offset_right = 142.0

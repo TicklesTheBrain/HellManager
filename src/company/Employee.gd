@@ -7,11 +7,11 @@ class_name Employee
             prestige = v
             prestigeChange.emit()
             
-@export var capacity: int:
+@export var skill: int:
     set(v):
-        if v != capacity:
-            capacity = v
-            capacityChange.emit()
+        if v != skill:
+            skill = v
+            skillChange.emit()
 
 @export var dependentActions: Array[Action] = []
 @export var independentActions: Array[Action] = [] #TODO: I forgot why I put it here
@@ -22,7 +22,7 @@ class_name Employee
 @export var staticText: String
 
 signal prestigeChange
-signal capacityChange
+signal skillChange
 signal destroyed
 
 func doWork(_job: Job):
