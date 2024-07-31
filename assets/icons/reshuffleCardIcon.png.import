@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0gyuspcbodb3"
-valid=false
+uid="uid://dqwjr34tl4q5e"
+path="res://.godot/imported/reshuffleCardIcon.png-26a7c9adcda844a1fd5e53557e831a27.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
-source_file="res://assets/monsterPics/monsterCrab.jpg"
+source_file="res://assets/icons/reshuffleCardIcon.png"
+dest_files=["res://.godot/imported/reshuffleCardIcon.png-26a7c9adcda844a1fd5e53557e831a27.ctex"]
 
 [params]
 

@@ -38,7 +38,7 @@ recordFieldTokenAmount = ""
 
 [resource]
 script = ExtResource("9_dsoc7")
-prestige = 5
+prestige = 4
 skill = 2
 dependentActions = Array[ExtResource("1_mpuww")]([])
 independentActions = Array[ExtResource("1_mpuww")]([SubResource("Resource_xsxqa"), SubResource("Resource_xxmip")])

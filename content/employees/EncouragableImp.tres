@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="Employee" load_steps=14 format=3 uid="uid://criw5g3i8xcl4"]
+
+[ext_resource type="Script" path="res://src/actions/Action.gd" id="1_ocsg0"]
+[ext_resource type="Script" path="res://src/dynamics/dynamicPrestige.gd" id="2_4b6cv"]
+[ext_resource type="Script" path="res://src/dynamics/dynamicTokenCollection.gd" id="3_ypmdj"]
+[ext_resource type="Script" path="res://src/company/Token.gd" id="4_8npxl"]
+[ext_resource type="Script" path="res://src/actions/action_produce.gd" id="5_g78sv"]
+[ext_resource type="Texture2D" uid="uid://ccxaexpfm0b7m" path="res://assets/monsterPics/monsterNoSkin.png" id="6_obv0e"]
+[ext_resource type="Script" path="res://src/methodReplacements/MethodReplacement.gd" id="7_dqnxt"]
+[ext_resource type="Script" path="res://src/company/Employee.gd" id="8_bnobt"]
+
+[sub_resource type="Resource" id="Resource_5wgot"]
+script = ExtResource("2_4b6cv")
+forEveryMultipleOf = 3.0
+
+[sub_resource type="Resource" id="Resource_xglq6"]
+script = ExtResource("4_8npxl")
+type = 5
+
+[sub_resource type="Resource" id="Resource_dw0ea"]
+script = ExtResource("4_8npxl")
+type = 4
+
+[sub_resource type="Resource" id="Resource_7ts8r"]
+script = ExtResource("3_ypmdj")
+tokenCollection = Array[ExtResource("4_8npxl")]([SubResource("Resource_xglq6"), SubResource("Resource_dw0ea")])
+dynamicMultiplier = SubResource("Resource_5wgot")
+
+[sub_resource type="Resource" id="Resource_ptc3c"]
+script = ExtResource("5_g78sv")
+producedTokens = Array[ExtResource("4_8npxl")]([])
+dynamic = SubResource("Resource_7ts8r")
+randomAmount = 0
+
+[resource]
+script = ExtResource("8_bnobt")
+prestige = 3
+skill = 1
+dependentActions = Array[ExtResource("1_ocsg0")]([SubResource("Resource_ptc3c"), null])
+independentActions = Array[ExtResource("1_ocsg0")]([])
+whenPlacedActions = Array[ExtResource("1_ocsg0")]([])
+methodReplacements = Array[ExtResource("7_dqnxt")]([])
+employeeName = "Encouragable Imp"
+employeePic = ExtResource("6_obv0e")
+staticText = "For every 3 prestige, produce Black and Yellow."

@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="Employee" load_steps=13 format=3 uid="uid://ggmu1f8i0hig"]
+
+[ext_resource type="Script" path="res://src/actions/Action.gd" id="1_boa11"]
+[ext_resource type="Script" path="res://src/company/Token.gd" id="2_fye3r"]
+[ext_resource type="Script" path="res://src/actions/action_consume.gd" id="3_2lyba"]
+[ext_resource type="Script" path="res://src/actions/action_changeTaskDelay.gd" id="4_76bpc"]
+[ext_resource type="Texture2D" uid="uid://c7n6lamey523r" path="res://assets/monsterPics/monsterLegs.png" id="5_uy7tc"]
+[ext_resource type="Script" path="res://src/methodReplacements/MethodReplacement.gd" id="6_37wul"]
+[ext_resource type="Script" path="res://src/company/Employee.gd" id="7_uj8d6"]
+
+[sub_resource type="Resource" id="Resource_gcgdf"]
+script = ExtResource("2_fye3r")
+type = 2
+
+[sub_resource type="Resource" id="Resource_hod1i"]
+script = ExtResource("2_fye3r")
+type = 2
+
+[sub_resource type="Resource" id="Resource_bowko"]
+script = ExtResource("2_fye3r")
+type = 2
+
+[sub_resource type="Resource" id="Resource_1iunf"]
+script = ExtResource("3_2lyba")
+requiredTokens = Array[ExtResource("2_fye3r")]([SubResource("Resource_gcgdf"), SubResource("Resource_hod1i"), SubResource("Resource_bowko")])
+limit = 999
+
+[sub_resource type="Resource" id="Resource_54hyg"]
+script = ExtResource("4_76bpc")
+delayChange = 1
+delaySet = false
+choiceBased = false
+basedOnChoice = false
+amountOfTasks = 1
+
+[resource]
+script = ExtResource("7_uj8d6")
+prestige = 4
+skill = 1
+dependentActions = Array[ExtResource("1_boa11")]([SubResource("Resource_1iunf"), SubResource("Resource_54hyg")])
+independentActions = Array[ExtResource("1_boa11")]([])
+whenPlacedActions = Array[ExtResource("1_boa11")]([])
+methodReplacements = Array[ExtResource("6_37wul")]([])
+employeeName = "The Deceiver"
+employeePic = ExtResource("5_uy7tc")
+staticText = "Consume 3 Green, Delay 1 Random Task."

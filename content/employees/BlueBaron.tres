@@ -47,7 +47,7 @@ condition = SubResource("Resource_uu3im")
 [resource]
 script = ExtResource("9_kvf5p")
 prestige = 4
-skill = 1
+skill = 0
 dependentActions = Array[ExtResource("1_7f3fi")]([SubResource("Resource_emjku"), SubResource("Resource_hxcwc")])
 independentActions = Array[ExtResource("1_7f3fi")]([SubResource("Resource_xb7er")])
 whenPlacedActions = Array[ExtResource("1_7f3fi")]([])

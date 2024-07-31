@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="Employee" load_steps=15 format=3 uid="uid://1w8ufw1ous2n"]
+
+[ext_resource type="Script" path="res://src/actions/Action.gd" id="1_3ewcp"]
+[ext_resource type="Script" path="res://src/company/Token.gd" id="2_75o68"]
+[ext_resource type="Script" path="res://src/actions/action_consume.gd" id="3_kcec1"]
+[ext_resource type="Script" path="res://src/actions/action_produce.gd" id="4_14xfb"]
+[ext_resource type="Texture2D" uid="uid://dbwkqsktbto2" path="res://assets/monsterPics/monsterStar.jpg" id="5_key1a"]
+[ext_resource type="Script" path="res://src/methodReplacements/MethodReplacement.gd" id="6_6fw5b"]
+[ext_resource type="Script" path="res://src/company/Employee.gd" id="7_wlvut"]
+
+[sub_resource type="Resource" id="Resource_ii0q3"]
+script = ExtResource("2_75o68")
+type = 3
+
+[sub_resource type="Resource" id="Resource_ivkt2"]
+script = ExtResource("2_75o68")
+type = 4
+
+[sub_resource type="Resource" id="Resource_nxtsw"]
+script = ExtResource("3_kcec1")
+requiredTokens = Array[ExtResource("2_75o68")]([SubResource("Resource_ii0q3"), SubResource("Resource_ivkt2")])
+limit = 999
+
+[sub_resource type="Resource" id="Resource_aiaux"]
+script = ExtResource("2_75o68")
+type = 6
+
+[sub_resource type="Resource" id="Resource_kgws3"]
+script = ExtResource("2_75o68")
+type = 7
+
+[sub_resource type="Resource" id="Resource_6cfhl"]
+script = ExtResource("2_75o68")
+type = 8
+
+[sub_resource type="Resource" id="Resource_7u4o0"]
+script = ExtResource("4_14xfb")
+producedTokens = Array[ExtResource("2_75o68")]([SubResource("Resource_aiaux"), SubResource("Resource_kgws3"), SubResource("Resource_6cfhl")])
+randomAmount = 1
+
+[resource]
+script = ExtResource("7_wlvut")
+prestige = 8
+skill = 4
+dependentActions = Array[ExtResource("1_3ewcp")]([SubResource("Resource_nxtsw"), SubResource("Resource_7u4o0")])
+independentActions = Array[ExtResource("1_3ewcp")]([])
+whenPlacedActions = Array[ExtResource("1_3ewcp")]([])
+methodReplacements = Array[ExtResource("6_6fw5b")]([])
+employeeName = "Difficult Talent"
+employeePic = ExtResource("5_key1a")
+staticText = "Consume Purple and Yellow, Produce random top Token."

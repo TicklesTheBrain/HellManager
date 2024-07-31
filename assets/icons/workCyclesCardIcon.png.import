@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbyeh2viktc8"
-path="res://.godot/imported/mosnterCyclops.jpg-3108c14d07b59c44a4c24033b453c3da.ctex"
+uid="uid://ccsuykwp0657d"
+path="res://.godot/imported/workCyclesCardIcon.png-c176bbdf4a2da35dbd381a83296a8e1b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/monsterPics/mosnterCyclops.jpg"
-dest_files=["res://.godot/imported/mosnterCyclops.jpg-3108c14d07b59c44a4c24033b453c3da.ctex"]
+source_file="res://assets/icons/workCyclesCardIcon.png"
+dest_files=["res://.godot/imported/workCyclesCardIcon.png-c176bbdf4a2da35dbd381a83296a8e1b.ctex"]
 
 [params]
 

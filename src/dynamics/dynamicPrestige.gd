@@ -1,5 +1,7 @@
 extends Dynamic
 class_name DynamicBasedOnPrestige
 
+@export var forEveryMultipleOf: float = 1
+
 func getAmount(askingAction: Action) -> int:
-    return askingAction.jobAttachedTo.prestige
+    return floor(askingAction.jobAttachedTo.prestige / forEveryMultipleOf)

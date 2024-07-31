@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pnt2iobbax4j"
-valid=false
+uid="uid://dbyeh2viktc8"
+path="res://.godot/imported/monsterCyclops.jpg-1732ef2db6191d7f01364dc7f950c6bc.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
-source_file="res://assets/monsterPics/monsterLegs.jpg"
+source_file="res://assets/monsterPics/monsterCyclops.jpg"
+dest_files=["res://.godot/imported/monsterCyclops.jpg-1732ef2db6191d7f01364dc7f950c6bc.ctex"]
 
 [params]
 

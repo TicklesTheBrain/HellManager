@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="Employee" load_steps=15 format=3 uid="uid://epa8pcill1fl"]
+
+[ext_resource type="Script" path="res://src/actions/Action.gd" id="1_nlvgm"]
+[ext_resource type="Script" path="res://src/company/Token.gd" id="2_xjyik"]
+[ext_resource type="Script" path="res://src/actions/action_produce.gd" id="3_weurv"]
+[ext_resource type="Texture2D" uid="uid://be6bgim82j43p" path="res://assets/monsterPics/monsterInsect.jpg" id="4_fjefc"]
+[ext_resource type="Script" path="res://src/actions/action_changePrestige.gd" id="5_gogtx"]
+[ext_resource type="Script" path="res://src/actions/action_delegateOther.gd" id="6_a1auf"]
+[ext_resource type="Script" path="res://src/methodReplacements/MethodReplacement.gd" id="7_321fo"]
+[ext_resource type="Script" path="res://src/company/Employee.gd" id="8_pg64g"]
+
+[sub_resource type="Resource" id="Resource_pnqg1"]
+script = ExtResource("2_xjyik")
+type = 0
+
+[sub_resource type="Resource" id="Resource_20tp4"]
+script = ExtResource("2_xjyik")
+type = 1
+
+[sub_resource type="Resource" id="Resource_qfgb6"]
+script = ExtResource("2_xjyik")
+type = 2
+
+[sub_resource type="Resource" id="Resource_4jjsj"]
+script = ExtResource("3_weurv")
+producedTokens = Array[ExtResource("2_xjyik")]([SubResource("Resource_pnqg1"), SubResource("Resource_20tp4"), SubResource("Resource_qfgb6")])
+randomAmount = 0
+
+[sub_resource type="Resource" id="Resource_k4hgd"]
+script = ExtResource("5_gogtx")
+amountOfChange = -1
+choiceBased = false
+
+[sub_resource type="Resource" id="Resource_3pydi"]
+script = ExtResource("6_a1auf")
+actionToDelegate = SubResource("Resource_k4hgd")
+checkJob = false
+allowDelegateOnVacant = false
+connectionType = 2
+
+[resource]
+script = ExtResource("8_pg64g")
+prestige = 0
+skill = 0
+dependentActions = Array[ExtResource("1_nlvgm")]([SubResource("Resource_4jjsj")])
+independentActions = Array[ExtResource("1_nlvgm")]([SubResource("Resource_3pydi")])
+whenPlacedActions = Array[ExtResource("1_nlvgm")]([])
+methodReplacements = Array[ExtResource("7_321fo")]([])
+employeeName = "Jack of Pain"
+employeePic = ExtResource("4_fjefc")
+staticText = "Produce Red Blue Green, Decrease prestige of all connections."

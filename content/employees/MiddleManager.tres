@@ -12,7 +12,7 @@ script = ExtResource("4_rr81q")
 [resource]
 script = ExtResource("5_7fi7s")
 prestige = 6
-skill = 2
+skill = 3
 dependentActions = Array[ExtResource("1_1e4ux")]([])
 independentActions = Array[ExtResource("1_1e4ux")]([])
 whenPlacedActions = Array[ExtResource("1_1e4ux")]([])

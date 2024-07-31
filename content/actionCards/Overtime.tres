@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ActionCard" load_steps=6 format=3 uid="uid://dwrg5sdss8ru"]
+
+[ext_resource type="Texture2D" uid="uid://ccsuykwp0657d" path="res://assets/icons/workCyclesCardIcon.png" id="1_ui3ap"]
+[ext_resource type="Script" path="res://src/actions/Action.gd" id="2_1xycr"]
+[ext_resource type="Script" path="res://src/actions/action_workCycles.gd" id="3_1f6ox"]
+[ext_resource type="Script" path="res://src/cards/ActionCard.gd" id="4_iuq3e"]
+
+[sub_resource type="Resource" id="Resource_abkoh"]
+script = ExtResource("3_1f6ox")
+amountOfCycles = 1
+
+[resource]
+script = ExtResource("4_iuq3e")
+cardText = "Work 2 additional work cycles."
+cardIcon = ExtResource("1_ui3ap")
+cardName = "Overtime"
+revealed = false
+onExecute = Array[ExtResource("2_1xycr")]([SubResource("Resource_abkoh")])

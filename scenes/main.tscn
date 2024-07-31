@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=84 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://src/Main.gd" id="1_nbim8"]
 [ext_resource type="Script" path="res://src/cards/CardMarket.gd" id="2_42g87"]
@@ -21,12 +21,18 @@
 [ext_resource type="Texture2D" uid="uid://dhmuqf88u3xo1" path="res://assets/testPic1.png" id="9_xt47j"]
 [ext_resource type="Script" path="res://src/company/TokenStorage.gd" id="11_if1yf"]
 [ext_resource type="Script" path="res://src/cards/Deck.gd" id="14_r0k10"]
+[ext_resource type="Resource" uid="uid://1w8ufw1ous2n" path="res://content/employees/DifficultTalent.tres" id="16_rq80c"]
+[ext_resource type="Resource" uid="uid://coi0b558k0gjf" path="res://content/employees/evilChampion.tres" id="17_b241t"]
 [ext_resource type="Script" path="res://src/cards/multiCard.gd" id="17_mrygo"]
 [ext_resource type="Script" path="res://src/cards/CardContainer.gd" id="18_1vww6"]
+[ext_resource type="Resource" uid="uid://msk8f7vv46nt" path="res://content/employees/Nerdzebub.tres" id="18_rr473"]
 [ext_resource type="Resource" uid="uid://dy20adawme1ir" path="res://content/actionCards/Growth.tres" id="18_s30eb"]
+[ext_resource type="Resource" uid="uid://ggmu1f8i0hig" path="res://content/employees/TheDeceiver.tres" id="19_ik1t6"]
 [ext_resource type="Resource" uid="uid://k7ial2wl0oe" path="res://content/actionCards/NewHire.tres" id="19_kjoxv"]
 [ext_resource type="Script" path="res://src/ui_code/AreaPC.gd" id="19_qe3sq"]
+[ext_resource type="Resource" uid="uid://epa8pcill1fl" path="res://content/employees/JackOfPain.tres" id="20_dl8i3"]
 [ext_resource type="Script" path="res://src/cards/Hand.gd" id="20_vouf7"]
+[ext_resource type="Resource" uid="uid://criw5g3i8xcl4" path="res://content/employees/EncouragableImp.tres" id="21_q0rqh"]
 [ext_resource type="Resource" uid="uid://dc6oekyla6god" path="res://content/actionCards/PublicPraise.tres" id="21_qglwj"]
 [ext_resource type="Resource" uid="uid://dr0r2nt3flmi0" path="res://content/employees/MiddleManager.tres" id="22_fscka"]
 [ext_resource type="Resource" uid="uid://ddnxi8pcn4mty" path="res://content/actionCards/MandatoryCourse.tres" id="22_xmwqi"]
@@ -40,6 +46,8 @@
 [ext_resource type="Script" path="res://src/ui_code/MarketPC.gd" id="28_lx5eo"]
 [ext_resource type="Script" path="res://src/actions/action_changeCache.gd" id="28_v6a6q"]
 [ext_resource type="PackedScene" uid="uid://dm73o0agf3yay" path="res://scenes/cardUI.tscn" id="29_2tfqd"]
+[ext_resource type="Resource" uid="uid://djlifq0cgtwru" path="res://content/actionCards/Reshuffling.tres" id="29_gf0mo"]
+[ext_resource type="Resource" uid="uid://dwrg5sdss8ru" path="res://content/actionCards/Overtime.tres" id="30_hfyms"]
 [ext_resource type="Resource" uid="uid://bwnb1afh7jngg" path="res://content/actionCards/makeFlow.tres" id="31_pv5e8"]
 [ext_resource type="Script" path="res://src/ui_code/MarketSlideController.gd" id="32_beqie"]
 [ext_resource type="Script" path="res://src/company/PlayerData.gd" id="33_oq5l2"]
@@ -84,6 +92,18 @@ script = ExtResource("17_mrygo")
 copies = 1
 card = ExtResource("22_xmwqi")
 debug = true
+
+[sub_resource type="Resource" id="Resource_lxcin"]
+script = ExtResource("17_mrygo")
+copies = 1
+card = ExtResource("29_gf0mo")
+debug = false
+
+[sub_resource type="Resource" id="Resource_gace1"]
+script = ExtResource("17_mrygo")
+copies = 3
+card = ExtResource("30_hfyms")
+debug = false
 
 [sub_resource type="Resource" id="Resource_2ov4j"]
 script = ExtResource("7_b1mae")
@@ -274,13 +294,62 @@ storage = NodePath("TokenStorage")
 [node name="TokenStorage" type="Node" parent="JobLord/Job"]
 script = ExtResource("11_if1yf")
 
+[node name="Job3" type="Node" parent="JobLord" node_paths=PackedStringArray("storage")]
+script = ExtResource("6_cnhkk")
+employee = ExtResource("16_rq80c")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job3"]
+script = ExtResource("11_if1yf")
+
+[node name="Job12" type="Node" parent="JobLord" node_paths=PackedStringArray("storage")]
+script = ExtResource("6_cnhkk")
+employee = ExtResource("17_b241t")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job12"]
+script = ExtResource("11_if1yf")
+
+[node name="Job13" type="Node" parent="JobLord" node_paths=PackedStringArray("storage")]
+script = ExtResource("6_cnhkk")
+employee = ExtResource("18_rr473")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job13"]
+script = ExtResource("11_if1yf")
+
+[node name="Job14" type="Node" parent="JobLord" node_paths=PackedStringArray("storage")]
+script = ExtResource("6_cnhkk")
+employee = ExtResource("19_ik1t6")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job14"]
+script = ExtResource("11_if1yf")
+
+[node name="Job15" type="Node" parent="JobLord" node_paths=PackedStringArray("storage")]
+script = ExtResource("6_cnhkk")
+employee = ExtResource("20_dl8i3")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job15"]
+script = ExtResource("11_if1yf")
+
+[node name="Job16" type="Node" parent="JobLord" node_paths=PackedStringArray("storage")]
+script = ExtResource("6_cnhkk")
+employee = ExtResource("21_q0rqh")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job16"]
+script = ExtResource("11_if1yf")
+
 [node name="ActionCards" type="Node" parent="."]
 
-[node name="Deck" type="Node" parent="ActionCards"]
+[node name="Deck" type="Node" parent="ActionCards" node_paths=PackedStringArray("feedContainer")]
 script = ExtResource("14_r0k10")
 includeDebug = true
 onlyDebug = true
-deck = Array[ExtResource("17_mrygo")]([SubResource("Resource_5jtij"), SubResource("Resource_8c0pc"), SubResource("Resource_poo86"), SubResource("Resource_lei73"), SubResource("Resource_l8s80")])
+deck = Array[ExtResource("17_mrygo")]([SubResource("Resource_5jtij"), SubResource("Resource_8c0pc"), SubResource("Resource_poo86"), SubResource("Resource_lei73"), SubResource("Resource_l8s80"), SubResource("Resource_lxcin"), SubResource("Resource_gace1")])
+feedContainer = NodePath("../Discard")
 
 [node name="CardMarket" type="Node" parent="ActionCards" node_paths=PackedStringArray("feedContainer", "disposeContainer")]
 script = ExtResource("2_42g87")

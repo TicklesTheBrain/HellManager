@@ -35,11 +35,11 @@ amount = 1
 [resource]
 script = ExtResource("9_d4k80")
 prestige = 1
-skill = 0
+skill = 1
 dependentActions = Array[ExtResource("1_1m3rg")]([SubResource("Resource_pbneg"), SubResource("Resource_bkr3c")])
 independentActions = Array[ExtResource("1_1m3rg")]([])
 whenPlacedActions = Array[ExtResource("1_1m3rg")]([])
 methodReplacements = Array[ExtResource("8_eoofv")]([])
 employeeName = "Networking Bastard"
 employeePic = ExtResource("7_0lk6h")
-staticText = "Consume all reds, gain produce one connection card for each."
+staticText = "Consume all reds, produce one connection card for each."

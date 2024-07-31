@@ -27,8 +27,8 @@ recordField = ""
 
 [resource]
 script = ExtResource("6_k2l2r")
-prestige = 3
-skill = 1
+prestige = 4
+skill = 3
 dependentActions = Array[ExtResource("1_c3eaq")]([SubResource("Resource_2hwj7")])
 independentActions = Array[ExtResource("1_c3eaq")]([])
 whenPlacedActions = Array[ExtResource("1_c3eaq")]([])

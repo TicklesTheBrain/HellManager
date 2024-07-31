@@ -35,7 +35,7 @@ connectionType = 1
 
 [resource]
 script = ExtResource("8_iskw1")
-prestige = 4
+prestige = 3
 skill = 2
 dependentActions = Array[ExtResource("1_12mjc")]([SubResource("Resource_k3ecl")])
 independentActions = Array[ExtResource("1_12mjc")]([])

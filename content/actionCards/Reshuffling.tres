@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ActionCard" load_steps=7 format=3 uid="uid://djlifq0cgtwru"]
+
+[ext_resource type="Texture2D" uid="uid://dqwjr34tl4q5e" path="res://assets/icons/reshuffleCardIcon.png" id="1_f1n23"]
+[ext_resource type="Script" path="res://src/actions/Action.gd" id="2_rprm7"]
+[ext_resource type="Resource" uid="uid://k7ial2wl0oe" path="res://content/actionCards/NewHire.tres" id="3_yy8iy"]
+[ext_resource type="Script" path="res://src/actions/action_relocateEmployee.gd" id="4_cmg0j"]
+[ext_resource type="Script" path="res://src/cards/ActionCard.gd" id="5_xhevj"]
+
+[sub_resource type="Resource" id="Resource_jgbqj"]
+script = ExtResource("4_cmg0j")
+relocationCard = ExtResource("3_yy8iy")
+basedOnChoice = true
+
+[resource]
+script = ExtResource("5_xhevj")
+cardText = "Remove demon from its job, put back in hand."
+cardIcon = ExtResource("1_f1n23")
+cardName = "Reshuffling"
+revealed = false
+onExecute = Array[ExtResource("2_rprm7")]([SubResource("Resource_jgbqj")])
