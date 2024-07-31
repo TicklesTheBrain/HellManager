@@ -37,6 +37,7 @@ func processScheduler():
 func processItem(item: ScheduleItem):
 	schedulerActive = true
 	inProgress.push_back(item)
+	# print('about to call this object ', item.change.get_object(), ' arguments ', item.change.get_method(), item.change.get_bound_arguments())
 	await item.change.call()
 	inProgress.erase(item)
 
@@ -51,7 +52,16 @@ func addToSchedule(change: Callable, animationSubject = null, ctxt: GameContext 
 	newItem.change = change
 	newItem.ctxt = ctxt
 	newItem.subject = animationSubject
+	# print ('added to schedule ', newItem.change.get_object())
 	schedule.push_back(newItem)
+
+
+#TODO: mThis probably need to be implemented widely
+func removeAllSubjects(subject):
+
+	var matching = schedule.filter(func(si): return si.subject == subject)
+	for toRemove in matching:
+		schedule.erase(toRemove)
 
 func _process(_delta):
 	processScheduler()

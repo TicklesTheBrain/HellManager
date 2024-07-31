@@ -17,6 +17,8 @@ func unrollDeck():
 
         for i in range(multiCard.copies):
             addCard(multiCard.card.specificDuplicate())
+    
+    shuffle()
 
 
 func _ready():

@@ -43,11 +43,11 @@ func _mouse_entered():
 func updatePrestige():
 	# print('update prestige called')
 	var newPrestige = str(employee.prestige)
-	UIScheduler.addToSchedule(func(): prestigeLabel.text = newPrestige)
+	UIScheduler.addToSchedule(func(): prestigeLabel.text = newPrestige, self)
 
 func updateSkill():
 	var newSkill = str(employee.skill)
-	UIScheduler.addToSchedule(func(): skillLabel.text = newSkill)
+	UIScheduler.addToSchedule(func(): skillLabel.text = newSkill, self)
 
 func showDestroy():
 	var tween = get_tree().create_tween()

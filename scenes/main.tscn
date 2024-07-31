@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=70 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://src/Main.gd" id="1_nbim8"]
 [ext_resource type="Script" path="res://src/cards/CardMarket.gd" id="2_42g87"]
@@ -18,18 +18,13 @@
 [ext_resource type="Script" path="res://src/company/Job.gd" id="6_cnhkk"]
 [ext_resource type="PackedScene" uid="uid://cgq6pba1xc53a" path="res://scenes/tokenUI.tscn" id="6_h2iy3"]
 [ext_resource type="Script" path="res://src/company/Token.gd" id="7_b1mae"]
-[ext_resource type="Script" path="res://src/actions/action_produce.gd" id="8_2wa5w"]
-[ext_resource type="Script" path="res://src/methodReplacements/MethodReplacement.gd" id="9_7lokn"]
 [ext_resource type="Texture2D" uid="uid://dhmuqf88u3xo1" path="res://assets/testPic1.png" id="9_xt47j"]
-[ext_resource type="Script" path="res://src/company/Employee.gd" id="10_wmw7d"]
 [ext_resource type="Script" path="res://src/company/TokenStorage.gd" id="11_if1yf"]
 [ext_resource type="Script" path="res://src/cards/Deck.gd" id="14_r0k10"]
-[ext_resource type="Script" path="res://src/actions/action_makeJob.gd" id="16_16kad"]
-[ext_resource type="Script" path="res://src/cards/ActionCard.gd" id="16_hnq1w"]
-[ext_resource type="Texture2D" uid="uid://ngdu2hqkbis2" path="res://assets/fedora.svg" id="17_6m0wt"]
-[ext_resource type="Script" path="res://src/actions/action_placeEmployee.gd" id="17_cxtnn"]
 [ext_resource type="Script" path="res://src/cards/multiCard.gd" id="17_mrygo"]
 [ext_resource type="Script" path="res://src/cards/CardContainer.gd" id="18_1vww6"]
+[ext_resource type="Resource" uid="uid://dy20adawme1ir" path="res://content/actionCards/Growth.tres" id="18_s30eb"]
+[ext_resource type="Resource" uid="uid://k7ial2wl0oe" path="res://content/actionCards/NewHire.tres" id="19_kjoxv"]
 [ext_resource type="Script" path="res://src/ui_code/AreaPC.gd" id="19_qe3sq"]
 [ext_resource type="Script" path="res://src/cards/Hand.gd" id="20_vouf7"]
 [ext_resource type="Resource" uid="uid://dr0r2nt3flmi0" path="res://content/employees/MiddleManager.tres" id="22_fscka"]
@@ -58,76 +53,23 @@
 [ext_resource type="Script" path="res://src/ui_code/MarketLabelLord.gd" id="53_ahosn"]
 [ext_resource type="PackedScene" uid="uid://6jmlsqw04ghs" path="res://scenes/market_label.tscn" id="54_0pl2r"]
 
-[sub_resource type="Resource" id="Resource_cal8w"]
-script = ExtResource("16_16kad")
-amountOfJobs = 1
-connected = 0
-connectionType = 0
-
-[sub_resource type="Resource" id="Resource_nj4v4"]
-script = ExtResource("16_hnq1w")
-cardText = "Add new job"
-cardIcon = ExtResource("17_6m0wt")
-cardName = "Expansion"
-revealed = false
-onExecute = Array[ExtResource("5_nsq4b")]([SubResource("Resource_cal8w")])
-
 [sub_resource type="Resource" id="Resource_5jtij"]
 script = ExtResource("17_mrygo")
-copies = 2
-card = SubResource("Resource_nj4v4")
-debug = false
-
-[sub_resource type="Resource" id="Resource_6ombi"]
-script = ExtResource("7_b1mae")
-type = 0
-
-[sub_resource type="Resource" id="Resource_bnl7g"]
-script = ExtResource("7_b1mae")
-type = 0
-
-[sub_resource type="Resource" id="Resource_7igap"]
-script = ExtResource("7_b1mae")
-type = 2
-
-[sub_resource type="Resource" id="Resource_4pb1r"]
-script = ExtResource("8_2wa5w")
-producedTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_6ombi"), SubResource("Resource_bnl7g"), SubResource("Resource_7igap")])
-randomAmount = 0
-
-[sub_resource type="Resource" id="Resource_llf17"]
-script = ExtResource("10_wmw7d")
-prestige = 2
-skill = 0
-dependentActions = Array[ExtResource("5_nsq4b")]([])
-independentActions = Array[ExtResource("5_nsq4b")]([])
-whenPlacedActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_4pb1r")])
-methodReplacements = Array[ExtResource("9_7lokn")]([])
-employeeName = ""
-staticText = ""
-
-[sub_resource type="Resource" id="Resource_qg2rp"]
-script = ExtResource("17_cxtnn")
-employee = SubResource("Resource_llf17")
-
-[sub_resource type="Resource" id="Resource_dburm"]
-script = ExtResource("16_hnq1w")
-cardText = "This shmuck"
-cardName = "Place this shmuck"
-revealed = false
-onExecute = Array[ExtResource("5_nsq4b")]([SubResource("Resource_qg2rp")])
+copies = 6
+card = ExtResource("18_s30eb")
+debug = true
 
 [sub_resource type="Resource" id="Resource_8c0pc"]
 script = ExtResource("17_mrygo")
 copies = 6
-card = SubResource("Resource_dburm")
+card = ExtResource("19_kjoxv")
 debug = false
 
 [sub_resource type="Resource" id="Resource_poo86"]
 script = ExtResource("17_mrygo")
-copies = 2
+copies = 24
 card = ExtResource("31_pv5e8")
-debug = false
+debug = true
 
 [sub_resource type="Resource" id="Resource_2ov4j"]
 script = ExtResource("7_b1mae")
@@ -322,6 +264,8 @@ script = ExtResource("11_if1yf")
 
 [node name="Deck" type="Node" parent="ActionCards"]
 script = ExtResource("14_r0k10")
+includeDebug = true
+onlyDebug = true
 deck = Array[ExtResource("17_mrygo")]([SubResource("Resource_5jtij"), SubResource("Resource_8c0pc"), SubResource("Resource_poo86")])
 
 [node name="CardMarket" type="Node" parent="ActionCards" node_paths=PackedStringArray("feedContainer", "disposeContainer")]

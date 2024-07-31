@@ -15,6 +15,7 @@ func _ready():
 
 func destroyCurrentEmployeeShow():
 	if get_children().size() > 0:
+		UIScheduler.removeAllSubjects(get_children()[0])
 		get_children()[0].queue_free()
 
 

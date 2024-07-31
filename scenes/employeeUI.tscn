@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://qd4r5iqbaah3"]
 
-[ext_resource type="Script" path="res://src/ui_code/EmployeeUIl.gd" id="1_khwmb"]
+[ext_resource type="Script" path="res://src/ui_code/EmployeeUI.gd" id="1_khwmb"]
 [ext_resource type="Texture2D" uid="uid://dk82t4md4wuqo" path="res://assets/white_uneven_tex.png" id="3_1mb5p"]
 [ext_resource type="FontFile" uid="uid://u2357g28y3hy" path="res://assets/fonts/libel-suit-rg.otf" id="4_iyvhs"]
 [ext_resource type="Texture2D" uid="uid://dhmuqf88u3xo1" path="res://assets/testPic1.png" id="5_ouqm5"]
@@ -23,10 +23,10 @@ blend_mode = 3
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mdt14"]
 blend_mode = 3
 
-[node name="EmployeeVisual" type="Node2D" node_paths=PackedStringArray("employeeNameLabel", "prestigeLabel", "skillLabel", "employeeTextLabel", "employeePic")]
+[node name="EmployeeUIBig" type="Node2D" node_paths=PackedStringArray("employeeNameLabel", "prestigeLabel", "skillLabel", "employeeTextLabel", "employeePic")]
 script = ExtResource("1_khwmb")
 employeeNameLabel = NodePath("EmployeeName")
-prestigeLabel = NodePath("Skill")
+prestigeLabel = NodePath("Prestige")
 skillLabel = NodePath("Skill")
 employeeTextLabel = NodePath("EmployeeText")
 employeePic = NodePath("EmployePic")
@@ -75,7 +75,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Capacity" type="Label" parent="."]
+[node name="Skill" type="Label" parent="."]
 offset_left = 210.0
 offset_top = 293.0
 offset_right = 245.0
@@ -100,7 +100,7 @@ expand_mode = 1
 stretch_mode = 5
 metadata/_edit_use_anchors_ = true
 
-[node name="Skill" type="Label" parent="."]
+[node name="Prestige" type="Label" parent="."]
 offset_left = 5.0
 offset_top = 291.0
 offset_right = 40.0
