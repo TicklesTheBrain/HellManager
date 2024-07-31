@@ -13,9 +13,18 @@ func makeNewJob():
 
 	return newJob
 
-func makeEveryoneWork():	
-	for child in get_children():
-			child.doWork()
+func makeEveryoneWork():
+	var allJobs = get_children()
+	allJobs.sort_custom(func(a,b):
+			var aPrio = 0
+			var bPrio = 0
+			if a.employee != null: aPrio = a.employee.prestige
+			if b.employee != null: bPrio = b.employee.prestige
+			return aPrio < bPrio
+	)
+	
+	for job in allJobs:
+			job.doWork()
 
 func getEmployeeJobAtCompany(employee: Employee):
 	var matching = get_children().filter(func(j): return j.employee == employee)

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ActionCard" load_steps=6 format=3 uid="uid://dc6oekyla6god"]
+
+[ext_resource type="Texture2D" uid="uid://diupes21ktgob" path="res://assets/icons/prestigeCardIcon.png" id="1_2uu1s"]
+[ext_resource type="Script" path="res://src/actions/Action.gd" id="2_c7rot"]
+[ext_resource type="Script" path="res://src/actions/action_changePrestige.gd" id="3_coajf"]
+[ext_resource type="Script" path="res://src/cards/ActionCard.gd" id="4_1b3lm"]
+
+[sub_resource type="Resource" id="Resource_didpp"]
+script = ExtResource("3_coajf")
+amountOfChange = 1
+choiceBased = true
+
+[resource]
+script = ExtResource("4_1b3lm")
+cardText = "Increase prestige by 1"
+cardIcon = ExtResource("1_2uu1s")
+cardName = "Public Praise"
+revealed = false
+onExecute = Array[ExtResource("2_c7rot")]([SubResource("Resource_didpp")])

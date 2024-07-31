@@ -4,7 +4,13 @@ class_name Job
 @export var priority: int = 1
 @export var inflow: Array[Job] = []:
 	get:
-		inflow.sort_custom(func(a,b): return a.priority < b.priority)
+		inflow.sort_custom(func(a,b):
+			var aPrio = 0
+			var bPrio = 0
+			if a.employee != null: aPrio = a.employee.prestige
+			if b.employee != null: bPrio = b.employee.prestige
+			return aPrio < bPrio
+		)
 		return inflow
 
 @export var outflow: Array[Job] = []

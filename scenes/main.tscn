@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=74 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://src/Main.gd" id="1_nbim8"]
 [ext_resource type="Script" path="res://src/cards/CardMarket.gd" id="2_42g87"]
@@ -27,7 +27,9 @@
 [ext_resource type="Resource" uid="uid://k7ial2wl0oe" path="res://content/actionCards/NewHire.tres" id="19_kjoxv"]
 [ext_resource type="Script" path="res://src/ui_code/AreaPC.gd" id="19_qe3sq"]
 [ext_resource type="Script" path="res://src/cards/Hand.gd" id="20_vouf7"]
+[ext_resource type="Resource" uid="uid://dc6oekyla6god" path="res://content/actionCards/PublicPraise.tres" id="21_qglwj"]
 [ext_resource type="Resource" uid="uid://dr0r2nt3flmi0" path="res://content/employees/MiddleManager.tres" id="22_fscka"]
+[ext_resource type="Resource" uid="uid://ddnxi8pcn4mty" path="res://content/actionCards/MandatoryCourse.tres" id="22_xmwqi"]
 [ext_resource type="Resource" uid="uid://dy5nsexsga1p4" path="res://content/employees/PurpleDemon.tres" id="23_bktqu"]
 [ext_resource type="Script" path="res://src/ui_code/SinkPC.gd" id="23_i5ahq"]
 [ext_resource type="Script" path="res://src/InputManager.gd" id="23_xx20n"]
@@ -69,6 +71,18 @@ debug = true
 script = ExtResource("17_mrygo")
 copies = 24
 card = ExtResource("31_pv5e8")
+debug = true
+
+[sub_resource type="Resource" id="Resource_lei73"]
+script = ExtResource("17_mrygo")
+copies = 1
+card = ExtResource("21_qglwj")
+debug = true
+
+[sub_resource type="Resource" id="Resource_l8s80"]
+script = ExtResource("17_mrygo")
+copies = 1
+card = ExtResource("22_xmwqi")
 debug = true
 
 [sub_resource type="Resource" id="Resource_2ov4j"]
@@ -266,7 +280,7 @@ script = ExtResource("11_if1yf")
 script = ExtResource("14_r0k10")
 includeDebug = true
 onlyDebug = true
-deck = Array[ExtResource("17_mrygo")]([SubResource("Resource_5jtij"), SubResource("Resource_8c0pc"), SubResource("Resource_poo86")])
+deck = Array[ExtResource("17_mrygo")]([SubResource("Resource_5jtij"), SubResource("Resource_8c0pc"), SubResource("Resource_poo86"), SubResource("Resource_lei73"), SubResource("Resource_l8s80")])
 
 [node name="CardMarket" type="Node" parent="ActionCards" node_paths=PackedStringArray("feedContainer", "disposeContainer")]
 script = ExtResource("2_42g87")

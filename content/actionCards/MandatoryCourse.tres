@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ActionCard" load_steps=6 format=3 uid="uid://ddnxi8pcn4mty"]
+
+[ext_resource type="Texture2D" uid="uid://n0vi6oreud7k" path="res://assets/icons/skillCardIcon.png" id="1_a4yv6"]
+[ext_resource type="Script" path="res://src/actions/Action.gd" id="2_7hfng"]
+[ext_resource type="Script" path="res://src/actions/action_changeSkill.gd" id="3_c5bfn"]
+[ext_resource type="Script" path="res://src/cards/ActionCard.gd" id="4_b7c38"]
+
+[sub_resource type="Resource" id="Resource_i521f"]
+script = ExtResource("3_c5bfn")
+amountOfChange = 1
+choiceBased = true
+
+[resource]
+script = ExtResource("4_b7c38")
+cardText = "Increase skill by 1."
+cardIcon = ExtResource("1_a4yv6")
+cardName = "Mandatory Course"
+revealed = false
+onExecute = Array[ExtResource("2_7hfng")]([SubResource("Resource_i521f")])
