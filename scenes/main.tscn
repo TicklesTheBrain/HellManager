@@ -63,7 +63,7 @@ debug = true
 script = ExtResource("17_mrygo")
 copies = 6
 card = ExtResource("19_kjoxv")
-debug = false
+debug = true
 
 [sub_resource type="Resource" id="Resource_poo86"]
 script = ExtResource("17_mrygo")
