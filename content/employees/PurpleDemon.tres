@@ -28,6 +28,7 @@ prestigeValueToCompare = 0
 [sub_resource type="Resource" id="Resource_k3ecl"]
 script = ExtResource("5_y14dc")
 actionToDelegate = SubResource("Resource_3i7yp")
+checkJob = false
 allowDelegateOnVacant = false
 delegateCondition = SubResource("Resource_ctef4")
 connectionType = 1

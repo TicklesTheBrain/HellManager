@@ -8,8 +8,9 @@ class_name ActionConsumeAllAndContinue
 @export var recordFieldTokenAmount: String
 
 func try() -> bool:
-	var job = Globals.getCtxt().actingJob
-	return job.getTokens(requiredTokens).size() > 0
+	if requiredAll:
+		requiredTokens = Token.getAllTypesCollection()
+	return jobAttachedTo.getTokens(requiredTokens).size() > 0
 		
 func performSpecific():
 

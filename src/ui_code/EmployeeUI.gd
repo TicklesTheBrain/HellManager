@@ -53,6 +53,7 @@ func showDestroy():
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "modulate", Color(Color.WHITE, 0), destroyFadeTime)
 	await get_tree().create_timer(destroyFadeTime).timeout
+	queue_free()
 
 func scheduleShowDestroy():
 	UIScheduler.addToSchedule(showDestroy)

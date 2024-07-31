@@ -2,6 +2,7 @@ extends Action
 class_name ActionDelegateOther
 
 @export var actionToDelegate: Action
+@export var checkJob: bool = false
 @export var allowDelegateOnVacant: bool = false
 @export var delegateCondition: Condition
 @export var connectionType: InOrOut = InOrOut.Outflow
@@ -29,7 +30,10 @@ func performSpecific() -> bool:
 			continue
 		if flow.employee == null and not allowDelegateOnVacant:
 			continue
-		if delegateCondition != null and delegateCondition.checkSubject(flow.employee):
+		var checkSubject = flow.employee
+		if checkJob:
+			checkSubject = flow
+		if delegateCondition != null and delegateCondition.checkSubject(checkSubject):
 			connectedToDelegate.push_back(flow)
 			continue
 		if delegateCondition == null:
@@ -40,5 +44,5 @@ func performSpecific() -> bool:
 		newAction.jobAttachedTo = flow
 		newAction.perform()
 	
-	# print('outflows to delegate ', connectedToDelegate)
+	# print('flows to delegate ', connectedToDelegate)
 	return connectedToDelegate.size() > 0

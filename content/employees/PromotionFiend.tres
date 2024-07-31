@@ -1,16 +1,47 @@
-[gd_resource type="Resource" script_class="Employee" load_steps=5 format=3 uid="uid://djt07p2160wmv"]
+[gd_resource type="Resource" script_class="Employee" load_steps=14 format=3 uid="uid://djt07p2160wmv"]
 
 [ext_resource type="Script" path="res://src/actions/Action.gd" id="1_mpuww"]
+[ext_resource type="Script" path="res://src/actions/action_changePrestige.gd" id="2_3qa8j"]
+[ext_resource type="Script" path="res://src/conditions/conditionTokenOnJob.gd" id="3_25jbq"]
+[ext_resource type="Script" path="res://src/company/Token.gd" id="4_ynv04"]
+[ext_resource type="Script" path="res://src/actions/action_consumeAllAndContinue.gd" id="6_7lrky"]
+[ext_resource type="Script" path="res://src/actions/action_delegateOther.gd" id="6_g3wfw"]
 [ext_resource type="Texture2D" uid="uid://degxjaaxqe0bh" path="res://assets/monsterPics/monsterDisfigured.jpg" id="7_5278f"]
 [ext_resource type="Script" path="res://src/methodReplacements/MethodReplacement.gd" id="8_7pnkl"]
 [ext_resource type="Script" path="res://src/company/Employee.gd" id="9_dsoc7"]
+
+[sub_resource type="Resource" id="Resource_se6mh"]
+script = ExtResource("2_3qa8j")
+amountOfChange = 1
+choiceBased = false
+
+[sub_resource type="Resource" id="Resource_p1ijh"]
+script = ExtResource("3_25jbq")
+tokenRequirement = Array[ExtResource("4_ynv04")]([])
+anyAmountPasses = true
+requireAll = true
+
+[sub_resource type="Resource" id="Resource_xsxqa"]
+script = ExtResource("6_g3wfw")
+actionToDelegate = SubResource("Resource_se6mh")
+checkJob = true
+allowDelegateOnVacant = false
+delegateCondition = SubResource("Resource_p1ijh")
+connectionType = 0
+
+[sub_resource type="Resource" id="Resource_xxmip"]
+script = ExtResource("6_7lrky")
+requiredTokens = Array[ExtResource("4_ynv04")]([])
+requiredAll = true
+recordFieldTokenList = ""
+recordFieldTokenAmount = ""
 
 [resource]
 script = ExtResource("9_dsoc7")
 prestige = 5
 skill = 2
 dependentActions = Array[ExtResource("1_mpuww")]([])
-independentActions = Array[ExtResource("1_mpuww")]([])
+independentActions = Array[ExtResource("1_mpuww")]([SubResource("Resource_xsxqa"), SubResource("Resource_xxmip")])
 whenPlacedActions = Array[ExtResource("1_mpuww")]([])
 methodReplacements = Array[ExtResource("8_7pnkl")]([])
 employeeName = "Promotion Fiend"

@@ -8,11 +8,6 @@
 [ext_resource type="Script" path="res://src/methodReplacements/MethodReplacement.gd" id="6_b48hk"]
 [ext_resource type="Script" path="res://src/company/Employee.gd" id="7_ha7ig"]
 
-[sub_resource type="Resource" id="Resource_6unms"]
-script = ExtResource("2_rjvej")
-cacheFieldName = ""
-changeAmount = 0
-
 [sub_resource type="Resource" id="Resource_p8mev"]
 script = ExtResource("3_ebesp")
 type = 3
@@ -30,11 +25,16 @@ script = ExtResource("4_vd3gg")
 requiredTokens = Array[ExtResource("3_ebesp")]([SubResource("Resource_p8mev"), SubResource("Resource_dchuw"), SubResource("Resource_xa4lj")])
 limit = 1
 
+[sub_resource type="Resource" id="Resource_6unms"]
+script = ExtResource("2_rjvej")
+cacheFieldName = "cacheA"
+changeAmount = 1
+
 [resource]
 script = ExtResource("7_ha7ig")
 prestige = 2
 skill = 1
-dependentActions = Array[ExtResource("1_fwvvj")]([SubResource("Resource_6unms"), SubResource("Resource_efdui")])
+dependentActions = Array[ExtResource("1_fwvvj")]([SubResource("Resource_efdui"), SubResource("Resource_6unms")])
 independentActions = Array[ExtResource("1_fwvvj")]([])
 whenPlacedActions = Array[ExtResource("1_fwvvj")]([])
 methodReplacements = Array[ExtResource("6_b48hk")]([])
