@@ -46,5 +46,9 @@ func checkChoice(smth) -> bool:
 		return false	
 	if from != null and smth.inflow.has(from):
 		return false
-	
+	if to == null and smth.inflow.size() >= smth.employee.skill:
+		return false
+	if from != null and smth == from:
+		return false
+		
 	return true

@@ -16,3 +16,9 @@ func makeNewJob():
 func makeEveryoneWork():	
 	for child in get_children():
 			child.doWork()
+
+func getEmployeeJobAtCompany(employee: Employee):
+	var matching = get_children().filter(func(j): return j.employee == employee)
+	if matching.size() == 0:
+		return null
+	return matching[0]

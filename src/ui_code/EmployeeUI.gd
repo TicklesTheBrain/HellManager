@@ -12,13 +12,20 @@ class_name EmployeeUI
 @export var employeePic: TextureRect
 @export var requestMouseOver: bool
 @export var destroyFadeTime: float
+@export var exhaustedSkillModulateColor: Color
 
 func _ready():
 	if employee != null:
 		updateVisuals()
-		employee.prestigeChange.connect(updatePrestige)
-		employee.skillChange.connect(updateSkill)
+		employee.prestigeChange.connect(scheduleUpdatePrestige)
+		employee.skillChange.connect(scheduleUpdateSkill)
 		employee.destroyed.connect(scheduleShowDestroy)
+		Events.flowAdded.connect(func(_f,t):
+			# print('triggered this thing', t, Globals.getJobManager().getEmployeeJobAtCompany(employee)) 
+			if t == Globals.getJobManager().getEmployeeJobAtCompany(employee):
+				# mprint('found match')
+				scheduleUpdateSkill()
+		)
 
 func updateVisuals():
 	if employeeNameLabel != null:
@@ -30,7 +37,7 @@ func updateVisuals():
 	if prestigeLabel != null:
 		prestigeLabel.text = str(employee.prestige)
 	if skillLabel != null:
-		skillLabel.text = str(employee.skill)
+		updateSkillLabel()
 
 func _mouse_exited():
 	# print('emp UI mouse leave')
@@ -40,14 +47,13 @@ func _mouse_entered():
 	# print('emp UI mouse enter')
 	Events.employeeUIMouseOverStart.emit(self)
 
-func updatePrestige():
+func scheduleUpdatePrestige():
 	# print('update prestige called')
 	var newPrestige = str(employee.prestige)
 	UIScheduler.addToSchedule(func(): prestigeLabel.text = newPrestige, self)
 
-func updateSkill():
-	var newSkill = str(employee.skill)
-	UIScheduler.addToSchedule(func(): skillLabel.text = newSkill, self)
+func scheduleUpdateSkill():	
+	UIScheduler.addToSchedule(updateSkillLabel, self)
 
 func showDestroy():
 	var tween = get_tree().create_tween()
@@ -57,3 +63,28 @@ func showDestroy():
 
 func scheduleShowDestroy():
 	UIScheduler.addToSchedule(showDestroy)
+
+func getInflows():
+
+	var job = Globals.getJobManager().getEmployeeJobAtCompany(employee)
+	if job == null:
+		return 0
+
+	return job.inflow.size()
+
+func updateSkillLabel():
+	print('update skill Label triggered')
+	var skill = employee.skill
+	var inflows = getInflows()
+	if inflows == 0:
+		skillLabel.self_modulate = Color.WHITE
+		skillLabel.text = str(skill)
+		print('zero inflows')
+	elif inflows < skill:
+		skillLabel.self_modulate = Color.WHITE
+		skillLabel.text = "{s}({i})".format({"s": skill, "i":skill- inflows})
+		print(' some inflows')
+	else:
+		skillLabel.self_modulate = exhaustedSkillModulateColor
+		skillLabel.text = "{s}({i})".format({"s": skill, "i": skill - inflows})
+		print('all inflows')

@@ -30,6 +30,9 @@ prestigeLabel = NodePath("Prestige")
 skillLabel = NodePath("Skill")
 employeeTextLabel = NodePath("EmployeeText")
 employeePic = NodePath("EmployePic")
+requestMouseOver = null
+destroyFadeTime = null
+exhaustedSkillModulateColor = Color(0.694118, 0.694118, 0.694118, 0.776471)
 
 [node name="Panel" type="Panel" parent="."]
 clip_children = 2

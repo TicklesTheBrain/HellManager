@@ -40,6 +40,8 @@ func checkChoice(smth) -> bool:
         return false
     if job != null:
         return false
+    if smth.inflow.size() > employee.skill:
+        return false    
     
     return true
     
