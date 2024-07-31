@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Employee" load_steps=5 format=3 uid="uid://djt07p2160wmv"]
+
+[ext_resource type="Script" path="res://src/actions/Action.gd" id="1_mpuww"]
+[ext_resource type="Texture2D" uid="uid://degxjaaxqe0bh" path="res://assets/monsterPics/monsterDisfigured.jpg" id="7_5278f"]
+[ext_resource type="Script" path="res://src/methodReplacements/MethodReplacement.gd" id="8_7pnkl"]
+[ext_resource type="Script" path="res://src/company/Employee.gd" id="9_dsoc7"]
+
+[resource]
+script = ExtResource("9_dsoc7")
+prestige = 5
+skill = 2
+dependentActions = Array[ExtResource("1_mpuww")]([])
+independentActions = Array[ExtResource("1_mpuww")]([])
+whenPlacedActions = Array[ExtResource("1_mpuww")]([])
+methodReplacements = Array[ExtResource("8_7pnkl")]([])
+employeeName = "Promotion Fiend"
+employeePic = ExtResource("7_5278f")
+staticText = "Consume All, increase prestige for any connection which provided."

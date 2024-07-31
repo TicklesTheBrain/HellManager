@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="Employee" load_steps=15 format=3 uid="uid://cea708jn0aiok"]
+
+[ext_resource type="Script" path="res://src/actions/Action.gd" id="1_opkid"]
+[ext_resource type="Script" path="res://src/company/Token.gd" id="2_w1b6d"]
+[ext_resource type="Script" path="res://src/actions/action_consume.gd" id="3_l50yk"]
+[ext_resource type="Script" path="res://src/actions/action_produce.gd" id="4_2150u"]
+[ext_resource type="Texture2D" uid="uid://d3sd4dpyq5cna" path="res://assets/monsterPics/monsterDragon.jpg" id="5_8n2ya"]
+[ext_resource type="Script" path="res://src/methodReplacements/MethodReplacement.gd" id="5_fu1id"]
+[ext_resource type="Script" path="res://src/company/Employee.gd" id="6_weyjj"]
+
+[sub_resource type="Resource" id="Resource_i11ia"]
+script = ExtResource("2_w1b6d")
+type = 1
+
+[sub_resource type="Resource" id="Resource_oin7s"]
+script = ExtResource("2_w1b6d")
+type = 1
+
+[sub_resource type="Resource" id="Resource_fc70h"]
+script = ExtResource("2_w1b6d")
+type = 1
+
+[sub_resource type="Resource" id="Resource_hphrw"]
+script = ExtResource("3_l50yk")
+requiredTokens = Array[ExtResource("2_w1b6d")]([SubResource("Resource_i11ia"), SubResource("Resource_oin7s"), SubResource("Resource_fc70h")])
+limit = 999
+
+[sub_resource type="Resource" id="Resource_o4c25"]
+script = ExtResource("2_w1b6d")
+type = 4
+
+[sub_resource type="Resource" id="Resource_um4cq"]
+script = ExtResource("2_w1b6d")
+type = 4
+
+[sub_resource type="Resource" id="Resource_8et6y"]
+script = ExtResource("4_2150u")
+producedTokens = Array[ExtResource("2_w1b6d")]([SubResource("Resource_o4c25"), SubResource("Resource_um4cq")])
+randomAmount = 0
+
+[resource]
+script = ExtResource("6_weyjj")
+prestige = 4
+skill = 2
+dependentActions = Array[ExtResource("1_opkid")]([SubResource("Resource_hphrw"), SubResource("Resource_8et6y")])
+independentActions = Array[ExtResource("1_opkid")]([])
+whenPlacedActions = Array[ExtResource("1_opkid")]([])
+methodReplacements = Array[ExtResource("5_fu1id")]([])
+employeeName = "Yellow Lady Demon"
+employeePic = ExtResource("5_8n2ya")
+staticText = "Consume 3 Red, Produce 2 Yellow."

@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="Employee" load_steps=14 format=3 uid="uid://b7atn000isd77"]
+
+[ext_resource type="Script" path="res://src/actions/Action.gd" id="1_1m3rg"]
+[ext_resource type="Script" path="res://src/company/Token.gd" id="2_fqi7k"]
+[ext_resource type="Script" path="res://src/actions/action_consumeAllAndContinue.gd" id="3_qse6r"]
+[ext_resource type="Script" path="res://src/cards/multiCard.gd" id="4_xaylc"]
+[ext_resource type="Resource" uid="uid://bwnb1afh7jngg" path="res://content/actionCards/makeFlow.tres" id="5_14u4m"]
+[ext_resource type="Script" path="res://src/actions/action_addCards.gd" id="6_tnk24"]
+[ext_resource type="Texture2D" uid="uid://csfaa0hqna4xe" path="res://assets/monsterPics/monsterFire.jpg" id="7_0lk6h"]
+[ext_resource type="Script" path="res://src/methodReplacements/MethodReplacement.gd" id="8_eoofv"]
+[ext_resource type="Script" path="res://src/company/Employee.gd" id="9_d4k80"]
+
+[sub_resource type="Resource" id="Resource_vbwk3"]
+script = ExtResource("2_fqi7k")
+type = 1
+
+[sub_resource type="Resource" id="Resource_pbneg"]
+script = ExtResource("3_qse6r")
+requiredTokens = Array[ExtResource("2_fqi7k")]([SubResource("Resource_vbwk3")])
+requiredAll = false
+recordFieldTokenList = ""
+recordFieldTokenAmount = "amount"
+
+[sub_resource type="Resource" id="Resource_sue44"]
+script = ExtResource("4_xaylc")
+copies = 1
+card = ExtResource("5_14u4m")
+debug = false
+
+[sub_resource type="Resource" id="Resource_bkr3c"]
+script = ExtResource("6_tnk24")
+actionCarsToAdd = Array[ExtResource("4_xaylc")]([SubResource("Resource_sue44")])
+amount = 1
+
+[resource]
+script = ExtResource("9_d4k80")
+prestige = 1
+skill = 0
+dependentActions = Array[ExtResource("1_1m3rg")]([SubResource("Resource_pbneg"), SubResource("Resource_bkr3c")])
+independentActions = Array[ExtResource("1_1m3rg")]([])
+whenPlacedActions = Array[ExtResource("1_1m3rg")]([])
+methodReplacements = Array[ExtResource("8_eoofv")]([])
+employeeName = "Networking Bastard"
+employeePic = ExtResource("7_0lk6h")
+staticText = "Consume all reds, gain produce one connection card for each."

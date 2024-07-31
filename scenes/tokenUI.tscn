@@ -1,30 +1,34 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgq6pba1xc53a"]
+[gd_scene load_steps=5 format=3 uid="uid://cgq6pba1xc53a"]
 
 [ext_resource type="Texture2D" uid="uid://dfkcvx505hxh6" path="res://assets/dot.png" id="1_ea0ll"]
 [ext_resource type="Script" path="res://src/ui_code/TokenUI.gd" id="2_3wh6f"]
 [ext_resource type="Texture2D" uid="uid://kptc5sjkxm41" path="res://assets/icons/iconToken2.png" id="3_3x4fy"]
+[ext_resource type="Texture2D" uid="uid://cicbkhkyjntl0" path="res://assets/icons/iconToken3.png" id="3_t7axl"]
 
-[node name="TokenUI" type="TextureRect"]
+[node name="TokenUI" type="CenterContainer" node_paths=PackedStringArray("shapeRect", "iconRect")]
+offset_right = 20.0
+offset_bottom = 19.0
+script = ExtResource("2_3wh6f")
+types = Array[int]([1, 0, 2, 3, 4, 5, 6, 7, 8])
+colors = Array[Color]([Color(0.886275, 0.192157, 0.333333, 1), Color(0.203922, 0.164706, 0.780392, 1), Color(0, 0.619608, 0, 1), Color(0.688469, 0.046875, 1, 1), Color(0.886719, 0.873916, 0.230908, 1), Color(0, 0, 0, 1), Color(0.968627, 0.638527, 0.0373449, 1), Color(0.409064, 0.831179, 0.898438, 1), Color(0.71875, 0.71875, 0.71875, 1)])
+icon = Array[Texture]([null, null, null, ExtResource("3_3x4fy"), ExtResource("3_3x4fy"), ExtResource("3_3x4fy"), ExtResource("3_t7axl"), ExtResource("3_t7axl"), ExtResource("3_t7axl")])
+icon_modulate = Array[Color]([Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1)])
+tokenFadeTime = 0.5
+shapeRect = NodePath("TokenShape")
+iconRect = NodePath("IconRect")
+
+[node name="TokenShape" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(18, 18)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -1880.0
-offset_bottom = -1040.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("1_ea0ll")
 expand_mode = 1
 stretch_mode = 4
-script = ExtResource("2_3wh6f")
-types = Array[int]([1, 0, 2])
-colors = Array[Color]([Color(0.886275, 0.192157, 0.333333, 1), Color(0.203922, 0.164706, 0.780392, 1), Color(0, 0.619608, 0, 1)])
-tokenFadeTime = 0.5
 
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 20.0
-offset_bottom = 19.0
+[node name="IconRect" type="TextureRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
 texture = ExtResource("3_3x4fy")
 expand_mode = 1
 stretch_mode = 4

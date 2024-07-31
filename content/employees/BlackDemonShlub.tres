@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="Employee" load_steps=13 format=3 uid="uid://cmh7siiajrek8"]
+
+[ext_resource type="Script" path="res://src/actions/Action.gd" id="1_p86bx"]
+[ext_resource type="Script" path="res://src/company/Token.gd" id="2_6fadx"]
+[ext_resource type="Script" path="res://src/actions/action_consume.gd" id="3_2t5ei"]
+[ext_resource type="Script" path="res://src/actions/action_produce.gd" id="4_3361q"]
+[ext_resource type="Texture2D" uid="uid://njsim6lih7kw" path="res://assets/monsterPics/monsterBlot.png" id="5_knd74"]
+[ext_resource type="Script" path="res://src/methodReplacements/MethodReplacement.gd" id="6_dg330"]
+[ext_resource type="Script" path="res://src/company/Employee.gd" id="7_o75ry"]
+
+[sub_resource type="Resource" id="Resource_3t7a0"]
+script = ExtResource("2_6fadx")
+type = 2
+
+[sub_resource type="Resource" id="Resource_onlrs"]
+script = ExtResource("2_6fadx")
+type = 0
+
+[sub_resource type="Resource" id="Resource_cf7wx"]
+script = ExtResource("3_2t5ei")
+requiredTokens = Array[ExtResource("2_6fadx")]([SubResource("Resource_3t7a0"), SubResource("Resource_onlrs")])
+limit = 999
+
+[sub_resource type="Resource" id="Resource_sve36"]
+script = ExtResource("2_6fadx")
+type = 5
+
+[sub_resource type="Resource" id="Resource_c4651"]
+script = ExtResource("4_3361q")
+producedTokens = Array[ExtResource("2_6fadx")]([SubResource("Resource_sve36")])
+randomAmount = 0
+
+[resource]
+script = ExtResource("7_o75ry")
+prestige = 4
+skill = 2
+dependentActions = Array[ExtResource("1_p86bx")]([SubResource("Resource_cf7wx"), SubResource("Resource_c4651")])
+independentActions = Array[ExtResource("1_p86bx")]([])
+whenPlacedActions = Array[ExtResource("1_p86bx")]([])
+methodReplacements = Array[ExtResource("6_dg330")]([])
+employeeName = "Black Demon, Shlub"
+employeePic = ExtResource("5_knd74")
+staticText = "Consume Green and Blue, Produce Black."

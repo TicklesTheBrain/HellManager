@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Employee" load_steps=7 format=3 uid="uid://dr0r2nt3flmi0"]
+
+[ext_resource type="Script" path="res://src/actions/Action.gd" id="1_1e4ux"]
+[ext_resource type="Texture2D" uid="uid://bei7jvfl7o35x" path="res://assets/monsterPics/monsteBrainBeak.png" id="2_b2671"]
+[ext_resource type="Script" path="res://src/methodReplacements/MethodReplacement.gd" id="3_s2nsb"]
+[ext_resource type="Script" path="res://src/methodReplacements/getNetworkInsteadOfOwn.gd" id="4_rr81q"]
+[ext_resource type="Script" path="res://src/company/Employee.gd" id="5_7fi7s"]
+
+[sub_resource type="Resource" id="Resource_pogl1"]
+script = ExtResource("4_rr81q")
+
+[resource]
+script = ExtResource("5_7fi7s")
+prestige = 6
+skill = 2
+dependentActions = Array[ExtResource("1_1e4ux")]([])
+independentActions = Array[ExtResource("1_1e4ux")]([])
+whenPlacedActions = Array[ExtResource("1_1e4ux")]([])
+methodReplacements = Array[ExtResource("3_s2nsb")]([SubResource("Resource_pogl1")])
+employeeName = "Middle Manager"
+employeePic = ExtResource("2_b2671")
+staticText = "Can pass on requests to connections."

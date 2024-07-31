@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="Employee" load_steps=11 format=3 uid="uid://hsb6uoeeefh0"]
+
+[ext_resource type="Script" path="res://src/actions/Action.gd" id="1_c3eaq"]
+[ext_resource type="Script" path="res://src/company/Token.gd" id="2_t3ghe"]
+[ext_resource type="Script" path="res://src/actions/action_collectAndContinue.gd" id="3_a4xea"]
+[ext_resource type="Texture2D" uid="uid://c6cinhe5674hp" path="res://assets/monsterPics/monsterFace.png" id="4_j07h5"]
+[ext_resource type="Script" path="res://src/methodReplacements/MethodReplacement.gd" id="5_1qf74"]
+[ext_resource type="Script" path="res://src/company/Employee.gd" id="6_k2l2r"]
+
+[sub_resource type="Resource" id="Resource_icen6"]
+script = ExtResource("2_t3ghe")
+type = 0
+
+[sub_resource type="Resource" id="Resource_nfnvo"]
+script = ExtResource("2_t3ghe")
+type = 1
+
+[sub_resource type="Resource" id="Resource_b3h2c"]
+script = ExtResource("2_t3ghe")
+type = 2
+
+[sub_resource type="Resource" id="Resource_2hwj7"]
+script = ExtResource("3_a4xea")
+requiredTokens = Array[ExtResource("2_t3ghe")]([SubResource("Resource_icen6"), SubResource("Resource_nfnvo"), SubResource("Resource_b3h2c")])
+collectMax = true
+recordField = ""
+
+[resource]
+script = ExtResource("6_k2l2r")
+prestige = 3
+skill = 1
+dependentActions = Array[ExtResource("1_c3eaq")]([SubResource("Resource_2hwj7")])
+independentActions = Array[ExtResource("1_c3eaq")]([])
+whenPlacedActions = Array[ExtResource("1_c3eaq")]([])
+methodReplacements = Array[ExtResource("5_1qf74")]([])
+employeeName = "Hoarding Manager"
+employeePic = ExtResource("4_j07h5")
+staticText = "Collect all tokens."

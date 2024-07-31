@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="Employee" load_steps=13 format=3 uid="uid://burxxcp74c0o5"]
+
+[ext_resource type="Script" path="res://src/actions/Action.gd" id="1_fwvvj"]
+[ext_resource type="Script" path="res://src/actions/action_changeCache.gd" id="2_rjvej"]
+[ext_resource type="Script" path="res://src/company/Token.gd" id="3_ebesp"]
+[ext_resource type="Script" path="res://src/actions/action_consume.gd" id="4_vd3gg"]
+[ext_resource type="Texture2D" uid="uid://sqobls63dm5j" path="res://assets/monsterPics/monsterGhostBlade.png" id="5_cnrjs"]
+[ext_resource type="Script" path="res://src/methodReplacements/MethodReplacement.gd" id="6_b48hk"]
+[ext_resource type="Script" path="res://src/company/Employee.gd" id="7_ha7ig"]
+
+[sub_resource type="Resource" id="Resource_6unms"]
+script = ExtResource("2_rjvej")
+cacheFieldName = ""
+changeAmount = 0
+
+[sub_resource type="Resource" id="Resource_p8mev"]
+script = ExtResource("3_ebesp")
+type = 3
+
+[sub_resource type="Resource" id="Resource_dchuw"]
+script = ExtResource("3_ebesp")
+type = 4
+
+[sub_resource type="Resource" id="Resource_xa4lj"]
+script = ExtResource("3_ebesp")
+type = 5
+
+[sub_resource type="Resource" id="Resource_efdui"]
+script = ExtResource("4_vd3gg")
+requiredTokens = Array[ExtResource("3_ebesp")]([SubResource("Resource_p8mev"), SubResource("Resource_dchuw"), SubResource("Resource_xa4lj")])
+limit = 1
+
+[resource]
+script = ExtResource("7_ha7ig")
+prestige = 2
+skill = 1
+dependentActions = Array[ExtResource("1_fwvvj")]([SubResource("Resource_6unms"), SubResource("Resource_efdui")])
+independentActions = Array[ExtResource("1_fwvvj")]([])
+whenPlacedActions = Array[ExtResource("1_fwvvj")]([])
+methodReplacements = Array[ExtResource("6_b48hk")]([])
+employeeName = "Delay Master"
+employeePic = ExtResource("5_cnrjs")
+staticText = "Consume Black, Yellow or Purple. Heal 1."

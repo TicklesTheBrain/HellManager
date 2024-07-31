@@ -1,12 +1,19 @@
-[gd_scene load_steps=148 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=84 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://src/Main.gd" id="1_nbim8"]
 [ext_resource type="Script" path="res://src/cards/CardMarket.gd" id="2_42g87"]
 [ext_resource type="Script" path="res://src/ui_code/CompanyUIManager.gd" id="2_hwxbs"]
 [ext_resource type="Script" path="res://src/ui_code/MouseOverLord.gd" id="3_2pjbp"]
 [ext_resource type="PackedScene" uid="uid://bdewx43gbc46u" path="res://scenes/flowLine.tscn" id="3_m468t"]
+[ext_resource type="Resource" uid="uid://ch3knaqoq6lg6" path="res://content/employees/BlueBaron.tres" id="4_3tnet"]
+[ext_resource type="Resource" uid="uid://djt07p2160wmv" path="res://content/employees/PromotionFiend.tres" id="4_52woe"]
+[ext_resource type="Resource" uid="uid://cea708jn0aiok" path="res://content/employees/YellowDemonLady.tres" id="4_bqqif"]
+[ext_resource type="Resource" uid="uid://b7atn000isd77" path="res://content/employees/NetworkingBastard.tres" id="4_d31wt"]
+[ext_resource type="Resource" uid="uid://cmh7siiajrek8" path="res://content/employees/BlackDemonShlub.tres" id="4_r5iho"]
+[ext_resource type="Resource" uid="uid://hsb6uoeeefh0" path="res://content/employees/HoardingManager.tres" id="4_u73lm"]
 [ext_resource type="Script" path="res://src/company/JobManager.gd" id="5_1cdr4"]
 [ext_resource type="PackedScene" uid="uid://dccekuf7o544k" path="res://scenes/jobUISmall.tscn" id="5_b0wxn"]
+[ext_resource type="Resource" uid="uid://burxxcp74c0o5" path="res://content/employees/DelayMaster.tres" id="5_d7s66"]
 [ext_resource type="Script" path="res://src/actions/Action.gd" id="5_nsq4b"]
 [ext_resource type="Script" path="res://src/company/Job.gd" id="6_cnhkk"]
 [ext_resource type="PackedScene" uid="uid://cgq6pba1xc53a" path="res://scenes/tokenUI.tscn" id="6_h2iy3"]
@@ -16,39 +23,27 @@
 [ext_resource type="Texture2D" uid="uid://dhmuqf88u3xo1" path="res://assets/testPic1.png" id="9_xt47j"]
 [ext_resource type="Script" path="res://src/company/Employee.gd" id="10_wmw7d"]
 [ext_resource type="Script" path="res://src/company/TokenStorage.gd" id="11_if1yf"]
-[ext_resource type="Texture2D" uid="uid://bsv27suggfjmq" path="res://assets/testPic2.png" id="13_fgyyd"]
-[ext_resource type="Script" path="res://src/conditions/conditionPrestigeAmount.gd" id="13_l20mq"]
-[ext_resource type="Script" path="res://src/actions/action_consume.gd" id="13_mduv8"]
 [ext_resource type="Script" path="res://src/cards/Deck.gd" id="14_r0k10"]
-[ext_resource type="Texture2D" uid="uid://c5qexnfi4fad2" path="res://assets/testPic3.png" id="15_lao0j"]
-[ext_resource type="Script" path="res://src/actions/action_delegateOther.gd" id="15_olcna"]
 [ext_resource type="Script" path="res://src/actions/action_makeJob.gd" id="16_16kad"]
 [ext_resource type="Script" path="res://src/cards/ActionCard.gd" id="16_hnq1w"]
 [ext_resource type="Texture2D" uid="uid://ngdu2hqkbis2" path="res://assets/fedora.svg" id="17_6m0wt"]
 [ext_resource type="Script" path="res://src/actions/action_placeEmployee.gd" id="17_cxtnn"]
 [ext_resource type="Script" path="res://src/cards/multiCard.gd" id="17_mrygo"]
-[ext_resource type="Script" path="res://src/actions/action_changePrestige.gd" id="17_p0tod"]
-[ext_resource type="Script" path="res://src/actions/action_changeTaskDelay.gd" id="17_rftmj"]
 [ext_resource type="Script" path="res://src/cards/CardContainer.gd" id="18_1vww6"]
-[ext_resource type="Script" path="res://src/actions/action_destroyEmployee.gd" id="18_jrclo"]
-[ext_resource type="Script" path="res://src/actions/action_addFlow.gd" id="19_5nh3j"]
 [ext_resource type="Script" path="res://src/ui_code/AreaPC.gd" id="19_qe3sq"]
-[ext_resource type="Script" path="res://src/methodReplacements/getNetworkInsteadOfOwn.gd" id="20_4ptb6"]
 [ext_resource type="Script" path="res://src/cards/Hand.gd" id="20_vouf7"]
-[ext_resource type="Script" path="res://src/actions/action_consumeAllAndContinue.gd" id="21_dr4mn"]
-[ext_resource type="Script" path="res://src/actions/action_collectAndContinue.gd" id="22_40m6m"]
-[ext_resource type="Texture2D" uid="uid://bwl07yqs0u1c7" path="res://assets/zig-arrow.svg" id="22_hgn1x"]
+[ext_resource type="Resource" uid="uid://dr0r2nt3flmi0" path="res://content/employees/MiddleManager.tres" id="22_fscka"]
+[ext_resource type="Resource" uid="uid://dy5nsexsga1p4" path="res://content/employees/PurpleDemon.tres" id="23_bktqu"]
 [ext_resource type="Script" path="res://src/ui_code/SinkPC.gd" id="23_i5ahq"]
 [ext_resource type="Script" path="res://src/InputManager.gd" id="23_xx20n"]
-[ext_resource type="Script" path="res://src/dynamics/dynamicConnectedToCondition.gd" id="24_1qhwm"]
-[ext_resource type="Texture2D" uid="uid://u5diswpi5wbn" path="res://assets/monsterPics/monsterWheelChair.jpg" id="24_pdeui"]
+[ext_resource type="Resource" uid="uid://brra3bq246esn" path="res://content/employees/GreenBaron.tres" id="24_4q6qm"]
 [ext_resource type="Script" path="res://src/conditions/conditionTokenOnJob.gd" id="25_bfr6v"]
-[ext_resource type="Script" path="res://src/dynamics/dynamicTokenCollection.gd" id="25_wg2ck"]
 [ext_resource type="Script" path="res://src/actions/action_destroyJob.gd" id="26_r4wih"]
 [ext_resource type="Script" path="res://src/cards/TaskCard.gd" id="27_skm2w"]
 [ext_resource type="Script" path="res://src/ui_code/MarketPC.gd" id="28_lx5eo"]
 [ext_resource type="Script" path="res://src/actions/action_changeCache.gd" id="28_v6a6q"]
 [ext_resource type="PackedScene" uid="uid://dm73o0agf3yay" path="res://scenes/cardUI.tscn" id="29_2tfqd"]
+[ext_resource type="Resource" uid="uid://bwnb1afh7jngg" path="res://content/actionCards/makeFlow.tres" id="31_pv5e8"]
 [ext_resource type="Script" path="res://src/ui_code/MarketSlideController.gd" id="32_beqie"]
 [ext_resource type="Script" path="res://src/company/PlayerData.gd" id="33_oq5l2"]
 [ext_resource type="FontFile" uid="uid://u2357g28y3hy" path="res://assets/fonts/libel-suit-rg.otf" id="34_y48yq"]
@@ -62,342 +57,6 @@
 [ext_resource type="PackedScene" uid="uid://6sbacijn0esb" path="res://scenes/companyUICanvas.tscn" id="45_k7yar"]
 [ext_resource type="Script" path="res://src/ui_code/MarketLabelLord.gd" id="53_ahosn"]
 [ext_resource type="PackedScene" uid="uid://6jmlsqw04ghs" path="res://scenes/market_label.tscn" id="54_0pl2r"]
-
-[sub_resource type="Resource" id="Resource_lfh2a"]
-script = ExtResource("7_b1mae")
-type = 2
-
-[sub_resource type="Resource" id="Resource_l3khh"]
-script = ExtResource("8_2wa5w")
-producedTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_lfh2a")])
-
-[sub_resource type="Resource" id="Resource_vt8gg"]
-script = ExtResource("10_wmw7d")
-prestige = 33
-skill = 0
-dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_l3khh")])
-independentActions = Array[ExtResource("5_nsq4b")]([])
-whenPlacedActions = Array[ExtResource("5_nsq4b")]([])
-methodReplacements = Array[ExtResource("9_7lokn")]([])
-employeeName = "Gamintojas"
-employeePic = ExtResource("9_xt47j")
-staticText = "Produce 1 Green."
-
-[sub_resource type="Resource" id="Resource_p2afh"]
-script = ExtResource("7_b1mae")
-type = 2
-
-[sub_resource type="Resource" id="Resource_oa62m"]
-script = ExtResource("7_b1mae")
-type = 1
-
-[sub_resource type="Resource" id="Resource_uttuc"]
-script = ExtResource("7_b1mae")
-type = 1
-
-[sub_resource type="Resource" id="Resource_pax6k"]
-script = ExtResource("7_b1mae")
-type = 2
-
-[sub_resource type="Resource" id="Resource_7c1lp"]
-script = ExtResource("7_b1mae")
-type = 2
-
-[sub_resource type="Resource" id="Resource_iwbiw"]
-script = ExtResource("13_mduv8")
-requiredTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_pax6k"), SubResource("Resource_7c1lp")])
-
-[sub_resource type="Resource" id="Resource_wk6m5"]
-script = ExtResource("7_b1mae")
-type = 0
-
-[sub_resource type="Resource" id="Resource_emjku"]
-script = ExtResource("8_2wa5w")
-producedTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_wk6m5")])
-
-[sub_resource type="Resource" id="Resource_dq6ey"]
-script = ExtResource("10_wmw7d")
-prestige = 2
-skill = 0
-dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_iwbiw"), SubResource("Resource_emjku")])
-independentActions = Array[ExtResource("5_nsq4b")]([])
-whenPlacedActions = Array[ExtResource("5_nsq4b")]([])
-methodReplacements = Array[ExtResource("9_7lokn")]([])
-employeeName = "Valgytojas"
-employeePic = ExtResource("13_fgyyd")
-staticText = "Consume 2 Green, produce 1 Blue"
-
-[sub_resource type="Resource" id="Resource_6gjpb"]
-script = ExtResource("7_b1mae")
-type = 1
-
-[sub_resource type="Resource" id="Resource_3i7yp"]
-script = ExtResource("8_2wa5w")
-producedTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_6gjpb")])
-
-[sub_resource type="Resource" id="Resource_ctef4"]
-script = ExtResource("13_l20mq")
-lower = true
-acceptEqual = true
-compareToActingEmployee = true
-prestigeValueToCompare = 0
-
-[sub_resource type="Resource" id="Resource_k3ecl"]
-script = ExtResource("15_olcna")
-actionToDelegate = SubResource("Resource_3i7yp")
-allowDelegateOnVacant = false
-delegateCondition = SubResource("Resource_ctef4")
-connectionType = 1
-
-[sub_resource type="Resource" id="Resource_r08g0"]
-script = ExtResource("10_wmw7d")
-prestige = 10
-skill = 0
-dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_k3ecl")])
-independentActions = Array[ExtResource("5_nsq4b")]([])
-whenPlacedActions = Array[ExtResource("5_nsq4b")]([])
-methodReplacements = Array[ExtResource("9_7lokn")]([])
-employeeName = "Pasiuntėjas"
-employeePic = ExtResource("15_lao0j")
-staticText = "Produce 1 Red on lower prestige subordinates"
-
-[sub_resource type="Resource" id="Resource_3t7a0"]
-script = ExtResource("7_b1mae")
-type = 1
-
-[sub_resource type="Resource" id="Resource_cf7wx"]
-script = ExtResource("13_mduv8")
-requiredTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_3t7a0")])
-
-[sub_resource type="Resource" id="Resource_cerpk"]
-script = ExtResource("17_rftmj")
-delayChange = 1
-delaySet = false
-choiceBased = false
-basedOnChoice = true
-
-[sub_resource type="Resource" id="Resource_qhelu"]
-script = ExtResource("10_wmw7d")
-prestige = 3
-skill = 0
-dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_cf7wx"), SubResource("Resource_cerpk")])
-independentActions = Array[ExtResource("5_nsq4b")]([])
-whenPlacedActions = Array[ExtResource("5_nsq4b")]([])
-methodReplacements = Array[ExtResource("9_7lokn")]([])
-employeeName = "Shlub"
-employeePic = ExtResource("13_fgyyd")
-staticText = "Consume Red, delay Tasks"
-
-[sub_resource type="Resource" id="Resource_pogl1"]
-script = ExtResource("20_4ptb6")
-
-[sub_resource type="Resource" id="Resource_xdlq6"]
-script = ExtResource("10_wmw7d")
-prestige = 7
-skill = 0
-dependentActions = Array[ExtResource("5_nsq4b")]([])
-independentActions = Array[ExtResource("5_nsq4b")]([])
-whenPlacedActions = Array[ExtResource("5_nsq4b")]([])
-methodReplacements = Array[ExtResource("9_7lokn")]([SubResource("Resource_pogl1")])
-employeeName = "Courier"
-staticText = "Can pass on requests"
-
-[sub_resource type="Resource" id="Resource_5i1vf"]
-script = ExtResource("7_b1mae")
-type = 0
-
-[sub_resource type="Resource" id="Resource_qbqwl"]
-script = ExtResource("7_b1mae")
-type = 1
-
-[sub_resource type="Resource" id="Resource_i7tyi"]
-script = ExtResource("7_b1mae")
-type = 2
-
-[sub_resource type="Resource" id="Resource_y7bww"]
-script = ExtResource("21_dr4mn")
-requiredTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_5i1vf"), SubResource("Resource_qbqwl"), SubResource("Resource_i7tyi")])
-recordFieldTokenList = ""
-recordFieldTokenAmount = ""
-
-[sub_resource type="Resource" id="Resource_dpwma"]
-script = ExtResource("10_wmw7d")
-prestige = 8
-skill = 0
-dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_y7bww")])
-independentActions = Array[ExtResource("5_nsq4b")]([])
-whenPlacedActions = Array[ExtResource("5_nsq4b")]([])
-methodReplacements = Array[ExtResource("9_7lokn")]([])
-employeeName = "Eater"
-staticText = "Consume Everything"
-
-[sub_resource type="Resource" id="Resource_7p3tm"]
-script = ExtResource("7_b1mae")
-type = 0
-
-[sub_resource type="Resource" id="Resource_rtdsl"]
-script = ExtResource("8_2wa5w")
-producedTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_7p3tm")])
-
-[sub_resource type="Resource" id="Resource_go63h"]
-script = ExtResource("17_p0tod")
-amountOfChange = -1
-choiceBased = false
-
-[sub_resource type="Resource" id="Resource_s1o2h"]
-script = ExtResource("13_l20mq")
-lower = true
-acceptEqual = true
-compareToActingEmployee = false
-prestigeValueToCompare = 0
-
-[sub_resource type="Resource" id="Resource_c57c2"]
-script = ExtResource("18_jrclo")
-selfDestroy = true
-condition = SubResource("Resource_s1o2h")
-
-[sub_resource type="Resource" id="Resource_y8f7y"]
-script = ExtResource("10_wmw7d")
-prestige = 5
-skill = 0
-dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_rtdsl"), SubResource("Resource_go63h")])
-independentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_c57c2")])
-whenPlacedActions = Array[ExtResource("5_nsq4b")]([])
-methodReplacements = Array[ExtResource("9_7lokn")]([])
-employeeName = ""
-staticText = ""
-
-[sub_resource type="Resource" id="Resource_b70cd"]
-script = ExtResource("7_b1mae")
-type = 1
-
-[sub_resource type="Resource" id="Resource_0nadg"]
-script = ExtResource("7_b1mae")
-type = 1
-
-[sub_resource type="Resource" id="Resource_v5ayw"]
-script = ExtResource("7_b1mae")
-type = 1
-
-[sub_resource type="Resource" id="Resource_icen6"]
-script = ExtResource("7_b1mae")
-type = 0
-
-[sub_resource type="Resource" id="Resource_nfnvo"]
-script = ExtResource("7_b1mae")
-type = 1
-
-[sub_resource type="Resource" id="Resource_b3h2c"]
-script = ExtResource("7_b1mae")
-type = 2
-
-[sub_resource type="Resource" id="Resource_2hwj7"]
-script = ExtResource("22_40m6m")
-requiredTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_icen6"), SubResource("Resource_nfnvo"), SubResource("Resource_b3h2c")])
-collectMax = true
-recordField = ""
-
-[sub_resource type="Resource" id="Resource_7po3r"]
-script = ExtResource("10_wmw7d")
-prestige = 2
-skill = 0
-dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_2hwj7")])
-independentActions = Array[ExtResource("5_nsq4b")]([])
-whenPlacedActions = Array[ExtResource("5_nsq4b")]([])
-methodReplacements = Array[ExtResource("9_7lokn")]([])
-employeeName = "Collector"
-employeePic = ExtResource("22_hgn1x")
-staticText = "Collect all tokens"
-
-[sub_resource type="Resource" id="Resource_qdqlf"]
-script = ExtResource("10_wmw7d")
-prestige = 2
-skill = 1
-dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_l3khh")])
-independentActions = Array[ExtResource("5_nsq4b")]([])
-whenPlacedActions = Array[ExtResource("5_nsq4b")]([])
-methodReplacements = Array[ExtResource("9_7lokn")]([])
-employeeName = "Gamintojas"
-employeePic = ExtResource("24_pdeui")
-staticText = "Produce 1 Green."
-
-[sub_resource type="Resource" id="Resource_j62mu"]
-script = ExtResource("7_b1mae")
-type = 2
-
-[sub_resource type="Resource" id="Resource_ixmts"]
-script = ExtResource("17_p0tod")
-amountOfChange = 1
-choiceBased = false
-
-[sub_resource type="Resource" id="Resource_vbwk3"]
-script = ExtResource("7_b1mae")
-type = 1
-
-[sub_resource type="Resource" id="Resource_pbneg"]
-script = ExtResource("21_dr4mn")
-requiredTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_vbwk3")])
-additionalAction = SubResource("Resource_ixmts")
-recordFieldTokenList = ""
-recordFieldTokenAmount = "amountOfChange"
-
-[sub_resource type="Resource" id="Resource_qcddy"]
-script = ExtResource("10_wmw7d")
-prestige = 1
-skill = 0
-dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_pbneg")])
-independentActions = Array[ExtResource("5_nsq4b")]([])
-whenPlacedActions = Array[ExtResource("5_nsq4b")]([])
-methodReplacements = Array[ExtResource("9_7lokn")]([])
-employeeName = "Grower"
-employeePic = ExtResource("15_lao0j")
-staticText = "Consume all reds, gain 1 prestige for each"
-
-[sub_resource type="Resource" id="Resource_sih2q"]
-script = ExtResource("7_b1mae")
-type = 0
-
-[sub_resource type="Resource" id="Resource_8omh7"]
-script = ExtResource("7_b1mae")
-type = 0
-
-[sub_resource type="Resource" id="Resource_bi3p5"]
-script = ExtResource("24_1qhwm")
-direction = 2
-
-[sub_resource type="Resource" id="Resource_q1t2w"]
-script = ExtResource("7_b1mae")
-type = 0
-
-[sub_resource type="Resource" id="Resource_pim35"]
-script = ExtResource("25_wg2ck")
-tokenCollection = Array[ExtResource("7_b1mae")]([SubResource("Resource_q1t2w")])
-dynamicMultiplier = SubResource("Resource_bi3p5")
-
-[sub_resource type="Resource" id="Resource_3dyha"]
-script = ExtResource("8_2wa5w")
-producedTokens = Array[ExtResource("7_b1mae")]([])
-dynamic = SubResource("Resource_pim35")
-
-[sub_resource type="Resource" id="Resource_e4rb4"]
-script = ExtResource("10_wmw7d")
-prestige = 3
-skill = 0
-dependentActions = Array[ExtResource("5_nsq4b")]([SubResource("Resource_3dyha")])
-independentActions = Array[ExtResource("5_nsq4b")]([])
-whenPlacedActions = Array[ExtResource("5_nsq4b")]([])
-methodReplacements = Array[ExtResource("9_7lokn")]([])
-employeeName = "Blue Beast"
-employeePic = ExtResource("13_fgyyd")
-staticText = "Produce Blue for each connection."
-
-[sub_resource type="Resource" id="Resource_ucos1"]
-script = ExtResource("7_b1mae")
-type = 1
-
-[sub_resource type="Resource" id="Resource_t3exc"]
-script = ExtResource("7_b1mae")
-type = 1
 
 [sub_resource type="Resource" id="Resource_cal8w"]
 script = ExtResource("16_16kad")
@@ -434,6 +93,7 @@ type = 2
 [sub_resource type="Resource" id="Resource_4pb1r"]
 script = ExtResource("8_2wa5w")
 producedTokens = Array[ExtResource("7_b1mae")]([SubResource("Resource_6ombi"), SubResource("Resource_bnl7g"), SubResource("Resource_7igap")])
+randomAmount = 0
 
 [sub_resource type="Resource" id="Resource_llf17"]
 script = ExtResource("10_wmw7d")
@@ -463,21 +123,10 @@ copies = 6
 card = SubResource("Resource_dburm")
 debug = false
 
-[sub_resource type="Resource" id="Resource_jr0jv"]
-script = ExtResource("19_5nh3j")
-
-[sub_resource type="Resource" id="Resource_ktrr6"]
-script = ExtResource("16_hnq1w")
-cardText = "Make new line of flow."
-cardIcon = ExtResource("22_hgn1x")
-cardName = "New line"
-revealed = false
-onExecute = Array[ExtResource("5_nsq4b")]([SubResource("Resource_jr0jv")])
-
 [sub_resource type="Resource" id="Resource_poo86"]
 script = ExtResource("17_mrygo")
 copies = 2
-card = SubResource("Resource_ktrr6")
+card = ExtResource("31_pv5e8")
 debug = false
 
 [sub_resource type="Resource" id="Resource_2ov4j"]
@@ -487,6 +136,8 @@ type = 2
 [sub_resource type="Resource" id="Resource_20e1u"]
 script = ExtResource("25_bfr6v")
 tokenRequirement = Array[ExtResource("7_b1mae")]([SubResource("Resource_2ov4j")])
+anyAmountPasses = false
+requireAll = false
 
 [sub_resource type="Resource" id="Resource_4skit"]
 script = ExtResource("26_r4wih")
@@ -584,121 +235,88 @@ inputLock = null
 
 [node name="Temp" type="Node" parent="."]
 
-[node name="Job3" type="Node" parent="Temp" node_paths=PackedStringArray("outflow", "storage")]
-script = ExtResource("6_cnhkk")
-outflow = [NodePath("../Job7")]
-employee = SubResource("Resource_vt8gg")
-storage = NodePath("TokenStorage")
-
-[node name="TokenStorage" type="Node" parent="Temp/Job3"]
-script = ExtResource("11_if1yf")
-contents = Array[ExtResource("7_b1mae")]([SubResource("Resource_p2afh"), SubResource("Resource_oa62m"), SubResource("Resource_uttuc")])
-defaultLimit = 5
-
-[node name="Job2" type="Node" parent="Temp" node_paths=PackedStringArray("inflow", "storage")]
-script = ExtResource("6_cnhkk")
-inflow = [NodePath("../../JobLord/Job")]
-employee = SubResource("Resource_dq6ey")
-storage = NodePath("TokenStorage")
-
-[node name="TokenStorage" type="Node" parent="Temp/Job2"]
-script = ExtResource("11_if1yf")
-defaultLimit = 5
-
-[node name="Job4" type="Node" parent="Temp" node_paths=PackedStringArray("outflow", "storage")]
-script = ExtResource("6_cnhkk")
-outflow = [NodePath("../Job5")]
-employee = SubResource("Resource_r08g0")
-storage = NodePath("TokenStorage")
-
-[node name="TokenStorage" type="Node" parent="Temp/Job4"]
-script = ExtResource("11_if1yf")
-defaultLimit = 5
-
-[node name="Job5" type="Node" parent="Temp" node_paths=PackedStringArray("inflow", "storage")]
-script = ExtResource("6_cnhkk")
-inflow = [NodePath("../Job4")]
-employee = SubResource("Resource_qhelu")
-storage = NodePath("TokenStorage")
-
-[node name="TokenStorage" type="Node" parent="Temp/Job5"]
-script = ExtResource("11_if1yf")
-defaultLimit = 20
-
-[node name="Job7" type="Node" parent="Temp" node_paths=PackedStringArray("inflow", "outflow", "storage")]
-script = ExtResource("6_cnhkk")
-inflow = [NodePath("../Job3")]
-outflow = [NodePath("../Job8")]
-employee = SubResource("Resource_xdlq6")
-storage = NodePath("TokenStorage")
-
-[node name="TokenStorage" type="Node" parent="Temp/Job7"]
-script = ExtResource("11_if1yf")
-defaultLimit = 20
-
-[node name="Job8" type="Node" parent="Temp" node_paths=PackedStringArray("inflow", "storage")]
-script = ExtResource("6_cnhkk")
-inflow = [NodePath("../Job7")]
-employee = SubResource("Resource_dpwma")
-storage = NodePath("TokenStorage")
-
-[node name="TokenStorage" type="Node" parent="Temp/Job8"]
-script = ExtResource("11_if1yf")
-defaultLimit = 20
-
-[node name="Job6" type="Node" parent="Temp" node_paths=PackedStringArray("storage")]
-script = ExtResource("6_cnhkk")
-employee = SubResource("Resource_y8f7y")
-storage = NodePath("TokenStorage")
-
-[node name="TokenStorage" type="Node" parent="Temp/Job6"]
-script = ExtResource("11_if1yf")
-contents = Array[ExtResource("7_b1mae")]([SubResource("Resource_b70cd"), SubResource("Resource_0nadg"), SubResource("Resource_v5ayw")])
-defaultLimit = 20
-
-[node name="Job9" type="Node" parent="Temp" node_paths=PackedStringArray("storage")]
-script = ExtResource("6_cnhkk")
-employee = SubResource("Resource_7po3r")
-storage = NodePath("TokenStorage")
-
-[node name="TokenStorage" type="Node" parent="Temp/Job9"]
-script = ExtResource("11_if1yf")
-defaultLimit = 20
-
 [node name="JobLord" type="Node" parent="." groups=["JobLord"]]
 script = ExtResource("5_1cdr4")
 
-[node name="Job" type="Node" parent="JobLord" node_paths=PackedStringArray("storage")]
+[node name="Job11" type="Node" parent="JobLord" node_paths=PackedStringArray("storage")]
 script = ExtResource("6_cnhkk")
-employee = SubResource("Resource_qdqlf")
-storage = NodePath("TokenStorage")
-
-[node name="TokenStorage" type="Node" parent="JobLord/Job"]
-script = ExtResource("11_if1yf")
-contents = Array[ExtResource("7_b1mae")]([SubResource("Resource_j62mu")])
-defaultLimit = 5
-
-[node name="Job10" type="Node" parent="JobLord" node_paths=PackedStringArray("inflow", "storage")]
-script = ExtResource("6_cnhkk")
-inflow = [NodePath("../Job11")]
-employee = SubResource("Resource_qcddy")
-storage = NodePath("TokenStorage")
-
-[node name="TokenStorage" type="Node" parent="JobLord/Job10"]
-script = ExtResource("11_if1yf")
-contents = Array[ExtResource("7_b1mae")]([SubResource("Resource_sih2q"), SubResource("Resource_8omh7")])
-defaultLimit = 20
-
-[node name="Job11" type="Node" parent="JobLord" node_paths=PackedStringArray("outflow", "storage")]
-script = ExtResource("6_cnhkk")
-outflow = [NodePath("../Job10")]
-employee = SubResource("Resource_e4rb4")
+employee = ExtResource("5_d7s66")
 storage = NodePath("TokenStorage")
 
 [node name="TokenStorage" type="Node" parent="JobLord/Job11"]
 script = ExtResource("11_if1yf")
-contents = Array[ExtResource("7_b1mae")]([SubResource("Resource_ucos1"), SubResource("Resource_t3exc")])
-defaultLimit = 20
+
+[node name="Job10" type="Node" parent="JobLord" node_paths=PackedStringArray("storage")]
+script = ExtResource("6_cnhkk")
+employee = ExtResource("4_d31wt")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job10"]
+script = ExtResource("11_if1yf")
+
+[node name="Job9" type="Node" parent="JobLord" node_paths=PackedStringArray("storage")]
+script = ExtResource("6_cnhkk")
+employee = ExtResource("4_u73lm")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job9"]
+script = ExtResource("11_if1yf")
+
+[node name="Job6" type="Node" parent="JobLord" node_paths=PackedStringArray("storage")]
+script = ExtResource("6_cnhkk")
+employee = ExtResource("4_52woe")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job6"]
+script = ExtResource("11_if1yf")
+
+[node name="Job8" type="Node" parent="JobLord" node_paths=PackedStringArray("storage")]
+script = ExtResource("6_cnhkk")
+employee = ExtResource("4_bqqif")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job8"]
+script = ExtResource("11_if1yf")
+
+[node name="Job7" type="Node" parent="JobLord" node_paths=PackedStringArray("storage")]
+script = ExtResource("6_cnhkk")
+employee = ExtResource("22_fscka")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job7"]
+script = ExtResource("11_if1yf")
+
+[node name="Job5" type="Node" parent="JobLord" node_paths=PackedStringArray("storage")]
+script = ExtResource("6_cnhkk")
+employee = ExtResource("4_r5iho")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job5"]
+script = ExtResource("11_if1yf")
+
+[node name="Job4" type="Node" parent="JobLord" node_paths=PackedStringArray("storage")]
+script = ExtResource("6_cnhkk")
+employee = ExtResource("23_bktqu")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job4"]
+script = ExtResource("11_if1yf")
+
+[node name="Job2" type="Node" parent="JobLord" node_paths=PackedStringArray("storage")]
+script = ExtResource("6_cnhkk")
+employee = ExtResource("4_3tnet")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job2"]
+script = ExtResource("11_if1yf")
+
+[node name="Job" type="Node" parent="JobLord" node_paths=PackedStringArray("storage")]
+script = ExtResource("6_cnhkk")
+employee = ExtResource("24_4q6qm")
+storage = NodePath("TokenStorage")
+
+[node name="TokenStorage" type="Node" parent="JobLord/Job"]
+script = ExtResource("11_if1yf")
 
 [node name="ActionCards" type="Node" parent="."]
 

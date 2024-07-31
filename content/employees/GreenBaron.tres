@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="Employee" load_steps=12 format=3 uid="uid://brra3bq246esn"]
+
+[ext_resource type="Script" path="res://src/actions/Action.gd" id="1_lbp88"]
+[ext_resource type="Texture2D" uid="uid://u5diswpi5wbn" path="res://assets/monsterPics/monsterWheelChair.jpg" id="2_dre1x"]
+[ext_resource type="Script" path="res://src/company/Token.gd" id="3_6pyih"]
+[ext_resource type="Script" path="res://src/actions/action_consumeAllAndContinue.gd" id="4_v02wo"]
+[ext_resource type="Script" path="res://src/actions/action_produce.gd" id="5_byqxs"]
+[ext_resource type="Script" path="res://src/methodReplacements/MethodReplacement.gd" id="6_c4syk"]
+[ext_resource type="Script" path="res://src/company/Employee.gd" id="7_oikhk"]
+
+[sub_resource type="Resource" id="Resource_jejmb"]
+script = ExtResource("4_v02wo")
+requiredTokens = Array[ExtResource("3_6pyih")]([])
+requiredAll = true
+recordFieldTokenList = ""
+recordFieldTokenAmount = ""
+
+[sub_resource type="Resource" id="Resource_8lc1c"]
+script = ExtResource("3_6pyih")
+type = 2
+
+[sub_resource type="Resource" id="Resource_3fjei"]
+script = ExtResource("3_6pyih")
+type = 2
+
+[sub_resource type="Resource" id="Resource_5dg03"]
+script = ExtResource("5_byqxs")
+producedTokens = Array[ExtResource("3_6pyih")]([SubResource("Resource_8lc1c"), SubResource("Resource_3fjei")])
+randomAmount = 0
+
+[resource]
+script = ExtResource("7_oikhk")
+prestige = 2
+skill = 1
+dependentActions = Array[ExtResource("1_lbp88")]([])
+independentActions = Array[ExtResource("1_lbp88")]([SubResource("Resource_jejmb"), SubResource("Resource_5dg03")])
+whenPlacedActions = Array[ExtResource("1_lbp88")]([])
+methodReplacements = Array[ExtResource("6_c4syk")]([])
+employeeName = "Green Baron"
+employeePic = ExtResource("2_dre1x")
+staticText = "Consume all, Produce 2 Green."

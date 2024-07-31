@@ -3,6 +3,7 @@ class_name ActionProduce
 
 @export var producedTokens: Array[Token] = []
 @export var dynamic: DynamicTokenCollection
+@export var randomAmount: int = 0
 
 		
 func performSpecific() -> bool:
@@ -12,6 +13,9 @@ func performSpecific() -> bool:
 		tokensToProduce = producedTokens
 	else:
 		tokensToProduce = dynamic.getCollection(self)
+
+	if randomAmount > 0:
+		tokensToProduce = Token.getRandomCollection(tokensToProduce, randomAmount)
 
 	var newTokens = jobAttachedTo.storage.addTokens(tokensToProduce.map(func(t): return t.replicateSelf()))
 	for token in newTokens:

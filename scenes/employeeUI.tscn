@@ -23,11 +23,11 @@ blend_mode = 3
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mdt14"]
 blend_mode = 3
 
-[node name="EmployeeVisual" type="Node2D" node_paths=PackedStringArray("employeeNameLabel", "prestigeLabel", "capacityLabel", "employeeTextLabel", "employeePic")]
+[node name="EmployeeVisual" type="Node2D" node_paths=PackedStringArray("employeeNameLabel", "prestigeLabel", "skillLabel", "employeeTextLabel", "employeePic")]
 script = ExtResource("1_khwmb")
 employeeNameLabel = NodePath("EmployeeName")
-prestigeLabel = NodePath("Prestige")
-capacityLabel = NodePath("Capacity")
+prestigeLabel = NodePath("Skill")
+skillLabel = NodePath("Skill")
 employeeTextLabel = NodePath("EmployeeText")
 employeePic = NodePath("EmployePic")
 
@@ -100,7 +100,7 @@ expand_mode = 1
 stretch_mode = 5
 metadata/_edit_use_anchors_ = true
 
-[node name="Prestige" type="Label" parent="."]
+[node name="Skill" type="Label" parent="."]
 offset_left = 5.0
 offset_top = 291.0
 offset_right = 40.0

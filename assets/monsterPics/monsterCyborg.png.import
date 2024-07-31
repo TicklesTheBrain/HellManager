@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pnt2iobbax4j"
-valid=false
+uid="uid://bxa055lcqgond"
+path="res://.godot/imported/monsterCyborg.png-8f868078e456704f973a99061b49e915.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
-source_file="res://assets/monsterPics/monsterLegs.jpg"
+source_file="res://assets/monsterPics/monsterCyborg.png"
+dest_files=["res://.godot/imported/monsterCyborg.png-8f868078e456704f973a99061b49e915.ctex"]
 
 [params]
 

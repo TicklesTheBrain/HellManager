@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ActionCard" load_steps=6 format=3 uid="uid://bwnb1afh7jngg"]
+
+[ext_resource type="Texture2D" uid="uid://bwl07yqs0u1c7" path="res://assets/zig-arrow.svg" id="1_n6wdb"]
+[ext_resource type="Script" path="res://src/actions/Action.gd" id="2_uydql"]
+[ext_resource type="Script" path="res://src/actions/action_addFlow.gd" id="3_ou5le"]
+[ext_resource type="Script" path="res://src/cards/ActionCard.gd" id="4_4uqnq"]
+
+[sub_resource type="Resource" id="Resource_jr0jv"]
+script = ExtResource("3_ou5le")
+
+[resource]
+script = ExtResource("4_4uqnq")
+cardText = "Make new line of token flow."
+cardIcon = ExtResource("1_n6wdb")
+cardName = "Subordinate"
+revealed = false
+onExecute = Array[ExtResource("2_uydql")]([SubResource("Resource_jr0jv")])

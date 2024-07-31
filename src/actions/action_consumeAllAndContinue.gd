@@ -2,6 +2,7 @@ extends Action
 class_name ActionConsumeAllAndContinue
 
 @export var requiredTokens: Array[Token] = []
+@export var requiredAll: bool = false
 @export var additionalAction: Action
 @export var recordFieldTokenList: String
 @export var recordFieldTokenAmount: String
@@ -11,6 +12,9 @@ func try() -> bool:
 	return job.getTokens(requiredTokens).size() > 0
 		
 func performSpecific():
+
+	if requiredAll:
+		requiredTokens = Token.getAllTypesCollection()
 
 	var stored := [] as Array[Job.TokenPath]
 	var acquired := [] as Array[Job.TokenPath]

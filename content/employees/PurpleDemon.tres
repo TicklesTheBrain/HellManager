@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="Employee" load_steps=13 format=3 uid="uid://dy5nsexsga1p4"]
+
+[ext_resource type="Script" path="res://src/actions/Action.gd" id="1_12mjc"]
+[ext_resource type="Script" path="res://src/company/Token.gd" id="2_h6cj2"]
+[ext_resource type="Script" path="res://src/actions/action_produce.gd" id="3_oqrgx"]
+[ext_resource type="Script" path="res://src/conditions/conditionPrestigeAmount.gd" id="4_2vqjs"]
+[ext_resource type="Script" path="res://src/actions/action_delegateOther.gd" id="5_y14dc"]
+[ext_resource type="Texture2D" uid="uid://bxa055lcqgond" path="res://assets/monsterPics/monsterCyborg.png" id="6_apk7r"]
+[ext_resource type="Script" path="res://src/methodReplacements/MethodReplacement.gd" id="7_rbp7s"]
+[ext_resource type="Script" path="res://src/company/Employee.gd" id="8_iskw1"]
+
+[sub_resource type="Resource" id="Resource_6gjpb"]
+script = ExtResource("2_h6cj2")
+type = 3
+
+[sub_resource type="Resource" id="Resource_3i7yp"]
+script = ExtResource("3_oqrgx")
+producedTokens = Array[ExtResource("2_h6cj2")]([SubResource("Resource_6gjpb")])
+randomAmount = 0
+
+[sub_resource type="Resource" id="Resource_ctef4"]
+script = ExtResource("4_2vqjs")
+lower = true
+acceptEqual = true
+compareToActingEmployee = true
+prestigeValueToCompare = 0
+
+[sub_resource type="Resource" id="Resource_k3ecl"]
+script = ExtResource("5_y14dc")
+actionToDelegate = SubResource("Resource_3i7yp")
+allowDelegateOnVacant = false
+delegateCondition = SubResource("Resource_ctef4")
+connectionType = 1
+
+[resource]
+script = ExtResource("8_iskw1")
+prestige = 4
+skill = 2
+dependentActions = Array[ExtResource("1_12mjc")]([SubResource("Resource_k3ecl")])
+independentActions = Array[ExtResource("1_12mjc")]([])
+whenPlacedActions = Array[ExtResource("1_12mjc")]([])
+methodReplacements = Array[ExtResource("7_rbp7s")]([])
+employeeName = "Purple Demon"
+employeePic = ExtResource("6_apk7r")
+staticText = "Produce 1 Purple on lower prestige subordinates"

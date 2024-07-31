@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="Employee" load_steps=14 format=3 uid="uid://bprb5ibih6r3g"]
+
+[ext_resource type="Script" path="res://src/actions/Action.gd" id="1_mrj8o"]
+[ext_resource type="Texture2D" uid="uid://cl3uwwpgrqwlq" path="res://assets/monsterPics/monsterSpooky.png" id="2_86h6p"]
+[ext_resource type="Script" path="res://src/methodReplacements/MethodReplacement.gd" id="3_ggeif"]
+[ext_resource type="Script" path="res://src/company/Employee.gd" id="4_7ecpq"]
+[ext_resource type="Script" path="res://src/company/Token.gd" id="5_hoj2x"]
+[ext_resource type="Script" path="res://src/actions/action_produce.gd" id="6_b5p08"]
+
+[sub_resource type="Resource" id="Resource_ghic5"]
+script = ExtResource("5_hoj2x")
+type = 1
+
+[sub_resource type="Resource" id="Resource_1a4fo"]
+script = ExtResource("5_hoj2x")
+type = 1
+
+[sub_resource type="Resource" id="Resource_s2x4m"]
+script = ExtResource("5_hoj2x")
+type = 1
+
+[sub_resource type="Resource" id="Resource_pyg6j"]
+script = ExtResource("5_hoj2x")
+type = 1
+
+[sub_resource type="Resource" id="Resource_yi8at"]
+script = ExtResource("5_hoj2x")
+type = 1
+
+[sub_resource type="Resource" id="Resource_vxf0i"]
+script = ExtResource("5_hoj2x")
+type = 1
+
+[sub_resource type="Resource" id="Resource_k84vd"]
+script = ExtResource("6_b5p08")
+producedTokens = Array[ExtResource("5_hoj2x")]([SubResource("Resource_ghic5"), SubResource("Resource_1a4fo"), SubResource("Resource_s2x4m"), SubResource("Resource_pyg6j"), SubResource("Resource_yi8at"), SubResource("Resource_vxf0i")])
+randomAmount = 0
+
+[resource]
+script = ExtResource("4_7ecpq")
+prestige = 2
+skill = 1
+dependentActions = Array[ExtResource("1_mrj8o")]([])
+independentActions = Array[ExtResource("1_mrj8o")]([])
+whenPlacedActions = Array[ExtResource("1_mrj8o")]([SubResource("Resource_k84vd")])
+methodReplacements = Array[ExtResource("3_ggeif")]([])
+employeeName = "Red Baron"
+employeePic = ExtResource("2_86h6p")
+staticText = "Produce 6 Red when placed."

@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="Employee" load_steps=17 format=3 uid="uid://ch3knaqoq6lg6"]
+
+[ext_resource type="Script" path="res://src/actions/Action.gd" id="1_7f3fi"]
+[ext_resource type="Script" path="res://src/company/Token.gd" id="2_qs7be"]
+[ext_resource type="Script" path="res://src/actions/action_produce.gd" id="3_qksr8"]
+[ext_resource type="Script" path="res://src/actions/action_changePrestige.gd" id="4_hhjih"]
+[ext_resource type="Texture2D" uid="uid://fi411sp4a2sj" path="res://assets/monsterPics/monsterBookHammer.png" id="5_ps8wd"]
+[ext_resource type="Script" path="res://src/conditions/conditionPrestigeAmount.gd" id="6_jxx5u"]
+[ext_resource type="Script" path="res://src/actions/action_destroyEmployee.gd" id="7_15ifd"]
+[ext_resource type="Script" path="res://src/methodReplacements/MethodReplacement.gd" id="8_vphbi"]
+[ext_resource type="Script" path="res://src/company/Employee.gd" id="9_kvf5p"]
+
+[sub_resource type="Resource" id="Resource_wk6m5"]
+script = ExtResource("2_qs7be")
+type = 0
+
+[sub_resource type="Resource" id="Resource_0awlb"]
+script = ExtResource("2_qs7be")
+type = 0
+
+[sub_resource type="Resource" id="Resource_4xfyt"]
+script = ExtResource("2_qs7be")
+type = 0
+
+[sub_resource type="Resource" id="Resource_emjku"]
+script = ExtResource("3_qksr8")
+producedTokens = Array[ExtResource("2_qs7be")]([SubResource("Resource_wk6m5"), SubResource("Resource_0awlb"), SubResource("Resource_4xfyt")])
+randomAmount = 0
+
+[sub_resource type="Resource" id="Resource_hxcwc"]
+script = ExtResource("4_hhjih")
+amountOfChange = -1
+choiceBased = false
+
+[sub_resource type="Resource" id="Resource_uu3im"]
+script = ExtResource("6_jxx5u")
+lower = true
+acceptEqual = true
+compareToActingEmployee = false
+prestigeValueToCompare = 0
+
+[sub_resource type="Resource" id="Resource_xb7er"]
+script = ExtResource("7_15ifd")
+selfDestroy = true
+condition = SubResource("Resource_uu3im")
+
+[resource]
+script = ExtResource("9_kvf5p")
+prestige = 2
+skill = 1
+dependentActions = Array[ExtResource("1_7f3fi")]([SubResource("Resource_emjku"), SubResource("Resource_hxcwc")])
+independentActions = Array[ExtResource("1_7f3fi")]([SubResource("Resource_xb7er")])
+whenPlacedActions = Array[ExtResource("1_7f3fi")]([])
+methodReplacements = Array[ExtResource("8_vphbi")]([])
+employeeName = "Blue Baron"
+employeePic = ExtResource("5_ps8wd")
+staticText = "Produce 3 Blue, lose prestige. Die at prestige 0."
