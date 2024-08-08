@@ -30,6 +30,7 @@ collisionShape = NodePath("DragAreaCompanyUI/CollisionShape2D")
 initialSize = Vector2(500, 500)
 
 [node name="CompanyBackground" type="ColorRect" parent="."]
+z_index = -10
 material = SubResource("ShaderMaterial_emcrn")
 offset_right = 40.0
 offset_bottom = 40.0

@@ -27,8 +27,8 @@ func updateLine():
 
 	var toIndex: int = to.inflow.find(from)
 	var fromIndex: int = from.outflow.find(to)
-	var fromPos: Vector2 = fromUI.outMarkers[fromIndex].global_position
-	var toPos: Vector2 = toUI.inMarkers[toIndex].global_position
+	var fromPos: Vector2 = fromUI.outMarkers[fromIndex].global_position - fromUI.get_parent().get_parent().position #TODO: this is ugly as fuck
+	var toPos: Vector2 = toUI.inMarkers[toIndex].global_position - toUI.get_parent().get_parent().position
 
 	#print('new line ', fromIndex, '  ', toIndex)
 	points[0] = fromPos

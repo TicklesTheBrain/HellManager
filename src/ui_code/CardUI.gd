@@ -22,5 +22,5 @@ func updateCardUI():
 
 func _on_area_2d_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
 	if event is InputEventMouseButton and event.is_released():
-		print('action card clicked ', self)
+		# print('action card clicked ', self)
 		Events.actionCardClicked.emit(self, event.button_index)

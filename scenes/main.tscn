@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=87 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://src/Main.gd" id="1_nbim8"]
 [ext_resource type="Script" path="res://src/cards/CardMarket.gd" id="2_42g87"]
@@ -61,7 +61,6 @@
 [ext_resource type="Script" path="res://src/ui_code/phase_show_ui.gd" id="43_dqmsq"]
 [ext_resource type="Script" path="res://scenes/general_info_label.gd" id="43_j5rga"]
 [ext_resource type="PackedScene" uid="uid://r1xuijx0ewa4" path="res://scenes/company_grid_cell.tscn" id="44_l3dw6"]
-[ext_resource type="Script" path="res://src/ui_code/CanvasLayerFollowPosition.gd" id="45_juffj"]
 [ext_resource type="PackedScene" uid="uid://6sbacijn0esb" path="res://scenes/companyUICanvas.tscn" id="45_k7yar"]
 [ext_resource type="Script" path="res://src/ui_code/MarketLabelLord.gd" id="53_ahosn"]
 [ext_resource type="PackedScene" uid="uid://6jmlsqw04ghs" path="res://scenes/market_label.tscn" id="54_0pl2r"]
@@ -223,7 +222,9 @@ taskManager = NodePath("TaskManager")
 script = ExtResource("23_xx20n")
 actionHand = NodePath("../ActionCards/HandCards")
 taskHand = NodePath("../TaskManager/TaskHand")
+mouseOverAllowed = null
 marketContainer = NodePath("../ActionCards/CardMarket")
+inputLock = null
 
 [node name="Temp" type="Node" parent="."]
 
@@ -424,32 +425,25 @@ initialRowMax = 5
 [node name="CompanyUICanvas" parent="CompanyUILord" instance=ExtResource("45_k7yar")]
 initialSize = Vector2(3000, 4000)
 
-[node name="TokenLayer" type="CanvasLayer" parent="CompanyUILord/CompanyUICanvas" node_paths=PackedStringArray("nodeForFollowPosition")]
-layer = 3
-script = ExtResource("45_juffj")
-nodeForFollowPosition = NodePath("..")
+[node name="TokenLayer" type="Node2D" parent="CompanyUILord/CompanyUICanvas"]
+z_index = 10
 
-[node name="LineLayer" type="CanvasLayer" parent="CompanyUILord/CompanyUICanvas" node_paths=PackedStringArray("nodeForFollowPosition")]
-layer = 2
-script = ExtResource("45_juffj")
-nodeForFollowPosition = NodePath("..")
+[node name="LineLayer" type="Node2D" parent="CompanyUILord/CompanyUICanvas"]
+z_index = 5
 
-[node name="JobLayer" type="CanvasLayer" parent="CompanyUILord/CompanyUICanvas" node_paths=PackedStringArray("nodeForFollowPosition")]
-script = ExtResource("45_juffj")
-nodeForFollowPosition = NodePath("..")
+[node name="JobLayer" type="Node2D" parent="CompanyUILord/CompanyUICanvas"]
 
-[node name="EmptyCellLayer" type="CanvasLayer" parent="CompanyUILord/CompanyUICanvas" node_paths=PackedStringArray("nodeForFollowPosition")]
-layer = 0
-script = ExtResource("45_juffj")
-nodeForFollowPosition = NodePath("..")
+[node name="EmptyCellLayer" type="Node2D" parent="CompanyUILord/CompanyUICanvas"]
+z_index = -5
 
 [node name="MouseOverLord" type="Node2D" parent="."]
-z_index = 5
+z_index = 45
 position = Vector2(1188, 27)
 script = ExtResource("3_2pjbp")
 hideDelay = 0.15
 
 [node name="HandPC" type="Node2D" parent="." node_paths=PackedStringArray("area", "logicalContainer")]
+z_index = 35
 position = Vector2(-17, -48)
 script = ExtResource("19_qe3sq")
 area = NodePath("CollisionShape2D")
@@ -472,6 +466,7 @@ packedCardForReference = ExtResource("29_2tfqd")
 position = Vector2(1519, 614)
 
 [node name="MarketSlideController" type="Node2D" parent="." node_paths=PackedStringArray("marketAnimator", "marketContainer")]
+z_index = 40
 script = ExtResource("32_beqie")
 marketAnimator = NodePath("MarketLayer/AnimationPlayer")
 marketContainer = NodePath("../ActionCards/CardMarket")
@@ -530,6 +525,7 @@ offset_bottom = 100.0
 alignment = 1
 
 [node name="CacheUI" type="Node2D" parent="."]
+z_index = 30
 position = Vector2(1594, -27)
 
 [node name="Panel" type="Panel" parent="CacheUI"]
@@ -575,6 +571,7 @@ packedCardForReference = ExtResource("37_62ix5")
 position = Vector2(2169, 428)
 
 [node name="TaskHandPC" type="Node2D" parent="." node_paths=PackedStringArray("area", "logicalContainer")]
+z_index = 15
 script = ExtResource("19_qe3sq")
 area = NodePath("CollisionShape2D")
 multipleRows = true
@@ -587,6 +584,7 @@ position = Vector2(1727.5, 557)
 shape = SubResource("RectangleShape2D_5fq8s")
 
 [node name="GeneralInfoLabel" type="Label" parent="."]
+z_index = 20
 offset_left = 1.0
 offset_top = 1022.0
 offset_right = 1415.0
@@ -598,6 +596,7 @@ horizontal_alignment = 1
 script = ExtResource("43_j5rga")
 
 [node name="PhaseShowUI" type="Node2D" parent="." node_paths=PackedStringArray("listOfRects", "pointer")]
+z_index = 25
 position = Vector2(1435, 1040)
 script = ExtResource("43_dqmsq")
 listOfPhases = Array[int]([0, 1, 2, 3])

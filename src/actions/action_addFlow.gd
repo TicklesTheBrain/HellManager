@@ -11,7 +11,10 @@ func isSetup() -> bool:
 
 func ask() -> Callable:
 	if not isSetup():
-		Events.requestMessage.emit('choose the outgoing job')
+		if from == null:
+			Events.requestMessage.emit('Choose the subservient job')
+		elif to == null:
+			Events.requestMessage.emit('Choose the supervising job')
 		return recordChoice
 	return Callable()
 
@@ -30,7 +33,7 @@ func recordChoice(smth):
 	if checkChoice(smth):
 		if from == null:
 			from = smth
-			Events.requestMessage.emit('choose incoming job')
+			
 		elif to == null:
 			to = smth
 		Events.clearMessage.emit()
@@ -46,9 +49,13 @@ func checkChoice(smth) -> bool:
 		return false	
 	if from != null and smth.inflow.has(from):
 		return false
-	if to == null and smth.inflow.size() >= smth.employee.skill:
+	if from != null and to == null and smth.inflow.size() >= smth.employee.skill:
 		return false
 	if from != null and smth == from:
 		return false
 		
 	return true
+
+func resetSetup():
+	from = null
+	to = null

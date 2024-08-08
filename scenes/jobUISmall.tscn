@@ -78,28 +78,28 @@ columns = 6
 position = Vector2(48, 53)
 
 [node name="OutMarker" type="Marker2D" parent="Markers"]
-position = Vector2(-110, 50)
-
-[node name="OutMarker2" type="Marker2D" parent="Markers"]
-position = Vector2(-75, 50)
-
-[node name="OutMarker3" type="Marker2D" parent="Markers"]
-position = Vector2(-30, 50)
-
-[node name="OutMarker4" type="Marker2D" parent="Markers"]
-position = Vector2(10, 50)
-
-[node name="InMarker" type="Marker2D" parent="Markers"]
 position = Vector2(-110, -165)
 
-[node name="InMarker2" type="Marker2D" parent="Markers"]
+[node name="OutMarker2" type="Marker2D" parent="Markers"]
 position = Vector2(-75, -165)
 
-[node name="InMarker3" type="Marker2D" parent="Markers"]
+[node name="OutMarker3" type="Marker2D" parent="Markers"]
 position = Vector2(-30, -165)
 
-[node name="InMarker4" type="Marker2D" parent="Markers"]
+[node name="OutMarker4" type="Marker2D" parent="Markers"]
 position = Vector2(10, -165)
+
+[node name="InMarker" type="Marker2D" parent="Markers"]
+position = Vector2(-110, 47)
+
+[node name="InMarker2" type="Marker2D" parent="Markers"]
+position = Vector2(-75, 47)
+
+[node name="InMarker3" type="Marker2D" parent="Markers"]
+position = Vector2(-30, 47)
+
+[node name="InMarker4" type="Marker2D" parent="Markers"]
+position = Vector2(10, 47)
 
 [node name="DragDetectArea" type="Area2D" parent="."]
 

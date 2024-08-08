@@ -34,7 +34,7 @@ randomAmount = 0
 
 [resource]
 script = ExtResource("8_bnobt")
-prestige = 3
+prestige = 2
 skill = 1
 dependentActions = Array[ExtResource("1_ocsg0")]([SubResource("Resource_ptc3c")])
 independentActions = Array[ExtResource("1_ocsg0")]([])

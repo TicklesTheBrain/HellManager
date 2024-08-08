@@ -11,10 +11,10 @@ class_name CompanyUILord
 @export var gridCell: PackedScene
 
 @export_group("UI Layers")
-@export var lineLayer: CanvasLayer
-@export var jobLayer: CanvasLayer
-@export var tokenLayer: CanvasLayer
-@export var cellLayer: CanvasLayer
+@export var lineLayer: Node2D
+@export var jobLayer: Node2D
+@export var tokenLayer: Node2D
+@export var cellLayer: Node2D
 
 @export_category("Grid stuff")
 @export var gridGapSizeVector: Vector2

@@ -49,6 +49,10 @@ func marketClose(controller: MarketUIController):
 	controller.closeMarket()
 
 func companyCanvasDragStart(canvas: CompanyUICanvas):
+
+	if draggedJob != null:
+		return
+
 	if draggedCanvas != null or not activeChoice.is_null():
 		return
 	
@@ -65,7 +69,7 @@ func companyCanvasDragEnd(canvas: CompanyUICanvas):
 	cancelCanvasDrag()
 
 func taskClicked(taskUI: TaskCardUI, button):
-	print('task clicked')
+	print('task clicked ', taskUI)
 	cancelCanvasDrag()
 	if not activeChoice.is_null():
 		stopChoice()
@@ -85,10 +89,11 @@ func employeeMouseOverEnd(empUI: EmployeeUI):
 	
 func cardClicked(cardUI: ActionCardUI, button: MouseButton):
 	cancelCanvasDrag()
-	#print('card clicked on input manger, input lock is ', inputLock, ' phase is ', phase)
+	print('card clicked on input manger, input lock is ', inputLock, ' phase is ', Globals.phase)
 
 	if not activeChoice.is_null():
 		stopChoice()
+		return
 
 	if inputLock:
 		return
