@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=96 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://src/Main.gd" id="1_nbim8"]
 [ext_resource type="Script" path="res://src/cards/CardMarket.gd" id="2_42g87"]
@@ -18,7 +18,6 @@
 [ext_resource type="Script" path="res://src/company/Job.gd" id="6_cnhkk"]
 [ext_resource type="PackedScene" uid="uid://cgq6pba1xc53a" path="res://scenes/tokenUI.tscn" id="6_h2iy3"]
 [ext_resource type="Script" path="res://src/company/Token.gd" id="7_b1mae"]
-[ext_resource type="Texture2D" uid="uid://dhmuqf88u3xo1" path="res://assets/testPic1.png" id="9_xt47j"]
 [ext_resource type="Script" path="res://src/company/TokenStorage.gd" id="11_if1yf"]
 [ext_resource type="Script" path="res://src/cards/Deck.gd" id="14_r0k10"]
 [ext_resource type="Resource" uid="uid://1w8ufw1ous2n" path="res://content/employees/DifficultTalent.tres" id="16_rq80c"]
@@ -62,6 +61,8 @@
 [ext_resource type="Script" path="res://scenes/general_info_label.gd" id="43_j5rga"]
 [ext_resource type="PackedScene" uid="uid://r1xuijx0ewa4" path="res://scenes/company_grid_cell.tscn" id="44_l3dw6"]
 [ext_resource type="PackedScene" uid="uid://6sbacijn0esb" path="res://scenes/companyUICanvas.tscn" id="45_k7yar"]
+[ext_resource type="Texture2D" uid="uid://cl0o88s86dga4" path="res://assets/icons/taskCardIconDefault.png" id="45_t5ct6"]
+[ext_resource type="Script" path="res://src/actions/action_consumeTokensChoice.gd" id="46_5xeqh"]
 [ext_resource type="Script" path="res://src/ui_code/MarketLabelLord.gd" id="53_ahosn"]
 [ext_resource type="PackedScene" uid="uid://6jmlsqw04ghs" path="res://scenes/market_label.tscn" id="54_0pl2r"]
 
@@ -125,9 +126,17 @@ randomEmployees = Array[ExtResource("25_61rh7")]([])
 script = ExtResource("7_b1mae")
 type = 2
 
+[sub_resource type="Resource" id="Resource_lamu5"]
+script = ExtResource("7_b1mae")
+type = 2
+
+[sub_resource type="Resource" id="Resource_wsi3h"]
+script = ExtResource("7_b1mae")
+type = 2
+
 [sub_resource type="Resource" id="Resource_20e1u"]
 script = ExtResource("25_bfr6v")
-tokenRequirement = Array[ExtResource("7_b1mae")]([SubResource("Resource_2ov4j")])
+tokenRequirement = Array[ExtResource("7_b1mae")]([SubResource("Resource_2ov4j"), SubResource("Resource_lamu5"), SubResource("Resource_wsi3h")])
 anyAmountPasses = false
 requireAll = false
 
@@ -142,12 +151,12 @@ changeAmount = -1
 
 [sub_resource type="Resource" id="Resource_v0x5r"]
 script = ExtResource("27_skm2w")
-taskIcon = ExtResource("9_xt47j")
-taskText = "Consume Job with One green"
+taskIcon = ExtResource("45_t5ct6")
+taskText = "Consume Job with thrre green"
 consequenceText = "Lose one CacheA"
 taskConsequence = Array[ExtResource("5_nsq4b")]([SubResource("Resource_41yhl")])
 consequenceFrequency = 1
-cardName = "Test Task"
+cardName = "Need Green"
 revealed = false
 onExecute = Array[ExtResource("5_nsq4b")]([SubResource("Resource_4skit")])
 
@@ -156,6 +165,41 @@ script = ExtResource("17_mrygo")
 copies = 4
 card = SubResource("Resource_v0x5r")
 debug = false
+randomEmployees = Array[ExtResource("25_61rh7")]([])
+
+[sub_resource type="Resource" id="Resource_mtx77"]
+script = ExtResource("7_b1mae")
+type = 2
+
+[sub_resource type="Resource" id="Resource_3hrpr"]
+script = ExtResource("7_b1mae")
+type = 2
+
+[sub_resource type="Resource" id="Resource_3uxcc"]
+script = ExtResource("7_b1mae")
+type = 2
+
+[sub_resource type="Resource" id="Resource_s3lh1"]
+script = ExtResource("46_5xeqh")
+tokensRequired = Array[ExtResource("7_b1mae")]([SubResource("Resource_mtx77"), SubResource("Resource_3hrpr"), SubResource("Resource_3uxcc")])
+requiresEmployeesPresent = true
+numberOfMaxJobs = 3
+
+[sub_resource type="Resource" id="Resource_4atyk"]
+script = ExtResource("27_skm2w")
+taskText = "Consume 3 green from up to 3 jobs."
+consequenceText = ""
+taskConsequence = Array[ExtResource("5_nsq4b")]([])
+consequenceFrequency = 1
+cardName = "Test Task"
+revealed = false
+onExecute = Array[ExtResource("5_nsq4b")]([SubResource("Resource_s3lh1")])
+
+[sub_resource type="Resource" id="Resource_8ne3f"]
+script = ExtResource("17_mrygo")
+copies = 1
+card = SubResource("Resource_4atyk")
+debug = true
 randomEmployees = Array[ExtResource("25_61rh7")]([])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f5c0v"]
@@ -396,7 +440,9 @@ startingTasks = 1
 
 [node name="TaskDeck" type="Node" parent="TaskManager"]
 script = ExtResource("14_r0k10")
-deck = Array[ExtResource("17_mrygo")]([SubResource("Resource_h0cd8")])
+includeDebug = true
+onlyDebug = true
+deck = Array[ExtResource("17_mrygo")]([SubResource("Resource_h0cd8"), SubResource("Resource_8ne3f")])
 
 [node name="TaskHand" type="Node" parent="TaskManager" node_paths=PackedStringArray("disposeContainer") groups=["TaskHand"]]
 script = ExtResource("20_vouf7")
@@ -597,7 +643,7 @@ script = ExtResource("43_j5rga")
 
 [node name="PhaseShowUI" type="Node2D" parent="." node_paths=PackedStringArray("listOfRects", "pointer")]
 z_index = 25
-position = Vector2(1435, 1040)
+position = Vector2(1440, 1040)
 script = ExtResource("43_dqmsq")
 listOfPhases = Array[int]([0, 1, 2, 3])
 listOfRects = [NodePath("MorningRect"), NodePath("MANAGERECT"), NodePath("WorkRect"), NodePath("ConsequenceRect")]

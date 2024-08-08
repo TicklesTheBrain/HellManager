@@ -9,3 +9,4 @@ func try():
 func performSpecific():
     for i in range(amountOfCycles):
         Globals.getJobManager().makeEveryoneWork()
+    return true

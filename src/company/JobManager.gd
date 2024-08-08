@@ -14,6 +14,7 @@ func makeNewJob():
 	return newJob
 
 func makeEveryoneWork():
+	Events.workCycleStarted.emit(self)
 	var allJobs = get_children()
 	allJobs.sort_custom(func(a,b):
 			var aPrio = 0
@@ -25,6 +26,7 @@ func makeEveryoneWork():
 	
 	for job in allJobs:
 			job.doWork()
+	Events.workCycleEnded.emit(self)
 
 func getEmployeeJobAtCompany(employee: Employee):
 	var matching = get_children().filter(func(j): return j.employee == employee)

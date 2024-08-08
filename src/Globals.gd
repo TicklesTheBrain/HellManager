@@ -91,4 +91,5 @@ func subtractTokenList(first, second):
 		var matching = result.filter(func(t): return t.type == token.type)
 		if matching.size() > 0:
 			result.erase(matching[0])
+	# print( result)
 	return result

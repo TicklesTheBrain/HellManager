@@ -27,10 +27,7 @@ func _ready():
 	Events.marketMouseEnter.connect(recordMarketMouseEnter)
 	Events.marketMouseLeave.connect(recordMarketMouseLeave)
 	#TODO: this input locking thing is fucked, need to do it a different way
-	Events.phaseStarted.connect(func(p):
-		if p == Globals.phases.WORK:
-			inputLock = true
-		)
+	Events.workCycleStarted.connect(func(_jm): inputLock = true)
 	UIScheduler.finished.connect(func():inputLock = false)
 
 func recordMarketMouseEnter():

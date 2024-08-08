@@ -75,7 +75,7 @@ func getTokensOwn(request: Array[Token], exclude: Array[Token] = [], limit: int 
 		return employee.invokeJobMethodReplacement("getTokensOwn", [self, request, exclude, limit])
 
 	if storage == null:
-		return [] as Array[Token]
+		return [] as Array[TokenPath]
 	var ownTokens = storage.getTokens(request, exclude)
 	if ownTokens.size() > limit:
 		ownTokens = ownTokens.slice(0, limit)

@@ -18,7 +18,7 @@ func removeMessage(ID: int):
 		return
 	
 	for message in matchingMessages:
-		print('message removed ', message.callerID)
+		# print('message removed ', message.callerID)
 		messageStack.erase(message)
 
 	scheduleUpdateMessage()
