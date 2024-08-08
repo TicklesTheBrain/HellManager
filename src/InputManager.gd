@@ -72,6 +72,7 @@ func taskClicked(taskUI: TaskCardUI, button):
 	print('task clicked ', taskUI)
 	cancelCanvasDrag()
 	if not activeChoice.is_null():
+		Events.newPlayerAction.emit(null)
 		stopChoice()
 		return
 	if not inputLock and button == MOUSE_BUTTON_LEFT:
@@ -92,6 +93,7 @@ func cardClicked(cardUI: ActionCardUI, button: MouseButton):
 	print('card clicked on input manger, input lock is ', inputLock, ' phase is ', Globals.phase)
 
 	if not activeChoice.is_null():
+		Events.newPlayerAction.emit(null)
 		stopChoice()
 		return
 

@@ -61,10 +61,11 @@ signal employeeUIMouseOverStart(employeeUI: EmployeeUI)
 signal employeeUIMouseOverEnd(employeeUI: EmployeeUI)
 signal employeeUIDetailsRequest(employeeUI: EmployeeUI)
 signal employeeUIDetailsCloseRequest(employeeUI: EmployeeUI)
-signal requestMessage(message: String)
-signal clearMessage()
+signal requestMessage(message: String, calledID: int)
+signal clearMessage(callerID: int)
 signal showChoices(validator: Callable)
 signal stopShowChoices
+signal newPlayerAction(initiator)
 
 #DANGER ZONE
 signal choiceMade(action, choice)

@@ -12,7 +12,7 @@ var actionCounter: int = 0:
 		Globals.actionCounter = v
 		actionCounter = v
 		if actionCounter > 0:
-			Events.requestMessage.emit('Play a card, get a card or skip. Actions Left: {act}'.format({"act": actionCounter}))
+			Events.requestMessage.emit('Play a card, get a card or skip. Actions Left: {act}'.format({"act": actionCounter}), get_instance_id())
 
 signal manageComplete
 
@@ -43,7 +43,7 @@ func mainLoop():
 	
 	await manageComplete #TODO: BAD BAD NOT GOOD, the idea is to create an action scheduler similar to the UIScheduler to make sure, things triggered off other events happen in the correct order
 	await RenderingServer.frame_post_draw
-	Events.clearMessage.emit()
+	Events.clearMessage.emit( get_instance_id())
 	Events.phaseEnded.emit(Globals.phases.MANAGE)
 	Events.phaseStarted.emit(Globals.phases.WORK)
 	jobManager.makeEveryoneWork()

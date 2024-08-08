@@ -354,7 +354,7 @@ func _process(_delta):
 		var sortCellsByDistance = func(a, b):
 			return abs(a.position - draggedJob.position) < abs(b.position - draggedJob.position)
 		allCells.sort_custom(sortCellsByDistance)
-		allCells = allCells.filter(func(c): return c.jobUI != draggedJob)
+		# allCells = allCells.filter(func(c): return c.jobUI != draggedJob)
 		if allCells[0].jobUI == null:
 			dragTarget = allCells[0]
 		else:

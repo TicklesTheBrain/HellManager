@@ -13,9 +13,7 @@ func useCard(card: ProtoCard, receiveActiveChoice: Callable):
 	if not useCardAllowed:
 		return
 	
-	if selectedCard != null:
-		selectedCard.reset()
-		selectedCard = null
+	Events.newPlayerAction.emit(card)
 
 	selectedCard = card
 
@@ -30,4 +28,13 @@ func useCard(card: ProtoCard, receiveActiveChoice: Callable):
 	
 	card.execute()
 	selectedCard = null
-	disposeCard(card)    
+	disposeCard(card)
+
+func _ready():
+	Events.newPlayerAction.connect(resetSelectedCard)
+
+func resetSelectedCard(_initiator):
+	if selectedCard != null:
+		print('resetting selected card')
+		selectedCard.reset()
+	selectedCard = null

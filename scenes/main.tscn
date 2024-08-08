@@ -166,7 +166,7 @@ resource_name = "close"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MarketLayer/Panel:position")
+tracks/0/path = NodePath("MarketLayer/MarketBaground:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -181,7 +181,7 @@ resource_name = "open"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MarketLayer/Panel:position")
+tracks/0/path = NodePath("MarketLayer/MarketBaground:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -480,7 +480,7 @@ libraries = {
 "": SubResource("AnimationLibrary_4g00f")
 }
 
-[node name="Panel" type="Panel" parent="MarketSlideController/MarketLayer"]
+[node name="MarketBaground" type="Panel" parent="MarketSlideController/MarketLayer"]
 z_as_relative = false
 offset_left = 248.0
 offset_top = -697.0
@@ -489,7 +489,7 @@ offset_bottom = -19.0
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_kad5c")
 
-[node name="Market PC" type="Node2D" parent="MarketSlideController/MarketLayer/Panel" node_paths=PackedStringArray("area", "logicalContainer")]
+[node name="Market PC" type="Node2D" parent="MarketSlideController/MarketLayer/MarketBaground" node_paths=PackedStringArray("area", "logicalContainer")]
 script = ExtResource("28_lx5eo")
 area = NodePath("MarketShape")
 maxGap = 25.0
@@ -498,26 +498,26 @@ logicalContainer = NodePath("../../../../ActionCards/CardMarket")
 resetRotation = false
 packedCardForReference = ExtResource("29_2tfqd")
 
-[node name="MarketShape" type="CollisionShape2D" parent="MarketSlideController/MarketLayer/Panel/Market PC"]
+[node name="MarketShape" type="CollisionShape2D" parent="MarketSlideController/MarketLayer/MarketBaground/Market PC"]
 position = Vector2(469.25, 375.75)
 shape = SubResource("RectangleShape2D_nfpkx")
 
-[node name="MarketSinkPC" type="Node2D" parent="MarketSlideController/MarketLayer/Panel" node_paths=PackedStringArray("positionMarker", "logicalContainer")]
+[node name="MarketSinkPC" type="Node2D" parent="MarketSlideController/MarketLayer/MarketBaground" node_paths=PackedStringArray("positionMarker", "logicalContainer")]
 script = ExtResource("23_i5ahq")
 positionMarker = NodePath("MarketSinkMarker")
 logicalContainer = NodePath("../../../../ActionCards/CardMarket/MarketDispose")
 packedCardForReference = ExtResource("29_2tfqd")
 
-[node name="MarketSinkMarker" type="Marker2D" parent="MarketSlideController/MarketLayer/Panel/MarketSinkPC"]
+[node name="MarketSinkMarker" type="Marker2D" parent="MarketSlideController/MarketLayer/MarketBaground/MarketSinkPC"]
 position = Vector2(-279, 344)
 
-[node name="MarketLabelLord" type="Node2D" parent="MarketSlideController/MarketLayer/Panel" node_paths=PackedStringArray("market", "container")]
+[node name="MarketLabelLord" type="Node2D" parent="MarketSlideController/MarketLayer/MarketBaground" node_paths=PackedStringArray("market", "container")]
 script = ExtResource("53_ahosn")
 marketLabelPacked = ExtResource("54_0pl2r")
 market = NodePath("../../../../ActionCards/CardMarket")
 container = NodePath("MarketLabelContainer")
 
-[node name="MarketLabelContainer" type="HBoxContainer" parent="MarketSlideController/MarketLayer/Panel/MarketLabelLord"]
+[node name="MarketLabelContainer" type="HBoxContainer" parent="MarketSlideController/MarketLayer/MarketBaground/MarketLabelLord"]
 offset_left = 177.0
 offset_top = 30.0
 offset_right = 764.0
@@ -684,5 +684,5 @@ color = Color(0.0078125, 0.0078125, 0.0078125, 1)
 offset = Vector2(-27, 5)
 polygon = PackedVector2Array(-1, 1, 27, -11, 55, 1)
 
-[connection signal="mouse_entered" from="MarketSlideController/MarketLayer/Panel" to="MarketSlideController" method="_on_panel_mouse_entered"]
-[connection signal="mouse_exited" from="MarketSlideController/MarketLayer/Panel" to="MarketSlideController" method="_on_panel_mouse_exited"]
+[connection signal="mouse_entered" from="MarketSlideController/MarketLayer/MarketBaground" to="MarketSlideController" method="_on_panel_mouse_entered"]
+[connection signal="mouse_exited" from="MarketSlideController/MarketLayer/MarketBaground" to="MarketSlideController" method="_on_panel_mouse_exited"]

@@ -12,9 +12,9 @@ func isSetup() -> bool:
 func ask() -> Callable:
 	if not isSetup():
 		if from == null:
-			Events.requestMessage.emit('Choose the subservient job')
+			Events.requestMessage.emit('Choose the subservient job', get_instance_id())
 		elif to == null:
-			Events.requestMessage.emit('Choose the supervising job')
+			Events.requestMessage.emit('Choose the supervising job', get_instance_id())
 		return recordChoice
 	return Callable()
 
@@ -36,7 +36,7 @@ func recordChoice(smth):
 			
 		elif to == null:
 			to = smth
-		Events.clearMessage.emit()
+		Events.clearMessage.emit(get_instance_id())
 		announceChoice(smth)
 		return true
 	return false
@@ -59,3 +59,4 @@ func checkChoice(smth) -> bool:
 func resetSetup():
 	from = null
 	to = null
+	Events.clearMessage.emit(get_instance_id())

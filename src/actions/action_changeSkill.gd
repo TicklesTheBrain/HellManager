@@ -28,14 +28,14 @@ func isSetup() -> bool:
 
 func ask() -> Callable:
 	if not isSetup():
-		Events.requestMessage.emit('choose employee job')
+		Events.requestMessage.emit('choose employee job',  get_instance_id())
 		return recordChoice
 	return Callable()
 
 func recordChoice(smth):
 	if checkChoice(smth):
 		employee = smth
-		Events.clearMessage.emit()
+		Events.clearMessage.emit( get_instance_id())
 		announceChoice(smth)
 		return true
 	return false
@@ -45,3 +45,8 @@ func checkChoice(smth) -> bool:
 	if not (smth is Employee):
 		return false	
 	return true
+
+
+func resetSetup():
+	employee = null
+	Events.clearMessage.emit(get_instance_id())

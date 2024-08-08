@@ -19,6 +19,7 @@ func performSpecific():
 
 func ask() -> Callable:
 	if not isSetup():
+		Events.requestMessage.emit('Choose appropriate job to destroy', get_instance_id())
 		return recordChoice
 	return Callable()
 
@@ -26,6 +27,7 @@ func recordChoice(smth):
 	if checkChoice(smth):
 		job = smth
 		announceChoice(smth)
+		Events.clearMessage.emit(get_instance_id())
 		return true
 	return false
 
@@ -39,3 +41,8 @@ func checkChoice(smth) -> bool:
 
 	# print('going to check condition now ', condition.checkSubject(smth))
 	return condition.checkSubject(smth)
+
+func resetSetup():
+	job = null
+	Events.clearMessage.emit(get_instance_id())
+
