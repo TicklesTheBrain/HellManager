@@ -10,6 +10,7 @@ class_name InputManager
 var draggedCanvas: CompanyUICanvas
 var draggedJob: JobUI = null
 var activeChoice: Callable = Callable()
+var marketMouse: bool = false
 	
 func _ready():
 	Events.actionCardClicked.connect(cardClicked)
@@ -23,12 +24,20 @@ func _ready():
 	Events.companyCanvasDragReleased.connect(companyCanvasDragEnd)
 	Events.marketOpenRequest.connect(marketOpen)
 	Events.marketCloseRequest.connect(marketClose)
+	Events.marketMouseEnter.connect(recordMarketMouseEnter)
+	Events.marketMouseLeave.connect(recordMarketMouseLeave)
 	#TODO: this input locking thing is fucked, need to do it a different way
 	Events.phaseStarted.connect(func(p):
 		if p == Globals.phases.WORK:
 			inputLock = true
 		)
 	UIScheduler.finished.connect(func():inputLock = false)
+
+func recordMarketMouseEnter():
+	marketMouse = true
+
+func recordMarketMouseLeave():
+	marketMouse = false
 
 func marketOpen(controller: MarketUIController):
 	cancelCanvasDrag()
@@ -65,7 +74,10 @@ func taskClicked(taskUI: TaskCardUI, button):
 		taskHand.useCard(taskUI.card, receiveActiveChoice)
 
 func employeeMouseOverStart(empUI: EmployeeUI):
-	if mouseOverAllowed and empUI.requestMouseOver:
+	if mouseOverAllowed and empUI.requestMouseOver and draggedJob == null:
+		if marketMouse:
+			if Globals.getJobManager().getEmployeeJobAtCompany(empUI.employee) != null:
+				return
 		Events.employeeUIDetailsRequest.emit(empUI)
 
 func employeeMouseOverEnd(empUI: EmployeeUI):

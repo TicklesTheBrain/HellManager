@@ -53,3 +53,4 @@ func mainLoop():
 	Events.phaseEnded.emit(Globals.phases.CONSEQUENCE)
 	Events.dayEnded.emit(Globals.day)
 	mainLoop()
+

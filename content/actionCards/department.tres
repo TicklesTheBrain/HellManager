@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ActionCard" load_steps=8 format=3 uid="uid://dgagykkwk2gio"]
+
+[ext_resource type="Texture2D" uid="uid://b5ktqmqpclelj" path="res://assets/icons/connectedJobsCardIcon.png" id="1_pepqf"]
+[ext_resource type="Script" path="res://src/actions/Action.gd" id="2_dof5k"]
+[ext_resource type="Script" path="res://src/actions/action_addFlow.gd" id="3_l0k8l"]
+[ext_resource type="Script" path="res://src/actions/action_makeJob.gd" id="4_73ecv"]
+[ext_resource type="Script" path="res://src/cards/ActionCard.gd" id="5_ji4vh"]
+
+[sub_resource type="Resource" id="Resource_ottbo"]
+script = ExtResource("3_l0k8l")
+
+[sub_resource type="Resource" id="Resource_uxqn6"]
+script = ExtResource("4_73ecv")
+amountOfJobs = 2
+connected = 1
+connectionType = 0
+addFlowAction = SubResource("Resource_ottbo")
+
+[resource]
+script = ExtResource("5_ji4vh")
+cardText = "Add two connected jobs."
+cardIcon = ExtResource("1_pepqf")
+cardName = "A deparment"
+revealed = false
+onExecute = Array[ExtResource("2_dof5k")]([SubResource("Resource_uxqn6")])

@@ -73,18 +73,18 @@ func getInflows():
 	return job.inflow.size()
 
 func updateSkillLabel():
-	print('update skill Label triggered')
+	# print('update skill Label triggered')
 	var skill = employee.skill
 	var inflows = getInflows()
 	if inflows == 0:
 		skillLabel.self_modulate = Color.WHITE
 		skillLabel.text = str(skill)
-		print('zero inflows')
+		# print('zero inflows')
 	elif inflows < skill:
 		skillLabel.self_modulate = Color.WHITE
 		skillLabel.text = "{s}({i})".format({"s": skill, "i":skill- inflows})
-		print(' some inflows')
+		# print(' some inflows')
 	else:
 		skillLabel.self_modulate = exhaustedSkillModulateColor
 		skillLabel.text = "{s}({i})".format({"s": skill, "i": skill - inflows})
-		print('all inflows')
+		# print('all inflows')

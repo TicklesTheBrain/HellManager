@@ -26,6 +26,7 @@ script = ExtResource("4_xaylc")
 copies = 1
 card = ExtResource("5_14u4m")
 debug = false
+randomEmployees = Array[ExtResource("9_d4k80")]([])
 
 [sub_resource type="Resource" id="Resource_bkr3c"]
 script = ExtResource("6_tnk24")

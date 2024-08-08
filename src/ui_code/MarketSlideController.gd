@@ -34,3 +34,8 @@ func closeMarket():
 	marketContainer.inaccessible = false
 	Globals.marketOpen = false
 
+func _on_panel_mouse_entered():
+	Events.marketMouseEnter.emit()
+
+func _on_panel_mouse_exited():
+	Events.marketMouseLeave.emit()

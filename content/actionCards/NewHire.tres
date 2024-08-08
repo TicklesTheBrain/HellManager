@@ -1,13 +1,11 @@
-[gd_resource type="Resource" script_class="ActionCard" load_steps=6 format=3 uid="uid://k7ial2wl0oe"]
+[gd_resource type="Resource" script_class="ActionCard" load_steps=5 format=3 uid="uid://k7ial2wl0oe"]
 
 [ext_resource type="Script" path="res://src/actions/Action.gd" id="1_1tsnn"]
 [ext_resource type="Script" path="res://src/actions/action_placeEmployee.gd" id="2_34h51"]
-[ext_resource type="Resource" uid="uid://bprb5ibih6r3g" path="res://content/employees/RedBaron.tres" id="2_wyf2e"]
 [ext_resource type="Script" path="res://src/cards/ActionCard.gd" id="3_qn5p1"]
 
 [sub_resource type="Resource" id="Resource_qg2rp"]
 script = ExtResource("2_34h51")
-employee = ExtResource("2_wyf2e")
 
 [resource]
 script = ExtResource("3_qn5p1")

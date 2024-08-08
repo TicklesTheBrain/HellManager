@@ -11,8 +11,8 @@ func performSpecific():
 	var hand = Globals.getActionHand()
 	for a in range(amount):
 		for multiCard in actionCarsToAdd:
-			for i in range(multiCard.copies):
-					hand.addCard(multiCard.card.specificDuplicate())
+			for card in multiCard.unroll():
+					hand.addCard(card)
 	return true
 
 func try():

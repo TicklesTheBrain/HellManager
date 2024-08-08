@@ -58,4 +58,14 @@ func invokeJobMethodReplacement(methodName: String, argArray: Array):
 		var bound = mr[methodName].bindv(argArray)
 		return bound.call()
 	return false
+
+func specificDuplicate():
+	var dupe = duplicate(true)
+
+	dupe.dependentActions.assign(dependentActions.map(func(a): return a.duplicate(true) as Action) as Array[Action])
+	dupe.independentActions.assign(independentActions.map(func(a): return a.duplicate(true) as Action) as Array[Action])
+	dupe.whenPlacedActions.assign(whenPlacedActions.map(func(a): return a.duplicate(true) as Action) as Array[Action])
+	dupe.methodReplacements.assign(methodReplacements.map(func(a): return a.duplicate(true) as MethodReplacement) as Array[MethodReplacement])
+
+	return dupe
 	

@@ -44,6 +44,8 @@ signal taskConsequenceEnd()
 signal gameStateChanged(dirty: bool)
 
 ## UI Signals
+signal marketMouseEnter()
+signal marketMouseLeave()
 signal actionCardClicked(card: ActionCardUI, button: MouseButton)
 signal marketOpenRequest(market: MarketUIController)
 signal marketCloseRequest(market: MarketUIController)

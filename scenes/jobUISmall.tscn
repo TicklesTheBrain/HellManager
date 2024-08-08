@@ -117,4 +117,5 @@ offset_bottom = 112.0
 mouse_filter = 2
 color = Color(1, 0.43, 0.8385, 0.639216)
 
+[connection signal="gui_input" from="JobFrame" to="." method="_on_job_frame_gui_input"]
 [connection signal="input_event" from="DragDetectArea" to="." method="_on_drag_detect_area_input_event"]

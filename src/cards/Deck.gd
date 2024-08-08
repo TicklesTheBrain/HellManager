@@ -7,19 +7,20 @@ class_name Deck
 
 func unrollDeck():
 
-    for multiCard in deck:
+	for multiCard in deck:
 
-        #Check for correct debug flags
-        if onlyDebug and not multiCard.debug:
-            continue
-        if not includeDebug and multiCard.debug:
-            continue
+		#Check for correct debug flags
+		if onlyDebug and not multiCard.debug:
+			continue
+			
+		if not includeDebug and multiCard.debug:
+			continue
 
-        for i in range(multiCard.copies):
-            addCard(multiCard.card.specificDuplicate())
-    
-    shuffle()
+		for card in multiCard.unroll():
+			addCard(card)
+	
+	shuffle()
 
 
 func _ready():
-    unrollDeck()
+	unrollDeck()
