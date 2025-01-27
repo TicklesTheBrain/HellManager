@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=3 uid="uid://d020x540ssu4g"]
+[gd_scene load_steps=102 format=3 uid="uid://d020x540ssu4g"]
 
 [ext_resource type="Script" path="res://src/Main.gd" id="1_nbim8"]
 [ext_resource type="Script" path="res://src/cards/CardMarket.gd" id="2_42g87"]
@@ -63,6 +63,8 @@
 [ext_resource type="PackedScene" uid="uid://6sbacijn0esb" path="res://scenes/companyUICanvas.tscn" id="45_k7yar"]
 [ext_resource type="Texture2D" uid="uid://cl0o88s86dga4" path="res://assets/icons/taskCardIconDefault.png" id="45_t5ct6"]
 [ext_resource type="Script" path="res://src/actions/action_consumeTokensChoice.gd" id="46_5xeqh"]
+[ext_resource type="Script" path="res://src/conditions/conditionPrestigeAmount.gd" id="47_y7qtl"]
+[ext_resource type="Script" path="res://src/actions/action_destroyEmployee.gd" id="48_fvpjj"]
 [ext_resource type="Script" path="res://src/ui_code/MarketLabelLord.gd" id="53_ahosn"]
 [ext_resource type="PackedScene" uid="uid://6jmlsqw04ghs" path="res://scenes/market_label.tscn" id="54_0pl2r"]
 
@@ -199,6 +201,35 @@ onExecute = Array[ExtResource("5_nsq4b")]([SubResource("Resource_s3lh1")])
 script = ExtResource("17_mrygo")
 copies = 1
 card = SubResource("Resource_4atyk")
+debug = true
+randomEmployees = Array[ExtResource("25_61rh7")]([])
+
+[sub_resource type="Resource" id="Resource_dmyl4"]
+script = ExtResource("47_y7qtl")
+lower = false
+acceptEqual = true
+compareToActingEmployee = false
+prestigeValueToCompare = 5
+
+[sub_resource type="Resource" id="Resource_n0cag"]
+script = ExtResource("48_fvpjj")
+selfDestroy = false
+condition = SubResource("Resource_dmyl4")
+
+[sub_resource type="Resource" id="Resource_p4xnx"]
+script = ExtResource("27_skm2w")
+taskText = "Consume Employee of 5 prestige or more."
+consequenceText = ""
+taskConsequence = Array[ExtResource("5_nsq4b")]([])
+consequenceFrequency = 0
+cardName = "Demand a scapegoat."
+revealed = false
+onExecute = Array[ExtResource("5_nsq4b")]([SubResource("Resource_n0cag")])
+
+[sub_resource type="Resource" id="Resource_l5bft"]
+script = ExtResource("17_mrygo")
+copies = 1
+card = SubResource("Resource_p4xnx")
 debug = true
 randomEmployees = Array[ExtResource("25_61rh7")]([])
 
@@ -442,7 +473,7 @@ startingTasks = 1
 script = ExtResource("14_r0k10")
 includeDebug = true
 onlyDebug = true
-deck = Array[ExtResource("17_mrygo")]([SubResource("Resource_h0cd8"), SubResource("Resource_8ne3f")])
+deck = Array[ExtResource("17_mrygo")]([SubResource("Resource_h0cd8"), SubResource("Resource_8ne3f"), SubResource("Resource_l5bft")])
 
 [node name="TaskHand" type="Node" parent="TaskManager" node_paths=PackedStringArray("disposeContainer") groups=["TaskHand"]]
 script = ExtResource("20_vouf7")

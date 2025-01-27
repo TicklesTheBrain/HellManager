@@ -52,4 +52,4 @@ func checkChoice(smth) -> bool:
 	if condition == null:
 		return true
 
-	return condition.checkSubject(smth)
+	return condition.checkSubject(smth.employee)
